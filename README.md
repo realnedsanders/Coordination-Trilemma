@@ -1,4 +1,4 @@
-# The Last Choice: Coordination or Extinction
+# The Last Choice: Proofs that Voluntary Cooperation is Humanity's Only Path
 
 ## What This Document Proves
 
