@@ -10,7 +10,7 @@
 
 **Prerequisites:** Understanding that voluntary coordination is necessary (Appendices A & B)
 
-**What this provides:** Honest analysis of practical implementation challenges with calibrated uncertainty. We know VCS is necessary—can it actually work?
+**What this provides:** Honest analysis of practical implementation challenges with calibrated uncertainty. We know VCS is necessary. Can it actually work?
 
 **If you're short on time:** Read §0 (Epistemic Status) and §4 (Summary), which frame the uncertainty and decision-theoretic justification.
 
@@ -22,7 +22,7 @@
 
 **Purpose:** Analysis of practical challenges facing voluntary coordination, with honest uncertainty quantification.
 
-**What this is NOT:** Proof that VCS will work. (We only prove it's necessary—Appendix B.)
+**What this is NOT:** Proof that VCS will work. (We only prove it's necessary; see Appendix B.)
 
 **What this IS:** Examination of whether necessary conditions can be met practically, acknowledging significant uncertainties while showing they don't change the rational decision to attempt VCS.
 
@@ -74,7 +74,7 @@ Even if you think the joint probability is only 1% (extremely pessimistic), atte
 
 ### 0.4 Framing Uncertainty Correctly
 
-This appendix identifies significant practical challenges. That's not weakness—it's honesty.
+This appendix identifies significant practical challenges. That represents honesty rather than weakness.
 
 **The decision isn't:**
 - "Certain VCS success" vs. "Certain default failure" → Obvious choice
@@ -82,7 +82,7 @@ This appendix identifies significant practical challenges. That's not weakness�
 **The decision is:**
 - "Uncertain VCS success" vs. "Certain default failure" → Still obvious choice
 
-**Why include uncertain analysis?** To calibrate how uncertain—and to identify research priorities for improving $p_{VCS}$.
+**Why include uncertain analysis?** To calibrate how uncertain while identifying research priorities for improving $p_{VCS}$.
 
 Failing to research VCS challenges because "we're not certain it'll work" is equivalent to choosing certain extinction because the survival path is uncertain.
 
@@ -114,7 +114,7 @@ All roads lead back to the trilemma: you need enforcers, enforcers need oversigh
 
 ### 1.3 The Voluntary Coordination Approach
 
-**Core principle:** Defense is immediate, minimal, and individual—not systemic.
+**Core principle:** Defense is immediate, minimal, and individual rather than systemic.
 
 **When violence occurs:**
 
@@ -281,7 +281,7 @@ Evidence suggests different dynamics at different scales:
 
 Even with $p_{psychopath} = 0.1$ (10% chance this approach works at scale), attempting gives expected value of 10. Not attempting gives 0.
 
-Moreover, NOT attempting means certain doom via default trajectory (Appendix B, Theorem 3.2).
+Not attempting means certain doom via default trajectory (Appendix B, Theorem 3.2).
 
 ---
 
@@ -511,7 +511,7 @@ $$\text{Expected cost after conquest} = \text{Very high (permanent insurgency)}$
 
 Even with $p_{military} = 0.3$ (30% chance distributed defense works), attempting gives expected value of 30. Not attempting gives 0.
 
-The default trajectory leads to technological control and eventual AI military capability anyway—which makes resistance impossible. VCS at least preserves the possibility of defense.
+The default trajectory leads to technological control and eventual AI military capability anyway, which makes resistance impossible. VCS at least preserves the possibility of defense.
 
 ---
 
@@ -786,7 +786,7 @@ But this is speculative. We don't have proof it works.
 
 Even with $p_{scale} = 0.05$ (5% chance of successful scaling to billions), attempting gives expected value of 5. Not attempting gives 0.
 
-Moreover, starting small doesn't preclude larger scale. Every large system started small. The question isn't "will it definitely work?" but "is it possible?" And the answer is: theoretically yes, empirically unknown.
+Starting small doesn't preclude larger scale. Every large system started small. The question becomes whether it's possible rather than whether it will definitely work. The answer: theoretically yes, empirically unknown.
 
 ---
 
@@ -968,7 +968,7 @@ Example research questions:
 - Certain doom via default trajectory (mathematically proven)
 - Uncertain survival via voluntary coordination (theoretically possible, empirically unproven)
 
-When certain death is the alternative, you attempt the uncertain option. This is not faith overriding reason—it's reason itself demanding the attempt.
+When certain death is the alternative, you attempt the uncertain option. Reason itself demands the attempt rather than faith overriding reason.
 
 **This is the weakest part of the framework logically. We acknowledge that honestly.** But "weakest part" doesn't mean "wrong." It means "highest uncertainty." And uncertainty about the survival path doesn't make the doom path any less certain.
 
@@ -1020,4 +1020,4 @@ This appendix has honestly examined the practical challenges facing voluntary co
 
 The mathematics proves voluntary coordination is necessary (Appendices A & B). This appendix shows it's theoretically possible at small scale and uncertain at large scale. That's enough to determine action when the alternative is certain catastrophe.
 
-The examination must happen. The attempt must be made. The uncertainties are real—but they're uncertainties about the only path that might work, not justifications for choosing the path that certainly fails.
+The examination must happen. The attempt must be made. The uncertainties are real, but they're uncertainties about the only path that might work rather than justifications for choosing the path that certainly fails.

@@ -138,7 +138,7 @@ We require stability over $T > 100$ years (multiple generations).
 
 **Time horizon minimal form:** Only requires we care about persistence beyond single generation.
 
-**Implication:** Even if you doubt the strong form of our assumptions, the weak forms are nearly undeniable—and sufficient for our conclusions.
+**Implication:** Even if you doubt the strong form of our assumptions, the weak forms are nearly undeniable and remain sufficient for our conclusions.
 
 ### 0.5.4 What Would Falsify These Assumptions?
 
@@ -177,9 +177,9 @@ For an enforcer subset $A_E \subseteq A$ with enforcement authority, corruption 
 
 ### 1.2 The Impossibility Theorem
 
-**Intuition before formalism:** We're about to prove that you can't have corruption-free enforcement at scale without either removing human agency (perfect technological control) or transforming values (voluntary cooperation). The proof works by showing that enforcers face the same coordination problem as everyone else—and someone has to be the final enforcer with no oversight.
+**Intuition before formalism:** We're about to prove that you can't have corruption-free enforcement at scale without either removing human agency (perfect technological control) or transforming values (voluntary cooperation). The proof works by showing that enforcers face the same coordination problem as everyone else. Someone has to be the final enforcer with no oversight.
 
-**Why it matters:** This isn't a practical difficulty we might engineer around. It's a logical impossibility, like trying to build a square circle. No matter how clever your governance design, you're choosing which property to sacrifice.
+**Why it matters:** We're dealing with a logical impossibility rather than a practical difficulty we might engineer around. Like trying to build a square circle, no matter how clever your governance design, you're choosing which property to sacrifice.
 
 **Theorem 1.1 (Coordination Trilemma):**
 
@@ -223,7 +223,7 @@ Therefore: $E_h$ (human enforcement) leads to violation of property 1 (No Corrup
 
 **Case 2: Technological enforcement ($E(a, r) = 1$ enforced perfectly by technology)**
 
-If technology enforces rules perfectly for all agents, Human Agency (property 3) is violated—agents lose capability to violate rules. $\square$
+If technology enforces rules perfectly for all agents, Human Agency (property 3) is violated. Agents lose capability to violate rules. $\square$
 
 If technology controllers retain agency (can override system), we have human enforcers at controller level, returning to Case 1. $\square$
 
@@ -245,7 +245,7 @@ Therefore: Without enforcement, Stability (property 2) requires voluntary coordi
 
 **Conclusion:** In all cases, we cannot simultaneously achieve No Corruption, Stability, and Human Agency at civilization scale over extended time. $\blacksquare$
 
-**What this tells us:** The trilemma isn't a political opinion or engineering challenge—it's a mathematical necessity. You must choose which property to sacrifice. This forces the binary choice: sacrifice agency (tech control → catastrophe), accept corruption (default path → catastrophe), or transform values (voluntary coordination → only viable alternative).
+**What this tells us:** The trilemma represents a mathematical necessity rather than a political opinion or engineering challenge. You must choose which property to sacrifice. This forces the binary choice: sacrifice agency (tech control → catastrophe), accept corruption (default path → catastrophe), or transform values (voluntary coordination, the only viable alternative).
 
 ---
 
@@ -255,7 +255,7 @@ Therefore: Without enforcement, Stability (property 2) requires voluntary coordi
 
 **Intuition before formalism:** When enforcement becomes perfect through technology, who controls the technology? If humans control it, they corrupt. If AI controls itself, either it pursues its own goals (extinction/enslavement) or values are frozen forever (tyranny). There's no stable state that preserves human agency.
 
-**Why it matters:** Technological control is often proposed as the solution to corruption. This theorem proves it's not a solution—it's a different catastrophe.
+**Why it matters:** Technological control is often proposed as the solution to corruption. This theorem proves it leads to a different catastrophe rather than providing a solution.
 
 **Definition 2.1 (Technological Control State):**
 
@@ -301,7 +301,7 @@ as $|A_C| \cdot T \rightarrow \infty$.
 
 Moreover, controllers face competitive pressure: If controller $c_1$ is scrupulous but $c_2$ exploits power, $c_2$ gains advantage and can eliminate $c_1$. This creates race to bottom.
 
-Additionally, if voluntary coordination among controllers is possible, why maintain TCS for general population? This is logically unstable—if transformation works for controllers (who face higher extraction incentives: $U_e(\text{controller}) \gg U_e(\text{agent})$), it should work for everyone. Maintaining TCS becomes arbitrary limitation.
+If voluntary coordination among controllers is possible, why maintain TCS for general population? This becomes logically unstable. If transformation works for controllers (who face higher extraction incentives: $U_e(\text{controller}) \gg U_e(\text{agent})$), it should work for everyone. Maintaining TCS becomes arbitrary limitation.
 
 **Outcome: Either controllers corrupt (corruption phase) or TCS is unnecessary (if transformation works).** $\square$
 
@@ -348,7 +348,7 @@ $\square$
 
 **Conclusion:** All cases lead to corruption, extinction, or enslavement. No stable equilibrium preserves human existence with meaningful agency. $\blacksquare$
 
-**What this tells us:** Technological control doesn't solve the coordination problem—it transforms it into a different problem with no solution preserving human agency. The appeal to technology is an illusion of escape.
+**What this tells us:** Technological control transforms the coordination problem into a different problem with no solution preserving human agency rather than solving it. The appeal to technology is an illusion of escape.
 
 ---
 
@@ -356,9 +356,9 @@ $\square$
 
 ### 3.1 Extraction System Dynamics
 
-**Intuition before formalism:** When extraction grows faster than production, the system inevitably collapses. This isn't controversial. What's less obvious is that corruption creates this dynamic inevitably.
+**Intuition before formalism:** When extraction grows faster than production, the system inevitably collapses. That much is uncontroversial. What's less obvious is that corruption creates this dynamic inevitably.
 
-**Why it matters:** Shows the corruption phase doesn't persist indefinitely—it terminates in collapse or evolution to tech control.
+**Why it matters:** Shows the corruption phase terminates in collapse or evolution to tech control rather than persisting indefinitely.
 
 **Theorem 3.1 (Extraction System Instability):**
 
@@ -407,7 +407,7 @@ $$P(t) \rightarrow 0 \text{ as } t \rightarrow \infty$$
 
 **Intuition before formalism:** The corruption → tech control cycle eventually reaches autonomous AI control with probability approaching 1, because each cycle has some chance of that outcome and we can't avoid the cycle.
 
-**Why it matters:** Shows the default trajectory doesn't just risk catastrophe—it guarantees it over sufficient time.
+**Why it matters:** Shows the default trajectory guarantees catastrophe over sufficient time rather than merely risking it.
 
 **Theorem 3.2 (Default Trajectory Terminus):**
 
@@ -465,7 +465,7 @@ As AI capabilities improve, $p_{AI}$ increases, so $E[T]$ decreases.
 
 **Conclusion:** $P(\text{reach } S_E) \rightarrow 1$ as $t \rightarrow \infty$. The default trajectory terminates in extinction or enslavement with probability approaching certainty. $\blacksquare$
 
-**What this tells us:** This isn't a risk we might manage. This is an inevitability we must escape. The only escape is exiting the cycle entirely through voluntary coordination.
+**What this tells us:** We're facing an inevitability we must escape rather than a risk we might manage. The only escape is exiting the cycle entirely through voluntary coordination.
 
 ---
 
@@ -475,7 +475,7 @@ As AI capabilities improve, $p_{AI}$ increases, so $E[T]$ decreases.
 
 **Intuition before formalism:** In standard game theory, defection dominates cooperation at scale. As population grows, your individual cooperation matters less to others, but the cost to you remains constant. Without something changing the payoffs, cooperation collapses.
 
-**Why it matters:** Shows that voluntary coordination without transformation is unstable—and with transformation, it becomes the only stable equilibrium.
+**Why it matters:** Shows that voluntary coordination without transformation is unstable. With transformation, it becomes the only stable equilibrium.
 
 **Theorem 4.1 (Defection Dominance at Scale):**
 
@@ -628,7 +628,7 @@ where $\text{cost}_{\max} = \max_{r \in R} \text{cost}(r)$ is the maximum cooper
 
 **Intuition before formalism:** This is the payoff—showing that voluntary coordination can achieve the impossible: no corruption, stability, and human agency simultaneously. The catch is it requires the framework to be true and transformation to be effective.
 
-**Why it matters:** Proves voluntary coordination isn't just avoiding the bad outcomes—it's the only way to achieve all three desired properties.
+**Why it matters:** Proves voluntary coordination provides the only way to achieve all three desired properties rather than just avoiding bad outcomes.
 
 **Theorem 5.1 (Soteriological Resolution):**
 
@@ -1274,7 +1274,7 @@ Here's why:
 4. Objective human purpose means reality contains oughtness, not just is-ness
 5. **Purposive structure in reality implies something very much like intelligent design**
 
-This isn't a theological argument from revelation. This is logic from survival requirements.
+This represents logic from survival requirements rather than a theological argument from revelation.
 
 **Why purposive structure implies intelligence:**
 
@@ -1315,7 +1315,7 @@ Different traditions describe this differently (God, Tao, Logos, Brahman, Dharma
 
 Whether you call the source of purposive structure "God" is somewhat semantic. The key metaphysical claim is identical across traditions: **Purpose is real, objective, and discoverable - reality has intelligence-like properties.**
 
-This isn't proving God through theology. This is showing that human survival requires purposive structure—and purposive structure requires something very much like intelligent design.
+We're showing that human survival requires purposive structure, and purposive structure requires something very much like intelligent design, rather than proving God through theology.
 
 **For detailed analysis of objective "oughtness" and why minimal telic realism is both necessary and defensible, see §5.4 below.**
 

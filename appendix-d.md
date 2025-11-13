@@ -8,7 +8,7 @@
 - **Appendix C:** Analyzes practical implementation challenges for voluntary coordination
 - **Appendix D (this document):** Proves the window for verification-based coordination is closing
 
-**Prerequisites:** None—this is independent technical analysis of synthetic media trajectory
+**Prerequisites:** None. This is independent technical analysis of synthetic media trajectory.
 
 **What this provides:** Evidence that within years, routine verification of content authenticity will become exponentially harder, closing the window for coordination based on verifiable truth.
 
@@ -29,7 +29,7 @@ This appendix provides technical evidence for this claim, analyzes the trajector
 **Generation Capabilities:**
 - Video: 20 seconds of 1080p with synchronized audio (OpenAI Sora 2)
 - Open-source gap: Decreased from 4.52% to 0.69% in six months
-- State control becoming impossible—consumer hardware can generate deepfakes
+- State control becoming impossible (consumer hardware can generate deepfakes)
 
 **Detection Performance:**
 - Human detection overall: **55.54% accuracy** (barely above chance)
@@ -67,7 +67,7 @@ This appendix provides technical evidence for this claim, analyzes the trajector
 **Cultural adaptation:**
 - Too slow (generations vs. years)
 - Extreme skepticism prevents coordination as much as credulity
-- Previous media revolutions took decades—we don't have decades
+- Previous media revolutions took decades; we don't have decades
 
 ### Implications for Voluntary Coordination
 
@@ -148,7 +148,7 @@ Image generation (Midjourney v6, DALL-E 3, Stable Diffusion XL) produces photore
 The most comprehensive meta-analysis to date (Diel et al., 2024) examined 56 studies involving 86,155 participants:
 
 - **Overall accuracy: 55.54%** (95% CI [48.87, 62.10])
-- Detection rates not significantly above chance (50%)—confidence intervals crossed chance threshold
+- Detection rates not significantly above chance (50%), with confidence intervals crossed chance threshold
 - By modality:
   - Video: 57.31% [47.80, 66.57]
   - Audio: 62.08% [38.23, 83.18]
@@ -445,7 +445,7 @@ If a generator reaches perfection (statistically indistinguishable from real), d
 
 ### 3.4 Social/Cultural Adaptation
 
-**The proposal:** Society develops cultural norms to handle synthetic media—default skepticism, trust networks, reduced reliance on media evidence, new social technologies.
+**The proposal:** Society develops cultural norms to handle synthetic media through default skepticism, trust networks, reduced reliance on media evidence, and new social technologies.
 
 **Why this may be insufficient:**
 
@@ -745,7 +745,7 @@ Columbia Journalism Review. (2025). What journalists should know about deepfake 
 - Independent verification possible
 
 **Medium confidence (industry documentation, preprints):**
-- Deepfake-Eval-2024 (arXiv preprint—methodology sound but not yet peer-reviewed)
+- Deepfake-Eval-2024 (arXiv preprint; methodology sound but not yet peer-reviewed)
 - OpenAI technical documentation (industry source, no independent verification)
 
 **Lower confidence (journalistic coverage):**
@@ -765,7 +765,7 @@ Columbia Journalism Review. (2025). What journalists should know about deepfake 
 
 **Very high confidence:**
 1. Current generation capabilities have crossed public detectability threshold for short-form content
-2. Human detection has failed at 55.54% overall accuracy—barely above chance
+2. Human detection has failed at 55.54% overall accuracy (barely above chance)
 3. AI detection degrades catastrophically on real-world content (45-50% performance drop)
 4. Open-source proliferation makes control impossible
 5. Economic incentives strongly favor generation over detection
@@ -790,7 +790,7 @@ Columbia Journalism Review. (2025). What journalists should know about deepfake 
 
 Voluntary coordination requires verifiable truth. Within years, routine verification becomes exponentially harder or impossible. The window for building coordination systems based on verifiable reality is closing.
 
-**You can examine source texts, verify institutional betrayals, and coordinate around observable truth NOW—while verification is still possible.** After the threshold, these foundations become unavailable. The examination must happen while truth remains knowable.
+**You can examine source texts, verify institutional betrayals, and coordinate around observable truth NOW while verification is still possible.** After the threshold, these foundations become unavailable. The examination must happen while truth remains knowable.
 
 ### 8.3 Decision Framework
 
@@ -826,7 +826,7 @@ The evidence is clear. The trajectory is established. The window is closing.
 
 **You can examine while truth is verifiable, or wait until it's impossible.**
 
-The choice is yours—but the window won't wait for you to decide.
+The choice is yours, but the window won't wait for you to decide.
 
 ---
 
@@ -834,9 +834,9 @@ The choice is yours—but the window won't wait for you to decide.
 
 | Term | Definition |
 |------|------------|
-| FVD | Fréchet Video Distance—lower is better (measures video quality) |
-| MOS | Mean Opinion Score—scale of 1-5 for perceived quality |
-| AUC | Area Under Curve—detection accuracy metric (1.0 = perfect) |
+| FVD | Fréchet Video Distance (lower is better; measures video quality) |
+| MOS | Mean Opinion Score (scale of 1-5 for perceived quality) |
+| AUC | Area Under Curve (detection accuracy metric; 1.0 = perfect) |
 | Deepfake | Synthetic media created by AI to impersonate real people/events |
 | Detection threshold | Point where detection accuracy falls below useful level (~60% for experts, ~25% for public) |
 | Generation | Creating synthetic media (video, audio, image, text) |
