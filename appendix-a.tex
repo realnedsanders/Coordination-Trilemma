@@ -1,8 +1,6 @@
 \section{No Third Path Exists}
 \label{app:a}
 
-\subsection{The Fundamental Question}
-
 Any proposed coordination system must answer one question: \textbf{How is coordination maintained when incentives to defect exist?}
 
 Every alternative proposal, no matter how novel or complex, must provide a mechanism for handling defection at scale. This appendix proves that all such mechanisms reduce to one of two outcomes: the default trajectory (corruption $\to$ technological control $\to$ extinction/enslavement) or voluntary coordination (survival through value transformation).
@@ -13,11 +11,9 @@ We establish this through three independent proofs. First, formal completeness t
 
 Together, these proofs demonstrate that the binary choice is mathematically necessary rather than rhetorical.
 
-\medskip\hrule\medskip
-
 \subsection{Formal Completeness}
 
-\subsection{The Coordination Problem Space}
+\textbf{The coordination problem space.}
 
 Every coordination system at scale must specify three components.
 
@@ -27,9 +23,7 @@ Every coordination system at scale must specify three components.
 
 These three components are necessary and sufficient. A system without all three either achieves no coordination (chaos) or achieves perfect preference alignment without needing enforcement (which is exactly what voluntary coordination establishes through transformation).
 
-\subsection{The Critical Insight: Only Three Enforcement Types Exist}
-
-While information and decision mechanisms have many implementations, enforcement has only three logically possible types.
+\textbf{The critical insight: only three enforcement types exist.} While information and decision mechanisms have many implementations, enforcement has only three logically possible types.
 
 \textbf{Type 1: Human enforcers} ($E_h$)
 Humans apply consequences to defectors. Police, judges, regulators, bureaucrats.
@@ -42,7 +36,7 @@ Compliance is voluntary based on internal motivation. Small communities with str
 
 \textbf{Why only three?} Because enforcement is binary. Either defection is prevented or punished (requiring an enforcer that's human or technological) or it isn't (voluntary). There's no fourth logical possibility.
 
-\subsection{Where Each Type Leads}
+\textbf{Where each type leads.}
 
 \textbf{Human Enforcement $\to$ Corruption Phase}
 
@@ -86,7 +80,7 @@ This is the voluntary coordination path. It works IF transformation achieves hig
 
 \emph{Mathematical formulation:} Appendix B, Theorems 4.2 and 5.1 establish conditions under which voluntary coordination is stable.
 
-\subsection{The Completeness Argument}
+\textbf{The completeness argument.}
 
 \textbf{Claim:} All coordination systems use one of these three enforcement types.
 
@@ -105,7 +99,7 @@ Corruption phase and tech control phase form the default trajectory, which termi
 
 \textbf{Therefore:} All coordination systems reduce to {default trajectory, voluntary coordination} = {certain doom, uncertain survival}.
 
-\subsection{Testing Common Objections}
+\textbf{Testing common objections.}
 
 \textbf{Objection 1:} "What about blockchain/DAOs/smart contracts/decentralized systems?"
 
@@ -133,13 +127,12 @@ If genuine voluntary dissociation occurs with no coercion, that's the voluntary 
 
 \textbf{Pattern:} Every proposal, when traced through its logical implications, reduces to one of our three enforcement types. We've yet to encounter a mechanism that doesn't fit this framework.
 
-\medskip\hrule\medskip
 
 \subsection{Information-Theoretic Necessity}
 
-This section presents intuitive explanations of information-theoretic constraints. For formal proofs, see Appendix B, §2.
+This section presents intuitive explanations of information-theoretic constraints. For formal proofs, see Appendix B.
 
-\subsection{The Observer Regress Problem}
+\textbf{The observer regress problem.}
 
 \textbf{Core insight:} Any enforcement mechanism requires observing agent behavior. But observation itself can be manipulated, creating infinite regress.
 
@@ -157,7 +150,7 @@ At that terminal level, one of two things happens. Either $O_n$ voluntarily repo
 
 \textbf{Practical implication:} You can't build a corruption-free enforcement system using observers. The observers themselves require enforcement through observation, ad infinitum.
 
-\subsection{The Information Asymmetry Problem}
+\textbf{The information asymmetry problem.}
 
 \textbf{Core insight:} Enforcers face structural information disadvantages that agents can exploit.
 
@@ -175,7 +168,7 @@ This asymmetry is structural and can't be eliminated. Agents have \emph{private 
 
 Eventually, monitoring costs exceed system capacity. At that point, enforcement breaks down or transitions to perfect technological control (removing human agency).
 
-\subsection{The Computational Complexity Barrier}
+\textbf{The computational complexity barrier.}
 
 \textbf{Core insight:} Verifying compliance is computationally harder than defecting undetectably.
 
@@ -189,7 +182,7 @@ For a rule set of complexity $|R|$ and population size $|A|$:
 
 \textbf{Implication:} Perfect enforcement requires resources that grow faster than the system itself. Eventually becomes economically impossible without perfect technological enforcement (removing human agency).
 
-\subsection{Why This Matters}
+\textbf{Why this matters.}
 
 These information-theoretic constraints show that enforcement systems face fundamental, unavoidable problems.
 
@@ -199,13 +192,12 @@ Together, these prove enforcement systems are inherently unstable. They require 
 
 The only stable alternative is voluntary coordination where these problems don't arise (no adversarial dynamics, no need for observation and verification).
 
-\medskip\hrule\medskip
 
 \subsection{Game-Theoretic Inevitability}
 
-This section presents intuitive game-theoretic analysis. For formal proofs, see Appendix B, §3.
+This section presents intuitive game-theoretic analysis. For formal proofs, see Appendix B.
 
-\subsection{The Enforcer's Dilemma}
+\textbf{The enforcer's dilemma.}
 
 \textbf{Setup:} Model enforcers as players choosing between Honest and Corrupt strategies.
 
@@ -225,19 +217,19 @@ Where $p$ equals probability of being caught (depends on how many other enforcer
 
 \emph{Formal proof:} Appendix B, Theorem 3.1.
 
-\subsection{The AI Control Trap}
+\textbf{The AI control trap.}
 
 \textbf{Setup:} Systems with technological enforcement face an impossible choice.
 
 \textbf{Case 1: AI less capable than humans}
 
-Humans can circumvent the system. Need human oversight for edge cases. Returns to human enforcement with corruption dynamics from §3.1.
+Humans can circumvent the system. Need human oversight for edge cases. Returns to human enforcement with corruption dynamics from1.
 
 \textbf{Case 2: AI at or above human capability}
 
 \emph{Sub-case A: Humans maintain control}
 
-Humans who control enforcement AI have extraordinary power. They face their own coordination problem. How do they prevent corruption within controller group? Either other humans enforce on controllers (infinite regress, returns to §3.1), or controllers coordinate voluntarily (but then why maintain tech control at all?).
+Humans who control enforcement AI have extraordinary power. They face their own coordination problem. How do they prevent corruption within controller group? Either other humans enforce on controllers (infinite regress, returns to1), or controllers coordinate voluntarily (but then why maintain tech control at all?).
 
 Controllers eventually corrupt. Now corruption phase has perfect enforcement tools. Worse than before.
 
@@ -251,7 +243,7 @@ If unaligned, the space of all possible AI goals is vast. "Human flourishing" is
 
 \emph{Formal proof:} Appendix B, Theorem 2.1.
 
-\subsection{The Voluntary Cooperation Stability Condition}
+\textbf{The voluntary cooperation stability condition.}
 
 \textbf{Setup:} Without enforcement, cooperation stability requires intrinsic motivation exceeding cooperation cost.
 
@@ -269,7 +261,7 @@ If unaligned, the space of all possible AI goals is vast. "Human flourishing" is
 
 \emph{Formal proofs:} Appendix B, Theorems 4.2 and 5.1.
 
-\subsection{Why Game Theory Points to Binary Choice}
+\textbf{Why game theory points to binary choice.}
 
 The game-theoretic analysis shows three things. Enforcer systems are unstable and tip to corruption over time. AI control creates trap where you either return to corruption or lose agency/existence. Voluntary cooperation can be stable if transformation achieves conditions.
 
@@ -277,25 +269,24 @@ These aren't normative claims about what \emph{should} be. These are mathematica
 
 The binary choice emerges from game theory itself: Only voluntary coordination with transformed values provides stable equilibrium preserving human agency.
 
-\medskip\hrule\medskip
 
 \subsection{Synthesis and Implications}
 
-\subsection{Three Independent Proofs, One Conclusion}
+\textbf{Three independent proofs, one conclusion.}
 
 We've now established the binary choice through three independent approaches.
 
-\textbf{Formal completeness (§1)} enumerated all logically possible enforcement types, showed each leads to specific outcome, and proved all systems map to {default trajectory, voluntary coordination}.
+\textbf{Formal completeness} enumerated all logically possible enforcement types, showed each leads to specific outcome, and proved all systems map to {default trajectory, voluntary coordination}.
 
-\textbf{Information-theoretic necessity (§2)} showed observer regress creates infinite regression or voluntary honesty, information asymmetry gives structural advantages to defectors, and computational complexity means verification costs exceed capacity. Together these prove enforcement systems are inherently unstable.
+\textbf{Information-theoretic necessity} showed observer regress creates infinite regression or voluntary honesty, information asymmetry gives structural advantages to defectors, and computational complexity means verification costs exceed capacity. Together these prove enforcement systems are inherently unstable.
 
-\textbf{Game-theoretic inevitability (§3)} demonstrated the enforcer's dilemma tips to corruption over time, AI control trap leads to loss of human control or existence, and VCS stability provides the only equilibrium preserving agency.
+\textbf{Game-theoretic inevitability} demonstrated the enforcer's dilemma tips to corruption over time, AI control trap leads to loss of human control or existence, and VCS stability provides the only equilibrium preserving agency.
 
 \textbf{Why three proofs matter:} These are independent frameworks from different domains of mathematics. Each alone is sufficient to establish the binary choice. Together, they provide multiple lines of evidence converging on the same conclusion.
 
 The binary choice follows from the structure of coordination itself rather than being an artifact of one analytical approach. It's visible from multiple mathematical perspectives.
 
-\subsection{Falsification: What Would Prove Us Wrong}
+\textbf{Falsification: what would prove us wrong.}
 
 To disprove this framework, one must show several things.
 
@@ -309,7 +300,7 @@ Fourth, \textbf{proof that transformation is impossible}, which would undermine 
 
 \textbf{Current status:} No such demonstration has been provided. The structure of the proofs suggests none can be.
 
-\subsection{Common Proposals Mapped to Framework}
+\textbf{Common proposals mapped to framework.}
 
 To make this concrete, here's where specific proposals fall.
 
@@ -327,7 +318,7 @@ To make this concrete, here's where specific proposals fall.
 
 Every proposal, when analyzed, maps to one of our enforcement types and thus to one of our two terminal outcomes.
 
-\subsection{Why This Matters}
+\textbf{Why this matters.}
 
 Understanding these proofs removes false hope in structural reforms or technological fixes. It clarifies what actually needs to happen: transformation of human motivation at scale, grounded in accurate understanding of human nature and purpose.
 
@@ -335,13 +326,12 @@ That's the only option that doesn't lead to certain catastrophe rather than one 
 
 The main document makes the case for why this matters urgently. This appendix proves there are no other paths. Together, they establish both the necessity and urgency of soteriological examination.
 
-\medskip\hrule\medskip
 
-\subsection{Explicit Challenge - Propose Alternatives}
+\subsection{Explicit Challenge}
 
 We've attempted to comprehensively analyze the coordination possibility space. However, we might have blindspots. We explicitly solicit counterexamples.
 
-\subsection{The Challenge}
+\textbf{The challenge.}
 
 \textbf{Propose a coordination mechanism that:}
 
@@ -357,7 +347,7 @@ We've attempted to comprehensively analyze the coordination possibility space. H
  \item Value transformation creating intrinsic cooperation motivation
 \end{itemize}
 
-\subsection{Submission Requirements}
+\textbf{Submission requirements.}
 
 Your proposed mechanism must specify several things.
 
@@ -369,7 +359,7 @@ Your proposed mechanism must specify several things.
 
 \textbf{Defection handling:} Walk through a specific scenario. Agent clearly violates important rule. How does system respond? What prevents escalation to enforcement hierarchy?
 
-\subsection{Our Analysis Framework}
+\textbf{Our analysis framework.}
 
 We will analyze proposals using several approaches.
 
@@ -381,7 +371,7 @@ We will analyze proposals using several approaches.
 
 \textbf{Historical analysis:} Similar mechanisms tried before? What happened at scale? Why did they succeed or fail?
 
-\subsection{Edge Cases We've Considered}
+\textbf{Edge cases we've considered.}
 
 \textbf{Quantum-indeterminate enforcement} still requires someone determining when and how quantum measurement occurs. Who controls that? Returns to human or technological control.
 
@@ -397,13 +387,13 @@ We will analyze proposals using several approaches.
 
 \textbf{Emergent order without enforcement} is $E_n$ (voluntary coordination). Requires transformation to be stable at scale. Proves our point rather than contradicting it.
 
-\subsection{Our Commitment}
+\textbf{Our commitment.}
 
 If you propose a mechanism we can't reduce to our framework, and it survives information-theoretic analysis (no observer regress, manageable complexity), game-theoretic analysis (stable equilibrium exists), and practical analysis (workable at civilization scale), \textbf{we will update our claims.}
 
 This is how intellectual progress works. We're analyzing reality rather than defending a position. If reality differs from our analysis, the analysis must change.
 
-\subsection{Responses to Real Proposed Alternatives}
+\textbf{Responses to real proposed alternatives.}
 
 Since publishing earlier versions of this framework, several specific alternatives have been proposed. Here we analyze the most prominent.
 
@@ -507,7 +497,7 @@ Still need several things answered. How are market decisions enforced? Who preve
 
 \textbf{Verdict:} Sophisticated decision mechanism but must combine with some enforcement type from our framework.
 
-\subsection{Pattern in All Alternatives}
+\textbf{Pattern in all alternatives.}
 
 Every proposed alternative falls into one of three categories.
 
@@ -519,7 +509,7 @@ Every proposed alternative falls into one of three categories.
 
 \textbf{No proposed alternative has escaped the framework.}
 
-\subsection{Current Status}
+\textbf{Current status.}
 
 \textbf{No proposed alternative has survived formal analysis.}
 
@@ -529,11 +519,10 @@ This doesn't prove no alternative exists. Proving non-existence of something not
 
 The offer stands: Propose a mechanism that survives all four analytical lenses, and we'll acknowledge it.
 
-\medskip\hrule\medskip
 
 \subsection{Conclusion}
 
-\subsection{What We've Established}
+\textbf{What we've established.}
 
 Through three independent proofs, we have established several things.
 
@@ -545,7 +534,7 @@ Through three independent proofs, we have established several things.
 
 These are mathematical necessities given the structure of coordination problems rather than empirical observations subject to future revision.
 
-\subsection{Implications}
+\textbf{Implications.}
 
 This analysis establishes several points.
 
@@ -553,7 +542,7 @@ No "middle path" exists avoiding both corruption and value transformation. Techn
 
 \textbf{The choice is binary:} Accept default trajectory (certain extinction/enslavement per Appendix B, Theorem 3.2) or attempt voluntary coordination (uncertain but only viable alternative per Appendix B, Theorem 5.1).
 
-\subsection{Relationship to Other Appendices}
+\textbf{Relationship to other appendices.}
 
 \textbf{This appendix proves:} No third path exists between default and voluntary coordination.
 
@@ -565,7 +554,7 @@ No "middle path" exists avoiding both corruption and value transformation. Techn
 
 Together, these establish necessity (voluntary coordination is necessary with no other path), urgency (must act now since window closing), requirements (what conditions must be met), and uncertainty (whether conditions can be met at scale).
 
-\subsection{The Categorical Distinction}
+\textbf{The categorical distinction.}
 
 \textbf{An important clarification about what "no alternative path" means:}
 
@@ -595,9 +584,8 @@ The "no alternative path" proof has profound metaphysical implications beyond ju
 
 The framework is complete. The logic is sound. The choice is binary. The stakes are absolute.
 
-\medskip\hrule\medskip
 
-\subsection{References}
+\textbf{Key theorems.}
 
 For formal mathematical proofs of claims in this appendix, see:
 - \textbf{Appendix B, Theorem 1.1}: The Coordination Trilemma
