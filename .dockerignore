@@ -1,0 +1,23 @@
+# Ignore auxiliary LaTeX files
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.synctex.gz
+
+# Ignore the PDF (it will be generated)
+*.pdf
+
+# Ignore git files
+.git
+.gitignore
+
+# Ignore markdown source files (not needed for compilation)
+*.md
+!LATEX_README.md
+
+# Ignore Python cache
+__pycache__
+*.pyc

@@ -1,1 +1,0 @@
-can you compress (informationally) the truest information captured in these documents such that I can use it as a seed/premise for future conversations exploring this topic? I almost liken it to abstraction<->concretism -- we need just enough to show where/how to start understanding the knowledge, and what is true.

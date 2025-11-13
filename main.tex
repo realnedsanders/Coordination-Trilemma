@@ -1,0 +1,93 @@
+\documentclass[12pt]{amsart}
+
+% Packages
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+
+% Formatting improvements
+\raggedbottom  % Prevent excessive vertical stretching
+\setlist{itemsep=0.5em, parsep=0pt, topsep=0.5em}  % Tighter list spacing
+\widowpenalty=10000  % Prevent widow lines
+\clubpenalty=10000   % Prevent orphan lines
+
+% Theorem environments
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{note}[theorem]{Note}
+
+% Hyperref setup
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue,
+  pdftitle={The Coordination Trilemma: A Formal Analysis of Large-Scale Human Cooperation},
+  pdfauthor={},
+  pdfsubject={Coordination Theory, Game Theory, Political Philosophy},
+  pdfkeywords={coordination, trilemma, voluntary cooperation, game theory}
+}
+
+% Title and author information
+\title[The Coordination Trilemma]{The Coordination Trilemma: A Formal Analysis of Large-Scale Human Cooperation}
+
+\author{}
+\address{}
+\email{}
+
+\date{\today}
+
+\begin{document}
+
+\begin{abstract}
+This paper presents a formal analysis of coordination mechanisms at civilization scale, examining the structural constraints that limit viable approaches to large-scale human cooperation. We develop a mathematical framework demonstrating that coordination systems face an inescapable trilemma: no mechanism can simultaneously achieve incorruptibility, stability, and preservation of human agency. Through formal proofs (presented in the appendices), we show that all coordination mechanisms reduce to two fundamental outcomes: either trajectories leading to extinction or permanent subjugation, or voluntary cooperation grounded in transformed values.
+
+The analysis reveals that hierarchical enforcement systems, whether human or technological, exhibit inherent instabilities that amplify over time. We formalize the dynamics of what we term the ``corruption-control cycle'' and prove that technological control systems create convergent pathways to catastrophic outcomes. This mathematical result, combined with empirical evidence about declining epistemic security and accelerating deployment of control infrastructure, suggests that the window for establishing voluntary coordination mechanisms may be limited.
+
+We discuss the requirements for voluntary coordination at scale, the metaphysical commitments such systems entail, and practical challenges including defection management and defense. While historical evidence supports viability at community scale, scalability to billions remains theoretically uncertain. Nevertheless, decision-theoretic considerations indicate that attempting voluntary coordination is rationally necessary given the alternative trajectories.
+\end{abstract}
+
+\maketitle
+
+\tableofcontents
+
+% Main article content
+\input{main-article.tex}
+
+% Appendices
+\appendix
+
+\input{appendix-a.tex}
+
+\clearpage
+\input{appendix-b.tex}
+
+\clearpage
+\input{appendix-c.tex}
+
+\clearpage
+\input{appendix-d.tex}
+
+% Bibliography
+\bibliographystyle{amsplain}
+\bibliography{references}
+
+\end{document}
