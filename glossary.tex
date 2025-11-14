@@ -1,0 +1,103 @@
+\section*{Glossary of Terms and Notation}
+\label{glossary}
+
+This glossary provides formal definitions, key terminology, and mathematical notation used throughout the paper.
+
+\bigskip
+\noindent\textbf{\large Core Concepts}
+\medskip
+
+\begin{center}
+\begin{tabular}{p{0.25\textwidth} p{0.68\textwidth}}
+\hline
+\textbf{Term} & \textbf{Definition} \\
+\hline
+Civilization Scale & Populations exceeding ten million people ($|A| > 10^7$) distributed across geography and time, where direct personal relationships cannot cover all interactions and anonymous defection becomes structurally possible. \\[1ex]
+Coordination System & A tuple $C = (A, R, E, M)$ where: $A$ is a non-empty set of agents; $R$ is a set of rules governing agent behavior; $E: A \times R \rightarrow \{0, 1\}$ is an enforcement function; $M: A \times R \rightarrow \mathbb{R}$ is a motivation function. \\[1ex]
+The Coordination Trilemma & No coordination system at civilization scale can simultaneously achieve: (1)~Incorruptibility (enforcers don't extract beyond maintenance needs), (2)~Stability (coordination persists for $T > 100$ years), (3)~Agency (humans retain capability to violate rules). \\
+\hline
+\end{tabular}
+\end{center}
+
+\bigskip
+\noindent\textbf{\large Key Definitions}
+\medskip
+
+\begin{center}
+\begin{tabular}{p{0.25\textwidth} p{0.68\textwidth}}
+\hline
+\textbf{Term} & \textbf{Definition} \\
+\hline
+Defection & Agent $a \in A$ defects from rule $r \in R$ when: following $r$ reduces utility, violating $r$ is feasible, and internal motivation $M(a, r, t) < \text{cost}(r, t)$. \\[1ex]
+Corruption & For enforcer subset $A_E \subseteq A$, occurs when $\exists a \in A_E$ using enforcement power to extract utility beyond what's necessary for system function. \\[1ex]
+Technological Control State (TCS) & System where $E(a, r) = 1$ for all agents through technological means: human capability to violate rules is technologically prevented, enforcement is automated and continuous, no human discretion in rule application. \\[1ex]
+Voluntary Coordination System (VCS) & Coordination system where $E(a, r) = 0$ or enforcement is minimal, $M(a, r) > C(a, r)$ for sufficient proportion $\theta$ of agents, and cooperation arises from intrinsic motivation. \\[1ex]
+Soteriological Framework & Comprehensive worldview/framework $S$ providing: objective telos aligned with human nature ($\phi(S) = 1$), intrinsic motivation $M > C$, recognition of universal human dignity, mechanisms for forgiveness and restoration. \\[1ex]
+Extraction System & Hierarchical coordination system where enforcers extract resources at rate $E(t)$ exceeding productive capacity growth, leading to inevitable collapse or transition. \\
+\hline
+\end{tabular}
+\end{center}
+
+\clearpage
+\noindent\textbf{\large Mathematical Notation}
+\medskip
+
+\begin{center}
+\begin{tabular}{p{0.15\textwidth} p{0.78\textwidth}}
+\hline
+\textbf{Symbol} & \textbf{Definition} \\
+\hline
+\multicolumn{2}{l}{\textit{Sets and Functions}} \\
+$A$ & Set of agents in a coordination system \\
+$|A|$ & Number of agents (population size) \\
+$A_E$ & Subset of enforcers with enforcement authority \\
+$A_E^*$ & Top-level enforcers with no oversight \\
+$R$ & Set of coordination rules \\
+$E(a,r)$ & Enforcement function (whether rule $r$ is enforced for agent $a$) \\
+$M(a,r)$ & Motivation function (agent $a$'s intrinsic motivation for rule $r$) \\
+$\phi(F)$ & Alignment function: how well framework $F$ aligns with objective human nature (0 to 1) \\[0.5ex]
+\multicolumn{2}{l}{\textit{Probabilities and Proportions}} \\
+$\theta$ & Proportion of population (cooperators or value-transformed agents) \\
+$\theta^*$, $\theta_{\text{crit}}$ & Critical threshold proportion for stable voluntary coordination \\
+$p$, $P(\cdot)$ & Probability (context-specific) \\
+$P_{\text{detection}}$ & Probability of detecting rule violation or corruption \\[0.5ex]
+\multicolumn{2}{l}{\textit{Time and Dynamics}} \\
+$t$ & Time variable \\
+$T$ & Time horizon (often $T > 100$ years for civilization scale) \\
+$P(t)$ & Productive capacity at time $t$ \\
+$E(t)$ & Extraction rate at time $t$ \\[0.5ex]
+\multicolumn{2}{l}{\textit{Utilities and Costs}} \\
+$U_e(a,t)$ & Utility available to agent $a$ from extraction at time $t$ \\
+$C(a,r)$, $\text{cost}(r,t)$ & Cost to agent $a$ of following rule $r$ \\
+$M(a,r)$ & Intrinsic motivation utility (benefit from cooperating independent of enforcement) \\[0.5ex]
+\multicolumn{2}{l}{\textit{Parameters}} \\
+$\alpha$ & Productive capacity growth rate \\
+$\beta$ & Extraction growth rate \\
+$\gamma$ & Rate at which extraction damages productive capacity \\
+$\delta$ & Natural productive capacity decay rate \\
+$\lambda$ & Maximum extraction rate as fraction of productive capacity \\
+$\epsilon$ & Small positive value (threshold for defection rates) \\
+\hline
+\end{tabular}
+\end{center}
+
+\clearpage
+\noindent\textbf{\large Key Terms}
+\medskip
+
+\begin{center}
+\begin{tabular}{p{0.25\textwidth} p{0.68\textwidth}}
+\hline
+\textbf{Term} & \textbf{Definition} \\
+\hline
+Bounded Rationality & Assumption that agents are utility-maximizing but with cognitive and informational constraints. Agents extract utility when benefits exceed expected costs times detection probability plus internal motivation. \\[1ex]
+Corruption-Control Cycle & Dynamic where hierarchical systems alternate between corruption phases (enforcers extract resources) and control phases (technological/hierarchical prevention mechanisms), with each cycle potentially progressing toward technological control states. \\[1ex]
+Default Trajectory & Path hierarchical coordination systems follow without intentional intervention toward voluntary coordination: corruption $\to$ control response $\to$ technological control escalation $\to$ terminal catastrophic outcomes. \\[1ex]
+Enforcement & External mechanisms (threats, punishments, technological prevention) ensuring compliance with coordination rules. \\[1ex]
+Minimal Telic Realism & Metaphysical position that human nature has objective properties and telos (purpose), such that some coordination patterns align with those properties better than others. \\[1ex]
+Scale Threshold & Population size above which coordination dynamics change qualitatively, typically $|A| > 10^7$ (ten million people), where personal relationships cannot cover all interactions. \\[1ex]
+Terminal States & Final outcomes of coordination trajectories from which no escape is possible: extinction, enslavement, or sustainable voluntary coordination. \\[1ex]
+Value Transformation & Change in agent's internal motivation $M(a,r)$ such that intrinsic desire to cooperate exceeds costs across all rules: $M(a,r) > C(a,r)$ for all $r \in R$. \\
+\hline
+\end{tabular}
+\end{center}

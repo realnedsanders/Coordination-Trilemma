@@ -41,7 +41,7 @@ docker-pull:
 	@echo "Docker image ready!"
 
 # Full build with bibliography
-$(MAIN).pdf: $(MAIN).tex main-article.tex appendix-a.tex appendix-b.tex appendix-c.tex appendix-d.tex $(BIB).bib
+$(MAIN).pdf: $(MAIN).tex main-article.tex appendix-a.tex appendix-b.tex appendix-c.tex appendix-d.tex $(BIB).bib glossary.tex
 	@echo "Compiling with $(COMPILE_METHOD) method..."
 	$(RUN_LATEX) $(MAIN)
 	$(RUN_BIBTEX) $(MAIN)

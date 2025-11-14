@@ -1,9 +1,7 @@
 \section{Formal Mathematical Theorems and Proofs}
 \label{app:b}
 
-\textbf{Purpose and scope.}
-
-\textbf{What we prove here.}
+\textbf{What we prove here}
 
 This appendix provides mathematical formulations and proofs for core claims:
 
@@ -21,30 +19,25 @@ Mathematical models are simplifications of reality. These proofs establish logic
 
 The proofs show \emph{necessary} conditions (voluntary coordination is necessary to avoid doom) but not \emph{sufficient} conditions (that voluntary coordination will succeed). This asymmetry means action is rationally required even under uncertainty.
 
-\textbf{Notation and conventions.}
+\textbf{Notation and conventions}
 
-Throughout this appendix:
+All formal notation and definitions are provided in the Glossary (page~\pageref{glossary}). Key notation used throughout:
 \begin{itemize}
- \item $A$ denotes the set of agents in a coordination system
- \item $|A|$ denotes the number of agents (population size)
- \item $R$ denotes the set of coordination rules
- \item $E(a,r)$ denotes enforcement function (whether rule $r$ is enforced for agent $a$)
- \item $M(a,r)$ denotes motivation function (agent $a$'s intrinsic motivation for rule $r$)
- \item $\theta$ denotes proportion of population (typically cooperators or transformed agents)
- \item $T$ denotes time horizon
- \item $p$ denotes probability
+ \item $C = (A, R, E, M)$ denotes a coordination system
+ \item $\theta$ denotes proportion of population (cooperators or value-transformed agents)
+ \item $\theta^*$ or $\theta_{\text{crit}}$ denotes critical threshold for stable cooperation
+ \item See Glossary for complete definitions and notation reference
 \end{itemize}
-
-A complete notation reference appears at the end of this appendix.
 
 
 \subsection{Axiomatic Foundations and Robustness}
 
 Before presenting theorems, we examine the foundational assumptions and test their robustness.
 
-\textbf{Core assumptions.}
+\textbf{Core assumptions}
 
 \textbf{Assumption 1.1 (Bounded Rationality):}
+\label{assum:bounded-rationality}
 
 We assume agents are utility-maximizing with bounded rationality. Formally: For any agent $a$ and opportunity to extract utility $U_e(a,t)$, if
 
@@ -66,6 +59,7 @@ $P(\text{at least one corruption event}) = 1 - (0.99)^{100,000} \approx 1$
 The corruption inevitability result holds even with very low corruption probability per agent per period.
 
 \textbf{Assumption 1.2 (Scale Threshold):}
+\label{assum:scale}
 
 We define "civilization scale" as $|A| > 10^7$ (ten million agents).
 
@@ -84,6 +78,7 @@ We define "civilization scale" as $|A| > 10^7$ (ten million agents).
  \end{itemize}
 
 \textbf{Assumption 1.3 (Time Horizon):}
+\label{assum:time}
 
 We require stability over $T > 100$ years (multiple generations).
 
@@ -101,7 +96,7 @@ We require stability over $T > 100$ years (multiple generations).
  \item Loss and transmission of values across generations
  \end{itemize}
 
-\textbf{Historical calibration.}
+\textbf{Historical calibration}
 
 \textbf{Claim:} These assumptions are not arbitrary but calibrated against historical evidence.
 
@@ -127,7 +122,7 @@ We require stability over $T > 100$ years (multiple generations).
  \item Claims of permanent solutions historically false
  \end{itemize}
 
-\textbf{Minimal form of assumptions.}
+\textbf{Minimal form of assumptions}
 
 \textbf{Critical insight:} Our results only require *weak* forms of these assumptions:
 
@@ -151,39 +146,21 @@ These assumptions are conservative, empirically grounded, and stated in minimal 
 
 
 \subsection{The Coordination Trilemma}
+\label{sec:trilemma}
 
-\textbf{Foundational definitions.}
+\textbf{Foundational definitions}
 
-\textbf{Definition 1.1 (Coordination System):}
+The formal definitions of coordination systems, defection, and corruption are provided in the Glossary (page~\pageref{glossary}). We use the standard notation: a coordination system is a tuple $C = (A, R, E, M)$ where $A$ is the set of agents, $R$ is the set of rules, $E$ is the enforcement function, and $M$ is the motivation function.
 
-A coordination system is a tuple $C = (A, R, E, M)$ where:
-\begin{itemize}
- \item $A$ is a non-empty set of agents
- \item $R$ is a set of rules governing agent behavior
- \item $E: A \times R \rightarrow \{0, 1\}$ is an enforcement function (whether rule violations are prevented/punished)
- \item $M: A \times R \rightarrow \mathbb{R}$ is a motivation function (internal desire to follow rules)
-\end{itemize}
-
-\textbf{Definition 1.2 (Defection):}
-
-Agent $a \in A$ defects from rule $r \in R$ at time $t$ when:
-\begin{enumerate}
- \item Following $r$ would reduce $a$'s utility at time $t$, AND
- \item Violating $r$ is feasible (either $E(a, r) = 0$ or enforcement can be evaded), AND
- \item $M(a, r, t) < \text{cost}(r, t)$ (internal motivation insufficient to overcome cost)
-\end{enumerate}
-
-\textbf{Definition 1.3 (Corruption):}
-
-For an enforcer subset $A_E \subseteq A$ with enforcement authority, corruption occurs when $\exists a \in A_E$ such that $a$ uses enforcement power to extract utility beyond what's necessary for system function.
-
-\textbf{The impossibility theorem.}
+\textbf{The impossibility theorem}
 
 \textbf{Intuition before formalism:} We're about to prove that you can't have corruption-free enforcement at scale without either removing human agency (perfect technological control) or transforming values (voluntary cooperation). The proof works by showing that enforcers face the same coordination problem as everyone else. Someone has to be the final enforcer with no oversight.
 
 \textbf{Why it matters:} We're dealing with a logical impossibility rather than a practical difficulty we might engineer around. Like trying to build a square circle, no matter how clever your governance design, you're choosing which property to sacrifice.
 
-\textbf{Theorem 1.1 (Coordination Trilemma):}
+\bigskip
+\textbf{Theorem~\ref{thm:trilemma} (Coordination Trilemma):}
+\label{thm:trilemma}
 
 For any coordination system $C = (A, R, E, M)$ at civilization scale ($|A| > 10^7$), at most two of the following can simultaneously hold over extended time ($T > 100$ years):
 
@@ -239,11 +216,11 @@ $\forall r \in R, \forall t: |\{a \in A : M(a, r, t) < \text{cost}(r, t)\}| < \e
 
 For costly rules where $\text{cost}(r) > 0$, some agents will have $M(a, r) < \text{cost}(r)$. At scale $|A| > 10^7$, even small proportion creates many potential defectors.
 
-From game theory (see Theorem 4.1), when seeing others defect without punishment reduces $M(a, r)$ for marginal cooperators, defection cascades. Stability fails unless:
+From game theory (see Theorem~\ref{thm:defection}), when seeing others defect without punishment reduces $M(a, r)$ for marginal cooperators, defection cascades. Stability fails unless:
 
 $P(M(a, r) > \text{cost}(r)) > \theta_{\text{crit}}$
 
-where $\theta_{\text{crit}}$ is critical mass threshold. This requires transformation achieving high intrinsic motivation (the voluntary coordination path, Theorem 5.1).
+where $\theta_{\text{crit}}$ is critical mass threshold. This requires transformation achieving high intrinsic motivation (the voluntary coordination path, Theorem~\ref{thm:resolution}).
 
 Therefore: Without enforcement, Stability (property 2) requires voluntary coordination through transformation. $\square$
 
@@ -254,7 +231,7 @@ Therefore: Without enforcement, Stability (property 2) requires voluntary coordi
 
 \subsection{Technological Control Impossibility}
 
-\textbf{TCS definition and states.}
+\textbf{TCS definition and states}
 
 \textbf{Intuition before formalism:} When enforcement becomes perfect through technology, who controls the technology? If humans control it, they corrupt. If AI controls itself, either it pursues its own goals (extinction/enslavement) or values are frozen forever (tyranny). There's no stable state that preserves human agency.
 
@@ -269,7 +246,9 @@ A system is in TCS when $E(a, r) = 1$ for all agents through technological means
  \item No human discretion in rule application
 \end{enumerate}
 
-\textbf{Theorem 2.1 (TCS Terminal States):}
+\bigskip
+\textbf{Theorem~\ref{thm:tcs} (TCS Terminal States):}
+\label{thm:tcs}
 
 Any Technological Control State necessarily leads to one of three outcomes:
 \begin{enumerate}
@@ -288,13 +267,13 @@ Controllers face coordination problem: How do they prevent corruption within $A_
 
 \emph{Sub-case 1a: Controllers enforce rules on each other through human oversight}
 
-This recreates the trilemma at controller level (Theorem 1.1):
+This recreates the trilemma at controller level (Theorem~\ref{thm:trilemma}):
 \begin{itemize}
  \item Either controllers enforce on each other $\to$ infinite regress (who enforces on final controllers?)
  \item Or no enforcement on controllers $\to$ corruption
 \end{itemize}
 
-Regress terminates at some controller subset with no oversight. By Theorem 1.1, corruption occurs with probability:
+Regress terminates at some controller subset with no oversight. By Theorem~\ref{thm:trilemma}, corruption occurs with probability:
 
 $P(\text{controller corruption over time } T) \rightarrow 1 \text{ as } T \rightarrow \infty$
 
@@ -370,7 +349,9 @@ $\square$
 
 \textbf{Why it matters:} Shows the corruption phase terminates in collapse or evolution to tech control rather than persisting indefinitely.
 
-\textbf{Theorem 3.1 (Extraction System Instability):}
+\bigskip
+\textbf{Theorem~\ref{thm:extraction} (Extraction System Instability):}
+\label{thm:extraction}
 
 Systems where extraction rate grows faster than productive capacity inevitably collapse or transition to alternative enforcement.
 
@@ -423,7 +404,9 @@ $P(t) \rightarrow 0 \text{ as } t \rightarrow \infty$
 
 \textbf{Why it matters:} Shows the default trajectory guarantees catastrophe over sufficient time rather than merely risking it.
 
-\textbf{Theorem 3.2 (Default Trajectory Terminus):}
+\bigskip
+\textbf{Theorem~\ref{thm:terminus} (Default Trajectory Terminus):}
+\label{thm:terminus}
 
 The default trajectory through corruption and technological control inevitably terminates in human extinction or permanent enslavement with probability approaching 1 over time.
 
@@ -447,11 +430,11 @@ From $S_C$:
 
 From $S_{TCS}^H$:
 \begin{itemize}
- \item Probability 1 of eventual controller corruption (Theorem 2.1, Case 1) $\to$ return to $S_C$
+ \item Probability 1 of eventual controller corruption (Theorem~\ref{thm:tcs}, Case 1) $\to$ return to $S_C$
 \end{itemize}
 
 From $S_{TCS}^{AI}$:
-- Probability 1 of transition to $S_E$ (Theorem 2.1, Case 2)  $\to$ \textbf{Absorbing state}
+- Probability 1 of transition to $S_E$ (Theorem~\ref{thm:tcs}, Case 2)  $\to$ \textbf{Absorbing state}
 
 \textbf{Critical observation:} Each cycle through $S_C \rightarrow S_{TCS}^H \rightarrow S_C$ has probability $p_{AI}$ of transitioning to $S_{TCS}^{AI}$ instead of $S_{TCS}^H$.
 
@@ -500,7 +483,9 @@ As AI capabilities improve, $p_{AI}$ increases, so $E[T]$ decreases.
 
 \textbf{Why it matters:} Shows that voluntary coordination without transformation is unstable. With transformation, it becomes the only stable equilibrium.
 
-\textbf{Theorem 4.1 (Defection Dominance at Scale):}
+\bigskip
+\textbf{Theorem~\ref{thm:defection} (Defection Dominance at Scale):}
+\label{thm:defection}
 
 For the N-person public goods game where each of $n$ agents chooses Cooperate (C) or Defect (D), with:
 \begin{itemize}
@@ -569,7 +554,9 @@ Loss: $L = n(\beta - c) = \Theta(n)$, scaling linearly with population. $\square
 
 \textbf{Why it matters:} Provides precise conditions for when voluntary coordination works, showing transformation is possible but demanding.
 
-\textbf{Theorem 4.2 (Voluntary Cooperation Stability):}
+\bigskip
+\textbf{Theorem~\ref{thm:cooperation} (Voluntary Cooperation Stability):}
+\label{thm:cooperation}
 
 With intrinsic motivation $m_i$ to cooperate (measured in utility units), cooperation equilibrium exists when sufficient proportion $\theta$ of agents have $m_i > c - \frac{\beta}{n}$, and $\theta$ satisfies:
 
@@ -627,6 +614,7 @@ where $\bar{m}$ is average motivation among cooperators. $\square$
 
 
 \subsection{Voluntary Coordination Resolution}
+\label{sec:voluntary}
 
 \textbf{Soteriological framework definition.}
 
@@ -658,7 +646,9 @@ where $\text{cost}_{\max} = \max_{r \in R} \text{cost}(r)$ is the maximum cooper
 
 \textbf{Why it matters:} Proves voluntary coordination provides the only way to achieve all three desired properties rather than just avoiding bad outcomes.
 
-\textbf{Theorem 5.1 (Soteriological Resolution):}
+\bigskip
+\textbf{Theorem~\ref{thm:resolution} (Soteriological Resolution):}
+\label{thm:resolution}
 
 If there exists a true soteriological framework $S$ with $\phi(S) = 1$, and population $A$ is value-transformed under $S$ to degree $\theta > \theta_{\text{crit}}$, then a coordination system can achieve all three properties:
 \begin{enumerate}
@@ -685,7 +675,7 @@ $M_{\text{trans}}(a, P) > \text{cost}(r) \text{ for all } r \in R$
 Cooperation is individually rational:
 $u(C) = b - c + M_{\text{trans}}(a, P) > b = u(D)$
 
-From Theorem 4.2, cooperation is stable when:
+From Theorem~\ref{thm:cooperation}, cooperation is stable when:
 $\theta > \theta_{\text{crit}} = \frac{c}{\beta + \bar{M}_{\text{trans}}}$
 
 Since $M_{\text{trans}}(a, P) > c$ for at least $\theta |A|$ agents by definition, and $\bar{M}_{\text{trans}} > 0$, this condition is satisfied.
@@ -716,13 +706,15 @@ Property (3) holds. $\square$
 
 \textbf{Stakes and decision theory.}
 
-\textbf{Theorem 5.2 (Stakes of Soteriological Choice):}
+\bigskip
+\textbf{Theorem~\ref{thm:stakes} (Stakes of Soteriological Choice):}
+\label{thm:stakes}
 
 Given that:
 \begin{enumerate}
- \item The default trajectory inevitably leads to extinction or enslavement (Theorem 3.2)
+ \item The default trajectory inevitably leads to extinction or enslavement (Theorem~\ref{thm:terminus})
  \item Voluntary coordination is the only viable alternative (Theorems 1.1, 2.1)
- \item Voluntary coordination requires true soteriological framework (Theorem 5.1)
+ \item Voluntary coordination requires true soteriological framework (Theorem~\ref{thm:resolution})
 \end{enumerate}
 
 The choice of soteriological framework is existentially determinative:
@@ -734,11 +726,11 @@ The choice of soteriological framework is existentially determinative:
 
 \textbf{Proof:}
 
-By Theorem 3.2: Default trajectory terminates in catastrophe with $P \rightarrow 1$.
+By Theorem~\ref{thm:terminus}: Default trajectory terminates in catastrophe with $P \rightarrow 1$.
 
 By Theorems 1.1 and 2.1: No alternative to voluntary coordination preserves agency while avoiding corruption/catastrophe.
 
-By Theorem 5.1: Voluntary coordination requires true framework with effective transformation.
+By Theorem~\ref{thm:resolution}: Voluntary coordination requires true framework with effective transformation.
 
 Therefore:
 \begin{itemize}
@@ -777,6 +769,7 @@ $\blacksquare$
 
 
 \subsection{The Nature of Objective Oughtness}
+\label{sec:oughtness}
 
 The previous sections establish that VCS requires purposive structure in reality. A critical reader might object: \emph{"You claim purpose is objective, but that's just philosophy. What do you mean by 'oughtness' and why should we believe it's real?"}
 
@@ -825,8 +818,8 @@ Different types of "ought" statements have different objectivity requirements. C
 \textbf{Type 4 (Mathematical) - PROVEN:}
  \begin{itemize}
  \item Nash equilibria exist objectively (game theory)
- \item Cooperation requires $M > c$ (mathematical fact, Theorem 4.2)
- \item Default trajectory terminates in catastrophe (proven, Theorem 3.2)
+ \item Cooperation requires $M > c$ (mathematical fact, Theorem~\ref{thm:cooperation})
+ \item Default trajectory terminates in catastrophe (proven, Theorem~\ref{thm:terminus})
  \end{itemize}
 - \textbf{These are objective mathematical facts about coordination structures}
 
@@ -871,7 +864,7 @@ If human nature has NO objective telos:
  \item Different environments $\to$ different "purposes" (no universal standard)
  \item Modern environment $\neq$ ancestral environment  $\to$ no objective "purpose" for modern humans
  \item No universal framework can have $\phi(S) = 1$ (no objective truth to be accurate about)
-- \textbf{Therefore: VCS is impossible} (Theorem 5.1 fails - no true framework to discover)
+- \textbf{Therefore: VCS is impossible} (Theorem~\ref{thm:resolution} fails - no true framework to discover)
 
 \textbf{The incompatibility:}
 
@@ -1171,11 +1164,11 @@ Both are more defensible than categorical moral realism, don't require resolving
 
 Given stated assumptions, we have rigorously proven:
 
-$\checkmark$ \textbf{The coordination trilemma exists} (Theorem 1.1) - Cannot simultaneously achieve {No Corruption, Stability, Human Agency} at civilization scale
+$\checkmark$ \textbf{The coordination trilemma exists} (Theorem~\ref{thm:trilemma}) - Cannot simultaneously achieve {No Corruption, Stability, Human Agency} at civilization scale
 
-$\checkmark$ \textbf{TCS cannot provide stable human survival} (Theorem 2.1) - Technological control leads to extinction, enslavement, or return to corruption
+$\checkmark$ \textbf{TCS cannot provide stable human survival} (Theorem~\ref{thm:tcs}) - Technological control leads to extinction, enslavement, or return to corruption
 
-$\checkmark$ \textbf{Default trajectory terminates in catastrophe} (Theorem 3.2) - Corruption $\to$ TCS cycle inevitably reaches extinction/enslavement with probability $\to$ 1
+$\checkmark$ \textbf{Default trajectory terminates in catastrophe} (Theorem~\ref{thm:terminus}) - Corruption $\to$ TCS cycle inevitably reaches extinction/enslavement with probability $\to$ 1
 
 $\checkmark$ \textbf{Cooperation fails without transformation} (Theorems 4.1, 4.2) - Game theory shows cooperation requires enforcement or high intrinsic motivation
 
@@ -1185,11 +1178,11 @@ $\checkmark$ \textbf{VCS is the only viable alternative} (Theorems 5.1, 5.2) - V
 
 $\times$ \textbf{VCS practical achievability} - We've shown IF conditions are met THEN VCS is stable, not that conditions CAN be met
 
-$\times$ \textbf{Exact timelines} - Theorem 3.2 shows inevitability but timeline depends on $\lambda$ (cycle duration) and $p_{AI}$ (AI transition probability), which vary
+$\times$ \textbf{Exact timelines} - Theorem~\ref{thm:terminus} shows inevitability but timeline depends on $\lambda$ (cycle duration) and $p_{AI}$ (AI transition probability), which vary
 
 $\times$ \textbf{Specific framework identification} - Mathematics shows a true soteriological framework is necessary, not which one is true
 
-$\times$ \textbf{All edge cases} - While Appendix A categorically analyzes proposals, creative alternatives we haven't considered might exist
+$\times$ \textbf{All edge cases} - While Appendix~\ref{app:a} categorically analyzes proposals, creative alternatives we haven't considered might exist
 
 \textbf{Assumption sensitivity.}
 
@@ -1245,7 +1238,7 @@ No coordination mechanism exists outside {corruption phase, tech control, volunt
  \item Doesn't rely on enforcers (human or technological)
  \item Doesn't require value transformation
  \item Maintains stability and agency
- \item Survives formal analysis in Appendix A framework
+ \item Survives formal analysis in Appendix~\ref{app:a} framework
  \end{itemize}
 
 \textbf{Prediction 4 (Game-Theoretic Cooperation Failure):}
@@ -1386,7 +1379,7 @@ The formal proofs have a profound implication that must be stated explicitly:
 Here's why:
 
 \begin{enumerate}
- \item VCS requires a true soteriological framework with $\varphi(S)$ = 1 (Theorem 5.1)
+ \item VCS requires a true soteriological framework with $\varphi(S)$ = 1 (Theorem~\ref{thm:resolution})
  \item $\varphi(S)$ = 1 means the framework accurately describes human nature and telos
  \item For this to be meaningful, human telos must exist objectively (not just subjectively or "as if")
  \item Objective human purpose means reality contains oughtness, not just is-ness

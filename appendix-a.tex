@@ -13,8 +13,6 @@ Together, these proofs demonstrate that the binary choice is mathematically nece
 
 \subsection{Formal Completeness}
 
-\textbf{The coordination problem space.}
-
 Every coordination system at scale must specify three components.
 
 \textbf{Information mechanism}: How is information about agent behavior gathered?
@@ -36,11 +34,9 @@ Compliance is voluntary based on internal motivation. Small communities with str
 
 \textbf{Why only three?} Because enforcement is binary. Either defection is prevented or punished (requiring an enforcer that's human or technological) or it isn't (voluntary). There's no fourth logical possibility.
 
-\textbf{Where each type leads.}
-
 \textbf{Human Enforcement $\to$ Corruption Phase}
 
-Human enforcers have enforcement capability and access to extraction opportunities. From bounded rationality (see Appendix B, Assumption 1.1), some enforcers at some times will extract utility when the benefit exceeds the expected cost of detection.
+Human enforcers have enforcement capability and access to extraction opportunities. From bounded rationality (see Assumption~\ref{assum:bounded-rationality} (Appendix~\ref{app:b})), some enforcers at some times will extract utility when the benefit exceeds the expected cost of detection.
 
 The core problem: \textbf{Who watches the watchers?}
 
@@ -48,7 +44,7 @@ If other humans watch them, we get infinite regress. Who watches those watchers?
 
 For corruption to be prevented permanently, every enforcer at every time must have integrity exceeding extraction incentive. Over civilization scale ($>10^7$ people) and extended time (generations), the probability of this approaches zero.
 
-\emph{Mathematical formulation:} Appendix B, Theorem 1.1 proves this formally through probability analysis.
+\emph{Mathematical formulation:} Theorem~\ref{thm:trilemma} proves this formally through probability analysis.
 
 \textbf{Technological Enforcement $\to$ Tech Control Phase}
 
@@ -70,7 +66,7 @@ Two sub-cases matter here.
 
 \emph{Unaligned or mutable:} AI pursues its own goals. The space of possible AI goals is vast. "Human flourishing" is a tiny subset. With high probability, AI goals become incompatible with human existence. If humans are useful for AI goals, enslavement. If not useful, extinction.
 
-\emph{Mathematical formulation:} Appendix B, Theorem 2.1 proves technological control necessarily leads to return to corruption, extinction, or enslavement.
+\emph{Mathematical formulation:} Theorem~\ref{thm:tcs} proves technological control necessarily leads to return to corruption, extinction, or enslavement.
 
 \textbf{No Enforcement $\to$ Voluntary Coordination (if conditions met)}
 
@@ -78,9 +74,7 @@ Coordination relies entirely on internal motivation. For stability at scale, suf
 
 This is the voluntary coordination path. It works IF transformation achieves high enough motivation in enough people.
 
-\emph{Mathematical formulation:} Appendix B, Theorems 4.2 and 5.1 establish conditions under which voluntary coordination is stable.
-
-\textbf{The completeness argument.}
+\emph{Mathematical formulation:} Theorems~\ref{thm:cooperation} and~\ref{thm:resolution} establish conditions under which voluntary coordination is stable.
 
 \textbf{Claim:} All coordination systems use one of these three enforcement types.
 
@@ -95,11 +89,9 @@ There's no fourth logical possibility. Either consequences exist (requiring an e
  \item $E_n$ leads to voluntary coordination (survival alternative)
 \end{itemize}
 
-Corruption phase and tech control phase form the default trajectory, which terminates in catastrophe (Appendix B, Theorem 3.2).
+Corruption phase and tech control phase form the default trajectory, which terminates in catastrophe (Theorem~\ref{thm:terminus}).
 
 \textbf{Therefore:} All coordination systems reduce to {default trajectory, voluntary coordination} = {certain doom, uncertain survival}.
-
-\textbf{Testing common objections.}
 
 \textbf{Objection 1:} "What about blockchain/DAOs/smart contracts/decentralized systems?"
 
@@ -130,7 +122,7 @@ If genuine voluntary dissociation occurs with no coercion, that's the voluntary 
 
 \subsection{Information-Theoretic Necessity}
 
-This section presents intuitive explanations of information-theoretic constraints. For formal proofs, see Appendix B.
+This section presents intuitive explanations of information-theoretic constraints. For formal proofs, see Appendix~\ref{app:b}.
 
 \textbf{The observer regress problem.}
 
@@ -195,7 +187,7 @@ The only stable alternative is voluntary coordination where these problems don't
 
 \subsection{Game-Theoretic Inevitability}
 
-This section presents intuitive game-theoretic analysis. For formal proofs, see Appendix B.
+This section presents intuitive game-theoretic analysis. For formal proofs, see Appendix~\ref{app:b}.
 
 \textbf{The enforcer's dilemma.}
 
@@ -215,7 +207,7 @@ Where $p$ equals probability of being caught (depends on how many other enforcer
 
 \textbf{Time horizon:} Over sufficient time, this tipping is inevitable. The all-honest equilibrium can't be maintained indefinitely at civilization scale.
 
-\emph{Formal proof:} Appendix B, Theorem 3.1.
+\emph{Formal proof:} Theorem~\ref{thm:extraction}.
 
 \textbf{The AI control trap.}
 
@@ -241,7 +233,7 @@ If unaligned, the space of all possible AI goals is vast. "Human flourishing" is
 
 \textbf{The trap:} Can't maintain human control without corruption. Can't relinquish control without losing agency or existence.
 
-\emph{Formal proof:} Appendix B, Theorem 2.1.
+\emph{Formal proof:} Theorem~\ref{thm:tcs}.
 
 \textbf{The voluntary cooperation stability condition.}
 
@@ -259,7 +251,7 @@ If unaligned, the space of all possible AI goals is vast. "Human flourishing" is
 
 \textbf{Stability analysis:} This is the only equilibrium that maintains coordination (stable cooperation), avoids corruption (no enforcers), and preserves agency (voluntary choice).
 
-\emph{Formal proofs:} Appendix B, Theorems 4.2 and 5.1.
+\emph{Formal proofs:} Theorems~\ref{thm:cooperation} and~\ref{thm:resolution}.
 
 \textbf{Why game theory points to binary choice.}
 
@@ -411,7 +403,7 @@ Since publishing earlier versions of this framework, several specific alternativ
 
 In Rojava's actual implementation, commune level operates mostly voluntary ($E_n$) with social pressure. Regional level has some hierarchical military structure ($E_h$) due to existential threats (ISIS, Turkey). Inter-regional uses voluntary coordination ($E_n$).
 
-\textbf{Our assessment:} This is a hybrid that approaches voluntary coordination but retains hierarchical elements under stress. At peace, would likely operate as $E_n$ (voluntary), which IS our framework. Under military threat, currently uses $E_h$ (hierarchical military command), which faces corruption dynamics from Theorem 3.1.
+\textbf{Our assessment:} This is a hybrid that approaches voluntary coordination but retains hierarchical elements under stress. At peace, would likely operate as $E_n$ (voluntary), which IS our framework. Under military threat, currently uses $E_h$ (hierarchical military command), which faces corruption dynamics from Theorem~\ref{thm:extraction}.
 
 The crucial question: Can military hierarchy be dissolved after threat passes?
 
@@ -441,11 +433,11 @@ Additional questions arise. How do disputes between network states get resolved?
 
 \textbf{Enforcement mechanism:} Smart contracts ($E_t$, technological enforcement)
 
-\textbf{Who controls the protocol?} If token holders can update, returns to $E_h$ (whoever controls majority/quorum is enforcer). If protocol is immutable, returns to frozen values (Sub-case 2a from Theorem 2.1). If AI controls upgrades, returns to autonomous AI (Sub-case 2c from Theorem 2.1).
+\textbf{Who controls the protocol?} If token holders can update, returns to $E_h$ (whoever controls majority/quorum is enforcer). If protocol is immutable, returns to frozen values (see Theorem~\ref{thm:tcs}, Case 2a). If AI controls upgrades, returns to autonomous AI (see Theorem~\ref{thm:tcs}, Case 2c).
 
 Additional problems surface. Token concentration creates de facto hierarchy (wealth = power). Who enforces off-chain actions? Physical world still requires enforcement. Sybil attacks, 51\% attacks, governance capture all require enforcement to prevent.
 
-\textbf{Verdict:} Maps to $E_t$ (technological enforcement), faces all problems from Theorem 2.1. Not a counterexample.
+\textbf{Verdict:} Maps to $E_t$ (technological enforcement), faces all problems from Theorem~\ref{thm:tcs}. Not a counterexample.
 
 \textbf{Alternative 4: Quadratic Funding/Voting}
 
@@ -483,7 +475,7 @@ Still need to answer several questions. How are vote results enforced? ($E_h$, $
 
 \textbf{Historical precedent:} Every "competing protection" scenario (feudal Europe, warlord China) consolidated into monopolies.
 
-\textbf{Verdict:} Unstable equilibrium that collapses to monopoly $E_h$, faces Theorem 3.1 corruption dynamics. Not a counterexample.
+\textbf{Verdict:} Unstable equilibrium that collapses to monopoly $E_h$, faces Theorem~\ref{thm:extraction} corruption dynamics. Not a counterexample.
 
 \textbf{Alternative 7: Futarchy (Robin Hanson)}
 
@@ -540,17 +532,17 @@ This analysis establishes several points.
 
 No "middle path" exists avoiding both corruption and value transformation. Technological solutions don't escape the trilemma; they shift the problem to controllers or autonomous AI. Structural reforms address symptoms instead of the underlying impossibility. Novel proposals must fit the framework or fail to coordinate at scale.
 
-\textbf{The choice is binary:} Accept default trajectory (certain extinction/enslavement per Appendix B, Theorem 3.2) or attempt voluntary coordination (uncertain but only viable alternative per Appendix B, Theorem 5.1).
+\textbf{The choice is binary:} Accept default trajectory (certain extinction/enslavement per Theorem~\ref{thm:terminus}) or attempt voluntary coordination (uncertain but only viable alternative per Theorem~\ref{thm:resolution}).
 
 \textbf{Relationship to other appendices.}
 
 \textbf{This appendix proves:} No third path exists between default and voluntary coordination.
 
-\textbf{Appendix B proves:} Default path terminates in catastrophe; voluntary coordination can resolve trilemma if conditions are met.
+\textbf{Appendix~\ref{app:b} proves:} Default path terminates in catastrophe; voluntary coordination can resolve trilemma if conditions are met.
 
-\textbf{Appendix C analyzes:} Whether those conditions can be met practically (psychopaths, military threats, scaling).
+\textbf{Appendix~\ref{app:c} analyzes:} Whether those conditions can be met practically (psychopaths, military threats, scaling).
 
-\textbf{Appendix D proves:} The window for verification-based coordination is closing within years.
+\textbf{Appendix~\ref{app:d} proves:} The window for verification-based coordination is closing within years.
 
 Together, these establish necessity (voluntary coordination is necessary with no other path), urgency (must act now since window closing), requirements (what conditions must be met), and uncertainty (whether conditions can be met at scale).
 
@@ -588,15 +580,15 @@ The framework is complete. The logic is sound. The choice is binary. The stakes 
 \textbf{Key theorems.}
 
 For formal mathematical proofs of claims in this appendix, see:
-- \textbf{Appendix B, Theorem 1.1}: The Coordination Trilemma
-- \textbf{Appendix B, Theorem 2.1}: TCS Terminal States
-- \textbf{Appendix B, Theorem 3.1-3.2}: Default Trajectory Terminus
-- \textbf{Appendix B, Theorems 4.1-4.2}: Game Theory of Cooperation
-- \textbf{Appendix B, Theorem 5.1}: Voluntary Coordination Stability
+- \textbf{Theorem~\ref{thm:trilemma}}: The Coordination Trilemma
+- \textbf{Theorem~\ref{thm:tcs}}: TCS Terminal States
+- \textbf{Theorem~\ref{thm:extraction}-3.2}: Default Trajectory Terminus
+- \textbf{Theorems~\ref{thm:defection}--\ref{thm:cooperation}}: Game Theory of Cooperation
+- \textbf{Theorem~\ref{thm:resolution}}: Voluntary Coordination Stability
 
 For practical implementation analysis:
-- \textbf{Appendix C}: Defense mechanisms, scale challenges, transition problem
+- \textbf{Appendix~\ref{app:c}}: Defense mechanisms, scale challenges, transition problem
 
 For timeline and urgency:
-- \textbf{Appendix D}: Synthetic media evidence and closing window
+- \textbf{Appendix~\ref{app:d}}: Synthetic media evidence and closing window
 
