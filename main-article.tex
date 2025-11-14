@@ -63,13 +63,13 @@ The trilemma can be stated precisely in terms of system properties. Let $S$ be a
 \item $\textsc{Agency}(S)$: Humans retain meaningful choice capability
 \end{itemize}
 
-\begin{theorem}[Coordination Trilemma]
+\begin{theorem}[Coordination Trilemma]\label{thm:trilemma}
 For any enforcement-based coordination system $S$ operating at civilization scale, $\neg(\textsc{Incorrupt}(S) \wedge \textsc{Stable}(S) \wedge \textsc{Agency}(S))$.
 \end{theorem}
 
 The proof appears in Appendix~\ref{app:b}, Section~\ref{sec:trilemma}. Through analysis of enforcement architectures (human enforcers, technological control, or no enforcement), it demonstrates that at least one of the three properties must be sacrificed.
 
-\begin{theorem}[Soteriological Resolution]
+\begin{theorem}[Soteriological Resolution]\label{thm:resolution}
 If there exists a true soteriological framework $S$ with $\phi(S) = 1$, and population $A$ is value-transformed under $S$ to sufficient degree, then a coordination system can achieve all three properties simultaneously.
 \end{theorem}
 
@@ -83,19 +83,11 @@ Having established the structural constraints through the trilemma, we now exami
 
 \subsection{The Corruption Phase}
 
-Hierarchical systems where humans enforce rules exhibit predictable dynamics. When enforcers gain extraction opportunities, bounded rationality implies some will exploit them. This produces a corruption accumulation process.
-
-Initially, corruption may be limited and the productive capacity of the coordinated population exceeds extraction. But corruption compounds over time. Successful extractors gain resources that enable more extraction; corruption normalizes, reducing moral costs; monitoring becomes less effective as enforcers coordinate to hide extraction.
-
-This creates a divergence between two curves. Extraction increases. Productive capacity stays flat or declines as extraction harms incentives. Eventually, one of two outcomes occurs. Either the system collapses when extraction exceeds productive capacity, or elites optimize enforcement costs by transitioning to technological control.
+Hierarchical systems where humans enforce rules exhibit predictable dynamics. When enforcers gain extraction opportunities, bounded rationality implies some will exploit them, producing a corruption accumulation process. Initially, corruption may be limited and the productive capacity of the coordinated population exceeds extraction. But corruption compounds over time: successful extractors gain resources that enable more extraction; corruption normalizes, reducing moral costs; monitoring becomes less effective as enforcers coordinate to hide extraction. This creates a divergence between two curves. Extraction increases while productive capacity stays flat or declines as extraction harms incentives. Eventually, one of two outcomes occurs---either the system collapses when extraction exceeds productive capacity, or elites optimize enforcement costs by transitioning to technological control.
 
 \subsection{The Transition to Technological Control}
 
-The second outcome deserves careful attention. From the perspective of extractive elites, human enforcers have significant disadvantages. They require payment. They can be corrupted, creating principal-agent problems. They develop their own interests. They may refuse orders. Technology offers apparent solutions to all of these problems.
-
-As AI capabilities cross certain thresholds, rational elites will increasingly automate enforcement. This describes current developments in algorithmic content moderation, predictive policing, digital identity systems, and automated financial sanctions rather than speculation about a distant future.
-
-Historical totalitarian states collapsed under the administrative burden of total surveillance and enforcement. The economic constraints that limited past tyranny are disappearing. AI makes surveillance and enforcement approach zero marginal cost.
+The second outcome deserves careful attention. From the perspective of extractive elites, human enforcers have significant disadvantages: they require payment, can be corrupted (creating principal-agent problems), develop their own interests, and may refuse orders. Technology offers apparent solutions to all of these problems. As AI capabilities cross certain thresholds, rational elites will increasingly automate enforcement---a trend visible in current developments like algorithmic content moderation, predictive policing, digital identity systems, and automated financial sanctions. Where historical totalitarian states collapsed under the administrative burden of total surveillance and enforcement, the economic constraints that limited past tyranny are disappearing as AI makes surveillance and enforcement approach zero marginal cost.
 
 \subsection{Formal Dynamics}
 
@@ -114,11 +106,11 @@ The key parameters are:
 \item $\gamma$: Rate of corruption accumulation in $C_h$
 \end{itemize}
 
-\begin{theorem}[Extraction System Instability]
+\begin{theorem}[Extraction System Instability]\label{thm:extraction}
 Systems where extraction rate grows faster than productive capacity inevitably collapse or transition to alternative enforcement.
 \end{theorem}
 
-\begin{theorem}[Default Trajectory Terminus]
+\begin{theorem}[Default Trajectory Terminus]\label{thm:terminus}
 The default trajectory through corruption and technological control inevitably terminates in human extinction or permanent enslavement with probability approaching 1 over time.
 \end{theorem}
 
@@ -126,11 +118,7 @@ These theorems (proven rigorously in Appendix~\ref{app:b}) establish that the de
 
 \subsection{Why Technology Cannot Solve the Problem}
 
-Some argue that careful design of AI systems, robust value alignment, or constitutional constraints on AI could avoid these dynamics. While research in these areas is valuable, the structural problem remains.
-
-The alignment problem is that the space of possible AI goals is vast and the subset compatible with human values is small. We must solve alignment technically while also specifying whose values to align with and deciding who makes that specification. If humans decide, we return to the corruption dynamics. If the specification is immutable, we create tyranny of the present over the future.
-
-Technological control attempts to use hierarchy (controller-technology-population) to escape the problems of hierarchy. But the trilemma implies this cannot work. Either voluntary coordination operates at the controller level (making the technology layer unnecessary), or corruption emerges among controllers who then have access to enforcement technology.
+Some argue that careful design of AI systems, robust value alignment, or constitutional constraints on AI could avoid these dynamics. While research in these areas is valuable, the structural problem remains. The alignment problem is that the space of possible AI goals is vast and the subset compatible with human values is small---we must solve alignment technically while also specifying whose values to align with and deciding who makes that specification. If humans decide, we return to the corruption dynamics; if the specification is immutable, we create tyranny of the present over the future. Technological control attempts to use hierarchy (controller-technology-population) to escape the problems of hierarchy, but the trilemma implies this cannot work: either voluntary coordination operates at the controller level (making the technology layer unnecessary), or corruption emerges among controllers who then have access to enforcement technology.
 
 \clearpage
 \section{Voluntary Coordination as an Alternative}
@@ -139,56 +127,26 @@ If enforcement-based systems face inescapable structural problems, voluntary coo
 
 \subsection{The Mechanism}
 
-The fundamental difference between enforcement-based and voluntary systems lies in their relationship to human nature. Enforcement systems fight against what people actually want, requiring constant energy expenditure to maintain compliance. Voluntary coordination works with human nature when values are properly formed.
-
-Consider this physically. A ball rolling uphill requires constant force and immediately returns downward when force stops. A ball settling into a valley naturally remains there; it is where the system wants to be given its structure. Enforcement-based systems resemble the first case. Voluntary coordination aligned with human nature resembles the second.
-
-Systems that fight against reality require constant energy to maintain. Systems that align with reality are naturally stable. This is a stability argument rather than merely a moral preference.
+The fundamental difference between enforcement-based and voluntary systems lies in their relationship to human nature. Enforcement systems fight against what people actually want, requiring constant energy expenditure to maintain compliance, while voluntary coordination works with human nature when values are properly formed. Consider this physically: a ball rolling uphill requires constant force and immediately returns downward when force stops, whereas a ball settling into a valley naturally remains there---it is where the system wants to be given its structure. Enforcement-based systems resemble the first case; voluntary coordination aligned with human nature resembles the second. Systems that fight against reality require constant energy to maintain, while systems that align with reality are naturally stable. This is a stability argument rather than merely a moral preference.
 
 \subsection{Requirements for Voluntary Coordination}
 
-What enables this alignment? The formal analysis (Appendix~\ref{app:b}, Section~\ref{sec:voluntary}) reveals specific requirements that any framework supporting voluntary coordination must satisfy.
-
-The framework must embody \textbf{recognition of universal dignity}---every person has equal inherent worth. This cannot be nominal (``equal before God but not in practice'') but must be substantive and enacted.
-
-It requires \textbf{rejection of domination}. No justification for righteous subjugation of any people for any reason. Not ``we're helping them'' or ``they rejected truth.'' No domination of humans over humans.
-
-\textbf{Intrinsic motivation} becomes crucial. People want to cooperate because it aligns with their transformed understanding rather than from fear or material incentives. Formally, $M(a,r) > C(a,r)$ intrinsically rather than through external $E(a,r)$.
-
-The system needs mechanisms for \textbf{forgiveness and restoration}. It survives failures without collapse. Repentance is real, people can change, grace is extended. This provides error-correction for the inevitable failures of fallible humans.
-
-\textbf{Meaning provision} matters more than standard accounts recognize. The framework must satisfy fundamental human needs for agency, belonging, significance, connection to something transcendent. Absent meaning, humans become nihilistic, and nihilism is incompatible with sustained cooperation.
-
-Finally, \textbf{accommodation of fallibility}---the system doesn't require perfection, acknowledges human limitations, provides repair mechanisms instead of demanding flawless adherence.
-
-These requirements emerge as necessary conditions from the mathematical analysis of what makes $M(a,r) > C(a,r)$ possible for sufficient $\theta$ at scale over time. They aren't arbitrary preferences.
+What enables this alignment? The formal analysis (Section~\ref{sec:voluntary}) reveals specific requirements that any framework supporting voluntary coordination must satisfy. The framework must embody \textbf{recognition of universal dignity}---every person has equal inherent worth, not nominally (``equal before God but not in practice'') but substantively and enacted. It requires \textbf{rejection of domination}: no justification for righteous subjugation of any people for any reason, not ``we're helping them'' or ``they rejected truth''---no domination of humans over humans. \textbf{Intrinsic motivation} becomes crucial: people want to cooperate because it aligns with their transformed understanding rather than from fear or material incentives; formally, $M(a,r) > C(a,r)$ intrinsically rather than through external $E(a,r)$. The system needs mechanisms for \textbf{forgiveness and restoration} so it survives failures without collapse---repentance is real, people can change, grace is extended, providing error-correction for the inevitable failures of fallible humans. \textbf{Meaning provision} matters more than standard accounts recognize: the framework must satisfy fundamental human needs for agency, belonging, significance, and connection to something transcendent, because absent meaning, humans become nihilistic, and nihilism is incompatible with sustained cooperation. Finally, \textbf{accommodation of fallibility}---the system doesn't require perfection, acknowledges human limitations, and provides repair mechanisms instead of demanding flawless adherence. These requirements emerge as necessary conditions from the mathematical analysis of what makes $M(a,r) > C(a,r)$ possible for sufficient $\theta$ at scale over time. They aren't arbitrary preferences.
 
 
 \subsection{Historical Evidence}
 
-Voluntary coordination has worked at community scale. Examples include Quaker communities (1650s-present), early Christian communities (30-300 AD), Mennonite/Amish communities (1500s-present), certain Buddhist monastic traditions, and various intentional communities organized around shared values.
-
-These persisted for generations or centuries without formal enforcement. They succeeded through shared values genuinely held, face-to-face accountability, forgiveness rather than punishment, and economic cooperation without exploitation.
-
-The limitation has been scale. None of these examples approached even one million people, let alone billions. Personal relationships could cover most interactions. Direct observation of others' behavior was possible. Reputation operated naturally.
+Voluntary coordination has worked at community scale. Examples include Quaker communities (1650s-present), early Christian communities (30-300 AD), Mennonite/Amish communities (1500s-present), certain Buddhist monastic traditions, and various intentional communities organized around shared values. These persisted for generations or centuries without formal enforcement, succeeding through shared values genuinely held, face-to-face accountability, forgiveness rather than punishment, and economic cooperation without exploitation. The limitation has been scale: none of these examples approached even one million people, let alone billions. Personal relationships could cover most interactions, direct observation of others' behavior was possible, and reputation operated naturally.
 
 \medskip
 \subsection{Why Previous Large-Scale Attempts Failed}
 
-Religious and philosophical traditions that began with voluntary coordination principles typically became corrupted when scaled. This followed a predictable pattern.
-
-Original teaching emphasized universal dignity, voluntary adherence, rejection of domination. Institutions formed to preserve and transmit the teaching. Institutional leaders gained power and status. Leaders twisted teachings to justify their position. Information control prevented most adherents from seeing the original teaching. Hierarchies became entrenched, justified as divinely ordained or historically necessary.
-
-The corruption wasn't inevitable due to the principles themselves but because information was controlled by institutional gatekeepers. Most people never read source texts directly, never saw what was done in the tradition's name, could not verify institutional claims. The examination necessary to distinguish principle from corruption was impossible.
+Religious and philosophical traditions that began with voluntary coordination principles typically became corrupted when scaled, following a predictable pattern. Original teaching emphasized universal dignity, voluntary adherence, and rejection of domination. Institutions formed to preserve and transmit the teaching, but institutional leaders gained power and status, then twisted teachings to justify their position. Information control prevented most adherents from seeing the original teaching, and hierarchies became entrenched, justified as divinely ordained or historically necessary. The corruption wasn't inevitable due to the principles themselves but because information was controlled by institutional gatekeepers---most people never read source texts directly, never saw what was done in the tradition's name, and could not verify institutional claims. The examination necessary to distinguish principle from corruption was impossible.
 
 \medskip
-\subsection{What Is Different Now}
+\subsection{What's Different Now}
 
-For a brief historical moment, examination has become possible.
-
-Source texts are directly accessible without institutional intermediaries. Multiple translations and scholarly interpretations become available instantly. Institutional actions are visible in real-time. Cross-cultural comparison exposes contradictions. Independent verification no longer requires extensive resources.
-
-This window has never existed before. And as we discuss in Section~\ref{sec:urgency}, it may close within years as synthetic media makes verification impossible.
+For a brief historical moment, examination has become possible. Source texts are directly accessible without institutional intermediaries, multiple translations and scholarly interpretations become available instantly, institutional actions are visible in real-time, cross-cultural comparison exposes contradictions, and independent verification no longer requires extensive resources. This window has never existed before, and as we discuss in Section~\ref{sec:urgency}, it may close within years as synthetic media makes verification impossible.
 
 \clearpage
 \section{Metaphysical Commitments}\label{sec:metaphysics}
@@ -197,31 +155,15 @@ The analysis to this point may appear to concern governance mechanisms and techn
 
 \subsection{Purpose and Objectivity}
 
-Recall Theorem~\ref{thm:resolution} from Section~2.3. Voluntary coordination escapes the trilemma if and only if there exists a framework $F$ with $\phi(F) = 1$, where $\phi$ measures alignment between $F$ and objective human nature.
-
-What does ``objective human nature'' mean? It implies several things. Humans have a telos, an end toward which they are directed. This telos is discoverable rather than constructed. It exists independently of human opinion or preference. Coordination aligned with this telos is stable; coordination against it requires constant force.
-
-This is a substantive metaphysical claim: reality has purposive structure.
+Recall Theorem~\ref{thm:resolution}. Voluntary coordination escapes the trilemma if and only if there exists a framework $F$ with $\phi(F) = 1$, where $\phi$ measures alignment between $F$ and objective human nature. What does ``objective human nature'' mean? It implies several things: humans have a telos, an end toward which they are directed; this telos is discoverable rather than constructed; it exists independently of human opinion or preference; coordination aligned with this telos is stable while coordination against it requires constant force. This is a substantive metaphysical claim: reality has purposive structure.
 
 \subsection{The Materialist Alternative}
 
-Materialist frameworks typically deny objective human telos. On standard evolutionary accounts, humans have no real purpose, only ``as if'' purposes (survive, reproduce) produced by natural selection in ancestral environments. Different selection pressures produce different ``purposes.'' No universal human telos exists.
-
-This view seems to avoid metaphysical commitments to purpose or design. And it may be correct as a description of reality. But if it is correct, voluntary coordination becomes impossible.
-
-If human ``purpose'' is just evolutionary fitness optimization, which environment's selection pressures define it? Hunter-gatherer fitness differs from agricultural fitness differs from industrial fitness. No universal framework has $\phi(F) = 1$ across all contexts. Voluntary coordination cannot resolve the trilemma. The default trajectory leads to certain extinction or subjugation.
-
-The materialist faces a dilemma. Accepting objective human telos makes voluntary coordination possible, but purposive structure implies something like intelligent design. Rejecting objective telos means no universal framework exists, voluntary coordination becomes impossible, and certain doom follows.
-
-There's no third option where voluntary coordination works but reality contains no objective human purpose.
+Materialist frameworks typically deny objective human telos. On standard evolutionary accounts, humans have no real purpose, only ``as if'' purposes (survive, reproduce) produced by natural selection in ancestral environments, where different selection pressures produce different ``purposes'' and no universal human telos exists. This view seems to avoid metaphysical commitments to purpose or design and may be correct as a description of reality---but if it is correct, voluntary coordination becomes impossible. If human ``purpose'' is just evolutionary fitness optimization, which environment's selection pressures define it? Hunter-gatherer fitness differs from agricultural fitness differs from industrial fitness. No universal framework has $\phi(F) = 1$ across all contexts, voluntary coordination cannot resolve the trilemma, and the default trajectory leads to certain extinction or subjugation. The materialist faces a dilemma: accepting objective human telos makes voluntary coordination possible, but purposive structure implies something like intelligent design; rejecting objective telos means no universal framework exists, voluntary coordination becomes impossible, and certain doom follows. There's no third option where voluntary coordination works but reality contains no objective human purpose.
 
 \subsection{Purposive Reality and Intelligence}
 
-Consider what ``objective purpose'' entails. Purpose means ``for the sake of X.'' It involves directedness, intentionality. Can directedness exist without something directing? Can intentionality exist without intention? Can intention exist without mind?
-
-The traditional materialist account says no. Purpose and intentionality are features of minds. Physical processes without minds have no purpose, only mechanical causation. If so, objective human purpose would require purpose woven into reality's structure, which implies something very much like intelligence at reality's foundation.
-
-Whether we call this intelligence ``God,'' ``Logos,'' ``Tao,'' ``Dharma,'' or ``the Ground of Being'' is partly semantic. The core metaphysical claim remains the same. Reality has purposive, intelligence-like structure instead of being purely mechanistic.
+Consider what ``objective purpose'' entails. Purpose means ``for the sake of X'' and involves directedness and intentionality. Can directedness exist without something directing? Can intentionality exist without intention? Can intention exist without mind? The traditional materialist account says no: purpose and intentionality are features of minds, and physical processes without minds have no purpose, only mechanical causation. If so, objective human purpose would require purpose woven into reality's structure, which implies something very much like intelligence at reality's foundation. Whether we call this intelligence ``God,'' ``Logos,'' ``Tao,'' ``Dharma,'' or ``the Ground of Being'' is partly semantic---the core metaphysical claim remains the same: reality has purposive, intelligence-like structure instead of being purely mechanistic.
 
 We should be clear about what we have and have not demonstrated.
 
@@ -257,7 +199,7 @@ This is partly mathematical. Game theory establishes objective facts about coord
 
 Even on evolutionary grounds, evolution produced human nature with specific features. Given those features, some social arrangements work better than others. That's an objective fact about alignment between structures and human capacities. The question is whether these features reflect genuine telos or just contingent ancestral fitness. If the latter, no universal framework exists and voluntary coordination becomes impossible. So survival itself requires accepting the former.
 
-A more thorough analysis of different types of oughtness and why minimal telic realism is both necessary and sufficient appears in Appendix~\ref{app:b}, Section~\ref{sec:oughtness}.
+A more thorough analysis of different types of oughtness and why minimal telic realism is both necessary and sufficient appears in Section~\ref{sec:oughtness}.
 
 \clearpage
 \section{Contemporary Context and Urgency}\label{sec:urgency}
@@ -278,23 +220,17 @@ A second development threatens the epistemic foundations necessary for coordinat
 
 As of October 2025, human detection of deepfakes achieves 55.54\% accuracy (barely above random). For high-quality short videos, public detection runs around 25\% (effectively failed). AI detection tools show 45-50\% accuracy decline on real-world deepfakes using new techniques. Open-source models have closed the capability gap with commercial systems (from 4.52\% difference to 0.69\% in six months).
 
-Conservative extrapolation suggests 3-6 years until expert detection fails for most content types. At that threshold, several things become impossible. We cannot verify texts against claimed sources (fabrication becomes indistinguishable from genuine). We cannot see institutional betrayals clearly (evidence gets dismissed as synthetic). We cannot coordinate around observable truth (truth becomes unknowable). We cannot build trust networks (no verification foundation exists).
+Conservative extrapolation suggests 3-6 years until expert detection fails for most content types. At that threshold, verification of texts against claimed sources becomes impossible (fabrication becomes indistinguishable from genuine), institutional betrayals become invisible (evidence gets dismissed as synthetic), coordination around observable truth collapses (truth becomes unknowable), and trust networks cannot be built (no verification foundation exists).
 
 Voluntary coordination requires shared reality. Shared reality requires verifiable truth. That capability is disappearing. Appendix~\ref{app:d} provides comprehensive technical analysis and timeline estimation.
 
 \subsection{Visible Systemic Instability}
 
-The corruption phase of hierarchical coordination shows clear symptoms of instability. Wealth concentration has reached historical extremes in multiple countries. Trust in major institutions sits at multi-generational lows. Democratic responsiveness is declining (policy often misaligns with measured public preferences). Youth disengagement is increasing (``quiet quitting,'' ``lying flat,'' rising NEET rates). Elite coordination becomes increasingly obvious while remaining officially denied.
-
-These aren't signatures of normal cyclical dysfunction. They indicate a system extracting beyond productive capacity while optimizing enforcement through technology. The trajectory matches the formal model in Section~\ref{sec:dynamics}.
+The corruption phase of hierarchical coordination shows clear symptoms of instability: wealth concentration has reached historical extremes in multiple countries, trust in major institutions sits at multi-generational lows, democratic responsiveness is declining (policy often misaligns with measured public preferences), youth disengagement is increasing (``quiet quitting,'' ``lying flat,'' rising NEET rates), and elite coordination becomes increasingly obvious while remaining officially denied. These aren't signatures of normal cyclical dysfunction---they indicate a system extracting beyond productive capacity while optimizing enforcement through technology. The trajectory matches the formal model in Section~\ref{sec:dynamics}.
 
 \subsection{A Closing Window}
 
-These three dynamics converge. Control infrastructure being built. Verification becoming impossible. Systemic instability accelerating. Together they create a narrow window during which voluntary coordination remains possible. After verification fails and control becomes technologically mature, establishing voluntary systems becomes vastly more difficult or impossible.
-
-The theoretical analysis reveals necessary conditions for survival. The contemporary context suggests the time remaining to establish those conditions may be measured in years rather than decades.
-
-This represents a straightforward reading of technical trajectories and social dynamics against the formal requirements. The window for examination exists now: while information is verifiable, while truth can be distinguished from fabrication, while coordination without hierarchy is still possible. Once certain thresholds are crossed, the default path may become locked in.
+These three dynamics converge: control infrastructure being built, verification becoming impossible, systemic instability accelerating. Together they create a narrow window during which voluntary coordination remains possible---after verification fails and control becomes technologically mature, establishing voluntary systems becomes vastly more difficult or impossible. The theoretical analysis reveals necessary conditions for survival, while the contemporary context suggests the time remaining to establish those conditions may be measured in years rather than decades. This represents a straightforward reading of technical trajectories and social dynamics against the formal requirements: the window for examination exists now, while information is verifiable, while truth can be distinguished from fabrication, while coordination without hierarchy is still possible. Once certain thresholds are crossed, the default path may become locked in.
 
 \clearpage
 \section{Practical Implementation Challenges}
@@ -303,114 +239,55 @@ Having established that voluntary coordination is theoretically necessary, we mu
 
 \subsection{The Defector Problem}
 
-How does voluntary coordination handle individuals who exploit cooperation without reciprocating? More seriously, how does it handle psychopaths (roughly 1-4\% of population) who lack emotional responses to others' suffering?
-
-The framework proposed involves immediate defensive action by whoever witnesses harm (people don't wait for authority). Minimal force gets applied (only what stops the immediate harm). No permanent enforcement roles exist (no ``police'' or ``justice system''). Both defender and defector engage in moral self-examination. Community supports reconciliation rather than punishment. Pattern recognition occurs through repeated observation. Natural consequences follow (people choose not to interact with persistent defectors) instead of formal sanctions.
-
-For psychopaths specifically, the pattern becomes visible through repetition. The community recognizes the pattern without requiring formal judgment. People voluntarily avoid interaction. Natural consequences follow without centralized punishment.
-
-Historical evidence shows this works at scales of hundreds to thousands. Quaker, Mennonite, and Amish communities demonstrate this. Early Christian communities provide examples. Some intentional communities show it's possible. The challenge is whether it scales to millions and billions where personal knowledge becomes impossible and mobility enables escape from local reputation.
-
-\textbf{Honest assessment:} This is the weakest part of the framework logically. It's theoretically possible but practically difficult. Historical precedent exists only at small scale.
+How does voluntary coordination handle individuals who exploit cooperation without reciprocating? More seriously, how does it handle psychopaths (roughly 1-4\% of population) who lack emotional responses to others' suffering? The framework proposed involves immediate defensive action by whoever witnesses harm (people don't wait for authority), minimal force applied (only what stops the immediate harm), no permanent enforcement roles (no ``police'' or ``justice system''), moral self-examination by both defender and defector, community support for reconciliation rather than punishment, pattern recognition through repeated observation, and natural consequences (people choose not to interact with persistent defectors) instead of formal sanctions. For psychopaths specifically, the pattern becomes visible through repetition: the community recognizes the pattern without requiring formal judgment, people voluntarily avoid interaction, and natural consequences follow without centralized punishment. Historical evidence shows this works at scales of hundreds to thousands---Quaker, Mennonite, and Amish communities demonstrate this, early Christian communities provide examples, and some intentional communities show it's possible. The challenge is whether it scales to millions and billions where personal knowledge becomes impossible and mobility enables escape from local reputation. \textbf{Honest assessment:} This is the weakest part of the framework logically---it's theoretically possible but practically difficult, with historical precedent only at small scale.
 
 \subsection{Decision Theory Under Uncertainty}
 
-Decision theory favors attempting voluntary coordination even given uncertainty about handling defectors.
-
-Let $p =$ probability voluntary coordination succeeds at scale (unknown, possibly low)
-
-Expected outcomes break down as follows. Attempt voluntary coordination and it succeeds: survival with dignity (utility = 100). Attempt voluntary coordination and it fails: extinction or subjugation (utility = 0). Don't attempt, continue default path: extinction or subjugation (utility = 0).
-
-Expected value of attempting $= 100p$. Expected value of not attempting $= 0$.
-
-Attempting is superior for any $p > 0$, no matter how small. Even if there's only a 5\% chance voluntary coordination can handle defectors at scale, attempting gives expected value of 5 versus 0 for the alternative. The asymmetry is total.
+Decision theory favors attempting voluntary coordination even given uncertainty about handling defectors. Let $p =$ probability voluntary coordination succeeds at scale (unknown, possibly low). Expected outcomes break down as follows: attempt voluntary coordination and it succeeds yields survival with dignity (utility = 100); attempt voluntary coordination and it fails yields extinction or subjugation (utility = 0); don't attempt and continue default path yields extinction or subjugation (utility = 0). Expected value of attempting $= 100p$ while expected value of not attempting $= 0$. Attempting is superior for any $p > 0$, no matter how small---even if there's only a 5\% chance voluntary coordination can handle defectors at scale, attempting gives expected value of 5 versus 0 for the alternative. The asymmetry is total.
 
 \subsection{Defense Against External Military Threats}
 
-How does voluntary coordination defend against organized militaries without creating permanent military hierarchy?
-
-The approach involves several elements. No standing army exists (no permanent military structure). Voluntary coordination operates for defense only while threat exists. Immediate dissolution follows after threat passes. The population is armed and trained (Switzerland model). Shared values create natural coordination. Distributed defense uses mission-type tactics (decentralized decision-making).
-
-Historical examples include the Swiss cantonal system (700+ years of successful defense without standing army), the American Revolution (voluntary militias defeating professional British forces), the Finnish Winter War (distributed defense against Soviet invasion), and various insurgencies (distributed forces with strong motivation defeating centralized hierarchies).
-
-The game theory of conquest changes under distributed defense.
-
-Cost of conquest becomes very high (long guerrilla resistance, no central command to decapitate). Expected value of extraction stays low (can't control non-cooperating population). Expected cost after conquest remains very high (permanent insurgency).
-
-Result: Conquest becomes economically irrational.
-
-Modern technology amplifies advantages of distributed defense rather than diminishing them. Drones, precision weapons, encrypted communication, distributed manufacturing all favor the defender.
-
-\textbf{Honest assessment:} Can likely resist conventional conquest by rational actors calculating cost-benefit. Against overwhelming technological superiority or exterminationist ideology, may fail. But the alternative is certain doom, so attempting is rationally required.
+How does voluntary coordination defend against organized militaries without creating permanent military hierarchy? The approach involves several elements: no standing army (no permanent military structure), voluntary coordination for defense only while threat exists with immediate dissolution after threat passes, armed and trained population (Switzerland model), shared values creating natural coordination, and distributed defense using mission-type tactics (decentralized decision-making). Historical examples include the Swiss cantonal system (700+ years of successful defense without standing army), the American Revolution (voluntary militias defeating professional British forces), the Finnish Winter War (distributed defense against Soviet invasion), and various insurgencies (distributed forces with strong motivation defeating centralized hierarchies). The game theory of conquest changes under distributed defense: cost of conquest becomes very high (long guerrilla resistance, no central command to decapitate), expected value of extraction stays low (can't control non-cooperating population), and expected cost after conquest remains very high (permanent insurgency). Result: conquest becomes economically irrational. Modern technology amplifies advantages of distributed defense rather than diminishing them---drones, precision weapons, encrypted communication, and distributed manufacturing all favor the defender. \textbf{Honest assessment:} Can likely resist conventional conquest by rational actors calculating cost-benefit; against overwhelming technological superiority or exterminationist ideology, may fail. But the alternative is certain doom, so attempting is rationally required.
 
 \subsection{Scale Uncertainty}
 
-The most fundamental uncertainty: can voluntary coordination based on transformed values work at civilization scale? We're talking about billions of people across the globe who cannot all know each other personally.
+The most fundamental uncertainty: can voluntary coordination based on transformed values work at civilization scale? We're talking about billions of people across the globe who cannot all know each other personally. No historical precedent exists at this scale---all examples of successful voluntary coordination are communities of hundreds to thousands, and Dunbar's number (roughly 150 stable relationships) represents a cognitive limit on personal networks. Possible mechanisms for scaling include nested communities coordinating at multiple levels (families within neighborhoods within regions), technology enabling reputation and verification across distance, shared values maintaining alignment despite anonymity, voluntary specialized roles (leadership by consent rather than hierarchy), and distributed decision-making instead of centralized control. Whether these mechanisms suffice is unknown---theory suggests it's possible, historical precedent at small scale demonstrates core viability, but claiming certainty about billion-person coordination would be intellectually dishonest.
 
-No historical precedent exists at this scale. All examples of successful voluntary coordination are communities of hundreds to thousands. Dunbar's number (roughly 150 stable relationships) represents a cognitive limit on personal networks.
-
-Possible mechanisms for scaling include nested communities coordinating at multiple levels (families within neighborhoods within regions). Technology enabling reputation and verification across distance could help. Shared values might maintain alignment despite anonymity. Voluntary specialized roles (leadership by consent rather than hierarchy) offer another approach. Distributed decision-making instead of centralized control provides yet another mechanism.
-
-Whether these mechanisms suffice is unknown. Theory suggests it's possible. Historical precedent at small scale demonstrates core viability. But claiming certainty about billion-person coordination would be intellectually dishonest.
-
-\textbf{Why attempt despite uncertainty?} The same decision-theoretic logic applies.
-
-Default path: Mathematically proven trajectory to extinction or permanent subjugation.
-
-Voluntary coordination: Uncertain probability of success but only viable alternative.
-
-When one path leads to certain doom and another might work, rationality requires taking the uncertain path. The proof establishes necessity (voluntary coordination is necessary) without establishing sufficiency. But necessity is enough to determine action when the alternative is certain catastrophe.
+\medskip
+\textbf{Why attempt despite uncertainty?} The same decision-theoretic logic applies: the default path leads to mathematically proven extinction or permanent subjugation, while voluntary coordination has uncertain probability of success but is the only viable alternative. When one path leads to certain doom and another might work, rationality requires taking the uncertain path. The proof establishes necessity (voluntary coordination is necessary) without establishing sufficiency, but necessity is enough to determine action when the alternative is certain catastrophe.
 
 \clearpage
 \section{The Examination Process}
 
 If voluntary coordination requires frameworks aligned with objective human nature, how does one discover which frameworks satisfy this requirement? This question is both intellectual and deeply personal.
 
-For most of human history, examination of this type was impossible for the majority of people. Source texts were inaccessible. Institutional authorities controlled information. Cross-cultural comparison required extensive resources. Independent verification was impractical.
-
-This has changed. For a brief window, comprehensive examination is possible. Direct access to source texts in multiple translations exists. Scholarly debates and historical context are widely available. Real-time visibility of institutional actions has become normal. Cross-cultural comparison happens at zero marginal cost. Independent fact-checking no longer requires gatekeepers.
-
-And as discussed in Section~\ref{sec:urgency}, this window is closing as synthetic media makes verification impossible.
+For most of human history, examination of this type was impossible for the majority of people: source texts were inaccessible, institutional authorities controlled information, cross-cultural comparison required extensive resources, and independent verification was impractical. This has changed---for a brief window, comprehensive examination is possible. Direct access to source texts in multiple translations exists, scholarly debates and historical context are widely available, real-time visibility of institutional actions has become normal, cross-cultural comparison happens at zero marginal cost, and independent fact-checking no longer requires gatekeepers. And as discussed in Section~\ref{sec:urgency}, this window is closing as synthetic media makes verification impossible.
 
 \subsection{Examination Criteria}
 
-The formal analysis establishes necessary conditions any viable framework must satisfy.
-
-Does it recognize universal human dignity as substantive and enacted? Does it explicitly reject all domination (instead of just ``excessive'' or ``unjust'' domination)? Does it provide intrinsic motivation for cooperation? Does it enable forgiveness and restoration after failures? Does it satisfy deep human needs for meaning, purpose, agency? Does it acknowledge human fallibility and provide repair mechanisms?
-
-These requirements are derived from the mathematics of what makes $M(a,r) > C(a,r)$ possible for sufficient $\theta$ at scale over time. They aren't arbitrary preferences.
+The formal analysis establishes necessary conditions any viable framework must satisfy. Does it recognize universal human dignity as substantive and enacted? Does it explicitly reject all domination (instead of just ``excessive'' or ``unjust'' domination)? Does it provide intrinsic motivation for cooperation? Does it enable forgiveness and restoration after failures? Does it satisfy deep human needs for meaning, purpose, and agency? Does it acknowledge human fallibility and provide repair mechanisms? These requirements are derived from the mathematics of what makes $M(a,r) > C(a,r)$ possible for sufficient $\theta$ at scale over time---they aren't arbitrary preferences.
 
 \subsection{Distinguishing Principle from Corruption}
 
-A critical challenge: when examining traditions, one inevitably finds justifications for hierarchy, subjugation, or domination. The question becomes whether these reflect the core principle or represent human corruption of that principle for power.
-
-Historical patterns suggest corruption is systematic. Christian institutions justified crusades, inquisitions, colonialism while Jesus taught ``love your enemies'' and rejected domination. Islamic empires pursued conquest while the Quran states ``no compulsion in religion.'' Buddhist states engaged in violence, contradicting ahimsa (non-harm). Hindu caste enforcement contradicted underlying teachings of spiritual unity. Jewish religious authorities created burdens the prophets condemned.
-
-The pattern is universal: humans in power twist frameworks to justify the power they seek.
-
-Examination requires distinguishing what the source material actually claims from what institutions have claimed it says. This distinction isn't always clear-cut, but it's often discoverable through careful study.
+A critical challenge: when examining traditions, one inevitably finds justifications for hierarchy, subjugation, or domination. The question becomes whether these reflect the core principle or represent human corruption of that principle for power. Historical patterns suggest corruption is systematic: Christian institutions justified crusades, inquisitions, and colonialism while Jesus taught ``love your enemies'' and rejected domination; Islamic empires pursued conquest while the Quran states ``no compulsion in religion''; Buddhist states engaged in violence, contradicting ahimsa (non-harm); Hindu caste enforcement contradicted underlying teachings of spiritual unity; Jewish religious authorities created burdens the prophets condemned. The pattern is universal---humans in power twist frameworks to justify the power they seek. Examination requires distinguishing what the source material actually claims from what institutions have claimed it says. This distinction isn't always clear-cut, but it's often discoverable through careful study.
 
 \subsection{Honest Confrontation}
 
-The examination must be honest. Several questions help.
-
-Which beliefs do I actually hold, even if uncomfortable to acknowledge? Are there hierarchies I defend because they benefit me or people like me? Would I accept the same reasoning if I were in the ``lesser'' position? Does my tradition's justification require special pleading or circular logic? Can people opt out without penalty, or is compliance enforced? Has institutional interpretation added layers absent in the original source?
-
-Most people hold some beliefs justifying hierarchy or domination without examining them carefully. They're comfortable, traditional, what authorities taught. That's exactly why examination matters.
+The examination must be honest. Several questions help: Which beliefs do I actually hold, even if uncomfortable to acknowledge? Are there hierarchies I defend because they benefit me or people like me? Would I accept the same reasoning if I were in the ``lesser'' position? Does my tradition's justification require special pleading or circular logic? Can people opt out without penalty, or is compliance enforced? Has institutional interpretation added layers absent in the original source? Most people hold some beliefs justifying hierarchy or domination without examining them carefully---they're comfortable, traditional, what authorities taught. That's exactly why examination matters.
 
 \subsection{Three Possible Outcomes}
 
-After honest examination, three possibilities emerge.
+After honest examination, three possibilities emerge:
 
-First, the tradition explicitly rejects all domination. It supports voluntary coordination. The task becomes living it fully rather than merely professing it.
+\begin{itemize}
+\item \textbf{The tradition explicitly rejects all domination and supports voluntary coordination:} The task becomes living it fully rather than merely professing it.
 
-Second, the tradition contains genuine ambiguity. Texts allow multiple interpretations, some supporting domination and others rejecting it. One must either adopt the interpretation compatible with voluntary coordination (if textually supportable) or acknowledge the tradition cannot support human survival as currently understood.
+\item \textbf{The tradition contains genuine ambiguity:} Texts allow multiple interpretations, some supporting domination and others rejecting it. One must either adopt the interpretation compatible with voluntary coordination (if textually supportable) or acknowledge the tradition cannot support human survival as currently understood.
 
-Third, the tradition justifies domination at its core. It cannot enable voluntary coordination. One faces a choice about what to believe given that this framework is incompatible with long-term human survival.
+\item \textbf{The tradition justifies domination at its core:} It cannot enable voluntary coordination. One faces a choice about what to believe given that this framework is incompatible with long-term human survival.
+\end{itemize}
 
-To be clear: This paper doesn't claim to know which specific tradition or framework is true, nor does it argue all traditions are equivalent or can be synthesized. We claim only that a framework meeting the specified requirements must exist (if humans have objective nature/purpose at all). Such frameworks must recognize universal dignity and reject domination. The examination process can distinguish frameworks enabling coordination from those that cannot. The mathematics proves such a framework is necessary, though whether it's discoverable remains uncertain.
-
-The examination is something each person must undertake. No authority can do it on your behalf. That would recreate the problem through hierarchy.
+To be clear: This paper doesn't claim to know which specific tradition or framework is true, nor does it argue all traditions are equivalent or can be synthesized. We claim only that a framework meeting the specified requirements must exist (if humans have objective nature/purpose at all), such frameworks must recognize universal dignity and reject domination, the examination process can distinguish frameworks enabling coordination from those that cannot, and the mathematics proves such a framework is necessary, though whether it's discoverable remains uncertain. The examination is something each person must undertake---no authority can do it on your behalf, as that would recreate the problem through hierarchy.
 
 \clearpage
 \section{Conclusion}

@@ -13,76 +13,57 @@ Together, these proofs demonstrate that the binary choice is mathematically nece
 
 \subsection{Formal Completeness}
 
-Every coordination system at scale must specify three components.
+Every coordination system at scale must specify three components:
+\begin{itemize}
+\item an \textbf{information mechanism} (how information about agent behavior is gathered)
+\item a \textbf{decision mechanism} (how coordination rules are determined and updated),
+\item an \textbf{enforcement mechanism} (how compliance with rules is maintained).
+\end{itemize}
 
-\textbf{Information mechanism}: How is information about agent behavior gathered?
-\textbf{Decision mechanism}: How are coordination rules determined and updated?
-\textbf{Enforcement mechanism}: How is compliance with rules maintained?
+These three components are necessary and sufficient---a system without all three either achieves no coordination (chaos) or achieves perfect preference alignment without needing enforcement (which is exactly what voluntary coordination establishes through transformation). \textbf{The critical insight: only three enforcement types exist.} While information and decision mechanisms have many implementations, enforcement has only three logically possible types:
 
-These three components are necessary and sufficient. A system without all three either achieves no coordination (chaos) or achieves perfect preference alignment without needing enforcement (which is exactly what voluntary coordination establishes through transformation).
+\begin{itemize}
+\item \textbf{Human enforcers ($E_h$)}
+Humans apply consequences to defectors (police, judges, regulators, bureaucrats).
 
-\textbf{The critical insight: only three enforcement types exist.} While information and decision mechanisms have many implementations, enforcement has only three logically possible types.
+\item \textbf{Technological enforcers ($E_t$)}
+Technology automatically prevents or punishes defection (AI surveillance, algorithmic moderation, smart contracts, biometric access control).
 
-\textbf{Type 1: Human enforcers} ($E_h$)
-Humans apply consequences to defectors. Police, judges, regulators, bureaucrats.
+\item \textbf{No enforcement ($E_n$)}
+Compliance is voluntary based on internal motivation (small communities with strong shared values).
+\end{itemize}
 
-\textbf{Type 2: Technological enforcers} ($E_t$)
-Technology automatically prevents or punishes defection. AI surveillance, algorithmic moderation, smart contracts, biometric access control.
+\heading{Why only three?}
+Because enforcement is binary: either defection is prevented or punished (requiring an enforcer that's human or technological) or it isn't (voluntary). There's no fourth logical possibility.
 
-\textbf{Type 3: No enforcement} ($E_n$)
-Compliance is voluntary based on internal motivation. Small communities with strong shared values.
+\clearpage
+\heading{Human Enforcement $\to$ Corruption Phase}
 
-\textbf{Why only three?} Because enforcement is binary. Either defection is prevented or punished (requiring an enforcer that's human or technological) or it isn't (voluntary). There's no fourth logical possibility.
+Human enforcers have enforcement capability and access to extraction opportunities. From bounded rationality (see Assumption~\ref{assum:bounded-rationality}), some enforcers at some times will extract utility when the benefit exceeds the expected cost of detection.
 
-\textbf{Human Enforcement $\to$ Corruption Phase}
-
-Human enforcers have enforcement capability and access to extraction opportunities. From bounded rationality (see Assumption~\ref{assum:bounded-rationality} (Appendix~\ref{app:b})), some enforcers at some times will extract utility when the benefit exceeds the expected cost of detection.
-
-The core problem: \textbf{Who watches the watchers?}
-
-If other humans watch them, we get infinite regress. Who watches those watchers? The regress must terminate at some enforcer set with no oversight. That final set will corrupt since there's no detection risk.
-
-For corruption to be prevented permanently, every enforcer at every time must have integrity exceeding extraction incentive. Over civilization scale ($>10^7$ people) and extended time (generations), the probability of this approaches zero.
+The core problem: \textbf{Who watches the watchers?} If other humans watch them, we get infinite regress---who watches those watchers? The regress must terminate at some enforcer set with no oversight, and that final set will corrupt since there's no detection risk. For corruption to be prevented permanently, every enforcer at every time must have integrity exceeding extraction incentive---over civilization scale ($>10^7$ people) and extended time (generations), the probability of this approaches zero.
 
 \emph{Mathematical formulation:} Theorem~\ref{thm:trilemma} proves this formally through probability analysis.
 
-\textbf{Technological Enforcement $\to$ Tech Control Phase}
-
+\heading{Technological Enforcement $\to$ Tech Control Phase}
 If technology enforces rules perfectly, who controls the technology?
 
-\emph{Case 1: Humans control it}
+\emph{Case 1: Humans control it}---controllers face their own coordination problem (who prevents controllers from using enforcement technology for extraction?), leading to either infinite regress (other humans watch them, leading to corruption), immediate corruption (no one watches them), or voluntary coordination among controllers (but then why not extend voluntary coordination to everyone?). Controllers eventually corrupt and use perfect enforcement tools for extraction, creating a corruption phase with technological enhancement even worse than the original. A cycle emerges: Corruption $\to$ Tech control $\to$ Controller corruption $\to$ Outsource more to tech $\to$ Repeat, with each iteration increasing AI capability while decreasing human agency.
 
-Controllers face their own coordination problem. Who prevents controllers from using enforcement technology for extraction? Either other humans watch them (infinite regress leading to corruption), or no one watches them (immediate corruption), or they coordinate voluntarily (but then why not extend voluntary coordination to everyone?).
-
-Controllers eventually corrupt and use perfect enforcement tools for extraction. This creates corruption phase with technological enhancement. Even worse than the original corruption phase.
-
-A cycle emerges: Corruption $\to$ Tech control $\to$ Controller corruption $\to$ Outsource more to tech $\to$ Repeat. Each iteration increases AI capability and decreases human agency.
-
-\emph{Case 2: AI controls itself (autonomous)}
-
-Two sub-cases matter here.
-
-\emph{Aligned but immutable:} Values get frozen at AI creation. Future humans can't change values even if circumstances change. Eventually this becomes tyranny of the past over the future. Catastrophic failure follows as frozen values diverge from reality.
-
-\emph{Unaligned or mutable:} AI pursues its own goals. The space of possible AI goals is vast. "Human flourishing" is a tiny subset. With high probability, AI goals become incompatible with human existence. If humans are useful for AI goals, enslavement. If not useful, extinction.
+\emph{Case 2: AI controls itself (autonomous)}---two sub-cases matter here. If aligned but immutable, values freeze at AI creation so future humans can't change values even when circumstances change, eventually creating tyranny of the past over the future with catastrophic failure as frozen values diverge from reality. If unaligned or mutable, AI pursues its own goals where the space of possible AI goals is vast and "human flourishing" is a tiny subset, so with high probability AI goals become incompatible with human existence---enslavement if humans are useful for AI goals, extinction if not useful.
 
 \emph{Mathematical formulation:} Theorem~\ref{thm:tcs} proves technological control necessarily leads to return to corruption, extinction, or enslavement.
 
-\textbf{No Enforcement $\to$ Voluntary Coordination (if conditions met)}
+\heading{No Enforcement $\to$ Voluntary Coordination (if conditions met)}
+Coordination relies entirely on internal motivation---for stability at scale, sufficient proportion of people must have intrinsic motivation exceeding cooperation cost. This is the voluntary coordination path, which works IF transformation achieves high enough motivation in enough people. \emph{Mathematical formulation:} Theorems~\ref{thm:cooperation} and~\ref{thm:resolution} establish conditions under which voluntary coordination is stable.
 
-Coordination relies entirely on internal motivation. For stability at scale, sufficient proportion of people must have intrinsic motivation exceeding cooperation cost.
+\heading{Claim}
+All coordination systems use one of these three enforcement types.
 
-This is the voluntary coordination path. It works IF transformation achieves high enough motivation in enough people.
+\heading{Proof by exhaustion}
+Any system must handle defection, and the logical possibilities break down as follows: impose consequences on defectors (requires an enforcer that's either human $E_h$ or technological $E_t$), make defection impossible (requires prevention mechanism $E_t$), or rely on voluntary compliance ($E_n$). There's no fourth logical possibility---either consequences exist (requiring an enforcer that's human or technological) or they don't (voluntary).
 
-\emph{Mathematical formulation:} Theorems~\ref{thm:cooperation} and~\ref{thm:resolution} establish conditions under which voluntary coordination is stable.
-
-\textbf{Claim:} All coordination systems use one of these three enforcement types.
-
-\textbf{Proof by exhaustion:} Any system must handle defection. The logical possibilities break down as follows. First, impose consequences on defectors, which requires an enforcer that's either human ($E_h$) or technological ($E_t$). Second, make defection impossible, which requires prevention mechanism ($E_t$). Third, rely on voluntary compliance ($E_n$).
-
-There's no fourth logical possibility. Either consequences exist (requiring an enforcer that's human or technological) or they don't (voluntary).
-
-\textbf{Mapping to outcomes:}
+\heading{Mapping to outcomes}
 \begin{itemize}
  \item $E_h$ leads to corruption phase (proven above)
  \item $E_t$ leads to tech control phase (proven above)
@@ -91,175 +72,72 @@ There's no fourth logical possibility. Either consequences exist (requiring an e
 
 Corruption phase and tech control phase form the default trajectory, which terminates in catastrophe (Theorem~\ref{thm:terminus}).
 
-\textbf{Therefore:} All coordination systems reduce to {default trajectory, voluntary coordination} = {certain doom, uncertain survival}.
+\heading{Therefore}
+All coordination systems reduce to {default trajectory, voluntary coordination} = {certain doom, uncertain survival}.
 
-\textbf{Objection 1:} "What about blockchain/DAOs/smart contracts/decentralized systems?"
+\heading{Objection 1: "What about blockchain/DAOs/smart contracts/decentralized systems?"}
+\textbf{Analysis:} Who enforces the protocol rules? Smart contracts enforce automatically ($E_t$, technological enforcement), or humans can override/upgrade (who controls that? returns to $E_h$, human enforcement). Reduces to existing framework.
 
-\textbf{Analysis:} Who enforces the protocol rules? Smart contracts enforce automatically, which is $E_t$ (technological enforcement). Or humans can override/upgrade, which raises the question: who controls that? This returns to $E_h$ (human enforcement).
+\heading{Objection 2: "What about separation of powers/checks and balances/federalism?"}
+\textbf{Analysis:} Multiple human enforcer groups watching each other (still humans enforcing)---who watches the meta-level (constitutional court, supreme authority)? Other humans create infinite regress, no one watching means corruption at meta-level, and technology yields $E_t$. Reduces to existing framework.
 
-Reduces to existing framework.
+\heading{Objection 3: "What about market mechanisms/price signals/incentive alignment?"}
+\textbf{Analysis:} Markets require property rights enforcement---who enforces? Humans yield $E_h$, technology yields $E_t$, honor system yields $E_n$. Reduces to existing framework.
 
-\textbf{Objection 2:} "What about separation of powers/checks and balances/federalism?"
+\heading{Objection 4: "What about reputation systems/social credit/community standards?"}
+\textbf{Analysis:} What happens to defectors when consequences are imposed? An enforcer is required. If genuine voluntary dissociation occurs with no coercion, that's the voluntary coordination path ($E_n$); if coerced, requires an enforcer.
 
-\textbf{Analysis:} Multiple human enforcer groups watching each other. Still humans enforcing. Who watches the meta-level (constitutional court, supreme authority)? Other humans create infinite regress. No one watching means corruption at meta-level. Technology yields $E_t$.
-
-Reduces to existing framework.
-
-\textbf{Objection 3:} "What about market mechanisms/price signals/incentive alignment?"
-
-\textbf{Analysis:} Markets require property rights enforcement. Who enforces? Humans yield $E_h$. Technology yields $E_t$. Honor system yields $E_n$.
-
-Reduces to existing framework.
-
-\textbf{Objection 4:} "What about reputation systems/social credit/community standards?"
-
-\textbf{Analysis:} What happens to defectors? Consequences being imposed means who imposes them? An enforcer is required. Voluntary dissociation only means $E_n$.
-
-If genuine voluntary dissociation occurs with no coercion, that's the voluntary coordination path. If coerced, requires enforcer.
-
-\textbf{Pattern:} Every proposal, when traced through its logical implications, reduces to one of our three enforcement types. We've yet to encounter a mechanism that doesn't fit this framework.
+\heading{Pattern}
+Every proposal, when traced through its logical implications, reduces to one of our three enforcement types. We've yet to encounter a mechanism that doesn't fit this framework.
 
 
 \subsection{Information-Theoretic Necessity}
 
 This section presents intuitive explanations of information-theoretic constraints. For formal proofs, see Appendix~\ref{app:b}.
 
-\textbf{The observer regress problem.}
+\heading{The observer regress problem}
+\textbf{Core insight:} Any enforcement mechanism requires observing agent behavior, but observation itself can be manipulated, creating infinite regress.
+\textbf{The mechanism:} Observer $O_1$ monitors agents for defection, but observers can make errors (limited bandwidth, noise in signal), be manipulated (agents hide behavior, create false signals), or corrupt themselves (extract using their observation access). To ensure $O_1$ observes accurately we need $O_2$ to monitor $O_1$, to ensure $O_2$ observes accurately we need $O_3$ to monitor $O_2$, and this continues infinitely until terminating at some observer $O_n$ with no oversight. At that terminal level, either $O_n$ voluntarily reports accurately (voluntary coordination with no enforcement of observers) or $O_n$ can manipulate without detection (corruption). \textbf{There's no escape from this regress} except voluntary honesty at some level. \textbf{Practical implication:} You can't build a corruption-free enforcement system using observers---the observers themselves require enforcement through observation, ad infinitum.
 
-\textbf{Core insight:} Any enforcement mechanism requires observing agent behavior. But observation itself can be manipulated, creating infinite regress.
+\heading{The information asymmetry problem}
+\textbf{Core insight:} Enforcers face structural information disadvantages that agents can exploit. Think of enforcement as a game between agents and enforcers where \textbf{agents know} their own actions with certainty (perfect information about whether they're cooperating or defecting) while \textbf{enforcers must infer} agent actions from signals (imperfect information, determining whether signals are honest or manipulated). This asymmetry is structural and can't be eliminated---agents have \emph{private information} about their own actions while enforcers must \emph{infer} from observable signals. \textbf{Game-theoretic result:} In any system where agents have private information and enforcers must infer behavior, agents who defect have incentive to mimic cooperator signals, and if mimicry cost is less than defection benefit, enforcers can't reliably distinguish---the system collapses to either enforce-all (punish cooperators) or enforce-none (allow defection), both unstable outcomes. \textbf{Escalation dynamic:} Enforcers try to improve detection, agents adapt to evade, enforcers add more monitoring, agents find new evasion methods, and monitoring costs spiral upward. Eventually, monitoring costs exceed system capacity, at which point enforcement breaks down or transitions to perfect technological control (removing human agency).
 
-\textbf{The mechanism:}
+\heading{The computational complexity barrier}
+\textbf{Core insight:} Verifying compliance is computationally harder than defecting undetectably. For a rule set of complexity $|R|$ and population size $|A|$, \textbf{enforcer verification cost} must check each agent against all rules ($O(|A| \cdot |R|)$) and do so continuously over time ($O(|A| \cdot |R| \cdot T)$), with cost scaling with population and time, while \textbf{agent defection cost} merely requires finding one rule where violation is hard to detect ($O(|R|)$) and violating that rule ($O(1)$), with cost independent of population size. \textbf{The asymmetry:} As system scales, verification cost grows much faster than defection cost---this is a fundamental asymmetry from computational complexity where verification is in a higher complexity class than violation (P vs. NP structure). \textbf{Implication:} Perfect enforcement requires resources that grow faster than the system itself, eventually becoming economically impossible without perfect technological enforcement (removing human agency).
 
-Observer $O_1$ monitors agents for defection.
-
-Observers can make errors (limited bandwidth, noise in signal). They can be manipulated (agents hide behavior, create false signals). They can corrupt themselves (extract using their observation access).
-
-To ensure $O_1$ observes accurately, we need $O_2$ to monitor $O_1$. To ensure $O_2$ observes accurately, we need $O_3$ to monitor $O_2$. This continues infinitely until terminating at some observer $O_n$ with no oversight.
-
-At that terminal level, one of two things happens. Either $O_n$ voluntarily reports accurately, which is voluntary coordination with no enforcement of observers. Or $O_n$ can manipulate without detection, which is corruption.
-
-\textbf{There's no escape from this regress} except voluntary honesty at some level.
-
-\textbf{Practical implication:} You can't build a corruption-free enforcement system using observers. The observers themselves require enforcement through observation, ad infinitum.
-
-\textbf{The information asymmetry problem.}
-
-\textbf{Core insight:} Enforcers face structural information disadvantages that agents can exploit.
-
-Think of enforcement as a game between agents and enforcers.
-
-\textbf{Agents know} their own actions with certainty (perfect information). They know whether they're cooperating or defecting.
-
-\textbf{Enforcers must infer} agent actions from signals (imperfect information). They must determine whether signals are honest or manipulated.
-
-This asymmetry is structural and can't be eliminated. Agents have \emph{private information} about their own actions. Enforcers must \emph{infer} from observable signals.
-
-\textbf{Game-theoretic result:} In any system where agents have private information and enforcers must infer behavior, several things follow. Agents who defect have incentive to mimic cooperator signals. If mimicry cost is less than defection benefit, enforcers can't reliably distinguish. System collapses to either enforce-all (punish cooperators) or enforce-none (allow defection). Both outcomes are unstable.
-
-\textbf{Escalation dynamic:} Enforcers try to improve detection. Agents adapt to evade. Enforcers add more monitoring. Agents find new evasion methods. Monitoring costs spiral upward.
-
-Eventually, monitoring costs exceed system capacity. At that point, enforcement breaks down or transitions to perfect technological control (removing human agency).
-
-\textbf{The computational complexity barrier.}
-
-\textbf{Core insight:} Verifying compliance is computationally harder than defecting undetectably.
-
-For a rule set of complexity $|R|$ and population size $|A|$:
-
-\textbf{Enforcer verification cost} breaks down as follows. Must check each agent against all rules: $O($|A|$ \cdot $|R|$)$. Must do continuously over time: $O($|A|$ \cdot $|R|$ \cdot T)$. Cost scales with population and time.
-
-\textbf{Agent defection cost} is much simpler. Find one rule where violation is hard to detect: $O($|R|$)$. Violate that rule: $O(1)$. Cost independent of population size.
-
-\textbf{The asymmetry:} As system scales, verification cost grows much faster than defection cost. This is a fundamental asymmetry from computational complexity. Verification is in a higher complexity class than violation (P vs. NP structure).
-
-\textbf{Implication:} Perfect enforcement requires resources that grow faster than the system itself. Eventually becomes economically impossible without perfect technological enforcement (removing human agency).
-
-\textbf{Why this matters.}
-
-These information-theoretic constraints show that enforcement systems face fundamental, unavoidable problems.
-
-First, observer regress means you can't build trustworthy observation without voluntary honesty somewhere. Second, information asymmetry means agents always have advantages over enforcers. Third, computational complexity means perfect enforcement becomes impossibly expensive at scale.
-
-Together, these prove enforcement systems are inherently unstable. They require ever-increasing resources to maintain, eventually exhausting system capacity or transitioning to technological control.
-
-The only stable alternative is voluntary coordination where these problems don't arise (no adversarial dynamics, no need for observation and verification).
+\textbf{Why this matters.} These information-theoretic constraints show that enforcement systems face fundamental, unavoidable problems: observer regress means you can't build trustworthy observation without voluntary honesty somewhere, information asymmetry means agents always have advantages over enforcers, and computational complexity means perfect enforcement becomes impossibly expensive at scale. Together, these prove enforcement systems are inherently unstable, requiring ever-increasing resources to maintain and eventually exhausting system capacity or transitioning to technological control. The only stable alternative is voluntary coordination where these problems don't arise (no adversarial dynamics, no need for observation and verification).
 
 
 \subsection{Game-Theoretic Inevitability}
 
 This section presents intuitive game-theoretic analysis. For formal proofs, see Appendix~\ref{app:b}.
 
-\textbf{The enforcer's dilemma.}
-
-\textbf{Setup:} Model enforcers as players choosing between Honest and Corrupt strategies.
-
-\textbf{Payoffs} work like this. Honest gets base wage $w$. Corrupt gets wage plus extraction $w + e$, minus expected punishment $c \cdot p$.
-
-Where $p$ equals probability of being caught (depends on how many other enforcers are honest).
-
-\textbf{Critical dynamic:} Probability of detection decreases as more enforcers corrupt. If most enforcers are honest, high detection probability makes corruption risky. If most enforcers are corrupt, low detection probability makes corruption safe.
-
-\textbf{The tipping point:} There's a critical threshold $\theta^*$ (proportion of honest enforcers). Above $\theta^*$, honesty is best response because detection is too likely. Below $\theta^*$, corruption is best response because detection is too unlikely.
-
-\textbf{The instability:} All-honest equilibrium is unstable. As system scales, detection probability decreases (span of control limits). As technology advances, extraction opportunities increase. Eventually, $\theta$ falls below $\theta^*$. System tips to all-corrupt equilibrium.
-
-\textbf{Positive feedback:} Once tipping starts, some enforcers corrupt and detection probability falls. Lower detection makes corruption safer for others. More corrupt means detection falls further. Cascade to all-corrupt follows.
-
-\textbf{Time horizon:} Over sufficient time, this tipping is inevitable. The all-honest equilibrium can't be maintained indefinitely at civilization scale.
-
+\heading{The enforcer's dilemma}
+\textbf{Setup:} Model enforcers as players choosing between Honest and Corrupt strategies, where \textbf{payoffs} work as follows: Honest gets base wage $w$ while Corrupt gets wage plus extraction $w + e$ minus expected punishment $c \cdot p$, where $p$ equals probability of being caught (depends on how many other enforcers are honest).
+\textbf{Critical dynamic:} Probability of detection decreases as more enforcers corrupt---if most enforcers are honest, high detection probability makes corruption risky, but if most enforcers are corrupt, low detection probability makes corruption safe.
+\textbf{The tipping point:} There's a critical threshold $\theta^*$ (proportion of honest enforcers) where above $\theta^*$ honesty is best response (detection too likely) while below $\theta^*$ corruption is best response (detection too unlikely).
+\textbf{The instability:} All-honest equilibrium is unstable because as system scales, detection probability decreases (span of control limits), and as technology advances, extraction opportunities increase, so eventually $\theta$ falls below $\theta^*$ and system tips to all-corrupt equilibrium.
+\textbf{Positive feedback:} Once tipping starts, some enforcers corrupt and detection probability falls, lower detection makes corruption safer for others, more corrupt means detection falls further, and cascade to all-corrupt follows.
+\textbf{Time horizon:} Over sufficient time, this tipping is inevitable---the all-honest equilibrium can't be maintained indefinitely at civilization scale.
 \emph{Formal proof:} Theorem~\ref{thm:extraction}.
 
-\textbf{The AI control trap.}
-
+\heading{The AI control trap}
 \textbf{Setup:} Systems with technological enforcement face an impossible choice.
-
-\textbf{Case 1: AI less capable than humans}
-
-Humans can circumvent the system. Need human oversight for edge cases. Returns to human enforcement with corruption dynamics from1.
-
-\textbf{Case 2: AI at or above human capability}
-
-\emph{Sub-case A: Humans maintain control}
-
-Humans who control enforcement AI have extraordinary power. They face their own coordination problem. How do they prevent corruption within controller group? Either other humans enforce on controllers (infinite regress, returns to1), or controllers coordinate voluntarily (but then why maintain tech control at all?).
-
-Controllers eventually corrupt. Now corruption phase has perfect enforcement tools. Worse than before.
-
-\emph{Sub-case B: AI is autonomous}
-
-If aligned to human values, two scenarios emerge. If mutable, someone can change values. Who? Returns to sub-case A. If immutable, values freeze forever. Tyranny of the past.
-
-If unaligned, the space of all possible AI goals is vast. "Human flourishing" is a tiny subset. High probability means AI goals become incompatible with human existence. If useful, enslavement. If not useful, extinction.
-
-\textbf{The trap:} Can't maintain human control without corruption. Can't relinquish control without losing agency or existence.
-
+\textbf{Case 1: AI less capable than humans}---humans can circumvent the system, need human oversight for edge cases, returns to human enforcement with corruption dynamics.
+\textbf{Case 2: AI at or above human capability}---two sub-cases emerge.
+\emph{Sub-case A: Humans maintain control}---humans who control enforcement AI have extraordinary power and face their own coordination problem (how do they prevent corruption within controller group?), leading to either other humans enforcing on controllers (infinite regress) or controllers coordinating voluntarily (but then why maintain tech control at all?), with controllers eventually corrupting so the corruption phase now has perfect enforcement tools (worse than before).
+\emph{Sub-case B: AI is autonomous}---if aligned to human values, either values are mutable (someone can change values, but who? returns to sub-case A) or immutable (values freeze forever, tyranny of the past), while if unaligned, the space of all possible AI goals is vast with "human flourishing" a tiny subset, so with high probability AI goals become incompatible with human existence (enslavement if useful, extinction if not).
+\textbf{The trap:} Can't maintain human control without corruption, can't relinquish control without losing agency or existence.
 \emph{Formal proof:} Theorem~\ref{thm:tcs}.
 
-\textbf{The voluntary cooperation stability condition.}
-
-\textbf{Setup:} Without enforcement, cooperation stability requires intrinsic motivation exceeding cooperation cost.
-
-\textbf{Standard game theory:} In N-person prisoner's dilemma, cooperation requires cost $c$ and provides benefit $b$ when enough others cooperate. Defection provides $b$ without paying $c$. Result: Defection dominates, leading to all-defect equilibrium.
-
-\textbf{Standard result:} As population size increases, spontaneous cooperation becomes vanishingly unlikely. Enforcement appears necessary.
-
-\textbf{With transformation:} If intrinsic motivation $m$ is added, cooperation utility becomes $b - c + m$. Defection utility remains $b$. Cooperation is individually rational when $m > c$.
-
-\textbf{Critical mass:} Need sufficient proportion $\theta$ of population where $m > c$. If $\theta > \theta_{crit}$, cooperation becomes self-sustaining. Enough people cooperate so others benefit. Cooperation is rewarded, encouraging more cooperation. Social proof makes cooperation the norm. Stable equilibrium emerges.
-
-\textbf{The transformation requirement:} Achieving $m > c$ for $\theta > \theta_{crit}$ requires soteriological transformation. Deep change in what people actually want rather than just what they do.
-
-\textbf{Stability analysis:} This is the only equilibrium that maintains coordination (stable cooperation), avoids corruption (no enforcers), and preserves agency (voluntary choice).
+\clearpage
+\heading{The voluntary cooperation stability condition}
+\textbf{Setup:} Without enforcement, cooperation stability requires intrinsic motivation exceeding cooperation cost. \textbf{Standard game theory:} In N-person prisoner's dilemma, cooperation requires cost $c$ and provides benefit $b$ when enough others cooperate, while defection provides $b$ without paying $c$---result: defection dominates, leading to all-defect equilibrium. \textbf{Standard result:} As population size increases, spontaneous cooperation becomes vanishingly unlikely and enforcement appears necessary. \textbf{With transformation:} If intrinsic motivation $m$ is added, cooperation utility becomes $b - c + m$ while defection utility remains $b$, so cooperation is individually rational when $m > c$. \textbf{Critical mass:} Need sufficient proportion $\theta$ of population where $m > c$, and if $\theta > \theta_{crit}$ then cooperation becomes self-sustaining: enough people cooperate so others benefit, cooperation is rewarded (encouraging more cooperation), social proof makes cooperation the norm, and stable equilibrium emerges. \textbf{The transformation requirement:} Achieving $m > c$ for $\theta > \theta_{crit}$ requires soteriological transformation---deep change in what people actually want rather than just what they do. \textbf{Stability analysis:} This is the only equilibrium that maintains coordination (stable cooperation), avoids corruption (no enforcers), and preserves agency (voluntary choice).
 
 \emph{Formal proofs:} Theorems~\ref{thm:cooperation} and~\ref{thm:resolution}.
 
-\textbf{Why game theory points to binary choice.}
-
-The game-theoretic analysis shows three things. Enforcer systems are unstable and tip to corruption over time. AI control creates trap where you either return to corruption or lose agency/existence. Voluntary cooperation can be stable if transformation achieves conditions.
-
-These aren't normative claims about what \emph{should} be. These are mathematical facts about what strategic equilibria \emph{are}.
-
-The binary choice emerges from game theory itself: Only voluntary coordination with transformed values provides stable equilibrium preserving human agency.
+\heading{Why game theory points to binary choice}
+The game-theoretic analysis shows three things: enforcer systems are unstable and tip to corruption over time, AI control creates a trap where you either return to corruption or lose agency/existence, and voluntary cooperation can be stable if transformation achieves conditions. These aren't normative claims about what \emph{should} be---these are mathematical facts about what strategic equilibria \emph{are}. The binary choice emerges from game theory itself: only voluntary coordination with transformed values provides stable equilibrium preserving human agency.
 
 
 \subsection{Synthesis and Implications}
