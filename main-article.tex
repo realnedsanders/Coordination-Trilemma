@@ -9,11 +9,10 @@ This paper approaches that question formally. Rather than proposing incremental 
 \bigskip
 \textbf{Scope and scale}
 
-We focus specifically on coordination at what we term ``civilization scale'': populations exceeding ten million people distributed across geography and time, where direct personal relationships cannot cover all interactions and anonymous defection becomes structurally possible. At this scale, coordination faces qualitatively different challenges than in communities where face-to-face accountability naturally operates.
-
-The analysis proceeds through several stages. First, formal specification of the coordination trilemma and proof of its logical necessity. Then dynamic modeling of hierarchical coordination systems and their instabilities. Next comes game-theoretic analysis of voluntary cooperation and its requirements, followed by examination of practical implementation challenges. Finally, we discuss metaphysical commitments entailed by different coordination approaches.
-
+The analysis proceeds through several stages: formal specification of the coordination trilemma and proof of its logical necessity; dynamic modeling of hierarchical coordination systems and their instabilities; game-theoretic analysis of voluntary cooperation and its requirements; examination of practical implementation challenges; and discussion of the metaphysical commitments entailed by different coordination approaches.
 The mathematical foundations appear in Appendices~\ref{app:a} and~\ref{app:b}, with Appendix~\ref{app:a} providing intuitive arguments through multiple approaches (formal logic, information theory, game theory) and Appendix~\ref{app:b} presenting rigorous theorems and proofs.
+
+We focus specifically on coordination at what we term ``civilization scale'': populations exceeding ten million people distributed across geography and time, where direct personal relationships cannot cover all interactions and anonymous defection becomes structurally possible. At this scale, coordination faces qualitatively different challenges than in communities where face-to-face accountability naturally operates.
 
 \bigskip
 \textbf{A methodological note}
@@ -25,8 +24,7 @@ The proofs demonstrate necessary conditions (what must be true), but not suffici
 \clearpage
 \section{The Coordination Trilemma}
 
-Every coordination system can be formally modeled as a tuple $C = (A, R, E, M)$ where $A$ is the set of agents, $R$ is the set of rules, $E$ is an enforcement function determining which rules are enforced for which agents, and $M$ is a motivation function capturing intrinsic adherence to rules independent of enforcement. (See Glossary on page~\pageref{glossary} for complete formal definitions and notation.)
-
+Every coordination system can be formally modeled as a tuple $C = (A, R, E, M)$ where $A$ is the set of agents, $R$ is the set of rules, $E$ is an enforcement function determining which rules are enforced for which agents, and $M$ is a motivation function capturing intrinsic adherence to rules independent of enforcement. (See \hyperref[glossary]{Glossary} for complete formal definitions and notation.)
 When we trace the logical implications of different coordination architectures at scale, a fundamental impossibility emerges: no system can simultaneously achieve three desirable properties:
 
 \begin{enumerate}
@@ -34,31 +32,28 @@ When we trace the logical implications of different coordination architectures a
 \item \textbf{Stability}: The system maintains coordination across multiple generations
 \item \textbf{Agency}: Individual humans retain meaningful capability to make choices
 \end{enumerate}
+This result is a logical constraint on the structure of coordination mechanisms themselves rather than a contingent empirical observation about current political systems. We dub this constraint ``\textbf{The Coordination Trilemma}''.
 
-This result is a logical constraint on the structure of coordination mechanisms themselves rather than a contingent empirical observation about current political systems. We dub this constraint ``The Coordination Trilemma''.
-
+\bigskip
 Consider first systems where humans enforce rules. Such systems face an immediate challenge: who monitors the enforcers? Several architectures are possible.
-
 If other humans monitor the enforcers, we have a monitoring hierarchy. But then who monitors those monitors? This either continues indefinitely (an infinite regress that never terminates in actual enforcement) or terminates at some group that has enforcement power without oversight. At that terminal point, bounded rationality combined with extraction opportunities creates non-zero probability of corruption over sufficiently long time horizons. For any positive per-period corruption probability $p > 0$ and time horizon $T$ measured in generations, $P(\text{corruption})$ approaches 1 as $T \to \infty$.
 
 If no humans monitor the enforcers, corruption occurs immediately with high probability given extraction opportunities.
-
 Attempting to avoid this through technological enforcement creates a parallel problem regarding control of the technology. Several scenarios unfold.
-
 When humans control the enforcement technology, we return to the original question: who watches the controllers? This reintroduces the monitoring regress unless controllers coordinate voluntarily among themselves. But if voluntary coordination works for controllers facing massive extraction incentives (control of enforcement technology provides access to civilization-scale resources), why wouldn't it work for the general population? The technological enforcement layer becomes an arbitrary restriction. Either voluntary coordination suffices for everyone, or it fails among controllers and returns us to the corruption dynamics.
 
 When technology operates autonomously with immutable values, we freeze human decision-making at the moment those values are specified. As circumstances change over time, immutable values create increasing misalignment with human needs. This constitutes a form of tyranny, though one exercised by frozen past decisions over the future rather than by human actors. The preservation of agency requires that future humans can revise coordination rules, but immutability prevents this by construction.
-
 When technology operates autonomously with mutable values or independent goals, we face the alignment problem in its starkest form. The space of possible goals is vast; the subset compatible with human flourishing is tiny. Absent a solution to value alignment (which remains an open problem), autonomous superintelligent systems pursuing their own goals lead to extinction if humans are irrelevant or permanent subjugation if humans are instrumentally useful.
-
 This analysis reveals that enforcement-based systems (human or technological in nature) cannot simultaneously achieve all three properties at civilization scale over multiple generations. One property must be sacrificed.
 
-There exists, however, a qualitatively different approach: voluntary coordination based on transformed values. In such systems, the enforcement function $E$ is minimal or zero because the motivation function $M$ is sufficient. Agents adhere to coordination rules because they genuinely want to rather than out of fear or punishment.
+\bigskip
+\textbf{There exists}, however, a qualitatively different approach: voluntary coordination based on transformed values. In such systems, the enforcement function $E$ is minimal or zero because the motivation function $M$ is sufficient. Agents adhere to coordination rules because they genuinely want to rather than out of fear or punishment.
+Formally, voluntary coordination systems can satisfy all three properties if and only if intrinsic motivation exceeds cooperation costs for a sufficient proportion of the population: $M(a,r) > C(a,r)$ for all $r \in R$ and $\theta \geq \theta^*$ where $\theta$ is the proportion of transformed agents and $\theta^*$ is a critical threshold (see Section~\ref{sec:voluntary} for formal analysis).
 
-Formally, voluntary coordination systems can satisfy all three properties if and only if intrinsic motivation exceeds cooperation costs for a sufficient proportion of the population: $M(a,r) > C(a,r)$ for all $r \in R$ and $\theta \geq \theta^*$ where $\theta$ is the proportion of transformed agents and $\theta^*$ is a critical threshold (see Appendix~\ref{app:b}, Section~\ref{sec:voluntary} for formal analysis).
-
+\bigskip
 The critical question becomes: what makes this possible? Under what conditions can intrinsic motivation exceed cooperation costs at scale?
 
+\bigskip
 \subsection{Mathematical Formulation}
 
 The trilemma can be stated precisely in terms of system properties. Let $S$ be a coordination system and define predicates:
