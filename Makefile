@@ -7,8 +7,9 @@ MAIN = main
 BIB = references
 
 # Docker image for LaTeX compilation
-# Can be overridden via environment variable (e.g., for CI to use custom image)
-DOCKER_IMAGE ?= texlive/texlive:latest
+# Can be overridden via environment variable
+# Using custom Alpine-based image by default (much smaller and faster)
+DOCKER_IMAGE ?= ghcr.io/realnedsanders/coordination-trilemma/latex:latest
 
 # Docker command wrapper
 # Runs container with current directory mounted, cleans up after
@@ -30,26 +31,30 @@ else
     RUN_BIBTEX = $(DOCKER_RUN) $(BIBTEX)
 endif
 
-.PHONY: all quick clean cleanall view docker-pull docker-pull-custom help local
+.PHONY: all quick clean cleanall view docker-pull docker-pull-full help local
 
 # Default target
 all: $(MAIN).pdf
 
 # Pull the Docker image (run this once to download)
 docker-pull:
-	@echo "Pulling LaTeX Docker image (this may take a few minutes)..."
+	@echo "Pulling custom Alpine-based LaTeX image..."
 	docker pull $(DOCKER_IMAGE)
 	@echo "Docker image ready!"
 
-# Pull the custom minimal image from GitHub Container Registry
-docker-pull-custom:
-	@echo "Pulling custom minimal LaTeX image from GitHub Container Registry..."
-	@echo "Note: Replace 'realnedsanders' with your GitHub username if needed"
-	docker pull ghcr.io/realnedsanders/coordination-trilemma/latex:latest
-	@echo "Custom image ready! Use: DOCKER_IMAGE=ghcr.io/realnedsanders/coordination-trilemma/latex:latest make"
+# Pull the full TeXLive image (larger, includes all packages)
+docker-pull-full:
+	@echo "Pulling full TeXLive Docker image (this may take a few minutes, ~4-5GB)..."
+	docker pull texlive/texlive:latest
+	@echo "Full TeXLive image ready! Use: DOCKER_IMAGE=texlive/texlive:latest make"
+
+# Generate build information from git metadata
+build-info.tex:
+	@echo "Generating build information..."
+	@./generate-build-info.sh
 
 # Full build with bibliography
-$(MAIN).pdf: $(MAIN).tex main-article.tex appendix-a.tex appendix-b.tex appendix-c.tex appendix-d.tex $(BIB).bib glossary.tex
+$(MAIN).pdf: build-info.tex $(MAIN).tex main-article.tex appendix-a.tex appendix-b.tex appendix-c.tex appendix-d.tex $(BIB).bib glossary.tex
 	@echo "Compiling with $(COMPILE_METHOD) method..."
 	$(RUN_LATEX) $(MAIN)
 	$(RUN_BIBTEX) $(MAIN)
@@ -70,7 +75,7 @@ local:
 
 # Clean auxiliary files
 clean:
-	rm -f *.aux *.log *.out *.toc *.bbl *.blg *.synctex.gz
+	rm -f *.aux *.log *.out *.toc *.bbl *.blg *.synctex.gz build-info.tex
 
 # Clean everything including PDF
 cleanall: clean
@@ -95,24 +100,24 @@ help:
 	@echo "Coordination Trilemma LaTeX Build System"
 	@echo ""
 	@echo "Available targets:"
-	@echo "  make                   - Build PDF using Docker (default)"
-	@echo "  make docker-pull       - Download LaTeX Docker image (run once)"
-	@echo "  make docker-pull-custom - Download custom minimal image from ghcr.io"
-	@echo "  make local             - Build using local LaTeX installation"
-	@echo "  make quick             - Quick build without bibliography update"
-	@echo "  make clean             - Remove auxiliary files"
-	@echo "  make cleanall          - Remove all generated files including PDF"
-	@echo "  make view              - Open the PDF"
-	@echo "  make shell             - Open interactive Docker shell for debugging"
-	@echo "  make help              - Show this help message"
+	@echo "  make                 - Build PDF using Alpine Docker image (default)"
+	@echo "  make docker-pull     - Download custom Alpine image (~500MB-1GB)"
+	@echo "  make docker-pull-full - Download full TeXLive image (~4-5GB)"
+	@echo "  make local           - Build using local LaTeX installation"
+	@echo "  make quick           - Quick build without bibliography update"
+	@echo "  make clean           - Remove auxiliary files"
+	@echo "  make cleanall        - Remove all generated files including PDF"
+	@echo "  make view            - Open the PDF"
+	@echo "  make shell           - Open interactive Docker shell for debugging"
+	@echo "  make help            - Show this help message"
 	@echo ""
 	@echo "First time setup:"
 	@echo "  1. Install Docker: https://docs.docker.com/get-docker/"
 	@echo "  2. Run: make docker-pull"
 	@echo "  3. Run: make"
 	@echo ""
-	@echo "To use custom minimal image (smaller, faster):"
-	@echo "  DOCKER_IMAGE=ghcr.io/realnedsanders/coordination-trilemma/latex:latest make"
+	@echo "To use full TeXLive image instead of Alpine:"
+	@echo "  DOCKER_IMAGE=texlive/texlive:latest make"
 	@echo ""
 	@echo "To use local LaTeX instead of Docker:"
 	@echo "  make local"

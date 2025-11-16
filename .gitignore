@@ -3,5 +3,7 @@
 *.out
 *.toc
 *.bbl
+*.blg
 *.synctex.gz
 *.pdf
+build-info.tex

@@ -68,8 +68,11 @@ jobs:
 
       - name: Build PDF
         run: make all
+        # Uses custom Alpine image by default (set in Makefile)
         env:
-          DOCKER_IMAGE: ghcr.io/${{ github.repository }}/latex:latest
+          BUILD_USER: "GitHub Actions"
+          BUILD_HOST: "github.com"
+          GITHUB_ACTIONS: "true"
 
       - name: Check if PDF was created
         run: |
