@@ -31,23 +31,23 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y chktex
 
       - name: Lint main.tex
-        run: chktex -q -n 1 -n 2 -n 3 -n 8 -n 13 -n 25 -n 36 main.tex || true
+        run: chktex -q -n 1 -n 2 -n 3 -n 8 -n 13 -n 25 -n 36 src/tex/main.tex || true
         continue-on-error: true
 
       - name: Lint main-article.tex
-        run: chktex -q -n 1 -n 2 -n 3 -n 8 -n 13 -n 25 -n 36 main-article.tex || true
+        run: chktex -q -n 1 -n 2 -n 3 -n 8 -n 13 -n 25 -n 36 src/tex/main-article.tex || true
         continue-on-error: true
 
       - name: Lint appendices
         run: |
-          for file in appendix-*.tex; do
+          for file in src/tex/appendices/*.tex; do
             echo "Linting $file..."
             chktex -q -n 1 -n 2 -n 3 -n 8 -n 13 -n 25 -n 36 "$file" || true
           done
         continue-on-error: true
 
       - name: Lint glossary.tex
-        run: chktex -q -n 1 -n 2 -n 3 -n 8 -n 13 -n 25 -n 36 glossary.tex || true
+        run: chktex -q -n 1 -n 2 -n 3 -n 8 -n 13 -n 25 -n 36 src/tex/glossary.tex || true
         continue-on-error: true
 
   build:
@@ -97,8 +97,8 @@ jobs:
         with:
           name: build-logs
           path: |
-            *.log
-            *.aux
+            src/tex/*.log
+            src/tex/*.aux
           retention-days: 7
 
   # Optional: Check for common LaTeX issues
@@ -113,26 +113,28 @@ jobs:
       - name: Check for unmatched braces
         run: |
           echo "Checking for common LaTeX syntax issues..."
-          for file in *.tex; do
-            echo "Checking $file..."
-            # Count opening and closing braces
-            open_braces=$(grep -o '{' "$file" | wc -l)
-            close_braces=$(grep -o '}' "$file" | wc -l)
-            echo "$file: { count=$open_braces, } count=$close_braces"
+          for file in src/tex/*.tex src/tex/appendices/*.tex; do
+            if [ -f "$file" ]; then
+              echo "Checking $file..."
+              # Count opening and closing braces
+              open_braces=$(grep -o '{' "$file" | wc -l)
+              close_braces=$(grep -o '}' "$file" | wc -l)
+              echo "$file: { count=$open_braces, } count=$close_braces"
+            fi
           done
 
       - name: Check for TODO comments
         run: |
           echo "Checking for TODO/FIXME comments..."
-          grep -rn "TODO\|FIXME\|XXX" *.tex || echo "No TODO comments found"
+          grep -rn "TODO\|FIXME\|XXX" src/tex/ || echo "No TODO comments found"
         continue-on-error: true
 
       - name: Check bibliography file exists
         run: |
-          if [ -f references.bib ]; then
+          if [ -f src/tex/references.bib ]; then
             echo "Bibliography file found"
           else
-            echo "Warning: references.bib not found"
+            echo "Warning: src/tex/references.bib not found"
             exit 1
           fi
 
