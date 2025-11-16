@@ -7,3 +7,9 @@
 *.synctex.gz
 *.pdf
 build-info.tex
+
+# Build directory
+build/
+
+# Drafts (not tracked)
+drafts/
