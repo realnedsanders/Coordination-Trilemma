@@ -158,7 +158,7 @@ jobs:
           path: ./public
 
       - name: Copy index page
-        run: cp index.html ./public/index.html
+        run: cp web/index.html ./public/index.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

@@ -1,7 +1,12 @@
 # Makefile for Coordination Trilemma LaTeX document
 # Uses Docker by default (no local LaTeX installation needed)
 
-# Main tex file
+# Source directories
+SRC_DIR = src/tex
+SCRIPTS_DIR = scripts
+BUILD_DIR = build
+
+# Main tex file (in src/tex/)
 MAIN = main
 # Bibliography file
 BIB = references
@@ -13,7 +18,9 @@ DOCKER_IMAGE ?= ghcr.io/realnedsanders/coordination-trilemma/latex:latest
 
 # Docker command wrapper
 # Runs container with current directory mounted, cleans up after
-DOCKER_RUN = docker run --rm -v $(PWD):/workdir -w /workdir $(DOCKER_IMAGE)
+# Working directory set to src/tex for LaTeX compilation
+# Note: Runs as root in container, but files are accessible due to volume mount
+DOCKER_RUN = docker run --rm -v $(PWD):/workdir -w /workdir/$(SRC_DIR) $(DOCKER_IMAGE)
 
 # Local compilation commands (if you have LaTeX installed)
 LATEX = pdflatex
@@ -24,8 +31,8 @@ COMPILE_METHOD ?= docker
 
 # Set commands based on compilation method
 ifeq ($(COMPILE_METHOD),local)
-    RUN_LATEX = $(LATEX)
-    RUN_BIBTEX = $(BIBTEX)
+    RUN_LATEX = cd $(SRC_DIR) && $(LATEX)
+    RUN_BIBTEX = cd $(SRC_DIR) && $(BIBTEX)
 else
     RUN_LATEX = $(DOCKER_RUN) $(LATEX)
     RUN_BIBTEX = $(DOCKER_RUN) $(BIBTEX)
@@ -33,8 +40,12 @@ endif
 
 .PHONY: all quick clean cleanall view docker-pull docker-pull-full help local
 
+# Ensure build directory exists
+$(BUILD_DIR):
+	@mkdir -p $(BUILD_DIR)
+
 # Default target
-all: $(MAIN).pdf
+all: $(BUILD_DIR) $(MAIN).pdf
 
 # Pull the Docker image (run this once to download)
 docker-pull:
@@ -49,23 +60,28 @@ docker-pull-full:
 	@echo "Full TeXLive image ready! Use: DOCKER_IMAGE=texlive/texlive:latest make"
 
 # Generate build information from git metadata
-build-info.tex:
+$(BUILD_DIR)/build-info.tex: | $(BUILD_DIR)
 	@echo "Generating build information..."
-	@./generate-build-info.sh
+	@$(SCRIPTS_DIR)/generate-build-info.sh
+	@mv build-info.tex $(BUILD_DIR)/ 2>/dev/null || true
 
 # Full build with bibliography
-$(MAIN).pdf: build-info.tex $(MAIN).tex main-article.tex appendix-a.tex appendix-b.tex appendix-c.tex appendix-d.tex $(BIB).bib glossary.tex
+$(MAIN).pdf: $(BUILD_DIR)/build-info.tex $(SRC_DIR)/$(MAIN).tex $(SRC_DIR)/main-article.tex $(SRC_DIR)/appendices/*.tex $(SRC_DIR)/$(BIB).bib $(SRC_DIR)/glossary.tex
 	@echo "Compiling with $(COMPILE_METHOD) method..."
+	@cp $(BUILD_DIR)/build-info.tex $(SRC_DIR)/ || true
 	$(RUN_LATEX) $(MAIN)
 	$(RUN_BIBTEX) $(MAIN)
 	$(RUN_LATEX) $(MAIN)
 	$(RUN_LATEX) $(MAIN)
+	@cp $(SRC_DIR)/$(MAIN).pdf . || true
 	@echo "✓ PDF generated: $(MAIN).pdf"
 
 # Quick build (no bibliography update)
-quick:
+quick: $(BUILD_DIR)/build-info.tex
 	@echo "Quick compile with $(COMPILE_METHOD) method..."
+	@cp $(BUILD_DIR)/build-info.tex $(SRC_DIR)/ || true
 	$(RUN_LATEX) $(MAIN)
+	@cp $(SRC_DIR)/$(MAIN).pdf . || true
 	@echo "✓ Quick build complete"
 
 # Use local LaTeX installation instead of Docker
@@ -75,11 +91,13 @@ local:
 
 # Clean auxiliary files
 clean:
-	rm -f *.aux *.log *.out *.toc *.bbl *.blg *.synctex.gz build-info.tex
+	rm -f $(SRC_DIR)/*.aux $(SRC_DIR)/*.log $(SRC_DIR)/*.out $(SRC_DIR)/*.toc $(SRC_DIR)/*.bbl $(SRC_DIR)/*.blg $(SRC_DIR)/*.synctex.gz
+	rm -f $(SRC_DIR)/build-info.tex
+	rm -rf $(BUILD_DIR)
 
 # Clean everything including PDF
 cleanall: clean
-	rm -f $(MAIN).pdf
+	rm -f $(MAIN).pdf $(SRC_DIR)/$(MAIN).pdf
 
 # View the PDF (requires a PDF viewer)
 view: $(MAIN).pdf
