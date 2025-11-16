@@ -1,21 +1,20 @@
 # Minimal Alpine-based LaTeX image for Coordination Trilemma
 # Optimized for size and security
-FROM alpine:3.19
+# Using edge for access to granular TeXLive packages
+FROM alpine:edge
 
 # Install only the TeXLive packages we actually need
 RUN apk add --no-cache \
     # Core LaTeX
     texlive \
     # For amsart document class and ams packages (amsmath, amssymb, amsthm)
-    texmf-dist-latexextra \
+    texlive-latexextra \
     # For BibTeX support
-    texmf-dist-bibtexextra \
-    # For fonts (T1 encoding)
-    texmf-dist-fontsextra \
+    texlive-bibtexextra \
     # Additional packages needed:
     # - geometry, hyperref, url, graphicx, enumitem, booktabs, array, xcolor
-    texmf-dist-latexrecommended \
-    texmf-dist-pictures \
+    texlive-latexrecommended \
+    texlive-pictures \
     # Perl for BibTeX (required by bibtex)
     perl
 
