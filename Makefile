@@ -38,14 +38,14 @@ else
     RUN_BIBTEX = $(DOCKER_RUN) $(BIBTEX)
 endif
 
-.PHONY: all quick clean cleanall view docker-pull docker-pull-full help local
+.PHONY: all clean cleanall view docker-pull docker-pull-full help local
+
+# Default target
+all: $(BUILD_DIR) $(MAIN).pdf clean
 
 # Ensure build directory exists
 $(BUILD_DIR):
 	@mkdir -p $(BUILD_DIR)
-
-# Default target
-all: $(BUILD_DIR) $(MAIN).pdf
 
 # Pull the Docker image (run this once to download)
 docker-pull:
@@ -73,16 +73,8 @@ $(MAIN).pdf: $(BUILD_DIR)/build-info.tex $(SRC_DIR)/$(MAIN).tex $(SRC_DIR)/main-
 	$(RUN_BIBTEX) $(MAIN)
 	$(RUN_LATEX) $(MAIN)
 	$(RUN_LATEX) $(MAIN)
-	@cp $(SRC_DIR)/$(MAIN).pdf . || true
+	@mv $(SRC_DIR)/$(MAIN).pdf . || true
 	@echo "✓ PDF generated: $(MAIN).pdf"
-
-# Quick build (no bibliography update)
-quick: $(BUILD_DIR)/build-info.tex
-	@echo "Quick compile with $(COMPILE_METHOD) method..."
-	@cp $(BUILD_DIR)/build-info.tex $(SRC_DIR)/ || true
-	$(RUN_LATEX) $(MAIN)
-	@cp $(SRC_DIR)/$(MAIN).pdf . || true
-	@echo "✓ Quick build complete"
 
 # Use local LaTeX installation instead of Docker
 local:
@@ -97,7 +89,7 @@ clean:
 
 # Clean everything including PDF
 cleanall: clean
-	rm -f $(MAIN).pdf $(SRC_DIR)/$(MAIN).pdf
+	rm -f $(MAIN).pdf
 
 # View the PDF (requires a PDF viewer)
 view: $(MAIN).pdf
@@ -122,7 +114,6 @@ help:
 	@echo "  make docker-pull     - Download custom Alpine image (~500MB-1GB)"
 	@echo "  make docker-pull-full - Download full TeXLive image (~4-5GB)"
 	@echo "  make local           - Build using local LaTeX installation"
-	@echo "  make quick           - Quick build without bibliography update"
 	@echo "  make clean           - Remove auxiliary files"
 	@echo "  make cleanall        - Remove all generated files including PDF"
 	@echo "  make view            - Open the PDF"
