@@ -1,0 +1,27 @@
+# Code Owners for Coordination Trilemma
+#
+# This file defines individuals or teams responsible for code review.
+# For SLSA Level 4 compliance, all changes must be reviewed by a code owner.
+#
+# Format: path @username @org/team-name
+#
+# More info: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owners for all files
+* @realnedsanders
+
+# Security-sensitive files require additional scrutiny
+/Dockerfile @realnedsanders
+/.github/workflows/ @realnedsanders
+/scripts/ @realnedsanders
+SECURITY.md @realnedsanders
+/src/main.tex @realnedsanders
+
+# Build system files
+Makefile @realnedsanders
+/generate-build-info.sh @realnedsanders
+
+# TODO: Add additional maintainers as team grows
+# Example:
+# * @realnedsanders @co-author
+# /security/ @security-team

@@ -1,6 +1,11 @@
 # Minimal Alpine-based LaTeX image for Coordination Trilemma
 # Optimized for size and security
 # Using edge for access to granular TeXLive packages
+#
+# Note: For maximum security, pin to a specific digest:
+# FROM alpine:edge@sha256:xxxxx
+# However, Alpine edge is a rolling release, so digests change frequently.
+# The image is signed with Cosign and has SLSA provenance attestations.
 FROM alpine:edge
 
 # Build arguments for provenance metadata

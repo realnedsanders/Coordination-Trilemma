@@ -1,0 +1,69 @@
+name: Sign PDF Artifact
+
+on:
+  workflow_run:
+    workflows: ["LaTeX CI"]
+    types:
+      - completed
+    branches: [main]
+
+permissions:
+  contents: read
+  actions: read
+  attestations: write
+  id-token: write
+
+jobs:
+  sign-pdf:
+    name: Sign PDF with Cosign
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    steps:
+      - name: Download PDF artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: coordination-trilemma-pdf
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - name: Install Cosign
+        uses: sigstore/cosign-installer@v3.7.0
+
+      - name: Sign PDF with Cosign (keyless)
+        run: |
+          # Sign the PDF using Sigstore's keyless signing
+          # This creates a transparency log entry that can be verified
+          cosign sign-blob --yes \
+            --bundle main.pdf.cosign.bundle \
+            main.pdf
+        env:
+          COSIGN_EXPERIMENTAL: 1
+
+      - name: Generate SLSA provenance for PDF
+        uses: actions/attest-build-provenance@v1
+        with:
+          subject-path: 'main.pdf'
+
+      - name: Upload signed PDF and signature
+        uses: actions/upload-artifact@v4
+        with:
+          name: coordination-trilemma-pdf-signed
+          path: |
+            main.pdf
+            main.pdf.cosign.bundle
+          retention-days: 90
+
+      - name: Signing details
+        run: |
+          echo "✅ PDF signed successfully"
+          echo ""
+          echo "Artifacts:"
+          echo "  - main.pdf (original PDF)"
+          echo "  - main.pdf.cosign.bundle (Cosign signature bundle)"
+          echo ""
+          echo "Verify signature with:"
+          echo "cosign verify-blob --bundle main.pdf.cosign.bundle \\"
+          echo "  --certificate-identity-regexp=\"^https://github.com/${{ github.repository }}\" \\"
+          echo "  --certificate-oidc-issuer=https://token.actions.githubusercontent.com \\"
+          echo "  main.pdf"
