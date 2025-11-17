@@ -17,6 +17,11 @@ jobs:
   sign-pdf:
     name: Sign PDF with Cosign
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/realnedsanders/coordination-trilemma/security-tools:latest
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     steps:
@@ -26,9 +31,6 @@ jobs:
           name: coordination-trilemma-pdf
           github-token: ${{ secrets.GITHUB_TOKEN }}
           run-id: ${{ github.event.workflow_run.id }}
-
-      - name: Install Cosign
-        uses: sigstore/cosign-installer@v3.7.0
 
       - name: Sign PDF with Cosign (keyless)
         run: |

@@ -1,0 +1,62 @@
+# Security Tools Image for Coordination Trilemma CI
+# Minimal Alpine image with tools for signing and security operations
+#
+# Included tools:
+# - cosign: Artifact signing (Sigstore)
+# - Basic utilities: git, curl, bash
+#
+# Note: For LaTeX linting (chktex), use the main latex:latest image instead
+# which already includes texlive and chktex
+#
+# Base: Alpine Linux for minimal size
+
+FROM alpine:3.19
+
+# Build arguments for provenance metadata
+ARG BUILD_DATE
+ARG VCS_REF
+ARG VCS_URL
+ARG VERSION
+ARG BUILD_URL
+
+# OCI labels for build provenance
+LABEL org.opencontainers.image.created="${BUILD_DATE}" \
+      org.opencontainers.image.authors="B. Escalera, A. Escalera" \
+      org.opencontainers.image.url="https://github.com/realnedsanders/Coordination-Trilemma" \
+      org.opencontainers.image.source="${VCS_URL}" \
+      org.opencontainers.image.version="${VERSION}" \
+      org.opencontainers.image.revision="${VCS_REF}" \
+      org.opencontainers.image.title="Security Tools" \
+      org.opencontainers.image.description="Security tools for Coordination Trilemma CI (cosign)" \
+      org.opencontainers.image.base.name="alpine:3.19" \
+      io.github.build.url="${BUILD_URL}"
+
+# Install basic utilities
+RUN apk add --no-cache \
+    git \
+    curl \
+    ca-certificates \
+    bash
+
+# Install Cosign (Sigstore)
+# Pinned to specific version for reproducibility
+RUN COSIGN_VERSION=2.4.1 && \
+    COSIGN_ARCH=$(uname -m) && \
+    case ${COSIGN_ARCH} in \
+        x86_64) COSIGN_ARCH="amd64" ;; \
+        aarch64) COSIGN_ARCH="arm64" ;; \
+    esac && \
+    curl -fsSL https://github.com/sigstore/cosign/releases/download/v${COSIGN_VERSION}/cosign-linux-${COSIGN_ARCH} \
+      -o /usr/local/bin/cosign && \
+    chmod +x /usr/local/bin/cosign && \
+    cosign version
+
+# Set working directory
+WORKDIR /workspace
+
+# Verify installations
+RUN cosign version && \
+    git --version
+
+# Default command (for interactive use)
+CMD ["/bin/bash"]

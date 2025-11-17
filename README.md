@@ -70,8 +70,18 @@ All documentation is in the [`docs/`](docs/) directory:
 ├── web/                  # GitHub Pages content
 ├── build/                # Build outputs (gitignored)
 ├── Makefile             # Build automation
-└── Dockerfile           # Custom LaTeX image
+├── Dockerfile           # Custom Alpine LaTeX image
+└── Dockerfile.security-tools  # Custom security tools image
 ```
+
+## 🔄 CI/CD Infrastructure
+
+All CI workflows use custom Alpine-based Docker images for faster, more reproducible builds:
+
+- **`latex:latest`** - Minimal Alpine image with TeXLive and ChkTeX for document compilation and linting
+- **`security-tools:latest`** - Minimal Alpine image with Cosign for artifact signing
+
+These images are automatically built and signed on every change to Dockerfiles. No tools are installed during CI runs, ensuring consistent environments and faster execution.
 
 ## 🔧 Development
 

@@ -22,13 +22,15 @@ jobs:
   lint:
     name: Lint LaTeX Files
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/realnedsanders/coordination-trilemma/latex:latest
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Install ChkTeX
-        run: sudo apt-get update && sudo apt-get install -y chktex
 
       - name: Lint main.tex
         run: chktex -q -n 1 -n 2 -n 3 -n 8 -n 13 -n 25 -n 36 src/tex/main.tex || true

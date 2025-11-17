@@ -72,14 +72,15 @@ The Makefile runs commands like this:
 ```bash
 docker run --rm \
   -v $(pwd):/workdir \
-  -w /workdir \
-  texlive/texlive:latest \
+  -w /workdir/src/tex \
+  ghcr.io/realnedsanders/coordination-trilemma/latex:latest \
   pdflatex main
 ```
 
 This:
-- Starts a temporary container with TeX Live
+- Starts a temporary container with our custom Alpine LaTeX image
 - Mounts your project directory inside
+- Sets working directory to `src/tex/`
 - Runs pdflatex on your files
 - Removes the container when done
 - Leaves the generated PDF on your computer
@@ -94,20 +95,29 @@ This:
 
 ## Docker Image Details
 
-**Image:** `texlive/texlive:latest`  
-**Size:** ~2GB  
-**Includes:** Complete TeX Live distribution with all packages  
-**Updates:** Regularly maintained by TeX Live team  
+**Default Image:** `ghcr.io/realnedsanders/coordination-trilemma/latex:latest`
+**Base:** Alpine Linux edge
+**Size:** ~500MB-1GB (much smaller than full TeXLive)
+**Includes:** Minimal TeXLive with required packages only
+**Updates:** Automatically built and signed on every change
 
-### Alternative: Smaller Image
+Our custom Alpine-based image includes:
+- `texlive` (core)
+- `texlive-latexextra`
+- `texlive-bibtexextra`
+- `texlive-latexrecommended`
+- `texlive-pictures`
+- ChkTeX (for linting)
 
-If 2GB is too large, edit line 10 of Makefile:
+### Alternative: Full TeXLive Image
 
-```makefile
-DOCKER_IMAGE = texlive/texlive:latest-small
+If you need additional packages, use the full image:
+
+```bash
+DOCKER_IMAGE=texlive/texlive:latest make
 ```
 
-The small image is ~400MB but may be missing some packages.
+The full image is ~4-5GB but includes all TeX packages.
 
 ## Verifying Installation
 
@@ -201,6 +211,30 @@ make local
 
 # This bypasses Docker and uses your local pdflatex
 ```
+
+## CI/CD Docker Images
+
+This project uses two custom Alpine-based images for CI/CD:
+
+### 1. LaTeX Build Image
+**Image:** `ghcr.io/realnedsanders/coordination-trilemma/latex:latest`
+- Used for: Document compilation and linting
+- Contains: TeXLive and ChkTeX
+- Size: ~500MB-1GB
+
+### 2. Security Tools Image
+**Image:** `ghcr.io/realnedsanders/coordination-trilemma/security-tools:latest`
+- Used for: Signing artifacts with Cosign
+- Contains: Cosign, curl, git, bash
+- Size: ~50MB
+
+Both images are:
+- ✅ Automatically built on every Dockerfile change
+- ✅ Signed with Cosign (keyless)
+- ✅ Include SLSA provenance and SBOM
+- ✅ Published to GitHub Container Registry
+
+This eliminates the need to install tools during CI runs, resulting in faster builds and consistent environments.
 
 ## Need Help?
 

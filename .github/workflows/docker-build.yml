@@ -1,25 +1,33 @@
-name: Build LaTeX Docker Image
+name: Build Docker Images
 
 on:
   push:
     branches: [ main ]
     paths:
-      - 'Dockerfile'
+      - 'Dockerfile*'
       - '.github/workflows/docker-build.yml'
   pull_request:
     paths:
-      - 'Dockerfile'
+      - 'Dockerfile*'
       - '.github/workflows/docker-build.yml'
   workflow_dispatch:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}/latex
 
 jobs:
   build-and-push:
-    name: Build and Push Docker Image
+    name: Build and Push ${{ matrix.image.name }}
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        image:
+          - name: latex
+            dockerfile: Dockerfile
+            description: "LaTeX Build Environment"
+          - name: security-tools
+            dockerfile: Dockerfile.security-tools
+            description: "Security Tools (cosign)"
     permissions:
       contents: read
       packages: write
@@ -49,7 +57,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/${{ github.repository }}/${{ matrix.image.name }}
           tags: |
             type=raw,value=latest,enable={{is_default_branch}}
             type=sha,prefix={{branch}}-
@@ -59,11 +67,12 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
+          file: ${{ matrix.image.dockerfile }}
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=gha,scope=${{ matrix.image.name }}
+          cache-to: type=gha,mode=max,scope=${{ matrix.image.name }}
           # Build arguments for OCI labels
           build-args: |
             BUILD_DATE=${{ steps.meta.outputs.created }}
@@ -82,7 +91,7 @@ jobs:
           # Sign the image using Sigstore's keyless signing (OIDC-based)
           # This provides cryptographic verification without managing keys
           cosign sign --yes \
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.build.outputs.digest }}
+            ${{ env.REGISTRY }}/${{ github.repository }}/${{ matrix.image.name }}@${{ steps.build.outputs.digest }}
         env:
           COSIGN_EXPERIMENTAL: 1
 
@@ -93,30 +102,30 @@ jobs:
           cosign verify \
             --certificate-identity-regexp="^https://github.com/${{ github.repository }}" \
             --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.build.outputs.digest }}
+            ${{ env.REGISTRY }}/${{ github.repository }}/${{ matrix.image.name }}@${{ steps.build.outputs.digest }}
         env:
           COSIGN_EXPERIMENTAL: 1
 
       - name: Scan image with Trivy
         uses: aquasecurity/trivy-action@0.28.0
         with:
-          image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          image-ref: ${{ env.REGISTRY }}/${{ github.repository }}/${{ matrix.image.name }}:latest
           format: 'sarif'
-          output: 'trivy-results.sarif'
+          output: 'trivy-results-${{ matrix.image.name }}.sarif'
 
       - name: Upload Trivy results to GitHub Security
         uses: github/codeql-action/upload-sarif@v3
         if: always()
         with:
-          sarif_file: 'trivy-results.sarif'
+          sarif_file: 'trivy-results-${{ matrix.image.name }}.sarif'
 
       - name: Image details
         if: github.event_name != 'pull_request'
         run: |
           echo "✅ Image pushed and signed:"
-          echo "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest"
+          echo "${{ env.REGISTRY }}/${{ github.repository }}/${{ matrix.image.name }}:latest"
           echo ""
           echo "Digest: ${{ steps.build.outputs.digest }}"
           echo ""
           echo "Verify signature with:"
-          echo "cosign verify --certificate-identity-regexp=\"^https://github.com/${{ github.repository }}\" --certificate-oidc-issuer=https://token.actions.githubusercontent.com ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.build.outputs.digest }}"
+          echo "cosign verify --certificate-identity-regexp=\"^https://github.com/${{ github.repository }}\" --certificate-oidc-issuer=https://token.actions.githubusercontent.com ${{ env.REGISTRY }}/${{ github.repository }}/${{ matrix.image.name }}@${{ steps.build.outputs.digest }}"
