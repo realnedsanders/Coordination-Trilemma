@@ -4,11 +4,11 @@ on:
   push:
     branches: [ main ]
     paths:
-      - 'Dockerfile*'
+      - 'docker/Dockerfile*'
       - '.github/workflows/docker-build.yml'
   pull_request:
     paths:
-      - 'Dockerfile*'
+      - 'docker/Dockerfile*'
       - '.github/workflows/docker-build.yml'
   workflow_dispatch:
 
@@ -23,10 +23,10 @@ jobs:
       matrix:
         image:
           - name: latex
-            dockerfile: Dockerfile
+            dockerfile: docker/Dockerfile.latex
             description: "LaTeX Build Environment"
-          - name: security-tools
-            dockerfile: Dockerfile.security-tools
+          - name: security
+            dockerfile: docker/Dockerfile.security
             description: "Security Tools (cosign)"
     permissions:
       contents: read
