@@ -8,21 +8,27 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - 'scripts/**'
-      - 'docker/**'
-      - '.github/workflows/**'
-      - 'Makefile'
-      - '**.md'
-      - 'docs/**'
+      - 'scripts/**'              # Shell scripts (ShellCheck)
+      - 'docker/**'               # Dockerfiles (Hadolint)
+      - '.github/workflows/**'    # Workflow YAML (ShellCheck)
+      - 'Makefile'                # Build script (ShellCheck)
+      - '**.md'                   # All markdown files (Markdownlint)
+      - 'docs/**'                 # Documentation directory (Markdownlint)
+      - '.markdownlint.yaml'      # Markdownlint config
+      - '.markdownlintignore'     # Markdownlint exclusions
+      - '.hadolint.yaml'          # Hadolint config
   pull_request:
     branches: [ "main" ]
     paths:
-      - 'scripts/**'
-      - 'docker/**'
-      - '.github/workflows/**'
-      - 'Makefile'
-      - '**.md'
-      - 'docs/**'
+      - 'scripts/**'              # Shell scripts (ShellCheck)
+      - 'docker/**'               # Dockerfiles (Hadolint)
+      - '.github/workflows/**'    # Workflow YAML (ShellCheck)
+      - 'Makefile'                # Build script (ShellCheck)
+      - '**.md'                   # All markdown files (Markdownlint)
+      - 'docs/**'                 # Documentation directory (Markdownlint)
+      - '.markdownlint.yaml'      # Markdownlint config
+      - '.markdownlintignore'     # Markdownlint exclusions
+      - '.hadolint.yaml'          # Hadolint config
   schedule:
     # Run weekly on Monday at 9:00 AM UTC
     - cron: '0 9 * * 1'

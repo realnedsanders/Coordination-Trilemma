@@ -6,10 +6,12 @@ on:
     paths:
       - 'docker/Dockerfile*'
       - '.github/workflows/docker-build.yml'
+      - '.hadolint.yaml'  # Rebuild when linting config changes
   pull_request:
     paths:
       - 'docker/Dockerfile*'
       - '.github/workflows/docker-build.yml'
+      - '.hadolint.yaml'
   workflow_dispatch:
 
 env:

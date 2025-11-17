@@ -4,17 +4,19 @@ on:
   push:
     branches: [ main ]
     paths:
-      - 'src/tex/**'
-      - 'web/**'
+      - 'src/tex/**'           # LaTeX source files
+      - 'scripts/**'           # Build and verification scripts
+      - 'web/**'               # GitHub Pages content
       - '.github/workflows/latex-build-deploy.yml'
-      # Note: Makefile changes alone won't trigger - wait for docker rebuild
-      # This prevents double-triggering when Dockerfiles change
+      # Makefile excluded on push - wait for docker workflow_run to avoid double trigger
+      # Docker changes trigger docker-build, which then triggers this via workflow_run
   pull_request:
     branches: [ main ]
     paths:
-      - 'src/tex/**'
-      - 'Makefile'
-      - 'web/**'
+      - 'src/tex/**'           # LaTeX source files
+      - 'scripts/**'           # Build and verification scripts
+      - 'Makefile'             # Build configuration (included in PRs for testing)
+      - 'web/**'               # GitHub Pages content
       - '.github/workflows/latex-build-deploy.yml'
   workflow_dispatch:
   # Run after Docker images are built to ensure we use the latest images

@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **.github/WORKFLOW_TRIGGERS.md** - Comprehensive documentation explaining when each workflow runs
+  - Quick reference table
+  - Detailed trigger explanations for each workflow
+  - Path filter patterns and why they're used
+  - Workflow dependency diagram
+  - Common scenarios and examples
+  - Testing and debugging guide
 - **.hadolint.yaml** - Hadolint configuration for Dockerfile linting standards
 - **.markdownlint.yaml** - Markdownlint configuration for documentation consistency
   - Enforces consistent heading styles, list formatting, code block styles
@@ -65,7 +72,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Quoted command substitution in COSIGN_ARCH assignment
   - Quoted variables in case statement and curl URL
 
+### Removed
+- **.github/workflows/sign-pdf.yml** - Deleted deprecated workflow
+  - PDF signing is now integrated into latex-build-deploy.yml (happens before deployment)
+  - Removes duplicate workflow and simplifies CI/CD pipeline
+
 ### Changed
+- **Workflow triggers optimized** - All workflows now use smart path filtering
+  - **docker-build.yml**: Added `.hadolint.yaml` to triggers (linting config affects builds)
+  - **latex-build-deploy.yml**: Added `scripts/**` to triggers, clarified Makefile exclusion on push
+  - **codeql.yml**: Added linting config files (`.markdownlint.yaml`, `.markdownlintignore`, `.hadolint.yaml`)
+  - All path filters documented with inline comments explaining each choice
+  - When linting configs change, workflows re-validate all files with new rules
+  - See `.github/WORKFLOW_TRIGGERS.md` for complete trigger documentation
 - **Security Scanning workflow** - Renamed to "Code Quality & Security Scanning"
   - Now includes markdownlint for documentation quality
   - Expanded path triggers to include markdown files and docs/

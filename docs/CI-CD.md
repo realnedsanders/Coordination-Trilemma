@@ -5,6 +5,13 @@
 
 This document explains the CI/CD workflow architecture for the Coordination Trilemma project.
 
+**See also:**
+- [WORKFLOW_TRIGGERS.md](../.github/WORKFLOW_TRIGGERS.md) - When workflows run and why (path filters, triggers, scenarios)
+- [BUILD.md](BUILD.md) - Local build instructions
+- [SECURITY.md](../.github/SECURITY.md) - Security verification and artifact signing
+- [TROUBLESHOOTING.md](TROUBLESHOOTING.md) - Common CI/CD issues
+- [SLSA_ROADMAP.md](SLSA_ROADMAP.md) - Path to SLSA Build Level 4
+
 ## Overview
 
 The project uses GitHub Actions with three main workflows:
