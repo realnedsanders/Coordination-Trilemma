@@ -1,0 +1,14 @@
+# Markdownlint ignore patterns
+# Files and directories to exclude from markdown linting
+
+# Git directory
+.git/
+
+# Dependencies
+node_modules/
+
+# Build outputs
+build/
+
+# Third-party files (if any)
+# vendor/
