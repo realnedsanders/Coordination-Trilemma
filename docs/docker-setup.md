@@ -1,8 +1,11 @@
 # Docker Setup for LaTeX Compilation
 
+**Last Updated:** 2025-11-17
+**Audience:** Builders
+
 ## What This Does
 
-This setup lets you compile your LaTeX paper **without installing LaTeX** on your computer. Everything runs inside a Docker container with a complete TeX Live distribution.
+This setup lets you compile your LaTeX paper **without installing LaTeX** on your computer. Everything runs inside a Docker container with our custom Alpine-based TeX Live distribution (~500MB-1GB, much smaller than full TeX Live ~4-5GB).
 
 ## Installation
 
@@ -87,11 +90,12 @@ This:
 
 ## Advantages
 
-✅ **No local installation** - LaTeX stack is ~4-6GB, Docker handles it  
-✅ **Consistent environment** - Same version everywhere  
-✅ **Isolated** - Won't conflict with other software  
-✅ **Easy updates** - `docker pull texlive/texlive:latest`  
-✅ **Works offline** - After first pull, no internet needed  
+✅ **No local installation** - Full LaTeX is ~4-6GB, our custom image is only ~500MB-1GB
+✅ **Consistent environment** - Same version everywhere (automatically built and signed)
+✅ **Isolated** - Won't conflict with other software
+✅ **Optimized** - Contains only the packages this document needs
+✅ **Secure** - Cryptographically signed with Cosign, includes SLSA provenance
+✅ **Works offline** - After first pull, no internet needed
 
 ## Docker Image Details
 
@@ -214,27 +218,44 @@ make local
 
 ## CI/CD Docker Images
 
-This project uses two custom Alpine-based images for CI/CD:
+This project uses two custom Alpine-based images for CI/CD, eliminating the need to install tools during CI runs:
 
 ### 1. LaTeX Build Image
 **Image:** `ghcr.io/realnedsanders/coordination-trilemma/latex:latest`
-- Used for: Document compilation and linting
-- Contains: TeXLive and ChkTeX
-- Size: ~500MB-1GB
+- **Purpose:** Document compilation and linting
+- **Contents:** TeXLive (minimal), ChkTeX, make, git, perl
+- **Size:** ~500MB-1GB (much smaller than full TeXLive ~4-5GB)
+- **Base:** Alpine Linux edge
+- **Packages:**
+  - `texlive` (core)
+  - `texlive-latexextra` (amsart, extended LaTeX)
+  - `texlive-bibtexextra` (bibliography support)
+  - `texlive-latexrecommended` (common packages)
+  - `texlive-pictures` (graphics support)
 
 ### 2. Security Tools Image
-**Image:** `ghcr.io/realnedsanders/coordination-trilemma/security-tools:latest`
-- Used for: Signing artifacts with Cosign
-- Contains: Cosign, curl, git, bash
-- Size: ~50MB
+**Image:** `ghcr.io/realnedsanders/coordination-trilemma/security:latest`
+- **Purpose:** Signing artifacts with Cosign
+- **Contents:** Cosign, curl, git, bash, coreutils
+- **Size:** ~50-100MB
+- **Base:** Alpine Linux
+
+### Security Features
 
 Both images are:
-- ✅ Automatically built on every Dockerfile change
-- ✅ Signed with Cosign (keyless)
-- ✅ Include SLSA provenance and SBOM
-- ✅ Published to GitHub Container Registry
+- ✅ **Automatically built** on every Dockerfile change
+- ✅ **Cryptographically signed** with Cosign (keyless via Sigstore)
+- ✅ **Provenance included** - SLSA provenance attestations
+- ✅ **SBOM generated** - Software Bill of Materials
+- ✅ **Vulnerability scanned** - Trivy scanning in CI
+- ✅ **Published to GHCR** - GitHub Container Registry
 
-This eliminates the need to install tools during CI runs, resulting in faster builds and consistent environments.
+### Benefits
+
+- **Faster CI builds:** No tool installation during runs
+- **Consistent environments:** Exact same tools every time
+- **Security:** Signed and auditable
+- **Efficiency:** Minimal size, only what's needed
 
 ## Need Help?
 

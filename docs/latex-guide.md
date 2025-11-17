@@ -1,21 +1,27 @@
 # LaTeX Compilation Guide for Coordination Trilemma
 
-## Files Created
+**Last Updated:** 2025-11-17
+**Audience:** Builders, Developers
 
-### Main Files
+This guide covers LaTeX compilation details for building the Coordination Trilemma paper.
+
+## Project Structure
+
+### LaTeX Source Files (`src/tex/`)
 - `main.tex` - Main LaTeX document that includes all sections
-- `main-article.tex` - The main article content (converted from README.md)
+- `main-article.tex` - The main article content
+- `glossary.tex` - Glossary definitions
 - `references.bib` - BibTeX bibliography file
+- `appendices/` - Directory containing all appendices:
+  - `appendix-a.tex` - Why No Alternative Path Exists
+  - `appendix-b.tex` - Formal Mathematical Foundations
+  - `appendix-c.tex` - Defense Mechanisms for Voluntary Coordination
+  - `appendix-d.tex` - The Closing Window - Synthetic Media Evidence
 
-### Appendices
-- `appendix-a.tex` - Appendix A: Why No Alternative Path Exists
-- `appendix-b.tex` - Appendix B: Formal Mathematical Foundations
-- `appendix-c.tex` - Appendix C: Defense Mechanisms for Voluntary Coordination
-- `appendix-d.tex` - Appendix D: The Closing Window - Synthetic Media Evidence
-
-### Utilities
-- `Makefile` - Build automation
-- `md_to_latex.py` - Markdown to LaTeX conversion script
+### Build System
+- `Makefile` - Build automation (at repository root)
+- `scripts/generate-build-info.sh` - Build provenance generation
+- `docker/Dockerfile.latex` - Custom Alpine-based LaTeX image
 
 ## Quick Start
 
@@ -29,21 +35,20 @@
 ### First Time Setup
 
 ```bash
-# Download the LaTeX Docker image (only needed once, ~2GB)
+# Download our custom Alpine LaTeX image (only needed once, ~500MB-1GB)
 make docker-pull
 
 # Build your PDF
 make
 ```
 
+The PDF will be generated at `main.pdf` in the repository root.
+
 ### Common Commands
 
 ```bash
 # Build PDF (uses Docker by default)
 make
-
-# Quick build (no bibliography update)
-make quick
 
 # View the generated PDF
 make view
@@ -56,7 +61,12 @@ make cleanall
 
 # Get help
 make help
+
+# Interactive Docker shell for debugging
+make shell
 ```
+
+**Note:** All builds automatically include bibliography processing. There's no separate "quick" build target.
 
 ### Alternative: Local LaTeX Installation
 
@@ -72,15 +82,37 @@ make local
 If you prefer to run Docker commands directly:
 
 ```bash
-# Pull the image first
-docker pull texlive/texlive:latest
+# Pull our custom image first
+docker pull ghcr.io/realnedsanders/coordination-trilemma/latex:latest
 
-# Compile (run from project directory)
-docker run --rm -v $(pwd):/workdir -w /workdir texlive/texlive:latest pdflatex main
-docker run --rm -v $(pwd):/workdir -w /workdir texlive/texlive:latest bibtex main
-docker run --rm -v $(pwd):/workdir -w /workdir texlive/texlive:latest pdflatex main
-docker run --rm -v $(pwd):/workdir -w /workdir texlive/texlive:latest pdflatex main
+# Compile (run from project root directory)
+docker run --rm \
+  -v $(pwd):/workdir \
+  -w /workdir/src/tex \
+  ghcr.io/realnedsanders/coordination-trilemma/latex:latest \
+  pdflatex main
+
+docker run --rm \
+  -v $(pwd):/workdir \
+  -w /workdir/src/tex \
+  ghcr.io/realnedsanders/coordination-trilemma/latex:latest \
+  bibtex main
+
+# Run pdflatex twice more for cross-references
+docker run --rm \
+  -v $(pwd):/workdir \
+  -w /workdir/src/tex \
+  ghcr.io/realnedsanders/coordination-trilemma/latex:latest \
+  pdflatex main
+
+docker run --rm \
+  -v $(pwd):/workdir \
+  -w /workdir/src/tex \
+  ghcr.io/realnedsanders/coordination-trilemma/latex:latest \
+  pdflatex main
 ```
+
+The PDF will be generated in `src/tex/` and needs to be moved to root manually.
 
 ## Document Structure
 
@@ -88,22 +120,23 @@ The document uses the `amsart` class (American Mathematical Society article styl
 
 ### Main Structure
 ```
-main.tex
+src/tex/main.tex
 ├── Preamble (packages, theorem environments, metadata)
 ├── Abstract
 ├── Table of Contents
 ├── main-article.tex (Sections 1-9)
-├── appendix-a.tex
-├── appendix-b.tex
-├── appendix-c.tex
-├── appendix-d.tex
+├── appendices/
+│   ├── appendix-a.tex
+│   ├── appendix-b.tex
+│   ├── appendix-c.tex
+│   └── appendix-d.tex
 └── Bibliography (from references.bib)
 ```
 
 ## Customization
 
 ### Author Information
-Edit the following lines in `main.tex`:
+Edit the following lines in `src/tex/main.tex`:
 ```latex
 \author{Your Name}
 \address{Your Institution}
@@ -111,12 +144,12 @@ Edit the following lines in `main.tex`:
 ```
 
 ### Title or Abstract
-Modify directly in `main.tex`.
+Modify directly in `src/tex/main.tex`.
 
 ### Adding Citations
-1. Add entries to `references.bib` in BibTeX format
+1. Add entries to `src/tex/references.bib` in BibTeX format
 2. Cite in text using `\cite{key}`
-3. Recompile with bibliography processing
+3. Recompile (bibliography processing is automatic with `make`)
 
 Example:
 ```latex
@@ -127,7 +160,8 @@ As shown by \cite{kahneman1979prospect}, ...
 
 ### Docker Method (Recommended)
 - **Docker** - That's it! Everything else is in the container
-- The Docker image includes a complete TeX Live distribution with all packages
+- Our custom Alpine-based image includes minimal TeX Live with required packages only (~500MB-1GB)
+- Much smaller and faster than full TeX Live (~4-5GB)
 
 ### Local Method (Alternative)
 If you choose to compile locally (`make local`):
@@ -142,10 +176,13 @@ If you choose to compile locally (`make local`):
 
 ### Docker Issues
 
-**Docker image too large:**
-- The texlive/texlive image is ~2GB (contains full TeX Live)
-- Alternative: Use `texlive/texlive:latest-small` (edit Makefile line 10)
-- Smaller image may be missing some packages
+**Need additional LaTeX packages:**
+- Our custom image is optimized (~500MB-1GB) and includes packages needed for this document
+- If you add packages not in the custom image, use the full TeXLive image:
+  ```bash
+  DOCKER_IMAGE=texlive/texlive:latest make
+  ```
+- The full image is ~4-5GB but includes all TeX packages
 
 **Permission errors on generated files:**
 - Docker runs as root, files may be owned by root
@@ -157,15 +194,15 @@ If you choose to compile locally (`make local`):
 - Make sure Docker daemon is running
 
 **Slow compilation:**
-- First run downloads the image (one-time ~5 min)
-- Subsequent builds are fast
-- Use `make quick` for faster incremental builds
+- First run downloads the image (one-time, ~500MB-1GB download)
+- Subsequent builds are much faster (no download needed)
+- Compilation itself takes ~30-60 seconds depending on your system
 
 ### LaTeX Issues
 
 **Bibliography not appearing:**
-- Make sure you run the full `make` (not `make quick`)
-- Check that `references.bib` is in the same directory
+- The full `make` automatically processes the bibliography
+- Check that `src/tex/references.bib` exists and has valid BibTeX entries
 
 **Citations showing as [?]:**
 - Run the full compilation: `make clean && make`
@@ -260,23 +297,26 @@ Pandoc is great for quick conversions, but for a formal mathematics paper going 
 
 ## Docker Image Details
 
-The Makefile uses `texlive/texlive:latest` which provides:
-- Complete TeX Live distribution
-- All common LaTeX packages pre-installed
-- pdflatex, bibtex, and related tools
-- Regular updates from the TeX Live team
+**Default Image:** `ghcr.io/realnedsanders/coordination-trilemma/latex:latest`
+
+This custom Alpine-based image provides:
+- Minimal TeX Live distribution with required packages only
+- **Size:** ~500MB-1GB (much smaller than full TeX Live)
+- **Base:** Alpine Linux edge
+- **Packages:** texlive, texlive-latexextra, texlive-bibtexextra, texlive-latexrecommended, texlive-pictures
+- **Tools:** pdflatex, bibtex, ChkTeX (linting), make, git, perl
+- **Updates:** Automatically rebuilt and signed when Dockerfile changes
+- **Security:** Cryptographically signed with Cosign, includes SLSA provenance
 
 ### Alternative Images
 
-Edit line 10 of the Makefile to use a different image:
+To use the full TeXLive image (~4-5GB with all packages):
 
-```makefile
-# Smaller image (~400MB vs 2GB)
-DOCKER_IMAGE = texlive/texlive:latest-small
-
-# Or use a specific year
-DOCKER_IMAGE = texlive/texlive:TL2023-historic
+```bash
+DOCKER_IMAGE=texlive/texlive:latest make
 ```
+
+The custom image is defined in `docker/Dockerfile.latex` and optimized for this specific document.
 
 ## Advanced Usage
 
@@ -296,29 +336,31 @@ cat main.log
 
 ### Building in CI/CD
 
-The Docker approach works great in CI/CD pipelines:
+This project uses GitHub Actions with our custom Docker image. The Makefile automatically detects CI environments and uses local compilation (since it's already inside a container).
 
-```yaml
-# Example GitHub Actions workflow
-- name: Build PDF
-  run: |
-    docker pull texlive/texlive:latest
-    make
-    
-- name: Upload PDF
-  uses: actions/upload-artifact@v3
-  with:
-    name: paper
-    path: main.pdf
-```
+See [CI/CD.md](CI/CD.md) for complete workflow documentation.
+
+**Key points:**
+- CI runs inside the `ghcr.io/realnedsanders/coordination-trilemma/latex:latest` container
+- Makefile sets `COMPILE_METHOD=local` when `GITHUB_ACTIONS` env var is set
+- Git provenance is automatically embedded in the PDF
+- PDF is cryptographically signed before deployment
 
 ### Custom Docker Image
 
-If you need additional packages, create a custom Dockerfile:
+Our custom image is defined in `docker/Dockerfile.latex`. To modify it:
 
+1. Edit `docker/Dockerfile.latex`
+2. Push changes to trigger automatic rebuild
+3. GitHub Actions will build, sign, and publish the new image
+4. Subsequent builds will use the updated image
+
+To add TeXLive packages:
 ```dockerfile
-FROM texlive/texlive:latest
-RUN tlmgr install <package-name>
+# In docker/Dockerfile.latex
+RUN apk add --no-cache \
+    texlive \
+    texlive-yourpackage
 ```
 
-Then update the Makefile to use your custom image.
+**Note:** Changes to Dockerfiles trigger a full rebuild cycle before document builds run.

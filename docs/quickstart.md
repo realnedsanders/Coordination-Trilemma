@@ -1,5 +1,10 @@
 # Quick Start Guide
 
+**Last Updated:** 2025-11-17
+**Audience:** New Users
+
+Get the Coordination Trilemma PDF built in 2 steps.
+
 ## 🚀 Get Your PDF in 2 Steps
 
 ### Step 1: Install Docker
@@ -17,14 +22,16 @@ sudo sh get-docker.sh
 
 ### Step 2: Build Your Paper
 ```bash
-# Download LaTeX image (only needed once, ~2GB)
+# Download our custom LaTeX image (only needed once, ~500MB-1GB)
 make docker-pull
 
 # Generate PDF
 make
 
-# Done! Your PDF is ready: main.pdf
+# Done! Your PDF is ready at: main.pdf
 ```
+
+The PDF is generated at the repository root as `main.pdf`.
 
 ## 📖 Common Commands
 
@@ -38,11 +45,12 @@ make help         # Show all available commands
 
 ## 🎯 What You Get
 
-- **main.pdf** - Your complete paper with all sections and appendices
+- **main.pdf** - Complete paper with all sections and appendices (at repository root)
 - Professional mathematical typesetting (amsart class)
 - Proper bibliography with BibTeX
 - Numbered theorems and cross-references
-- Ready for SocArXiv submission
+- Embedded build provenance (git commit, date, platform)
+- Cryptographically signed (when built in CI)
 
 ## 🔧 Customization
 
@@ -97,7 +105,8 @@ sudo chown -R $USER:$USER .
 
 1. Customize author information in `src/tex/main.tex`
 2. Run `make` to generate your PDF
-3. Review the output in `build/main.pdf`
-4. Share your research!
+3. Review the output at `main.pdf` (repository root)
+4. Verify signatures: `./scripts/verify-signatures.sh`
+5. Share your research at enlightenment.dev!
 
 For detailed documentation, see [BUILD.md](BUILD.md).

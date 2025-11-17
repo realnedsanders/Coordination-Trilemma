@@ -1,6 +1,15 @@
 # Build Documentation
 
+**Last Updated:** 2025-11-17
+**Audience:** Builders, Developers
+
 This document contains technical information for building and developing the Coordination Trilemma LaTeX document.
+
+**See also:**
+- [Quick Start Guide](quickstart.md) - For first-time users
+- [Docker Setup](docker-setup.md) - Docker installation and configuration
+- [LaTeX Guide](latex-guide.md) - LaTeX-specific details
+- [TROUBLESHOOTING.md](TROUBLESHOOTING.md) - Common issues and solutions
 
 ## 🚀 Quick Start
 

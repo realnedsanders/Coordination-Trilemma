@@ -1,5 +1,7 @@
 # Coordination Trilemma - Documentation
 
+**Last Updated:** 2025-11-17
+
 This directory contains all technical and development documentation for the Coordination Trilemma project.
 
 ## Documentation Index
@@ -8,31 +10,57 @@ This directory contains all technical and development documentation for the Coor
 - **[Main README](../README.md)** - Overview of the paper's content and arguments
 
 ### For Builders
+- **[Quick Start Guide](quickstart.md)** - Get started quickly (new users start here!)
 - **[BUILD.md](BUILD.md)** - Complete build instructions and project structure
-- **[Quick Start Guide](quickstart.md)** - Get started quickly with building the PDF
-- **[LaTeX Guide](latex-guide.md)** - LaTeX compilation details and troubleshooting
-- **[Docker Setup](docker-setup.md)** - Docker-specific instructions
+- **[LaTeX Guide](latex-guide.md)** - LaTeX compilation details
+- **[Docker Setup](docker-setup.md)** - Docker installation and configuration
+- **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)** - Common issues and solutions
+
+### For Contributors & Maintainers
+- **[CONTRIBUTING.md](../CONTRIBUTING.md)** - How to contribute to the project
+- **[CI-CD.md](CI-CD.md)** - Workflow architecture and debugging
+- **[CHANGELOG.md](../CHANGELOG.md)** - Project history and changes
 
 ### For Security & Verification
 - **[SECURITY.md](SECURITY.md)** - Security documentation and artifact verification
 - **[SLSA Roadmap](SLSA_ROADMAP.md)** - Path to SLSA Build Level 4
 
-## Quick Links
+### Planning & Historical
+- **[CLEANUP_AND_SLSA4_PLAN.md](CLEANUP_AND_SLSA4_PLAN.md)** - Repository reorganization plan (Part 1 completed)
 
-**Building the PDF:**
+## Quick Reference
+
+### First Time Setup
 ```bash
+# 1. Install Docker (one-time)
+# macOS: brew install --cask docker
+# Linux: curl -fsSL https://get.docker.com | sh
+
+# 2. Build PDF
 make docker-pull
 make
+
+# Done! PDF at: main.pdf
 ```
 
-**Verifying Signatures:**
+### Common Commands
 ```bash
-./scripts/verify-signatures.sh
+make                    # Build PDF
+make view              # Open PDF
+make clean             # Clean build files
+make help              # Show all commands
 ```
 
-**Published Version:**
-- Landing page: https://enlightenment.dev
-- Direct PDF: https://enlightenment.dev/main.pdf
+### Getting Help
+1. Check [TROUBLESHOOTING.md](TROUBLESHOOTING.md) for common issues
+2. Read relevant guide (BUILD, Docker, LaTeX)
+3. Search [GitHub Issues](https://github.com/realnedsanders/Coordination-Trilemma/issues)
+4. Open new issue if needed
+
+### Published Version
+- **Landing page:** https://enlightenment.dev
+- **Direct PDF:** https://enlightenment.dev/main.pdf
+- **Verify:** `./scripts/verify-signatures.sh`
 
 ## Contributing
 

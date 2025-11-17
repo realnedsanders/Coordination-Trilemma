@@ -109,7 +109,15 @@ This project achieves **SLSA Build Level 3** with cryptographically signed artif
 # Download and verify
 curl -O https://enlightenment.dev/main.pdf
 curl -O https://enlightenment.dev/main.pdf.cosign.bundle
+
+# Verify using our script
 ./scripts/verify-signatures.sh
+
+# Or verify manually with cosign
+cosign verify-blob --bundle main.pdf.cosign.bundle \
+  --certificate-identity-regexp="^https://github.com/realnedsanders/Coordination-Trilemma" \
+  --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
+  main.pdf
 ```
 
 See [docs/SECURITY.md](docs/SECURITY.md) for complete security documentation.
