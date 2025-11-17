@@ -55,9 +55,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        dockerfile:
-          - docker/Dockerfile.latex
-          - docker/Dockerfile.security
+        include:
+          - dockerfile: docker/Dockerfile.latex
+            name: latex
+          - dockerfile: docker/Dockerfile.security
+            name: security
 
     steps:
       - name: Checkout code
@@ -69,15 +71,15 @@ jobs:
           dockerfile: ${{ matrix.dockerfile }}
           failure-threshold: warning
           format: sarif
-          output-file: hadolint-results-${{ matrix.dockerfile }}.sarif
+          output-file: hadolint-results-${{ matrix.name }}.sarif
           no-fail: false
 
       - name: Upload Hadolint results to GitHub Security
         uses: github/codeql-action/upload-sarif@v4
         if: always()
         with:
-          sarif_file: hadolint-results-${{ matrix.dockerfile }}.sarif
-          category: hadolint-${{ matrix.dockerfile }}
+          sarif_file: hadolint-results-${{ matrix.name }}.sarif
+          category: hadolint-${{ matrix.name }}
 
       - name: Show readable output
         if: failure()
@@ -90,7 +92,7 @@ jobs:
         if: always()
         run: |
           echo "### Hadolint Results for ${{ matrix.dockerfile }}" >> $GITHUB_STEP_SUMMARY
-          if [ -f "hadolint-results-${{ matrix.dockerfile }}.sarif" ]; then
+          if [ -f "hadolint-results-${{ matrix.name }}.sarif" ]; then
             echo "✅ Scan completed" >> $GITHUB_STEP_SUMMARY
           else
             echo "⚠️ Scan had issues" >> $GITHUB_STEP_SUMMARY

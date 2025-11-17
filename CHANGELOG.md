@@ -45,6 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Kept ShellCheck (for shell scripts) and Hadolint (for Dockerfiles)
   - Updated Hadolint to use CodeQL Action v4 (v3 deprecated December 2026)
   - Changed to matrix strategy to scan each Dockerfile separately with better error reporting
+  - Fixed SARIF output file paths (was creating `docker/Dockerfile.latex.sarif` directories)
   - Added readable output step that shows issues on failure
   - Added job summaries for better visibility
 - **Hadolint configuration** - Created `.hadolint.yaml` to configure Dockerfile linting
