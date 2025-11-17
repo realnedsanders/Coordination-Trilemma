@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **.github/ISSUE_TEMPLATE/config.yml** - Issue template configuration with contact links
   - **Repository badges** - Build status, SLSA level, licenses, PDF download in README.md
   - **.github/workflows/release.yml** - Automated GitHub Releases on version tags
-  - **.github/workflows/codeql.yml** - Security scanning with CodeQL, ShellCheck, and Hadolint
+  - **.github/workflows/codeql.yml** - Security scanning with ShellCheck (shell scripts) and Hadolint (Dockerfiles)
 
 - **LICENSE** file with dual licensing explanation (CC-BY 4.0 for paper, AGPLv3 for software)
 - **CONTRIBUTING.md** - Comprehensive 350+ line contribution guide
@@ -38,6 +38,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Dependabot configuration** - Reduced Docker ecosystem checks to monthly (from weekly) to avoid rate limits
   - Reduced open PR limit from 3 to 2
   - Added grouping for Alpine updates
+- **Security scanning workflow** - Removed CodeQL analysis job (CodeQL doesn't support shell scripts)
+  - Renamed workflow from "CodeQL Security Scan" to "Security Scanning"
+  - Kept ShellCheck (for shell scripts) and Hadolint (for Dockerfiles)
+  - Updated Hadolint to use CodeQL Action v4 (v3 deprecated December 2026)
+  - Added job summaries for better visibility
 
 ### Changed
 - **SECURITY.md location** - Moved to .github/SECURITY.md for GitHub auto-detection
