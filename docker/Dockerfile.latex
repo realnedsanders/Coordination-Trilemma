@@ -42,7 +42,9 @@ RUN apk add --no-cache \
     texlive-latexrecommended \
     texlive-pictures \
     # Perl for BibTeX (required by bibtex)
-    perl
+    perl \
+    # gnumake
+    make
 
 # Set working directory
 WORKDIR /workdir

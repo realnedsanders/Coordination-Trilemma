@@ -47,7 +47,7 @@ make help         # Show all available commands
 ## 🔧 Customization
 
 ### Add Your Name
-Edit `main.tex` lines 33-35:
+Edit `src/tex/main.tex` (author section):
 ```latex
 \author{Your Name Here}
 \address{Your Institution}
@@ -55,9 +55,9 @@ Edit `main.tex` lines 33-35:
 ```
 
 ### Edit Content
-- Main article: `main-article.tex`
-- Appendices: `appendix-a.tex` through `appendix-d.tex`
-- Bibliography: `references.bib`
+- Main article: `src/tex/main-article.tex`
+- Appendices: `src/tex/appendices/appendix-a.tex` through `appendix-d.tex`
+- Bibliography: `src/tex/references.bib`
 
 ### Rebuild After Changes
 ```bash
@@ -83,7 +83,7 @@ sudo chown -R $USER:$USER .
 ```
 
 **Want more details?**
-- See `LATEX_README.md` for comprehensive documentation
+- See [BUILD.md](BUILD.md) for comprehensive documentation
 - Run `make help` for all available commands
 
 ## 🎓 Why This Setup?
@@ -95,9 +95,9 @@ sudo chown -R $USER:$USER .
 
 ## Next Steps
 
-1. Customize author information in `main.tex`
+1. Customize author information in `src/tex/main.tex`
 2. Run `make` to generate your PDF
-3. Review the output in `main.pdf`
-4. Submit to SocArXiv!
+3. Review the output in `build/main.pdf`
+4. Share your research!
 
-For detailed documentation, see `LATEX_README.md`.
+For detailed documentation, see [BUILD.md](BUILD.md).
