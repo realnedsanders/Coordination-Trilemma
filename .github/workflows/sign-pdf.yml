@@ -2,7 +2,7 @@ name: Sign PDF Artifact
 
 on:
   workflow_run:
-    workflows: ["LaTeX CI"]
+    workflows: ["LaTeX Build & Deploy"]
     types:
       - completed
     branches: [main]
@@ -22,6 +22,7 @@ jobs:
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
+      options: --pull always
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     steps:

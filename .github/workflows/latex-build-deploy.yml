@@ -1,11 +1,27 @@
-name: LaTeX CI
+name: LaTeX Build & Deploy
 
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'src/tex/**'
+      - 'Makefile'
+      - 'web/**'
+      - '.github/workflows/latex-build-deploy.yml'
   pull_request:
     branches: [ main ]
+    paths:
+      - 'src/tex/**'
+      - 'Makefile'
+      - 'web/**'
+      - '.github/workflows/latex-build-deploy.yml'
   workflow_dispatch:
+  # Run after Docker images are built to ensure we use the latest images
+  workflow_run:
+    workflows: ["Build Docker Images"]
+    types:
+      - completed
+    branches: [main]
 
 # Sets permissions for GitHub Pages deployment
 permissions:
@@ -27,6 +43,7 @@ jobs:
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
+      options: --pull always
 
     steps:
       - name: Checkout code
@@ -56,21 +73,19 @@ jobs:
     name: Build PDF
     runs-on: ubuntu-latest
     needs: lint
+    container:
+      image: ghcr.io/realnedsanders/coordination-trilemma/latex:latest
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+      options: --pull always
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Build PDF
         run: make all
-        # Uses custom Alpine image by default (set in Makefile)
         env:
           BUILD_USER: "GitHub Actions"
           BUILD_HOST: "github.com"
