@@ -137,17 +137,3 @@ make view
 ```
 
 See [docs/BUILD.md](docs/BUILD.md) for complete build instructions.
-
-## License
-
-See the [LICENSE](LICENSE) file for details.
-
-## Contributing
-
-This is an academic paper under active development. We welcome:
-- Corrections to mathematical proofs or logical errors
-- Additional historical evidence or counterexamples
-- Clarifications of ambiguous statements
-- References to relevant literature
-
-Please open an issue or submit a pull request. Changes to the main argument require substantial justification.
