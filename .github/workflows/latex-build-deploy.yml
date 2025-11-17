@@ -5,9 +5,10 @@ on:
     branches: [ main ]
     paths:
       - 'src/tex/**'
-      - 'Makefile'
       - 'web/**'
       - '.github/workflows/latex-build-deploy.yml'
+      # Note: Makefile changes alone won't trigger - wait for docker rebuild
+      # This prevents double-triggering when Dockerfiles change
   pull_request:
     branches: [ main ]
     paths:
@@ -75,6 +76,10 @@ jobs:
     name: Build PDF
     runs-on: ubuntu-latest
     needs: lint
+    # Skip if triggered by a failed workflow_run
+    if: |
+      github.event_name != 'workflow_run' ||
+      github.event.workflow_run.conclusion == 'success'
     container:
       image: ghcr.io/realnedsanders/coordination-trilemma/latex:latest
       credentials:
@@ -164,12 +169,14 @@ jobs:
             exit 1
           fi
 
-  # Sign PDF with Cosign (only on main branch)
+  # Sign PDF with Cosign (only on main branch pushes or after successful docker builds)
   sign:
     name: Sign PDF with Cosign
     runs-on: ubuntu-latest
     needs: build
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: |
+      (github.event_name == 'push' && github.ref == 'refs/heads/main') ||
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')
     container:
       image: ghcr.io/realnedsanders/coordination-trilemma/security:latest
       credentials:
@@ -221,12 +228,14 @@ jobs:
           echo "  --certificate-oidc-issuer=https://token.actions.githubusercontent.com \\"
           echo "  main.pdf"
 
-  # Deploy to GitHub Pages (only on main branch)
+  # Deploy to GitHub Pages (only on main branch pushes or after successful docker builds)
   deploy:
     name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
     needs: sign
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: |
+      (github.event_name == 'push' && github.ref == 'refs/heads/main') ||
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')
 
     environment:
       name: github-pages
