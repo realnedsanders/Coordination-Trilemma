@@ -44,7 +44,9 @@ RUN apk add --no-cache \
     # Perl for BibTeX (required by bibtex)
     perl \
     # gnumake
-    make
+    make \
+    # Git for build provenance
+    git
 
 # Set working directory
 WORKDIR /workdir

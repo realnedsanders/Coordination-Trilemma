@@ -85,6 +85,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full git history for accurate build info
+
+      - name: Configure git safe directory
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git config --global --add safe.directory "$(pwd)"
 
       - name: Build PDF
         run: make all

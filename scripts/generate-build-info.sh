@@ -5,11 +5,27 @@
 OUTPUT_FILE="build-info.tex"
 
 # Get git information
-GIT_COMMIT_HASH=$(git rev-parse HEAD 2>/dev/null || echo "unknown")
-GIT_COMMIT_SHORT=$(git rev-parse --short HEAD 2>/dev/null || echo "unknown")
-GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "unknown")
-GIT_TAG=$(git describe --tags --exact-match 2>/dev/null || echo "")
-GIT_DIRTY=$(git diff --quiet 2>/dev/null || echo "-dirty")
+# Check if we're in a git repository first
+if git rev-parse --git-dir >/dev/null 2>&1; then
+    GIT_COMMIT_HASH=$(git rev-parse HEAD 2>/dev/null || echo "unknown")
+    GIT_COMMIT_SHORT=$(git rev-parse --short HEAD 2>/dev/null || echo "unknown")
+    GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "unknown")
+    GIT_TAG=$(git describe --tags --exact-match 2>/dev/null || echo "")
+
+    # Check if working tree is dirty (has uncommitted changes)
+    if git diff --quiet 2>/dev/null && git diff --cached --quiet 2>/dev/null; then
+        GIT_DIRTY=""
+    else
+        GIT_DIRTY="-dirty"
+    fi
+else
+    # Not a git repository
+    GIT_COMMIT_HASH="unknown"
+    GIT_COMMIT_SHORT="unknown"
+    GIT_BRANCH="unknown"
+    GIT_TAG=""
+    GIT_DIRTY=""
+fi
 
 # Get build information
 BUILD_DATE=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
