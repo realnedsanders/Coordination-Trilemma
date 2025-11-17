@@ -450,6 +450,83 @@ ls -lh main.pdf
 - Quick reference table
 - "If all else fails" section
 
+## Automated Linting
+
+This project uses **markdownlint** to enforce documentation standards automatically.
+
+### Configuration
+
+Linting rules are defined in `.markdownlint.yaml` at the repository root:
+
+**Key rules:**
+- **Line length**: 120 characters (reasonable for documentation)
+- **Heading style**: ATX-style (`#` not underlined)
+- **List markers**: Use `-` for unordered lists
+- **Code blocks**: Must specify language (` ```bash` not ` ``` `)
+- **Proper names**: Correct capitalization (GitHub, Docker, LaTeX, SLSA)
+- **HTML**: Allowed elements like `<br>`, `<img>`, `<table>` for badges and formatting
+
+### Running Locally
+
+Test your markdown before committing:
+
+```bash
+# Using Docker (recommended)
+docker run --rm -v "$(pwd)":/workdir \
+  ghcr.io/igorshubovych/markdownlint-cli:latest \
+  --config .markdownlint.yaml \
+  docs/*.md
+
+# Or install markdownlint-cli globally
+npm install -g markdownlint-cli
+markdownlint --config .markdownlint.yaml docs/*.md
+```
+
+### Common Issues
+
+**Line too long:**
+```markdown
+# Bad
+This is a very long line that exceeds the 120 character limit and will trigger a markdownlint warning about line length.
+
+# Good
+This is a very long line that exceeds the 120 character limit and will trigger
+a markdownlint warning about line length.
+```
+
+**Missing code block language:**
+```markdown
+# Bad
+​```
+make
+​```
+
+# Good
+​```bash
+make
+​```
+```
+
+**Inconsistent list markers:**
+```markdown
+# Bad
+* Item 1
+- Item 2
+
+# Good
+- Item 1
+- Item 2
+```
+
+### CI Integration
+
+Markdownlint runs automatically on:
+- Every push to main
+- Every pull request
+- Weekly schedule
+
+Failed linting will block PRs until fixed.
+
 ## Review Checklist
 
 Before committing documentation:
@@ -463,6 +540,7 @@ Before committing documentation:
 - [ ] Examples are copy-pasteable
 - [ ] Consistent with this style guide
 - [ ] Renders correctly in GitHub
+- [ ] **Passes markdownlint** (`markdownlint --config .markdownlint.yaml <file>.md`)
 
 ## Maintenance
 

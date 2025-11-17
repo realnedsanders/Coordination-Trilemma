@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - **.hadolint.yaml** - Hadolint configuration for Dockerfile linting standards
+- **.markdownlint.yaml** - Markdownlint configuration for documentation consistency
+  - Enforces consistent heading styles, list formatting, code block styles
+  - Line length limit of 120 characters
+  - Allows necessary HTML elements for badges and formatting
+  - Enforces proper capitalization of technical terms (GitHub, Docker, LaTeX, etc.)
+- **.markdownlintignore** - Exclude patterns for markdown linting
+- **Markdownlint job** - Added to Code Quality & Security Scanning workflow
+  - Scans all markdown files for consistency and best practices
+  - Runs on pushes, PRs, and weekly schedule
+  - Provides clear feedback on documentation quality
 
 - **GitHub Community & Best Practices:**
   - **CODE_OF_CONDUCT.md** - Contributor Covenant 2.1 with academic discourse addendum
@@ -56,6 +66,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Quoted variables in case statement and curl URL
 
 ### Changed
+- **Security Scanning workflow** - Renamed to "Code Quality & Security Scanning"
+  - Now includes markdownlint for documentation quality
+  - Expanded path triggers to include markdown files and docs/
+  - Three jobs: ShellCheck, Hadolint, Markdownlint
 - **SECURITY.md location** - Moved to .github/SECURITY.md for GitHub auto-detection
 - **All SECURITY.md references** - Updated throughout documentation to point to new location
 
