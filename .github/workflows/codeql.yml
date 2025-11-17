@@ -125,6 +125,11 @@ jobs:
             **/*.md
             !node_modules
             !.git
+            !src/md/**
+            !drafts/**
+            !LICENSE.md
+            !SOFTWARE-LICENSE.md
+            !ARTICLE-LICENSE.txt
 
       - name: Summary
         if: always()

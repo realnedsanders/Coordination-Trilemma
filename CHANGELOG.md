@@ -74,11 +74,14 @@ infrastructure, though the paper itself follows academic versioning.
 - **Dockerfile.security** - Fixed shell quoting issues flagged by hadolint
   - Quoted command substitution in Cosign_ARCH assignment
   - Quoted variables in case statement and curl URL
-- **Markdown formatting** - Fixed 43 markdownlint errors across all documentation
-  - Added language specifiers to 6 code blocks (MD040)
-  - Fixed 37 line length violations (MD013) by rewrapping text to 120 character limit
-  - Files fixed: CHANGELOG.md, CONTRIBUTING.md, README.md, and all docs/ files
-  - Excluded src/md/, drafts/, and license files from linting via .markdownlintignore
+- **Markdown formatting** - Fixed all markdownlint errors across documentation (43 in root/docs, 80 in `.github`)
+  - Added language specifiers to 7 code blocks (MD040): `docs/BUILD.md`, `docs/CLEANUP_AND_SLSA4_PLAN.md` (2),
+    `docs/latex-guide.md`, `docs/SLSA_ROADMAP.md`, `README.md`, `.github/SECURITY.md`
+  - Fixed 38 line length violations (MD013) by rewrapping text to 120 character limit
+  - Auto-fixed 72 formatting issues (blank lines around lists/fences, proper name capitalization, bare URLs)
+  - Files fixed: `CHANGELOG.md`, `CONTRIBUTING.md`, `README.md`, all `docs/` files, all `.github/*.md` files
+  - Excluded `src/md/`, `drafts/`, and license files from linting via `.markdownlintignore`
+  - Updated CI workflow to explicitly exclude ignored patterns for proper CI linting
 
 ### Removed
 

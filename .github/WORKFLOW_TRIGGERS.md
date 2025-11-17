@@ -38,11 +38,13 @@ manual:
 ```
 
 **Why these paths?**
+
 - **Dockerfile changes** → Need to rebuild images
 - **Workflow changes** → Need to test workflow modifications
 - **Hadolint config** → Linting rules affect build quality
 
 **Downstream effects:**
+
 - ✅ Triggers **LaTeX Build & Deploy** via `workflow_run` (on main only)
 - This ensures LaTeX build always uses latest Docker images
 
@@ -79,6 +81,7 @@ manual:
 ```
 
 **Why these paths?**
+
 - **src/tex/** → Paper content changes
 - **scripts/** → Build scripts affect compilation
 - **web/** → Landing page changes
@@ -86,18 +89,21 @@ manual:
 - **workflow_run** → Ensures we use freshly built Docker images
 
 **What doesn't trigger this?**
+
 - ❌ Documentation changes (docs/, *.md in root)
-- ❌ GitHub community files (.github/SUPPORT.md, CODE_OF_CONDUCT.md, etc.)
+- ❌ GitHub community files (.GitHub/SUPPORT.md, CODE_OF_CONDUCT.md, etc.)
 - ❌ Linting configs (.markdownlint.yaml, .hadolint.yaml)
 - ❌ Docker changes (handled by workflow_run)
 
 **Why not Makefile on push?**
 When Makefile changes alongside Docker changes, we'd get:
+
 1. Docker workflow builds new images
 2. LaTeX workflow starts with old images (race condition)
 3. Docker workflow completes and triggers LaTeX again
 
 Instead, we:
+
 1. Docker workflow builds new images
 2. LaTeX workflow waits
 3. Docker workflow completes and triggers LaTeX with new images ✅
@@ -108,7 +114,7 @@ Instead, we:
 
 **File:** `.github/workflows/codeql.yml`
 
-**Purpose:** Lint shell scripts, Dockerfiles, and markdown documentation.
+**Purpose:** Lint shell scripts, Dockerfiles, and Markdown documentation.
 
 **Triggers on:**
 
@@ -135,13 +141,15 @@ manual:
 ```
 
 **Jobs:**
+
 1. **ShellCheck** - Lints shell scripts in `scripts/`
 2. **Hadolint** - Lints Dockerfiles in `docker/`
-3. **Markdownlint** - Lints all markdown files
+3. **Markdownlint** - Lints all Markdown files
 
 **Why these paths?**
+
 - **scripts/** → Shell scripts need linting (ShellCheck)
-- **docker/** → Dockerfiles need linting (Hadolint)
+- **Docker/** → Dockerfiles need linting (Hadolint)
 - **workflows/** → Workflow YAML contains shell commands (ShellCheck)
 - **Makefile** → Contains shell commands (ShellCheck)
 - **Markdown files** → Documentation needs consistency (Markdownlint)
@@ -151,6 +159,7 @@ manual:
   - `.hadolint.yaml` → Dockerfile linting rules
 
 **Why weekly schedule?**
+
 - Linter rules can be updated upstream
 - Catches gradual drift in code quality
 - Verifies dependencies haven't broken
@@ -172,6 +181,7 @@ push:
 ```
 
 **Process:**
+
 1. Tag pushed: `git tag v1.0.0 && git push origin v1.0.0`
 2. Workflow builds PDF from that tag's commit
 3. Signs PDF with Cosign
@@ -179,11 +189,13 @@ push:
 5. Uploads signed PDF and signature bundle
 
 **Why tags only?**
+
 - Releases are for specific versions, not every commit
 - Tag represents a milestone/published version
 - Semantic versioning (v1.0.0) is standard
 
 **Manual creation:**
+
 ```bash
 # Create and push a release tag
 git tag v1.0.0 -m "Release version 1.0.0"
@@ -196,9 +208,9 @@ git push origin v1.0.0
 
 ### Glob Patterns
 
-- `**/*.md` - All markdown files recursively
+- `**/*.md` - All Markdown files recursively
 - `src/tex/**` - All files under src/tex/ at any depth
-- `docker/Dockerfile*` - All files starting with "Dockerfile" in docker/
+- `docker/Dockerfile*` - All files starting with "Dockerfile" in Docker/
 - `scripts/**` - All files under scripts/ at any depth
 
 ### Exclusions
@@ -206,11 +218,13 @@ git push origin v1.0.0
 Path filters are **inclusive** - workflows only run if changed files match.
 
 If you change only `README.md`:
+
 - ✅ Code Quality workflow runs (matches `**/*.md`)
 - ❌ Docker workflow doesn't run (no match)
 - ❌ LaTeX workflow doesn't run (no match)
 
 If you change `src/tex/main-article.tex` and `docker/Dockerfile.latex`:
+
 - ✅ Docker workflow runs (matches `docker/Dockerfile*`)
 - ✅ LaTeX workflow runs via `workflow_run` after Docker completes
 - ✅ Code Quality workflow runs (matches `docker/**`)
@@ -241,6 +255,7 @@ flowchart TD
 ```
 
 **Key points:**
+
 - Docker build → Triggers LaTeX build (ensures latest images)
 - Multiple workflows can run in parallel if different file types change
 - Workflows only run when relevant files change (saves CI minutes)
@@ -254,6 +269,7 @@ flowchart TD
 **Change:** `src/tex/main-article.tex`
 
 **Workflows triggered:**
+
 - ✅ LaTeX Build & Deploy (push to main)
 
 **Result:** PDF rebuilt and deployed
@@ -265,6 +281,7 @@ flowchart TD
 **Change:** `docker/Dockerfile.latex`
 
 **Workflows triggered:**
+
 1. ✅ Build Docker Images (builds new image)
 2. ✅ Code Quality (Hadolint scans Dockerfile)
 3. ✅ LaTeX Build & Deploy (via workflow_run after #1 completes)
@@ -278,6 +295,7 @@ flowchart TD
 **Change:** `docs/BUILD.md`
 
 **Workflows triggered:**
+
 - ✅ Code Quality (Markdownlint)
 
 **Result:** Documentation linted, no PDF rebuild (efficient!)
@@ -289,7 +307,8 @@ flowchart TD
 **Change:** `.markdownlint.yaml` (e.g., change line length from 120 to 100)
 
 **Workflows triggered:**
-- ✅ Code Quality (re-validates ALL markdown against new rules)
+
+- ✅ Code Quality (re-validates ALL Markdown against new rules)
 
 **Result:** All documentation checked with new standards
 
@@ -300,6 +319,7 @@ flowchart TD
 **Change:** `scripts/generate-build-info.sh`
 
 **Workflows triggered:**
+
 - ✅ LaTeX Build & Deploy (script affects build)
 - ✅ Code Quality (ShellCheck lints script)
 
@@ -312,6 +332,7 @@ flowchart TD
 **Change:** PR updates LaTeX content, docs, and adds shell script
 
 **Workflows triggered:**
+
 - ✅ LaTeX Build & Deploy (PR test)
 - ✅ Code Quality (lints all changed files)
 
@@ -329,6 +350,7 @@ When modifying workflow files themselves:
 4. **Small changes** - Test incrementally
 
 **Example:**
+
 ```bash
 # Make workflow change
 vim .github/workflows/latex-build-deploy.yml
@@ -349,6 +371,7 @@ gh pr create --fill
 ### Check what would trigger
 
 GitHub shows which workflows would run on a PR:
+
 - Go to PR → "Checks" tab
 - See list of workflows that will run
 - Click details to see why (which paths matched)

@@ -3,9 +3,11 @@
 **Last Updated:** 2025-11-17
 **Audience:** Security Researchers, Verifiers, Advanced Users
 
-This document describes the security measures, build provenance, and verification procedures for the Coordination Trilemma project.
+This document describes the security measures, build provenance, and verification procedures for
+the Coordination Trilemma project.
 
 **See also:**
+
 - [BUILD.md](BUILD.md) - Build instructions
 - [CI-CD.md](CI-CD.md) - Workflow architecture
 - [SLSA_ROADMAP.md](SLSA_ROADMAP.md) - Path to SLSA Level 4
@@ -29,6 +31,7 @@ This project achieves **SLSA Build Level 3** with the following guarantees:
 ### Docker Image: `ghcr.io/realnedsanders/coordination-trilemma/latex`
 
 **Security Features:**
+
 - ✅ Signed with Cosign (Sigstore keyless signing)
 - ✅ SLSA Provenance attestation
 - ✅ SBOM (Software Bill of Materials) attestation
@@ -36,6 +39,7 @@ This project achieves **SLSA Build Level 3** with the following guarantees:
 - ✅ OCI labels with build metadata
 
 **Verify the image signature:**
+
 ```bash
 # Install cosign
 brew install cosign  # macOS
@@ -50,6 +54,7 @@ cosign verify \
 ```
 
 **Inspect provenance attestation:**
+
 ```bash
 cosign verify-attestation \
   --certificate-identity-regexp="^https://github.com/realnedsanders/Coordination-Trilemma" \
@@ -59,6 +64,7 @@ cosign verify-attestation \
 ```
 
 **View SBOM:**
+
 ```bash
 cosign verify-attestation \
   --certificate-identity-regexp="^https://github.com/realnedsanders/Coordination-Trilemma" \
@@ -68,6 +74,7 @@ cosign verify-attestation \
 ```
 
 **Inspect image metadata:**
+
 ```bash
 docker inspect ghcr.io/realnedsanders/coordination-trilemma/latex:latest
 ```
@@ -75,13 +82,15 @@ docker inspect ghcr.io/realnedsanders/coordination-trilemma/latex:latest
 ### PDF Document: `main.pdf`
 
 **Security Features:**
+
 - ✅ Signed with Cosign (keyless signing)
 - ✅ SLSA Provenance attestation from GitHub
 - ✅ Build metadata embedded in PDF
 - ✅ Git commit hash in PDF metadata
-- ✅ **Deployed PDF is cryptographically signed** - https://enlightenment.dev serves the signed version
+- ✅ **Deployed PDF is cryptographically signed** - <https://enlightenment.dev> serves the signed version
 
 **Verify the published PDF:**
+
 ```bash
 # Download from enlightenment.dev
 curl -O https://enlightenment.dev/main.pdf
@@ -95,12 +104,14 @@ cosign verify-blob --bundle main.pdf.cosign.bundle \
 ```
 
 **Or download from GitHub Actions artifacts:**
+
 ```bash
 # The signed PDF is also available in GitHub Actions artifacts
 # under the name "coordination-trilemma-pdf-signed"
 ```
 
 **Inspect PDF metadata:**
+
 ```bash
 # Install pdfinfo (part of poppler-utils)
 pdfinfo main.pdf
@@ -110,6 +121,7 @@ exiftool main.pdf | grep -E "(Creator|Producer|Subject|Keywords)"
 ```
 
 The PDF metadata includes:
+
 - Git commit hash
 - Git branch
 - Build timestamp
@@ -121,6 +133,7 @@ The PDF metadata includes:
 ### Docker Image Provenance
 
 Each image includes:
+
 1. **OCI Labels** following the OCI Image Spec:
    - `org.opencontainers.image.created` - Build timestamp
    - `org.opencontainers.image.revision` - Git commit SHA
@@ -140,6 +153,7 @@ Each image includes:
 ### PDF Provenance
 
 Embedded in PDF metadata and first page:
+
 - **Full commit hash** in PDF Subject field
 - **Git branch** in PDF Keywords
 - **Build timestamp** (UTC) in PDF Keywords
@@ -152,6 +166,7 @@ Embedded in PDF metadata and first page:
 ### Container Vulnerability Scanning
 
 All Docker images are scanned with Trivy for:
+
 - OS package vulnerabilities
 - Known CVEs
 - Misconfigurations
@@ -160,6 +175,7 @@ All Docker images are scanned with Trivy for:
 Results are uploaded to GitHub Security tab.
 
 **Scan locally:**
+
 ```bash
 docker pull ghcr.io/realnedsanders/coordination-trilemma/latex:latest
 trivy image ghcr.io/realnedsanders/coordination-trilemma/latex:latest
@@ -170,11 +186,13 @@ trivy image ghcr.io/realnedsanders/coordination-trilemma/latex:latest
 ### Current Status: Partially Reproducible
 
 **Reproducible:**
+
 - ✅ Source code (git commit hash)
 - ✅ Build scripts (versioned in git)
 - ✅ Docker image layers (cached and deterministic)
 
 **Non-reproducible (known sources of variation):**
+
 - ⚠️ Build timestamps in PDF
 - ⚠️ Font generation timestamps in LaTeX
 - ⚠️ Alpine package versions (edge is rolling)
@@ -182,6 +200,7 @@ trivy image ghcr.io/realnedsanders/coordination-trilemma/latex:latest
 ### Improving Reproducibility
 
 To improve reproducibility:
+
 1. Pin Alpine base image to specific digest
 2. Pin Alpine package versions
 3. Use SOURCE_DATE_EPOCH for timestamps
@@ -200,7 +219,8 @@ This project uses **Sigstore's keyless signing** which provides:
 5. **Verifiable**: Anyone can verify signatures without contacting us
 
 **Trust chain:**
-```
+
+```text
 GitHub (OIDC Identity Provider)
     ↓
 Fulcio (Certificate Authority)
