@@ -177,9 +177,13 @@ Use the same conventional commit format:
 When making changes, update relevant documentation:
 
 **Content changes** → Update paper itself + README summary
+
 **Build system changes** → Update BUILD.md, Makefile comments
+
 **Docker changes** → Update docker-setup.md, Dockerfile comments
+
 **Security changes** → Update SECURITY.md, verification scripts
+
 **Workflow changes** → Create/update CI/CD.md
 
 ## Testing Requirements
