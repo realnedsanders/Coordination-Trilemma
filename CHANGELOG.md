@@ -31,6 +31,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - License information to README.md and CONTRIBUTING.md
 - Contributing section to README.md
 
+### Fixed
+- **Docker build workflow** - Fixed invalid Docker tag generation (was producing `:-3bfd563` instead of short SHA)
+  - Changed from `type=sha,prefix={{branch}}-` to `type=sha,format=short`
+  - Resolves build failures on Dependabot PRs
+- **Dependabot configuration** - Reduced Docker ecosystem checks to monthly (from weekly) to avoid rate limits
+  - Reduced open PR limit from 3 to 2
+  - Added grouping for Alpine updates
+
 ### Changed
 - **SECURITY.md location** - Moved to .github/SECURITY.md for GitHub auto-detection
 - **All SECURITY.md references** - Updated throughout documentation to point to new location

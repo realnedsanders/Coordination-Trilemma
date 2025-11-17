@@ -28,14 +28,15 @@ updates:
         update-types:
           - "patch"
 
-  # Docker base images (if we want to track Alpine updates)
+  # Docker base images
+  # Note: Tracks Alpine base image updates in Dockerfiles
   - package-ecosystem: "docker"
     directory: "/docker"
     schedule:
-      interval: "weekly"
+      interval: "monthly"  # Less frequent to avoid rate limits
       day: "monday"
       time: "09:00"
-    open-pull-requests-limit: 3
+    open-pull-requests-limit: 2  # Reduced from 3
     commit-message:
       prefix: "docker"
       include: "scope"
@@ -45,3 +46,11 @@ updates:
       - "automated"
     reviewers:
       - "realnedsanders"
+    # Group Alpine updates together
+    groups:
+      alpine-updates:
+        patterns:
+          - "alpine*"
+        update-types:
+          - "minor"
+          - "patch"

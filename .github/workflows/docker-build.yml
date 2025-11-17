@@ -60,7 +60,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ github.repository }}/${{ matrix.image.name }}
           tags: |
             type=raw,value=latest,enable={{is_default_branch}}
-            type=sha,prefix={{branch}}-
+            type=sha,format=short
 
       - name: Build and push Docker image
         id: build
