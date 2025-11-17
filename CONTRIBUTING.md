@@ -29,7 +29,7 @@ We welcome several types of contributions:
 - Security enhancements
 
 ### 4. Security Reports
-- See [SECURITY.md](docs/SECURITY.md) for reporting security issues
+- See [SECURITY.md](SECURITY.md) for reporting security issues
 
 ## How to Contribute
 
@@ -227,7 +227,7 @@ When making changes, update relevant documentation:
 **Questions about:**
 - **Content/Paper:** Open an issue with `[question]` tag
 - **Build System:** See [BUILD.md](docs/BUILD.md) or [TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md)
-- **Security:** See [SECURITY.md](docs/SECURITY.md)
+- **Security:** See [SECURITY.md](SECURITY.md)
 - **Contributing Process:** Open an issue with `[meta]` tag
 
 **Before opening an issue:**

@@ -14,7 +14,7 @@ flowchart TD
     B -->|Fix an issue| D[TROUBLESHOOTING.md]
     B -->|Contribute| E[CONTRIBUTING.md]
     B -->|Understand workflows| F[CI-CD.md]
-    B -->|Verify security| G[SECURITY.md]
+    B -->|Verify security| G[../.github/SECURITY.md]
 
     C -->|Yes| H[quickstart.md]
     C -->|No| I[BUILD.md]
@@ -51,7 +51,7 @@ flowchart TD
 - **[DOCS_STYLE_GUIDE.md](DOCS_STYLE_GUIDE.md)** - Documentation standards and best practices
 
 ### For Security & Verification
-- **[SECURITY.md](SECURITY.md)** - Security documentation and artifact verification
+- **[SECURITY.md](../.github/SECURITY.md)** - Security documentation and artifact verification
 - **[SLSA Roadmap](SLSA_ROADMAP.md)** - Path to SLSA Build Level 4
 
 ### Planning & Historical

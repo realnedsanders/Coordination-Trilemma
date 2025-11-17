@@ -424,7 +424,7 @@ All workflows support `workflow_dispatch` for manual triggering:
 ## Related Documentation
 
 - [BUILD.md](BUILD.md) - Local build instructions
-- [SECURITY.md](SECURITY.md) - Security verification
+- [SECURITY.md](../.github/SECURITY.md) - Security verification
 - [TROUBLESHOOTING.md](TROUBLESHOOTING.md) - Common issues
 - [docker-setup.md](docker-setup.md) - Docker details
 - [SLSA_ROADMAP.md](SLSA_ROADMAP.md) - Path to Level 4

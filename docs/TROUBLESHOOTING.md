@@ -433,7 +433,7 @@ sudo setenforce 0
 - [BUILD.md](BUILD.md) - Complete build documentation
 - [docker-setup.md](docker-setup.md) - Docker-specific help
 - [latex-guide.md](latex-guide.md) - LaTeX details
-- [SECURITY.md](SECURITY.md) - Security verification
+- [SECURITY.md](../.github/SECURITY.md) - Security verification
 
 ### 2. Check Existing Issues
 - [GitHub Issues](https://github.com/realnedsanders/Coordination-Trilemma/issues)

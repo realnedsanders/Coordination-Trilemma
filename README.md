@@ -1,5 +1,12 @@
 # The Coordination Trilemma
 
+[![Build and Deploy](https://github.com/realnedsanders/Coordination-Trilemma/actions/workflows/latex-build-deploy.yml/badge.svg)](https://github.com/realnedsanders/Coordination-Trilemma/actions/workflows/latex-build-deploy.yml)
+[![Docker Build](https://github.com/realnedsanders/Coordination-Trilemma/actions/workflows/docker-build.yml/badge.svg)](https://github.com/realnedsanders/Coordination-Trilemma/actions/workflows/docker-build.yml)
+[![SLSA Level 3](https://slsa.dev/images/gh-badge-level3.svg)](https://slsa.dev)
+[![License: CC-BY-4.0](https://img.shields.io/badge/Paper-CC--BY--4.0-blue.svg)](https://creativecommons.org/licenses/by/4.0/)
+[![License: AGPL v3](https://img.shields.io/badge/Code-AGPL--v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
+[![Latest PDF](https://img.shields.io/badge/PDF-Download-green.svg)](https://enlightenment.dev/main.pdf)
+
 > A formal analysis of coordination mechanisms at civilization scale, examining the structural constraints that limit viable approaches to large-scale human cooperation.
 
 ## Overview
@@ -120,7 +127,7 @@ cosign verify-blob --bundle main.pdf.cosign.bundle \
   main.pdf
 ```
 
-See [docs/SECURITY.md](docs/SECURITY.md) for complete security documentation.
+See [SECURITY.md](SECURITY.md) for complete security documentation.
 
 ## Documentation
 
@@ -130,7 +137,7 @@ Technical and build documentation is in the [`docs/`](docs/) directory:
 - **[Quick Start](docs/quickstart.md)** - Get started quickly
 - **[LaTeX Guide](docs/latex-guide.md)** - LaTeX compilation details
 - **[Docker Setup](docs/docker-setup.md)** - Docker-specific instructions
-- **[Security](docs/SECURITY.md)** - Security and provenance verification
+- **[Security](SECURITY.md)** - Security and provenance verification
 - **[SLSA Roadmap](docs/SLSA_ROADMAP.md)** - Path to SLSA Level 4
 
 ## Quick Build

@@ -136,7 +136,6 @@ The workflow ensures that only cryptographically signed PDFs are deployed to pro
 │   └── md/               # Markdown versions
 ├── docs/                 # All documentation
 │   ├── BUILD.md          # This file
-│   ├── SECURITY.md       # Security and provenance
 │   ├── quickstart.md     # Quick start guide
 │   ├── latex-guide.md    # LaTeX compilation details
 │   └── docker-setup.md   # Docker-specific instructions

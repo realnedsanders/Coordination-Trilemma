@@ -1,0 +1,139 @@
+name: 🐛 Bug Report
+description: Report a bug or unexpected behavior
+title: "[Bug]: "
+labels: ["bug", "triage"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please fill out the sections below to help us diagnose and fix the issue.
+
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: Preflight Checklist
+      description: Please ensure you've completed these steps before submitting
+      options:
+        - label: I have searched [existing issues](https://github.com/realnedsanders/Coordination-Trilemma/issues) to ensure this bug hasn't been reported
+          required: true
+        - label: I have checked the [TROUBLESHOOTING guide](https://github.com/realnedsanders/Coordination-Trilemma/blob/main/docs/TROUBLESHOOTING.md)
+          required: true
+        - label: I am using the latest version from `main` branch
+          required: false
+
+  - type: dropdown
+    id: bug-type
+    attributes:
+      label: Bug Category
+      description: What type of issue are you experiencing?
+      options:
+        - Build failure (PDF not generating)
+        - Docker issue (image pull, container errors)
+        - CI/CD workflow failure
+        - Signature verification failure
+        - Documentation error or outdated info
+        - LaTeX compilation error
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what the bug is
+      placeholder: When I run `make`, I get an error...
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: Detailed steps to reproduce the behavior
+      placeholder: |
+        1. Clone the repository
+        2. Run `make docker-pull`
+        3. Run `make`
+        4. See error...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+      placeholder: PDF should be generated at main.pdf
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened?
+      placeholder: Build fails with error message...
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error Messages / Logs
+      description: |
+        Please paste relevant error messages or logs. For build errors, include:
+        - Terminal output
+        - Contents of `src/tex/main.log` (if applicable)
+        - Docker logs (if applicable)
+      render: shell
+      placeholder: |
+        $ make
+        Error: ...
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Please provide your environment details
+      value: |
+        - OS: [e.g., macOS 14.1, Ubuntu 22.04, Windows 11]
+        - Docker version: [output of `docker --version`]
+        - Git version: [output of `git --version`]
+        - Make version: [output of `make --version`]
+        - Build method: [Docker or local LaTeX]
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Add any other context about the problem
+      placeholder: |
+        - This started happening after...
+        - I'm using a custom configuration...
+        - This might be related to...
+
+  - type: checkboxes
+    id: workaround
+    attributes:
+      label: Workarounds Attempted
+      description: Have you tried any workarounds?
+      options:
+        - label: Clean build (`make cleanall && make`)
+        - label: Pulling fresh Docker image (`make docker-pull`)
+        - label: Using alternative build method (local vs Docker)
+        - label: Checking file permissions
+        - label: Restarting Docker daemon
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      description: Would you like to help fix this?
+      options:
+        - label: I'm willing to submit a PR to fix this bug

@@ -7,7 +7,7 @@
 Quick reference for achieving SLSA Build Level 4.
 
 **See also:**
-- [SECURITY.md](SECURITY.md) - Current security implementation (Level 3)
+- [SECURITY.md](../.github/SECURITY.md) - Current security implementation (Level 3)
 - [CI-CD.md](CI-CD.md) - Workflow details
 - [CLEANUP_AND_SLSA4_PLAN.md](CLEANUP_AND_SLSA4_PLAN.md) - Original plan (Part 1 completed)
 

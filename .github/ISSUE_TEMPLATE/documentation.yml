@@ -1,0 +1,157 @@
+name: 📚 Documentation Issue
+description: Report unclear, missing, or incorrect documentation
+title: "[Docs]: "
+labels: ["documentation", "triage"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve our documentation! Clear documentation benefits everyone.
+
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: Preflight Checklist
+      description: Please ensure you've completed these steps
+      options:
+        - label: I have searched [existing issues](https://github.com/realnedsanders/Coordination-Trilemma/issues) for similar documentation problems
+          required: true
+        - label: I have checked if this is already documented elsewhere
+          required: false
+
+  - type: dropdown
+    id: doc-type
+    attributes:
+      label: Documentation Type
+      description: What kind of documentation issue is this?
+      options:
+        - Missing information
+        - Incorrect/outdated information
+        - Unclear or confusing
+        - Typo or grammar
+        - Broken link
+        - Missing example
+        - Needs diagram or visual
+        - Organization/structure issue
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: affected-doc
+    attributes:
+      label: Affected Documentation
+      description: Which document needs improvement?
+      options:
+        - README.md
+        - CONTRIBUTING.md
+        - docs/BUILD.md
+        - docs/quickstart.md
+        - docs/latex-guide.md
+        - docs/docker-setup.md
+        - docs/TROUBLESHOOTING.md
+        - docs/CI-CD.md
+        - docs/SECURITY.md
+        - docs/SLSA_ROADMAP.md
+        - docs/DOCS_STYLE_GUIDE.md
+        - LICENSE
+        - Multiple documents
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: issue
+    attributes:
+      label: What's Wrong?
+      description: Clearly describe the documentation problem
+      placeholder: |
+        The documentation says X, but actually Y happens...
+        OR
+        The documentation doesn't explain how to...
+    validations:
+      required: true
+
+  - type: textarea
+    id: location
+    attributes:
+      label: Location
+      description: Where exactly is the problem? (file path, section, line number if known)
+      placeholder: |
+        File: docs/BUILD.md
+        Section: "Quick Start"
+        Around line 45
+    validations:
+      required: false
+
+  - type: textarea
+    id: current
+    attributes:
+      label: Current Documentation
+      description: Quote the current text (if applicable)
+      placeholder: |
+        Currently it says:
+        > "Run make quick to build..."
+      render: markdown
+
+  - type: textarea
+    id: suggested
+    attributes:
+      label: Suggested Improvement
+      description: What should it say instead, or what information should be added?
+      placeholder: |
+        It should say:
+        "Run `make` to build the PDF. The `make quick` target has been deprecated."
+
+        OR
+
+        It should include:
+        - Example command
+        - Expected output
+        - Common errors and solutions
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact
+      description: Who is affected and how?
+      placeholder: |
+        - New users are confused by...
+        - This prevents people from...
+        - I wasted 2 hours because...
+
+  - type: dropdown
+    id: audience
+    attributes:
+      label: Affected Audience
+      description: Who would benefit from this improvement?
+      multiple: true
+      options:
+        - New users
+        - Builders
+        - Contributors
+        - Maintainers
+        - Security researchers
+        - All users
+    validations:
+      required: false
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Any other relevant information
+      placeholder: |
+        - This relates to recent changes in...
+        - The old documentation used to work but...
+        - Related to issue #...
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      description: Would you like to help fix this?
+      options:
+        - label: I'm willing to submit a PR to improve this documentation

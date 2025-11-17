@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Discussions
+    url: https://github.com/realnedsanders/Coordination-Trilemma/discussions
+    about: Ask questions and discuss ideas with the community
+  - name: 🔐 Security Vulnerability
+    url: https://github.com/realnedsanders/Coordination-Trilemma/security/advisories/new
+    about: Report a security vulnerability privately (please do not open a public issue)
+  - name: 📖 Documentation
+    url: https://github.com/realnedsanders/Coordination-Trilemma/tree/main/docs
+    about: Browse comprehensive documentation and guides

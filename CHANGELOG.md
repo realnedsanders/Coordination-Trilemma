@@ -8,6 +8,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **GitHub Community & Best Practices:**
+  - **CODE_OF_CONDUCT.md** - Contributor Covenant 2.1 with academic discourse addendum
+  - **.github/SUPPORT.md** - Comprehensive support guide for users
+  - **.github/SECURITY.md** - Moved from docs/ for GitHub auto-detection
+  - **.github/dependabot.yml** - Automated dependency updates for GitHub Actions and Docker
+  - **5 issue templates** - Bug report, feature request, documentation, paper content, question
+  - **.github/ISSUE_TEMPLATE/config.yml** - Issue template configuration with contact links
+  - **Repository badges** - Build status, SLSA level, licenses, PDF download in README.md
+  - **.github/workflows/release.yml** - Automated GitHub Releases on version tags
+  - **.github/workflows/codeql.yml** - Security scanning with CodeQL, ShellCheck, and Hadolint
+
 - **LICENSE** file with dual licensing explanation (CC-BY 4.0 for paper, AGPLv3 for software)
 - **CONTRIBUTING.md** - Comprehensive 350+ line contribution guide
 - **CHANGELOG.md** - Project history and change tracking
@@ -21,6 +32,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Contributing section to README.md
 
 ### Changed
+- **SECURITY.md location** - Moved to .github/SECURITY.md for GitHub auto-detection
+- **All SECURITY.md references** - Updated throughout documentation to point to new location
+
 - **Documentation Overhaul (Phase 1-3 Complete):**
   - Fixed all file paths in latex-guide.md, docker-setup.md, quickstart.md, BUILD.md
   - Fixed Docker image size references throughout (custom Alpine ~500MB-1GB)

@@ -1,0 +1,65 @@
+name: ❓ Question
+description: Ask a question about the project
+title: "[Question]: "
+labels: ["question", "triage"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have a question? We're happy to help!
+
+        **Before asking:**
+        - Check the [documentation](https://github.com/realnedsanders/Coordination-Trilemma/tree/main/docs)
+        - Search [existing issues](https://github.com/realnedsanders/Coordination-Trilemma/issues)
+        - Check [Discussions](https://github.com/realnedsanders/Coordination-Trilemma/discussions)
+
+        **For general discussion,** consider using [GitHub Discussions](https://github.com/realnedsanders/Coordination-Trilemma/discussions) instead.
+
+  - type: dropdown
+    id: question-type
+    attributes:
+      label: Question Category
+      description: What is your question about?
+      options:
+        - How to build/compile the PDF
+        - How to use Docker
+        - How to verify signatures
+        - How to contribute
+        - Understanding the paper's argument
+        - Understanding the code/workflows
+        - Licensing questions
+        - Using the paper for research/teaching
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Your Question
+      description: Ask your question clearly
+      placeholder: How do I...? What does X mean? Why does Y happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: tried
+    attributes:
+      label: What Have You Tried?
+      description: What have you already attempted?
+      placeholder: |
+        - I checked the documentation and found...
+        - I tried X but...
+        - I looked at Y and...
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Any other relevant information
+      placeholder: |
+        - I'm using this for...
+        - My background is...
+        - This is related to...
