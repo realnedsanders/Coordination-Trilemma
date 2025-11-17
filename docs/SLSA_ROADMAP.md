@@ -1,6 +1,15 @@
 # SLSA Level 4 Roadmap
 
+**Last Updated:** 2025-11-17
+**Audience:** Maintainers, Security Team
+**Status:** Planning / In Progress
+
 Quick reference for achieving SLSA Build Level 4.
+
+**See also:**
+- [SECURITY.md](SECURITY.md) - Current security implementation (Level 3)
+- [CI-CD.md](CI-CD.md) - Workflow details
+- [CLEANUP_AND_SLSA4_PLAN.md](CLEANUP_AND_SLSA4_PLAN.md) - Original plan (Part 1 completed)
 
 ## Current Status
 

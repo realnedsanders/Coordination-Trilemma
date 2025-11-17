@@ -37,6 +37,33 @@ make clean      # Remove build artifacts
 make cleanall   # Remove everything including PDF
 ```
 
+## Build Process Flow
+
+```mermaid
+flowchart LR
+    A[make] --> B{Environment?}
+    B -->|Local| C[make local]
+    B -->|Docker| D[Pull Docker Image]
+
+    C --> E[pdflatex×3 + bibtex]
+    D --> E
+
+    E --> F[Generate PDF]
+    F --> G[main.pdf]
+
+    H[scripts/generate-build-info.sh] -.->|Git metadata| E
+
+    style A fill:#e1f5ff
+    style G fill:#e1ffe1
+    style H fill:#fff4e1
+```
+
+**What happens:**
+1. **Makefile** detects environment (local or Docker)
+2. **Build info script** extracts git metadata (commit, date, branch)
+3. **LaTeX** runs 3 passes + bibtex for cross-refs and bibliography
+4. **Output** generates `main.pdf` at repository root
+
 ## 🔧 Development
 
 ```bash

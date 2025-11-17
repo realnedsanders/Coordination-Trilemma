@@ -16,88 +16,48 @@ The project uses GitHub Actions with three main workflows:
 
 ### Main Build Pipeline
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│ TRIGGER: Push to main (src/tex/**, web/**, workflows)          │
-└────────────────────┬────────────────────────────────────────────┘
-                     │
-                     ▼
-         ┌───────────────────────┐
-         │  Lint LaTeX Files     │
-         │  (ChkTeX in container)│
-         └───────────┬───────────┘
-                     │
-                     ▼
-         ┌───────────────────────┐
-         │  Build PDF            │
-         │  (in LaTeX container) │
-         │  - Generate build info│
-         │  - Run pdflatex×3     │
-         │  - Run bibtex         │
-         └───────────┬───────────┘
-                     │
-                     ▼
-         ┌───────────────────────┐
-         │  Sign PDF             │
-         │  (Cosign + SLSA)      │
-         │  - Keyless signing    │
-         │  - Provenance         │
-         └───────────┬───────────┘
-                     │
-                     ▼
-         ┌───────────────────────┐
-         │  Deploy to Pages      │
-         │  (enlightenment.dev)  │
-         │  - Upload signed PDF  │
-         │  - Upload signature   │
-         │  - Upload index.html  │
-         └───────────────────────┘
+```mermaid
+flowchart TD
+    A[TRIGGER: Push to main<br/>src/tex/**, web/**, workflows] --> B[Lint LaTeX Files<br/>ChkTeX in container]
+    B --> C[Build PDF<br/>in LaTeX container]
+    C --> D[Generate build info<br/>Run pdflatex×3<br/>Run bibtex]
+    D --> E[Sign PDF<br/>Cosign + SLSA]
+    E --> F[Keyless signing<br/>Provenance]
+    F --> G[Deploy to Pages<br/>enlightenment.dev]
+    G --> H[Upload signed PDF<br/>Upload signature<br/>Upload index.html]
+
+    style A fill:#e1f5ff
+    style C fill:#fff4e1
+    style E fill:#ffe1e1
+    style G fill:#e1ffe1
 ```
 
 ### Docker Build Workflow
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│ TRIGGER: Push to main (docker/**, workflows)                    │
-└────────────────────┬────────────────────────────────────────────┘
-                     │
-                     ▼
-    ┌────────────────────────────────────┐
-    │  Build Matrix: LaTeX + Security    │
-    └────────────┬───────────────────────┘
-                 │
-        ┌────────┴──────────┐
-        ▼                   ▼
-┌───────────────┐   ┌──────────────────┐
-│ Build LaTeX   │   │ Build Security   │
-│ Image         │   │ Tools Image      │
-│ (Alpine+TeX)  │   │ (Alpine+Cosign)  │
-└───────┬───────┘   └────────┬─────────┘
-        │                     │
-        ▼                     ▼
-┌───────────────┐   ┌──────────────────┐
-│ Sign Image    │   │ Sign Image       │
-│ (Cosign)      │   │ (Cosign)         │
-└───────┬───────┘   └────────┬─────────┘
-        │                     │
-        ▼                     ▼
-┌───────────────┐   ┌──────────────────┐
-│ Generate SBOM │   │ Generate SBOM    │
-│ & Provenance  │   │ & Provenance     │
-└───────┬───────┘   └────────┬─────────┘
-        │                     │
-        ▼                     ▼
-┌───────────────┐   ┌──────────────────┐
-│ Push to GHCR  │   │ Push to GHCR     │
-└───────┬───────┘   └────────┬─────────┘
-        │                     │
-        └─────────┬───────────┘
-                  │
-                  ▼
-    ┌─────────────────────────┐
-    │  Trigger LaTeX Build    │
-    │  (workflow_run)         │
-    └─────────────────────────┘
+```mermaid
+flowchart TD
+    A[TRIGGER: Push to main<br/>docker/**, workflows] --> B[Build Matrix:<br/>LaTeX + Security]
+
+    B --> C1[Build LaTeX Image<br/>Alpine+TeX]
+    B --> C2[Build Security Tools<br/>Alpine+Cosign]
+
+    C1 --> D1[Sign Image<br/>Cosign]
+    C2 --> D2[Sign Image<br/>Cosign]
+
+    D1 --> E1[Generate SBOM<br/>& Provenance]
+    D2 --> E2[Generate SBOM<br/>& Provenance]
+
+    E1 --> F1[Push to GHCR<br/>latex:latest]
+    E2 --> F2[Push to GHCR<br/>security:latest]
+
+    F1 --> G[Trigger LaTeX Build<br/>workflow_run]
+    F2 --> G
+
+    style A fill:#e1f5ff
+    style B fill:#fff4e1
+    style C1 fill:#ffe1e1
+    style C2 fill:#ffe1e1
+    style G fill:#e1ffe1
 ```
 
 ## Workflow Files

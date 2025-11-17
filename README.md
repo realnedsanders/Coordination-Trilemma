@@ -145,3 +145,38 @@ make view
 ```
 
 See [docs/BUILD.md](docs/BUILD.md) for complete build instructions.
+
+## License
+
+This project uses **dual licensing**:
+
+- **📄 Academic Paper** (LaTeX source, PDF, article content) → [CC-BY 4.0](ARTICLE-LICENSE.txt)
+  - You may share, adapt, and build upon the work, even commercially
+  - You must give appropriate credit and indicate changes
+
+- **⚙️ Software & Infrastructure** (build system, scripts, workflows) → [AGPLv3](SOFTWARE-LICENSE.md)
+  - You may use, modify, and distribute
+  - Derivative works must be open source under AGPLv3
+  - Network use is distribution (must provide source)
+
+See [LICENSE](LICENSE) for complete details and rationale.
+
+**Citation:**
+```
+B. Escalera, A. Escalera. "The Coordination Trilemma: A Formal Analysis of
+Large-Scale Human Cooperation." 2025. https://enlightenment.dev
+```
+
+## Contributing
+
+This is an academic paper under active development. We welcome:
+- Corrections to mathematical proofs or logical errors
+- Additional historical evidence or counterexamples
+- Clarifications of ambiguous statements
+- References to relevant literature
+- Documentation improvements
+- Build system enhancements
+
+Please see [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
+
+**Note:** By contributing, you agree to license academic content under CC-BY 4.0 and software/infrastructure under AGPLv3.

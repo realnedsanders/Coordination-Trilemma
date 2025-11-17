@@ -1,6 +1,14 @@
 # Security and Build Provenance
 
+**Last Updated:** 2025-11-17
+**Audience:** Security Researchers, Verifiers, Advanced Users
+
 This document describes the security measures, build provenance, and verification procedures for the Coordination Trilemma project.
+
+**See also:**
+- [BUILD.md](BUILD.md) - Build instructions
+- [CI-CD.md](CI-CD.md) - Workflow architecture
+- [SLSA_ROADMAP.md](SLSA_ROADMAP.md) - Path to SLSA Level 4
 
 ## SLSA Build Level
 

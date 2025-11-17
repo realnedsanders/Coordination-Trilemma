@@ -255,9 +255,35 @@ When making changes, update relevant documentation:
 - Respect intellectual disagreement
 - Remember this is an academic project
 
-## License
+## License & Copyright
 
-By contributing, you agree that your contributions will be licensed under the same license as the project (see [LICENSE](LICENSE) file).
+This project uses **dual licensing**. By contributing, you agree that:
+
+### Academic Content Contributions
+Contributions to the paper (LaTeX source, article text, proofs, arguments) will be licensed under **Creative Commons Attribution 4.0 International (CC-BY 4.0)**.
+
+**You agree:**
+- Your contribution is your original work or properly attributed
+- It will be licensed under CC-BY 4.0
+- Others may use, share, and adapt it with attribution
+- You retain copyright but grant broad usage rights
+
+### Software/Infrastructure Contributions
+Contributions to build system, scripts, Docker files, workflows, and documentation will be licensed under **GNU Affero General Public License v3.0 (AGPLv3)**.
+
+**You agree:**
+- Your contribution is your original work
+- It will be licensed under AGPLv3
+- Derivative works must also be AGPLv3
+- Network use triggers distribution requirements
+
+### Which Applies to My Contribution?
+- Editing `.tex` files in `src/tex/`? → **CC-BY 4.0**
+- Editing Makefile, scripts, Docker files? → **AGPLv3**
+- Editing documentation? → **AGPLv3**
+- When in doubt, ask in your PR
+
+See [LICENSE](LICENSE) for complete details on the dual licensing structure and rationale.
 
 ## Recognition
 

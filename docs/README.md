@@ -4,6 +4,34 @@
 
 This directory contains all technical and development documentation for the Coordination Trilemma project.
 
+## Which Doc Should I Read?
+
+```mermaid
+flowchart TD
+    A[What do you want to do?] --> B{Goal?}
+
+    B -->|Build the PDF| C{Never built before?}
+    B -->|Fix an issue| D[TROUBLESHOOTING.md]
+    B -->|Contribute| E[CONTRIBUTING.md]
+    B -->|Understand workflows| F[CI-CD.md]
+    B -->|Verify security| G[SECURITY.md]
+
+    C -->|Yes| H[quickstart.md]
+    C -->|No| I[BUILD.md]
+
+    H --> J{Need Docker help?}
+    J -->|Yes| K[docker-setup.md]
+    J -->|No| L[BUILD.md for reference]
+
+    I --> M{LaTeX specific?}
+    M -->|Yes| N[latex-guide.md]
+    M -->|No| O[You're all set!]
+
+    style A fill:#e1f5ff
+    style H fill:#e1ffe1
+    style D fill:#ffe1e1
+```
+
 ## Documentation Index
 
 ### For Readers
@@ -20,6 +48,7 @@ This directory contains all technical and development documentation for the Coor
 - **[CONTRIBUTING.md](../CONTRIBUTING.md)** - How to contribute to the project
 - **[CI-CD.md](CI-CD.md)** - Workflow architecture and debugging
 - **[CHANGELOG.md](../CHANGELOG.md)** - Project history and changes
+- **[DOCS_STYLE_GUIDE.md](DOCS_STYLE_GUIDE.md)** - Documentation standards and best practices
 
 ### For Security & Verification
 - **[SECURITY.md](SECURITY.md)** - Security documentation and artifact verification
