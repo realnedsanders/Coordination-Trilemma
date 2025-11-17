@@ -8,6 +8,7 @@ Get the Coordination Trilemma PDF built in 2 steps.
 ## 🚀 Get Your PDF in 2 Steps
 
 ### Step 1: Install Docker
+
 ```bash
 # macOS
 brew install --cask docker
@@ -21,6 +22,7 @@ sudo sh get-docker.sh
 ```
 
 ### Step 2: Build Your Paper
+
 ```bash
 # Download our custom LaTeX image (only needed once, ~500MB-1GB)
 make docker-pull
@@ -55,7 +57,9 @@ make help         # Show all available commands
 ## 🔧 Customization
 
 ### Add Your Name
+
 Edit `src/tex/main.tex` (author section):
+
 ```latex
 \author{Your Name Here}
 \address{Your Institution}
@@ -63,11 +67,13 @@ Edit `src/tex/main.tex` (author section):
 ```
 
 ### Edit Content
+
 - Main article: `src/tex/main-article.tex`
 - Appendices: `src/tex/appendices/appendix-a.tex` through `appendix-d.tex`
 - Bibliography: `src/tex/references.bib`
 
 ### Rebuild After Changes
+
 ```bash
 make
 ```
@@ -75,6 +81,7 @@ make
 ## ❓ Troubleshooting
 
 **PDF not generating?**
+
 ```bash
 # Check Docker is running
 docker ps
@@ -85,12 +92,14 @@ make
 ```
 
 **Permission errors?**
+
 ```bash
 # Fix file ownership (Linux/Mac)
 sudo chown -R $USER:$USER .
 ```
 
 **Want more details?**
+
 - See [BUILD.md](BUILD.md) for comprehensive documentation
 - Run `make help` for all available commands
 

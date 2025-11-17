@@ -6,6 +6,7 @@
 This document outlined the plan to reorganize the repository for better clarity and achieve SLSA Build Level 4.
 
 **Part 1 (Repository Cleanup) has been completed:**
+
 - ✅ Directory structure reorganized (src/, docs/, scripts/, web/)
 - ✅ Documentation consolidated
 - ✅ Source files organized
@@ -26,7 +27,7 @@ This document outlined the plan to reorganize the repository for better clarity 
 ### Current Issues
 
 1. **Root directory clutter**: 28+ files at root level
-2. **Multiple README files**: README.md, LATEX_README.md, QUICKSTART.md, DOCKER_SETUP.md
+2. **Multiple README files**: README.md, LaTeX_README.md, QUICKSTART.md, Docker_SETUP.md
 3. **Duplicate files**: Both .md and .tex versions of appendices
 4. **Scripts scattered**: Shell scripts mixed with source files
 5. **Working drafts visible**: Draft content in main tree
@@ -34,7 +35,7 @@ This document outlined the plan to reorganize the repository for better clarity 
 
 ### Proposed Directory Structure
 
-```
+```text
 coordination-trilemma/
 ├── README.md                          # Main README (consolidated)
 ├── SECURITY.md                        # Security documentation
@@ -88,12 +89,14 @@ coordination-trilemma/
 ### Cleanup Tasks
 
 #### Phase 1: Consolidate Documentation
+
 - [ ] Merge all README files into single README.md with sections
 - [ ] Move detailed guides to `docs/` directory
 - [ ] Update all internal links
 - [ ] Create docs/README.md as index
 
 #### Phase 2: Reorganize Source Files
+
 - [ ] Create `src/` directory
 - [ ] Move all .tex files to `src/`
 - [ ] Create `src/appendices/` subdirectory
@@ -101,6 +104,7 @@ coordination-trilemma/
 - [ ] Update CI workflow paths
 
 #### Phase 3: Scripts Organization
+
 - [ ] Create `scripts/` directory
 - [ ] Move all .sh files to `scripts/`
 - [ ] Update Makefile to reference new paths
@@ -108,17 +112,20 @@ coordination-trilemma/
 - [ ] Make all scripts executable
 
 #### Phase 4: Web Content
+
 - [ ] Create `web/` directory
 - [ ] Move index.html to `web/`
 - [ ] Update GitHub Pages workflow
 
 #### Phase 5: Build Artifacts
+
 - [ ] Create `build/` directory
 - [ ] Update Makefile to output to `build/`
 - [ ] Update .gitignore for `build/`
 - [ ] Update CI to handle new structure
 
 #### Phase 6: Clean Up Duplicates
+
 - [ ] Remove .md versions of appendices (keep .tex)
 - [ ] Archive or remove "working drafts" and "future plans" directories
 - [ ] Document what was removed in CHANGELOG.md
@@ -130,6 +137,7 @@ coordination-trilemma/
 ### Current Status: SLSA Level 3 ✅
 
 We have:
+
 - ✅ Version controlled source
 - ✅ Build service (GitHub Actions)
 - ✅ Build as code (versioned workflows)
@@ -147,6 +155,7 @@ We have:
 **Implementation:**
 
 ##### A. Branch Protection Rules
+
 ```yaml
 # .github/branch-protection.yml (conceptual - set in repo settings)
 main:
@@ -162,6 +171,7 @@ main:
 ```
 
 **Tasks:**
+
 - [ ] Enable branch protection on `main`
 - [ ] Require at least 1 approval
 - [ ] Require review from code owners
@@ -170,7 +180,8 @@ main:
 - [ ] Enforce for administrators
 
 ##### B. CODEOWNERS File
-```
+
+```text
 # .github/CODEOWNERS
 # All files require review from core team
 * @realnedsanders/core-team
@@ -183,12 +194,15 @@ SECURITY.md @realnedsanders/security-team
 ```
 
 **Tasks:**
+
 - [ ] Create CODEOWNERS file
 - [ ] Define team structure
 - [ ] Assign ownership
 
 ##### C. Pull Request Template
+
 **Tasks:**
+
 - [ ] Create PR template
 - [ ] Require security checklist
 - [ ] Require testing checklist
@@ -197,11 +211,13 @@ SECURITY.md @realnedsanders/security-team
 #### 2. Hermetic Builds ✅
 
 **Current state**: ✅ Already hermetic (Docker-based)
+
 - Builds run in isolated containers
 - No network access during build (except package downloads)
 - Reproducible environment
 
 **Improvements:**
+
 - [ ] Pin Alpine base image to specific digest
 - [ ] Pin all package versions
 - [ ] Cache package lists for reproducibility
@@ -209,6 +225,7 @@ SECURITY.md @realnedsanders/security-team
 #### 3. Reproducible Builds ⚠️
 
 **Current state**: Partially reproducible
+
 - ✅ Source code versioned
 - ✅ Build scripts versioned
 - ⚠️ Timestamps vary
@@ -217,18 +234,22 @@ SECURITY.md @realnedsanders/security-team
 **Implementation:**
 
 ##### A. Use SOURCE_DATE_EPOCH
+
 ```bash
 # In generate-build-info.sh
 export SOURCE_DATE_EPOCH=$(git log -1 --format=%ct)
 ```
 
 **Tasks:**
+
 - [ ] Set SOURCE_DATE_EPOCH from git commit timestamp
 - [ ] Configure pdflatex to use SOURCE_DATE_EPOCH
 - [ ] Normalize all timestamps
 
 ##### B. Pin All Dependencies
+
 Create `scripts/pin-dependencies.sh`:
+
 ```bash
 #!/bin/bash
 # Pin Alpine packages to specific versions
@@ -236,19 +257,23 @@ Create `scripts/pin-dependencies.sh`:
 ```
 
 **Tasks:**
+
 - [ ] Create dependency pinning script
 - [ ] Generate Dockerfile with pinned versions
 - [ ] Document pinning process
 - [ ] Automate version updates
 
 ##### C. Reproducibility Testing
+
 Create `.github/workflows/reproducibility-test.yml`:
+
 ```yaml
 # Build twice and compare outputs
 # Ensures bit-for-bit reproducibility
 ```
 
 **Tasks:**
+
 - [ ] Create reproducibility test workflow
 - [ ] Build PDF twice from same commit
 - [ ] Compare checksums
@@ -257,6 +282,7 @@ Create `.github/workflows/reproducibility-test.yml`:
 #### 4. Build Provenance Enhancements
 
 **Additional attestations:**
+
 - [ ] Add vulnerability disclosure policy
 - [ ] Document incident response process
 - [ ] Add security contacts
@@ -267,21 +293,25 @@ Create `.github/workflows/reproducibility-test.yml`:
 ## Implementation Timeline
 
 ### Week 1: Repository Cleanup
+
 - **Day 1-2**: Consolidate documentation
 - **Day 3-4**: Reorganize directory structure
 - **Day 5**: Update all references and test builds
 
 ### Week 2: Two-Person Review
+
 - **Day 1-2**: Set up branch protection
 - **Day 3**: Create CODEOWNERS and templates
 - **Day 4-5**: Document review process
 
 ### Week 3: Reproducible Builds
+
 - **Day 1-2**: Implement SOURCE_DATE_EPOCH
 - **Day 3-4**: Pin dependencies
 - **Day 5**: Create reproducibility tests
 
 ### Week 4: Testing & Documentation
+
 - **Day 1-2**: End-to-end testing
 - **Day 3-4**: Update all documentation
 - **Day 5**: Final SLSA Level 4 verification
@@ -291,6 +321,7 @@ Create `.github/workflows/reproducibility-test.yml`:
 ## SLSA Level 4 Checklist
 
 ### Build Platform Requirements
+
 - [x] Builds run on GitHub Actions
 - [x] Build service is hardened (GitHub-managed)
 - [x] Build service is isolated
@@ -298,11 +329,13 @@ Create `.github/workflows/reproducibility-test.yml`:
 - [ ] Build service provides build-as-code
 
 ### Source Requirements
+
 - [x] Version controlled (Git)
 - [ ] Two-person reviewed
 - [ ] All changes reviewed before merge
 
 ### Build Process
+
 - [x] Scripted build
 - [x] Build service generates provenance
 - [x] Provenance is unforgeable
@@ -311,6 +344,7 @@ Create `.github/workflows/reproducibility-test.yml`:
 - [ ] Dependencies are pinned
 
 ### Provenance Requirements
+
 - [x] Cryptographically signed
 - [x] Service-generated (not self-attested)
 - [x] Non-falsifiable
@@ -318,6 +352,7 @@ Create `.github/workflows/reproducibility-test.yml`:
 - [ ] Reproducible (bit-for-bit)
 
 ### Additional Requirements
+
 - [ ] Two-person review documented
 - [ ] Review process enforced
 - [ ] Build hermiticity verified

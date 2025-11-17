@@ -8,6 +8,7 @@ This guide covers LaTeX compilation details for building the Coordination Trilem
 ## Project Structure
 
 ### LaTeX Source Files (`src/tex/`)
+
 - `main.tex` - Main LaTeX document that includes all sections
 - `main-article.tex` - The main article content
 - `glossary.tex` - Glossary definitions
@@ -19,6 +20,7 @@ This guide covers LaTeX compilation details for building the Coordination Trilem
   - `appendix-d.tex` - The Closing Window - Synthetic Media Evidence
 
 ### Build System
+
 - `Makefile` - Build automation (at repository root)
 - `scripts/generate-build-info.sh` - Build provenance generation
 - `docker/Dockerfile.latex` - Custom Alpine-based LaTeX image
@@ -29,7 +31,7 @@ This guide covers LaTeX compilation details for building the Coordination Trilem
 
 **You only need Docker installed - no LaTeX installation required!**
 
-1. Install Docker: https://docs.docker.com/get-docker/
+1. Install Docker: <https://docs.docker.com/get-docker/>
 2. That's it!
 
 ### First Time Setup
@@ -116,10 +118,12 @@ The PDF will be generated in `src/tex/` and needs to be moved to root manually.
 
 ## Document Structure
 
-The document uses the `amsart` class (American Mathematical Society article style), which is ideal for mathematics-heavy content.
+The document uses the `amsart` class (American Mathematical Society article style), which is ideal
+for mathematics-heavy content.
 
 ### Main Structure
-```
+
+```text
 src/tex/main.tex
 ├── Preamble (packages, theorem environments, metadata)
 ├── Abstract
@@ -136,7 +140,9 @@ src/tex/main.tex
 ## Customization
 
 ### Author Information
+
 Edit the following lines in `src/tex/main.tex`:
+
 ```latex
 \author{Your Name}
 \address{Your Institution}
@@ -144,14 +150,17 @@ Edit the following lines in `src/tex/main.tex`:
 ```
 
 ### Title or Abstract
+
 Modify directly in `src/tex/main.tex`.
 
 ### Adding Citations
+
 1. Add entries to `src/tex/references.bib` in BibTeX format
 2. Cite in text using `\cite{key}`
 3. Recompile (bibliography processing is automatic with `make`)
 
 Example:
+
 ```latex
 As shown by \cite{kahneman1979prospect}, ...
 ```
@@ -159,12 +168,15 @@ As shown by \cite{kahneman1979prospect}, ...
 ## Requirements
 
 ### Docker Method (Recommended)
+
 - **Docker** - That's it! Everything else is in the container
 - Our custom Alpine-based image includes minimal TeX Live with required packages only (~500MB-1GB)
 - Much smaller and faster than full TeX Live (~4-5GB)
 
 ### Local Method (Alternative)
+
 If you choose to compile locally (`make local`):
+
 - Complete TeX distribution (TeX Live 2022+ or MiKTeX)
 - Required packages (usually included):
   - amsmath, amssymb, amsthm (mathematical typesetting)
@@ -177,23 +189,29 @@ If you choose to compile locally (`make local`):
 ### Docker Issues
 
 **Need additional LaTeX packages:**
+
 - Our custom image is optimized (~500MB-1GB) and includes packages needed for this document
 - If you add packages not in the custom image, use the full TeXLive image:
+
   ```bash
   DOCKER_IMAGE=texlive/texlive:latest make
   ```
+
 - The full image is ~4-5GB but includes all TeX packages
 
 **Permission errors on generated files:**
+
 - Docker runs as root, files may be owned by root
 - Fix: `sudo chown -R $USER:$USER .`
 - Or add this to Makefile: `--user $(id -u):$(id -g)`
 
 **Docker not found:**
-- Install Docker: https://docs.docker.com/get-docker/
+
+- Install Docker: <https://docs.docker.com/get-docker/>
 - Make sure Docker daemon is running
 
 **Slow compilation:**
+
 - First run downloads the image (one-time, ~500MB-1GB download)
 - Subsequent builds are much faster (no download needed)
 - Compilation itself takes ~30-60 seconds depending on your system
@@ -201,26 +219,31 @@ If you choose to compile locally (`make local`):
 ### LaTeX Issues
 
 **Bibliography not appearing:**
+
 - The full `make` automatically processes the bibliography
 - Check that `src/tex/references.bib` exists and has valid BibTeX entries
 
 **Citations showing as [?]:**
+
 - Run the full compilation: `make clean && make`
 
 **Cross-references not working:**
+
 - The Makefile runs pdflatex 3 times automatically
 - If still broken: `make clean && make`
 
 ### Manual Fixes
 
 If automatic conversion missed something:
+
 1. The appendix .tex files can be edited directly
-2. Mathematical notation is preserved as-is from markdown
+2. Mathematical notation is preserved as-is from Markdown
 3. Tables may need manual adjustment for complex formatting
 
 ## Notes on Conversion
 
 ### What Was Preserved
+
 - All mathematical notation (already in LaTeX format)
 - Section structure and hierarchy
 - Lists (itemize and enumerate)
@@ -228,13 +251,16 @@ If automatic conversion missed something:
 - Emphasis and bold text
 
 ### What May Need Manual Review
-- Complex markdown tables (check formatting)
+
+- Complex Markdown tables (check formatting)
 - Special characters in non-math mode
 - Links (converted to \url{})
-- Any custom markdown extensions
+- Any custom Markdown extensions
 
 ### Checking the Conversion
+
 Review each appendix .tex file, particularly:
+
 - Table formatting (Appendix D has several tables)
 - Mathematical theorem environments (Appendix B)
 - List structures (all appendices)
@@ -242,6 +268,7 @@ Review each appendix .tex file, particularly:
 ## Submission to SocArXiv
 
 For SocArXiv submission:
+
 1. Compile the PDF using `make` or manual compilation
 2. Submit `main.pdf` as your manuscript
 3. Optionally, include all .tex files as supplementary materials
@@ -250,7 +277,9 @@ For SocArXiv submission:
 ## Further Customization
 
 ### Changing Document Class
+
 To use a different class (e.g., standard `article`):
+
 ```latex
 \documentclass[12pt]{article}
 ```
@@ -258,6 +287,7 @@ To use a different class (e.g., standard `article`):
 Note: You may need to adjust theorem environments for non-AMS classes.
 
 ### Adding Figures
+
 ```latex
 \begin{figure}[h]
   \centering
@@ -269,24 +299,27 @@ Note: You may need to adjust theorem environments for non-AMS classes.
 
 ## License and Attribution
 
-Follow the same license as the original markdown files.
+Follow the same license as the original Markdown files.
 
 ## Questions or Issues
 
 If you encounter problems with the LaTeX conversion:
+
 1. Check the compilation log (.log file) for specific errors
 2. Review the section causing issues in the .tex file
-3. Most markdown elements should convert cleanly to LaTeX
+3. Most Markdown elements should convert cleanly to LaTeX
 
 ## Why Docker + pdflatex?
 
 ### Why Docker?
+
 - **No installation hassle** - No need to install multi-GB TeX distributions
 - **Reproducible** - Same environment on any machine
 - **Isolated** - Won't conflict with other software
 - **Cross-platform** - Works on Linux, Mac, Windows (via Docker Desktop)
 
 ### Why pdflatex (not pandoc)?
+
 - **Better math support** - Professional mathematical typesetting
 - **Custom formatting** - Full control with amsart class
 - **Bibliography** - Seamless BibTeX integration  
@@ -300,10 +333,11 @@ Pandoc is great for quick conversions, but for a formal mathematics paper going 
 **Default Image:** `ghcr.io/realnedsanders/coordination-trilemma/latex:latest`
 
 This custom Alpine-based image provides:
+
 - Minimal TeX Live distribution with required packages only
 - **Size:** ~500MB-1GB (much smaller than full TeX Live)
 - **Base:** Alpine Linux edge
-- **Packages:** texlive, texlive-latexextra, texlive-bibtexextra, texlive-latexrecommended, texlive-pictures
+- **Packages:** TeXLive, TeXLive-latexextra, TeXLive-bibtexextra, TeXLive-latexrecommended, TeXLive-pictures
 - **Tools:** pdflatex, bibtex, ChkTeX (linting), make, git, perl
 - **Updates:** Automatically rebuilt and signed when Dockerfile changes
 - **Security:** Cryptographically signed with Cosign, includes SLSA provenance
@@ -336,11 +370,13 @@ cat main.log
 
 ### Building in CI/CD
 
-This project uses GitHub Actions with our custom Docker image. The Makefile automatically detects CI environments and uses local compilation (since it's already inside a container).
+This project uses GitHub Actions with our custom Docker image. The Makefile automatically detects
+CI environments and uses local compilation (since it's already inside a container).
 
 See [CI/CD.md](CI/CD.md) for complete workflow documentation.
 
 **Key points:**
+
 - CI runs inside the `ghcr.io/realnedsanders/coordination-trilemma/latex:latest` container
 - Makefile sets `COMPILE_METHOD=local` when `GITHUB_ACTIONS` env var is set
 - Git provenance is automatically embedded in the PDF
@@ -356,6 +392,7 @@ Our custom image is defined in `docker/Dockerfile.latex`. To modify it:
 4. Subsequent builds will use the updated image
 
 To add TeXLive packages:
+
 ```dockerfile
 # In docker/Dockerfile.latex
 RUN apk add --no-cache \

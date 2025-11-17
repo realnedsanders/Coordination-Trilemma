@@ -7,13 +7,14 @@
 Quick reference for achieving SLSA Build Level 4.
 
 **See also:**
+
 - [SECURITY.md](../.github/SECURITY.md) - Current security implementation (Level 3)
 - [CI-CD.md](CI-CD.md) - Workflow details
 - [CLEANUP_AND_SLSA4_PLAN.md](CLEANUP_AND_SLSA4_PLAN.md) - Original plan (Part 1 completed)
 
 ## Current Status
 
-```
+```text
 SLSA Level 1: ✅ COMPLETE
   ├─ Build process documented
   └─ Version control
@@ -38,6 +39,7 @@ SLSA Level 4: 🚧 IN PROGRESS (60% complete)
 ## Progress Tracker
 
 ### Repository Cleanup (Pre-requisite)
+
 - [x] Plan created (`CLEANUP_AND_SLSA4_PLAN.md`)
 - [ ] Script created (`reorganize-repo.sh`)
 - [ ] Directory structure reorganized
@@ -47,6 +49,7 @@ SLSA Level 4: 🚧 IN PROGRESS (60% complete)
 - [ ] Build tested and verified
 
 ### Two-Person Review (Critical for Level 4)
+
 - [x] CODEOWNERS file created
 - [x] PR template created
 - [ ] Branch protection enabled
@@ -56,6 +59,7 @@ SLSA Level 4: 🚧 IN PROGRESS (60% complete)
 - [ ] Team members added (if applicable)
 
 ### Hermetic Builds (Already Complete)
+
 - [x] Docker-based builds
 - [x] Isolated environment
 - [x] No network during build (except deps)
@@ -63,6 +67,7 @@ SLSA Level 4: 🚧 IN PROGRESS (60% complete)
 - [ ] Enhanced: Pin all package versions
 
 ### Reproducible Builds (Major Gap)
+
 - [ ] SOURCE_DATE_EPOCH implementation
 - [ ] Timestamp normalization in PDF
 - [ ] LaTeX deterministic output
@@ -72,6 +77,7 @@ SLSA Level 4: 🚧 IN PROGRESS (60% complete)
 - [ ] Acceptable delta defined
 
 ### Build Provenance (Mostly Complete)
+
 - [x] SLSA provenance attestation
 - [x] Cosign signatures
 - [x] SBOM generation
@@ -155,18 +161,22 @@ SLSA Level 4 achieved when:
 ## Risks & Challenges
 
 ### Two-Person Review
+
 - **Risk**: Single maintainer project (need more reviewers)
 - **Mitigation**: Document exceptions for emergencies, seek co-maintainers
 
 ### Reproducible Builds
+
 - **Risk**: LaTeX inherently has timestamps
 - **Mitigation**: Use SOURCE_DATE_EPOCH, document acceptable variance
 
 ### Alpine Edge
+
 - **Risk**: Rolling release makes pinning difficult
 - **Mitigation**: Switch to Alpine stable with frozen versions
 
 ### Maintenance Burden
+
 - **Risk**: Level 4 adds significant overhead
 - **Consideration**: Is it worth it for this project?
 

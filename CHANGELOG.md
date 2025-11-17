@@ -3,12 +3,14 @@
 All notable changes to the Coordination Trilemma project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) for infrastructure, though the paper itself follows academic versioning.
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) for
+infrastructure, though the paper itself follows academic versioning.
 
 ## [Unreleased]
 
 ### Added
-- **.github/WORKFLOW_TRIGGERS.md** - Comprehensive documentation explaining when each workflow runs
+
+- **.GitHub/WORKFLOW_TRIGGERS.md** - Comprehensive documentation explaining when each workflow runs
   - Quick reference table
   - Detailed trigger explanations for each workflow
   - Path filter patterns and why they're used
@@ -21,22 +23,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Line length limit of 120 characters
   - Allows necessary HTML elements for badges and formatting
   - Enforces proper capitalization of technical terms (GitHub, Docker, LaTeX, etc.)
-- **.markdownlintignore** - Exclude patterns for markdown linting
+- **.markdownlintignore** - Exclude patterns for Markdown linting
 - **Markdownlint job** - Added to Code Quality & Security Scanning workflow
-  - Scans all markdown files for consistency and best practices
+  - Scans all Markdown files for consistency and best practices
   - Runs on pushes, PRs, and weekly schedule
   - Provides clear feedback on documentation quality
 
 - **GitHub Community & Best Practices:**
   - **CODE_OF_CONDUCT.md** - Contributor Covenant 2.1 with academic discourse addendum
-  - **.github/SUPPORT.md** - Comprehensive support guide for users
-  - **.github/SECURITY.md** - Moved from docs/ for GitHub auto-detection
-  - **.github/dependabot.yml** - Automated dependency updates for GitHub Actions and Docker
+  - **.GitHub/SUPPORT.md** - Comprehensive support guide for users
+  - **.GitHub/SECURITY.md** - Moved from docs/ for GitHub auto-detection
+  - **.GitHub/dependabot.yml** - Automated dependency updates for GitHub Actions and Docker
   - **5 issue templates** - Bug report, feature request, documentation, paper content, question
-  - **.github/ISSUE_TEMPLATE/config.yml** - Issue template configuration with contact links
+  - **.GitHub/ISSUE_TEMPLATE/config.yml** - Issue template configuration with contact links
   - **Repository badges** - Build status, SLSA level, licenses, PDF download in README.md
-  - **.github/workflows/release.yml** - Automated GitHub Releases on version tags
-  - **.github/workflows/codeql.yml** - Security scanning with ShellCheck (shell scripts) and Hadolint (Dockerfiles)
+  - **.GitHub/workflows/release.yml** - Automated GitHub Releases on version tags
+  - **.GitHub/workflows/codeql.yml** - Security scanning with ShellCheck (shell scripts) and Hadolint (Dockerfiles)
 
 - **LICENSE** file with dual licensing explanation (CC-BY 4.0 for paper, AGPLv3 for software)
 - **CONTRIBUTING.md** - Comprehensive 350+ line contribution guide
@@ -51,6 +53,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Contributing section to README.md
 
 ### Fixed
+
 - **Docker build workflow** - Fixed invalid Docker tag generation (was producing `:-3bfd563` instead of short SHA)
   - Changed from `type=sha,prefix={{branch}}-` to `type=sha,format=short`
   - Resolves build failures on Dependabot PRs
@@ -67,33 +70,40 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Added job summaries for better visibility
 - **Hadolint configuration** - Created `.hadolint.yaml` to configure Dockerfile linting
   - Ignores DL3018 (pin apk versions) - Alpine edge packages don't have stable versions
-  - Added trusted registries (docker.io, ghcr.io)
+  - Added trusted registries (Docker.io, ghcr.io)
 - **Dockerfile.security** - Fixed shell quoting issues flagged by hadolint
-  - Quoted command substitution in COSIGN_ARCH assignment
+  - Quoted command substitution in Cosign_ARCH assignment
   - Quoted variables in case statement and curl URL
+- **Markdown formatting** - Fixed 43 markdownlint errors across all documentation
+  - Added language specifiers to 6 code blocks (MD040)
+  - Fixed 37 line length violations (MD013) by rewrapping text to 120 character limit
+  - Files fixed: CHANGELOG.md, CONTRIBUTING.md, README.md, and all docs/ files
+  - Excluded src/md/, drafts/, and license files from linting via .markdownlintignore
 
 ### Removed
-- **.github/workflows/sign-pdf.yml** - Deleted deprecated workflow
-  - PDF signing is now integrated into latex-build-deploy.yml (happens before deployment)
+
+- **.GitHub/workflows/sign-pdf.yml** - Deleted deprecated workflow
+  - PDF signing is now integrated into LaTeX-build-deploy.yml (happens before deployment)
   - Removes duplicate workflow and simplifies CI/CD pipeline
 
 ### Changed
+
 - **Workflow triggers optimized** - All workflows now use smart path filtering
-  - **docker-build.yml**: Added `.hadolint.yaml` to triggers (linting config affects builds)
-  - **latex-build-deploy.yml**: Added `scripts/**` to triggers, clarified Makefile exclusion on push
+  - **Docker-build.yml**: Added `.hadolint.yaml` to triggers (linting config affects builds)
+  - **LaTeX-build-deploy.yml**: Added `scripts/**` to triggers, clarified Makefile exclusion on push
   - **codeql.yml**: Added linting config files (`.markdownlint.yaml`, `.markdownlintignore`, `.hadolint.yaml`)
   - All path filters documented with inline comments explaining each choice
   - When linting configs change, workflows re-validate all files with new rules
   - See `.github/WORKFLOW_TRIGGERS.md` for complete trigger documentation
 - **Security Scanning workflow** - Renamed to "Code Quality & Security Scanning"
   - Now includes markdownlint for documentation quality
-  - Expanded path triggers to include markdown files and docs/
+  - Expanded path triggers to include Markdown files and docs/
   - Three jobs: ShellCheck, Hadolint, Markdownlint
-- **SECURITY.md location** - Moved to .github/SECURITY.md for GitHub auto-detection
+- **SECURITY.md location** - Moved to .GitHub/SECURITY.md for GitHub auto-detection
 - **All SECURITY.md references** - Updated throughout documentation to point to new location
 
 - **Documentation Overhaul (Phase 1-3 Complete):**
-  - Fixed all file paths in latex-guide.md, docker-setup.md, quickstart.md, BUILD.md
+  - Fixed all file paths in LaTeX-guide.md, Docker-setup.md, quickstart.md, BUILD.md
   - Fixed Docker image size references throughout (custom Alpine ~500MB-1GB)
   - Removed references to non-existent `make quick` target
   - Updated manual compilation commands with correct paths and images
@@ -119,6 +129,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Comprehensive Mermaid examples in DOCS_STYLE_GUIDE.md (flowcharts, sequence, state, git graphs)
 
 ### Documentation Statistics
+
 - **Files Created:** 5 major documentation files (~1500+ lines)
 - **Files Updated:** 8 existing documentation files
 - **Total Documentation:** ~3500+ lines of comprehensive, consistent documentation
@@ -129,12 +140,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [2025-11-17] - Build System & CI/CD Improvements
 
 ### Added
+
 - Git to LaTeX Docker image for accurate build provenance
 - Automatic CI environment detection in Makefile (uses local compilation when inside container)
 - Full git history checkout in CI for accurate commit information
 - Git safe directory configuration for containers
 
 ### Fixed
+
 - Build provenance showing "unknown-dirty" due to missing git in container
 - Docker-in-Docker issue in CI (Makefile now detects GitHub Actions)
 - Double workflow trigger when Dockerfile and other files change simultaneously
@@ -142,6 +155,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Workflow conditions now handle both push and workflow_run event types
 
 ### Changed
+
 - LaTeX build workflow now signs PDF before deployment (not after)
 - Deploy workflow now publishes signed PDFs to enlightenment.dev
 - Deprecated separate sign-pdf.yml workflow (signing integrated into main workflow)
@@ -150,6 +164,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [2025-11-16] - Repository Reorganization
 
 ### Added
+
 - Custom Alpine-based LaTeX Docker image (~500MB-1GB vs ~4-5GB full TeXLive)
 - Custom security tools Docker image (~50-100MB with Cosign)
 - Comprehensive documentation structure in docs/ directory
@@ -159,6 +174,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SLSA Level 3 compliance with signed artifacts
 
 ### Changed
+
 - **BREAKING:** Reorganized repository structure:
   - LaTeX sources moved to `src/tex/`
   - Documentation consolidated in `docs/`
@@ -169,6 +185,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Technical documentation moved to docs/BUILD.md
 
 ### Infrastructure
+
 - Makefile updated for new directory structure
 - CI workflows updated for new paths
 - Docker images automatically built and signed on changes
@@ -177,6 +194,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [2025-11-13] - Initial Public Release
 
 ### Added
+
 - LaTeX source for Coordination Trilemma paper
 - Main article content with formal proofs
 - Four appendices with detailed analysis
@@ -188,6 +206,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SLSA provenance attestations
 
 ### Paper Content
+
 - Formal definition of the Coordination Trilemma
 - Proofs of impossibility for enforcement-based systems
 - Analysis of voluntary coordination requirements
@@ -200,11 +219,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Version Numbering
 
 **Infrastructure/Build System:** Semantic Versioning (MAJOR.MINOR.PATCH)
+
 - MAJOR: Breaking changes to build system or structure
 - MINOR: New features, workflows, or non-breaking improvements
 - PATCH: Bug fixes, documentation updates
 
 **Paper Content:** Academic versioning
+
 - Major revisions tracked by git tags (v1.0, v2.0, etc.)
 - Minor corrections tracked in git history
 - Published versions have SLSA provenance with commit hash
@@ -212,11 +233,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Maintaining This Changelog
 
 ### When to Update
+
 - Before merging PRs that change functionality
 - After major milestones or releases
 - When deprecating features or making breaking changes
 
 ### Categories
+
 - **Added** - New features, content, or documentation
 - **Changed** - Changes to existing functionality
 - **Deprecated** - Soon-to-be removed features
@@ -225,9 +248,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Security** - Security improvements or fixes
 
 ### Links
-- Repository: https://github.com/realnedsanders/Coordination-Trilemma
-- Published PDF: https://enlightenment.dev
-- Issues: https://github.com/realnedsanders/Coordination-Trilemma/issues
+
+- Repository: <https://github.com/realnedsanders/Coordination-Trilemma>
+- Published PDF: <https://enlightenment.dev>
+- Issues: <https://github.com/realnedsanders/Coordination-Trilemma/issues>
 
 ---
 

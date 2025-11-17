@@ -3,7 +3,8 @@
 **Last Updated:** 2025-11-17
 **Audience:** Contributors, Maintainers
 
-This guide establishes standards for documentation in the Coordination Trilemma project to ensure consistency, clarity, and maintainability.
+This guide establishes standards for documentation in the Coordination Trilemma project to ensure
+consistency, clarity, and maintainability.
 
 ## Document Structure
 
@@ -30,10 +31,12 @@ Brief description of what this document covers (1-2 sentences).
 ### Metadata Fields
 
 **Last Updated:** Always use YYYY-MM-DD format (ISO 8601)
+
 - Update whenever making significant changes
 - Minor typo fixes don't require date updates
 
 **Audience:** Choose from:
+
 - **All Users** - Everyone
 - **New Users** - First-time builders
 - **Builders** - People compiling the PDF
@@ -44,6 +47,7 @@ Brief description of what this document covers (1-2 sentences).
 - **Advanced Users** - Power users
 
 **Status:** (Optional) Use for planning/roadmap docs:
+
 - `Completed` - Done
 - `In Progress` - Actively working on
 - `Planning` - Future work
@@ -52,6 +56,7 @@ Brief description of what this document covers (1-2 sentences).
 ### "See also" Section
 
 Include 2-5 related documents with brief descriptions:
+
 ```markdown
 **See also:**
 - [BUILD.md](BUILD.md) - Complete build instructions
@@ -61,12 +66,14 @@ Include 2-5 related documents with brief descriptions:
 ## Writing Style
 
 ### Tone
+
 - **Clear and direct** - Get to the point quickly
 - **Helpful, not condescending** - Assume intelligence, explain complexity
 - **Professional but approachable** - Academic project, but readable
 - **Action-oriented** - Focus on what to do, not just what is
 
 ### Voice
+
 - **Active voice preferred** - "Run the command" not "The command should be run"
 - **Second person for instructions** - "You should..." or imperative "Run..."
 - **First person plural for the project** - "We use Alpine Linux"
@@ -74,12 +81,14 @@ Include 2-5 related documents with brief descriptions:
 ### Formatting
 
 #### Headers
+
 - **H1 (`#`)** - Document title only (one per file)
 - **H2 (`##`)** - Main sections
 - **H3 (`###`)** - Subsections
 - **H4 (`####`)** - Rarely needed, use sparingly
 
 **Examples:**
+
 ```markdown
 # Document Title
 ## Main Section
@@ -87,11 +96,13 @@ Include 2-5 related documents with brief descriptions:
 ```
 
 #### Lists
+
 - Use `-` for unordered lists (not `*` or `+`)
 - Use `1.` for ordered lists (automatic numbering)
 - Indent sub-items with 2 spaces
 
 **Example:**
+
 ```markdown
 - First item
   - Sub-item
@@ -104,10 +115,12 @@ Include 2-5 related documents with brief descriptions:
 ```
 
 #### Code Blocks
+
 - Always specify language for syntax highlighting
 - Use descriptive labels for terminal sessions
 
 **Examples:**
+
 ```markdown
 ​```bash
 make clean
@@ -125,15 +138,18 @@ on: push
 ```
 
 #### Inline Code
+
 - Use backticks for `commands`, `file names`, `variables`
 - Use for exact strings user will type or see
 
 #### Emphasis
+
 - **Bold** for important terms, warnings, emphasis
 - *Italic* sparingly for softer emphasis
 - Don't use CAPS for emphasis (except acronyms)
 
 #### Links
+
 - Use relative links for internal docs: `[BUILD.md](BUILD.md)`
 - Use descriptive text: `[build instructions](BUILD.md)` not `[click here](BUILD.md)`
 - External links: `[Docker Docs](https://docs.docker.com/)`
@@ -143,6 +159,7 @@ on: push
 ### Shell Commands
 
 **Show from repository root:**
+
 ```markdown
 ​```bash
 # Always assume user is at repository root
@@ -151,12 +168,14 @@ make clean
 ```
 
 **Not:**
+
 ```bash
 # Don't show from subdirectories unless necessary
 cd scripts && ./verify-signatures.sh
 ```
 
 **Include comments for clarity:**
+
 ```bash
 # Download Docker image (one-time, ~500MB)
 make docker-pull
@@ -166,6 +185,7 @@ make
 ```
 
 **Show expected output when helpful:**
+
 ```bash
 $ make
 Compiling PDF...
@@ -244,13 +264,14 @@ Use tables for comparisons, reference info, or structured data:
 ```
 
 **Align:**
+
 - Left-align text columns
 - Center-align short content
 - Right-align numbers
 
 ### Decision Trees
 
-Use markdown to show decision flows:
+Use Markdown to show decision flows:
 
 ```markdown
 **Which Docker image should I use?**
@@ -265,6 +286,7 @@ Use markdown to show decision flows:
 **Use Mermaid for diagrams** - GitHub renders Mermaid natively:
 
 #### Flowcharts
+
 ```markdown
 ​```mermaid
 flowchart TD
@@ -279,6 +301,7 @@ flowchart TD
 ```
 
 #### Sequence Diagrams
+
 ```markdown
 ​```mermaid
 sequenceDiagram
@@ -297,6 +320,7 @@ sequenceDiagram
 ```
 
 #### State Diagrams
+
 ```markdown
 ​```mermaid
 stateDiagram-v2
@@ -310,6 +334,7 @@ stateDiagram-v2
 ```
 
 #### Git Graphs
+
 ```markdown
 ​```mermaid
 gitGraph
@@ -326,6 +351,7 @@ gitGraph
 ```
 
 **Mermaid Styling Tips:**
+
 - Use colors: `style A fill:#e1f5ff` (light blue for triggers)
 - Use colors: `style B fill:#fff4e1` (light yellow for processing)
 - Use colors: `style C fill:#ffe1e1` (light red for critical steps)
@@ -345,32 +371,38 @@ Simple: A → B → C
 ## File Naming
 
 ### Documentation Files
+
 - **UPPERCASE.md** - Top-level important docs (README, LICENSE, CONTRIBUTING, CHANGELOG)
 - **lowercase-with-dashes.md** - Regular docs (quick start-guide.md)
 - **PascalCase.md** - Planning/roadmap docs (SLSA_ROADMAP.md)
 
 ### Sections
+
 - Use kebab-case for anchor links: `#build-instructions`
 - No spaces, lowercase only
 
 ## Content Guidelines
 
 ### Be Comprehensive But Concise
+
 - Cover the topic thoroughly
 - Don't repeat information available elsewhere (link instead)
 - Front-load important information
 
 ### Examples Over Explanation
+
 - Show concrete examples
 - Provide copy-pasteable commands
 - Include expected output
 
 ### Troubleshooting Sections
+
 - Start with most common issues
 - Provide specific error messages where possible
 - Always give a solution or next step
 
 ### Keep It Current
+
 - Update "Last Updated" dates
 - Remove obsolete information
 - Mark deprecated features clearly
@@ -378,6 +410,7 @@ Simple: A → B → C
 ## Common Patterns
 
 ### Quick Start Sections
+
 ```markdown
 ## Quick Start
 
@@ -394,6 +427,7 @@ make
 ```
 
 ### Prerequisites
+
 ```markdown
 ## Prerequisites
 
@@ -406,6 +440,7 @@ make
 ```
 
 ### Troubleshooting
+
 ```markdown
 ### Error Message
 
@@ -427,24 +462,28 @@ ls -lh main.pdf
 ## Documentation Types
 
 ### Tutorial (e.g., quickstart.md)
+
 - Numbered steps
 - Copy-pasteable commands
 - Expected outcomes shown
 - "What you get" section
 
 ### Reference (e.g., BUILD.md)
+
 - Complete information
 - Organized by topic
 - Cross-referenced
 - Examples for each feature
 
 ### Guide (e.g., CI-CD.md)
+
 - Explain concepts
 - Show relationships
 - Diagrams helpful
 - "How it works" focus
 
 ### Troubleshooting (e.g., TROUBLESHOOTING.md)
+
 - Problem → Solution format
 - Grouped by type
 - Quick reference table
@@ -459,6 +498,7 @@ This project uses **markdownlint** to enforce documentation standards automatica
 Linting rules are defined in `.markdownlint.yaml` at the repository root:
 
 **Key rules:**
+
 - **Line length**: 120 characters (reasonable for documentation)
 - **Heading style**: ATX-style (`#` not underlined)
 - **List markers**: Use `-` for unordered lists
@@ -468,7 +508,7 @@ Linting rules are defined in `.markdownlint.yaml` at the repository root:
 
 ### Running Locally
 
-Test your markdown before committing:
+Test your Markdown before committing:
 
 ```bash
 # Using Docker (recommended)
@@ -485,6 +525,7 @@ markdownlint --config .markdownlint.yaml docs/*.md
 ### Common Issues
 
 **Line too long:**
+
 ```markdown
 # Bad
 This is a very long line that exceeds the 120 character limit and will trigger a markdownlint warning about line length.
@@ -495,6 +536,7 @@ a markdownlint warning about line length.
 ```
 
 **Missing code block language:**
+
 ```markdown
 # Bad
 ​```
@@ -508,6 +550,7 @@ make
 ```
 
 **Inconsistent list markers:**
+
 ```markdown
 # Bad
 * Item 1
@@ -521,6 +564,7 @@ make
 ### CI Integration
 
 Markdownlint runs automatically on:
+
 - Every push to main
 - Every pull request
 - Weekly schedule
@@ -547,6 +591,7 @@ Before committing documentation:
 ### When to Update Docs
 
 **Always update when:**
+
 - Changing functionality
 - Adding features
 - Fixing bugs that affect usage
@@ -554,11 +599,13 @@ Before committing documentation:
 - Changing workflows
 
 **Update "Last Updated" when:**
+
 - Significant content changes
 - Restructuring
 - Adding new sections
 
 **Don't update "Last Updated" for:**
+
 - Typo fixes
 - Minor wording changes
 - Formatting improvements
@@ -566,6 +613,7 @@ Before committing documentation:
 ### Documentation Debt
 
 If you can't update docs immediately:
+
 1. Add `<!-- TODO: Update after X -->` comment
 2. Create issue with `[docs]` tag
 3. Link to issue in commit message

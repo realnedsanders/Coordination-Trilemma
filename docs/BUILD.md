@@ -6,6 +6,7 @@
 This document contains technical information for building and developing the Coordination Trilemma LaTeX document.
 
 **See also:**
+
 - [Quick Start Guide](quickstart.md) - For first-time users
 - [Docker Setup](docker-setup.md) - Docker installation and configuration
 - [LaTeX Guide](latex-guide.md) - LaTeX-specific details
@@ -59,6 +60,7 @@ flowchart LR
 ```
 
 **What happens:**
+
 1. **Makefile** detects environment (local or Docker)
 2. **Build info script** extracts git metadata (commit, date, branch)
 3. **LaTeX** runs 3 passes + bibtex for cross-refs and bibliography
@@ -85,6 +87,7 @@ make help
 This project uses a custom minimal Alpine-based LaTeX image by default for fast, lightweight builds.
 
 ### Custom Alpine Image (Default)
+
 - **Size**: ~500MB-1GB (much smaller than full TeXLive!)
 - **Pros**: Alpine edge-based, faster downloads, secure, includes only packages needed for this document
 - **Location**: `ghcr.io/realnedsanders/coordination-trilemma/latex:latest`
@@ -92,6 +95,7 @@ This project uses a custom minimal Alpine-based LaTeX image by default for fast,
 - **Usage**: Default when running `make`
 
 ### Full TeXLive Image (Alternative)
+
 - **Size**: ~4-5GB
 - **Pros**: Includes all LaTeX packages
 - **When to use**: If you add packages not included in the custom image
@@ -109,22 +113,26 @@ All CI workflows use custom Alpine-based Docker images for faster, more reproduc
 - **`latex:latest`** - Minimal Alpine image with TeXLive and ChkTeX for document compilation and linting
 - **`security-tools:latest`** - Minimal Alpine image with Cosign for artifact signing
 
-These images are automatically built and signed on every change to Dockerfiles. No tools are installed during CI runs, ensuring consistent environments and faster execution.
+These images are automatically built and signed on every change to Dockerfiles. No tools are
+installed during CI runs, ensuring consistent environments and faster execution.
 
 ### Continuous Integration
 
 This repository uses GitHub Actions to automatically:
+
 - **Build custom Docker image**: Rebuilds minimal Alpine-based image when Dockerfile changes
 - **Lint LaTeX files**: Checks all .tex files using ChkTeX
 - **Build the PDF**: Compiles using the custom minimal image
 - **Sign the PDF**: Cryptographically signs PDF with Cosign (keyless) and generates SLSA provenance
-- **Deploy to GitHub Pages**: Publishes the **signed** PDF to https://enlightenment.dev
+- **Deploy to GitHub Pages**: Publishes the **signed** PDF to <https://enlightenment.dev>
 
-The workflow ensures that only cryptographically signed PDFs are deployed to production. The signature bundle (`main.pdf.cosign.bundle`) is also deployed and can be used to verify authenticity.
+The workflow ensures that only cryptographically signed PDFs are deployed to production. The
+signature bundle (`main.pdf.cosign.bundle`) is also deployed and can be used to verify
+authenticity.
 
 ## 📁 Project Structure
 
-```
+```text
 .
 ├── src/
 │   ├── tex/              # LaTeX source files
@@ -165,12 +173,14 @@ The CI automatically deploys the latest PDF to GitHub Pages. To enable this:
 4. Save the settings
 
 After the next push to `main`, your PDF will be available at:
-- **Landing page**: https://enlightenment.dev
-- **Direct PDF link**: https://enlightenment.dev/main.pdf
+
+- **Landing page**: <https://enlightenment.dev>
+- **Direct PDF link**: <https://enlightenment.dev/main.pdf>
 
 ### Customizing the Landing Page
 
-The landing page is defined in `web/index.html`. You can edit this file to customize the appearance, add additional content, or change the styling.
+The landing page is defined in `web/index.html`. You can edit this file to customize the
+appearance, add additional content, or change the styling.
 
 ## Contributing
 

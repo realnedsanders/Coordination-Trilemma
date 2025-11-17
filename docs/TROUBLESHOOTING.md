@@ -25,11 +25,12 @@ cat src/tex/*.log | grep -i error
 
 ## Build Issues
 
-### Error: "docker: command not found"
+### Error: "Docker: command not found"
 
 **Cause:** Docker is not installed or not in PATH.
 
 **Solution:**
+
 ```bash
 # macOS
 brew install --cask docker
@@ -45,6 +46,7 @@ sudo systemctl start docker
 ```
 
 **Verify:**
+
 ```bash
 docker --version
 docker ps
@@ -55,6 +57,7 @@ docker ps
 **Cause:** Docker daemon is not running.
 
 **Solution:**
+
 ```bash
 # macOS/Windows: Open Docker Desktop application
 
@@ -68,9 +71,10 @@ docker ps
 
 ### Error: "permission denied while trying to connect to Docker"
 
-**Cause:** User not in docker group (Linux).
+**Cause:** User not in Docker group (Linux).
 
 **Solution:**
+
 ```bash
 # Add user to docker group
 sudo usermod -aG docker $USER
@@ -79,11 +83,12 @@ sudo usermod -aG docker $USER
 docker ps
 ```
 
-### Error: "make: docker: No such file or directory"
+### Error: "make: Docker: No such file or directory"
 
 **Cause:** Running in CI container trying to use Docker (Docker-in-Docker issue).
 
-**Solution:** This is handled automatically by the Makefile when `GITHUB_ACTIONS` env var is set. If running locally in a container:
+**Solution:** This is handled automatically by the Makefile when `GITHUB_ACTIONS` env var is set.
+If running locally in a container:
 
 ```bash
 # Use local LaTeX instead
@@ -95,6 +100,7 @@ make local
 **Cause:** Git not available in container OR git ownership issues.
 
 **Solution:**
+
 ```bash
 # If building locally, ensure git is installed
 git --version
@@ -112,6 +118,7 @@ git config --global --add safe.directory "$(pwd)"
 **Cause:** Running from wrong directory or using outdated paths.
 
 **Solution:**
+
 ```bash
 # Always run make from repository root
 cd /path/to/Coordination-Trilemma
@@ -129,6 +136,7 @@ ls main.pdf
 **Cause:** LaTeX compilation errors.
 
 **Solution:**
+
 ```bash
 # Check the logs
 cat src/tex/main.log | grep -i error
@@ -146,6 +154,7 @@ DOCKER_IMAGE=texlive/texlive:latest make
 **Cause:** BibTeX not processing correctly.
 
 **Solution:**
+
 ```bash
 # Full clean build
 make cleanall
@@ -163,6 +172,7 @@ cat src/tex/main.blg
 **Cause:** Need multiple LaTeX passes for cross-references.
 
 **Solution:**
+
 ```bash
 # Make runs pdflatex 3 times automatically
 # If still broken:
@@ -177,6 +187,7 @@ make
 **Cause:** Network issues or registry problems.
 
 **Solution:**
+
 ```bash
 # Check network
 ping ghcr.io
@@ -194,6 +205,7 @@ DOCKER_IMAGE=texlive/texlive:latest make
 **Cause:** Custom Alpine image doesn't include all packages.
 
 **Solution:**
+
 ```bash
 # Use full TeXLive image
 DOCKER_IMAGE=texlive/texlive:latest make
@@ -206,6 +218,7 @@ DOCKER_IMAGE=texlive/texlive:latest make
 **Cause:** Docker runs as root by default.
 
 **Solution:**
+
 ```bash
 # Fix ownership
 sudo chown -R $USER:$USER .
@@ -218,6 +231,7 @@ sudo chown -R $USER:$USER .
 **Cause:** Docker images take significant space.
 
 **Solution:**
+
 ```bash
 # Check usage
 docker system df
@@ -238,6 +252,7 @@ make docker-pull
 **Cause:** Git ownership mismatch (common in containers).
 
 **Solution:**
+
 ```bash
 # Add safe directory
 git config --global --add safe.directory "$(pwd)"
@@ -251,6 +266,7 @@ git config --global --add safe.directory /workdir
 **Cause:** Shallow git clone or detached HEAD.
 
 **Solution:**
+
 ```bash
 # Ensure full clone
 git fetch --unshallow
@@ -267,6 +283,7 @@ make cleanall && make
 **Cause:** Untracked files or git index issues.
 
 **Solution:**
+
 ```bash
 # Check status
 git status
@@ -283,11 +300,12 @@ make cleanall && make
 
 ## Signature Verification Issues
 
-### "cosign: command not found"
+### "Cosign: command not found"
 
 **Cause:** Cosign not installed.
 
 **Solution:**
+
 ```bash
 # macOS
 brew install cosign
@@ -304,6 +322,7 @@ cosign version
 **Cause:** Various - outdated signature, wrong file, network issues.
 
 **Solution:**
+
 ```bash
 # Download fresh copies
 curl -O https://enlightenment.dev/main.pdf
@@ -326,16 +345,18 @@ cosign verify-blob --bundle main.pdf.cosign.bundle \
 **Cause:** Path filters or branch restrictions.
 
 **Solution:**
+
 - Check `.github/workflows/*.yml` path filters
 - LaTeX builds trigger on changes to `src/tex/**`, `web/**`, `.github/workflows/latex-build-deploy.yml`
 - Docker builds trigger on changes to `docker/**`, `.github/workflows/docker-build.yml`
-- Changes to both trigger docker build first, then LaTeX build
+- Changes to both trigger Docker build first, then LaTeX build
 
 ### Build succeeds locally but fails in CI
 
 **Cause:** Environment differences.
 
 **Solution:**
+
 ```bash
 # Check CI logs in GitHub Actions
 # Common issues:
@@ -354,6 +375,7 @@ make
 **Cause:** Wrong event type or failed conditions.
 
 **Solution:**
+
 - Sign/deploy only run on push to main or after successful Docker rebuild
 - Check workflow_run event succeeded
 - Check event type matches conditions in yaml
@@ -363,6 +385,7 @@ make
 ### Builds very slow
 
 **Possible causes:**
+
 1. **First run:** Downloading Docker image (~500MB-1GB)
    - Subsequent builds much faster
    - `docker pull` progress shown
@@ -383,6 +406,7 @@ make
 **Cause:** Network bandwidth or registry issues.
 
 **Solution:**
+
 ```bash
 # Check network
 curl -I https://ghcr.io
@@ -397,6 +421,7 @@ docker images | grep coordination-trilemma
 ### macOS: "Docker Desktop is not running"
 
 **Solution:**
+
 - Open Docker Desktop application
 - Wait for it to fully start (whale icon in menu bar)
 - Try again
@@ -404,6 +429,7 @@ docker images | grep coordination-trilemma
 ### Windows: WSL2 issues
 
 **Solution:**
+
 ```powershell
 # Ensure WSL2 is installed and updated
 wsl --update
@@ -416,6 +442,7 @@ docker ps
 ### Linux: SELinux denying access
 
 **Solution:**
+
 ```bash
 # Check SELinux status
 getenforce
@@ -430,17 +457,21 @@ sudo setenforce 0
 ## Still Having Issues?
 
 ### 1. Check Documentation
+
 - [BUILD.md](BUILD.md) - Complete build documentation
-- [docker-setup.md](docker-setup.md) - Docker-specific help
-- [latex-guide.md](latex-guide.md) - LaTeX details
+- [Docker-setup.md](docker-setup.md) - Docker-specific help
+- [LaTeX-guide.md](latex-guide.md) - LaTeX details
 - [SECURITY.md](../.github/SECURITY.md) - Security verification
 
 ### 2. Check Existing Issues
+
 - [GitHub Issues](https://github.com/realnedsanders/Coordination-Trilemma/issues)
 - Search closed issues too
 
 ### 3. Gather Information
+
 When reporting issues, include:
+
 ```bash
 # System info
 uname -a
@@ -455,6 +486,7 @@ make 2>&1 | tee build.log
 ```
 
 ### 4. Open an Issue
+
 - Use descriptive title
 - Include steps to reproduce
 - Attach logs and error messages
@@ -467,15 +499,16 @@ make 2>&1 | tee build.log
 | Problem | Quick Fix |
 |---------|-----------|
 | Docker not found | Install Docker, start daemon |
-| Permission denied | Add user to docker group |
+| Permission denied | Add user to Docker group |
 | PDF not generating | Check `src/tex/main.log` for errors |
 | Slow build | First run downloads image |
 | Git ownership error | `git config --global --add safe.directory "$(pwd)"` |
-| Signature verification | Install cosign, check network |
+| Signature verification | Install Cosign, check network |
 | CI failure | Check GitHub Actions logs |
 
 **Emergency Fallback:**
 If Docker completely fails, you can build locally with LaTeX:
+
 ```bash
 make local
 # Requires local LaTeX installation

@@ -5,11 +5,14 @@
 
 ## What This Does
 
-This setup lets you compile your LaTeX paper **without installing LaTeX** on your computer. Everything runs inside a Docker container with our custom Alpine-based TeX Live distribution (~500MB-1GB, much smaller than full TeX Live ~4-5GB).
+This setup lets you compile your LaTeX paper **without installing LaTeX** on your computer.
+Everything runs inside a Docker container with our custom Alpine-based TeX Live distribution
+(~500MB-1GB, much smaller than full TeX Live ~4-5GB).
 
 ## Installation
 
 ### macOS
+
 ```bash
 # Using Homebrew
 brew install --cask docker
@@ -19,6 +22,7 @@ brew install --cask docker
 ```
 
 ### Windows
+
 ```bash
 # Download and install Docker Desktop:
 # https://docs.docker.com/desktop/install/windows-install/
@@ -28,6 +32,7 @@ docker --version
 ```
 
 ### Linux (Ubuntu/Debian)
+
 ```bash
 # Install Docker
 curl -fsSL https://get.docker.com -o get-docker.sh
@@ -47,6 +52,7 @@ docker --version
 ```
 
 ### Linux (Fedora/RHEL)
+
 ```bash
 sudo dnf install docker
 sudo systemctl start docker
@@ -72,6 +78,7 @@ make
 ## How It Works
 
 The Makefile runs commands like this:
+
 ```bash
 docker run --rm \
   -v $(pwd):/workdir \
@@ -81,6 +88,7 @@ docker run --rm \
 ```
 
 This:
+
 - Starts a temporary container with our custom Alpine LaTeX image
 - Mounts your project directory inside
 - Sets working directory to `src/tex/`
@@ -106,6 +114,7 @@ This:
 **Updates:** Automatically built and signed on every change
 
 Our custom Alpine-based image includes:
+
 - `texlive` (core)
 - `texlive-latexextra`
 - `texlive-bibtexextra`
@@ -145,6 +154,7 @@ make
 ## Common Issues
 
 ### Docker daemon not running
+
 ```bash
 # macOS/Windows: Open Docker Desktop application
 
@@ -153,6 +163,7 @@ sudo systemctl start docker
 ```
 
 ### Permission denied
+
 ```bash
 # Linux: Add user to docker group
 sudo usermod -aG docker $USER
@@ -160,6 +171,7 @@ sudo usermod -aG docker $USER
 ```
 
 ### Container conflicts
+
 ```bash
 # If you see "container already exists"
 docker rm <container-name>
@@ -169,6 +181,7 @@ docker system prune
 ```
 
 ### Disk space issues
+
 ```bash
 # Docker images take space. Free up with:
 docker system df           # Check usage
@@ -178,7 +191,9 @@ docker system prune -a     # Remove unused images
 ## Advanced: Custom Configuration
 
 ### Run with specific user (avoid root-owned files)
+
 Edit Makefile line 14:
+
 ```makefile
 DOCKER_RUN = docker run --rm \
   --user $(id -u):$(id -g) \
@@ -187,18 +202,22 @@ DOCKER_RUN = docker run --rm \
 ```
 
 ### Use specific TeX Live version
+
 ```makefile
 DOCKER_IMAGE = texlive/texlive:TL2023-historic
 ```
 
 ### Add custom packages
+
 Create `Dockerfile`:
+
 ```dockerfile
 FROM texlive/texlive:latest
 RUN tlmgr install <package-name>
 ```
 
 Build and use:
+
 ```bash
 docker build -t my-latex .
 # Then edit Makefile to use my-latex
@@ -221,7 +240,9 @@ make local
 This project uses two custom Alpine-based images for CI/CD, eliminating the need to install tools during CI runs:
 
 ### 1. LaTeX Build Image
+
 **Image:** `ghcr.io/realnedsanders/coordination-trilemma/latex:latest`
+
 - **Purpose:** Document compilation and linting
 - **Contents:** TeXLive (minimal), ChkTeX, make, git, perl
 - **Size:** ~500MB-1GB (much smaller than full TeXLive ~4-5GB)
@@ -234,7 +255,9 @@ This project uses two custom Alpine-based images for CI/CD, eliminating the need
   - `texlive-pictures` (graphics support)
 
 ### 2. Security Tools Image
+
 **Image:** `ghcr.io/realnedsanders/coordination-trilemma/security:latest`
+
 - **Purpose:** Signing artifacts with Cosign
 - **Contents:** Cosign, curl, git, bash, coreutils
 - **Size:** ~50-100MB
@@ -243,6 +266,7 @@ This project uses two custom Alpine-based images for CI/CD, eliminating the need
 ### Security Features
 
 Both images are:
+
 - ✅ **Automatically built** on every Dockerfile change
 - ✅ **Cryptographically signed** with Cosign (keyless via Sigstore)
 - ✅ **Provenance included** - SLSA provenance attestations
@@ -259,9 +283,9 @@ Both images are:
 
 ## Need Help?
 
-- **Docker documentation:** https://docs.docker.com/
-- **TeX Live image:** https://hub.docker.com/r/texlive/texlive
-- **Issue tracker:** https://github.com/TeX-Live/texlive-docker
+- **Docker documentation:** <https://docs.docker.com/>
+- **TeX Live image:** <https://hub.docker.com/r/texlive/texlive>
+- **Issue tracker:** <https://github.com/TeX-Live/texlive-docker>
 
 ## Summary
 

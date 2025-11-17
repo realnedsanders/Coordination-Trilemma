@@ -10,5 +10,16 @@ node_modules/
 # Build outputs
 build/
 
+# LaTeX-generated markdown (may have different formatting)
+src/md/
+
+# Draft documents (not published, informal formatting)
+drafts/
+
+# Legal text (standard license formatting)
+LICENSE.md
+SOFTWARE-LICENSE.md
+ARTICLE-LICENSE.txt
+
 # Third-party files (if any)
 # vendor/

@@ -6,6 +6,7 @@
 This document explains the CI/CD workflow architecture for the Coordination Trilemma project.
 
 **See also:**
+
 - [WORKFLOW_TRIGGERS.md](../.github/WORKFLOW_TRIGGERS.md) - When workflows run and why (path filters, triggers, scenarios)
 - [BUILD.md](BUILD.md) - Local build instructions
 - [SECURITY.md](../.github/SECURITY.md) - Security verification and artifact signing
@@ -15,6 +16,7 @@ This document explains the CI/CD workflow architecture for the Coordination Tril
 ## Overview
 
 The project uses GitHub Actions with three main workflows:
+
 1. **Docker Build** - Builds and signs custom container images
 2. **LaTeX Build & Deploy** - Compiles, signs, and publishes the PDF
 3. **Sign PDF** (deprecated) - Now integrated into workflow 2
@@ -74,12 +76,14 @@ flowchart TD
 **Purpose:** Build and publish Docker images
 
 **Triggers:**
+
 - Push to `main` branch
 - Changes to `docker/**` or `.github/workflows/docker-build.yml`
 - Manual dispatch
 
 **Images Built:**
-1. **latex** - `ghcr.io/realnedsanders/coordination-trilemma/latex:latest`
+
+1. **LaTeX** - `ghcr.io/realnedsanders/coordination-trilemma/latex:latest`
    - Base: Alpine Linux edge
    - Contents: TeXLive (minimal), ChkTeX, make, git, perl
    - Size: ~500MB-1GB
@@ -90,6 +94,7 @@ flowchart TD
    - Size: ~50-100MB
 
 **Key Features:**
+
 - Matrix build for parallel execution
 - OCI labels with build metadata
 - Cosign keyless signing
@@ -98,6 +103,7 @@ flowchart TD
 - Trivy vulnerability scanning
 
 **Outputs:**
+
 - Signed images pushed to GitHub Container Registry
 - Build artifacts and scan results
 
@@ -106,6 +112,7 @@ flowchart TD
 **Purpose:** Build PDF, sign it, and deploy to GitHub Pages
 
 **Triggers:**
+
 - Push to `main` branch
 - Changes to `src/tex/**`, `web/**`, or the workflow file itself
 - After Docker image rebuild completes (`workflow_run`)
@@ -116,11 +123,13 @@ flowchart TD
 **Jobs:**
 
 #### Job 1: Lint
+
 - Runs ChkTeX on all `.tex` files
 - Checks for common LaTeX issues
 - Continues even if warnings found
 
 #### Job 2: Build
+
 - **Container:** `ghcr.io/realnedsanders/coordination-trilemma/latex:latest`
 - **Steps:**
   1. Checkout code (full history for provenance)
@@ -133,6 +142,7 @@ flowchart TD
 **Key Detail:** Makefile detects `GITHUB_ACTIONS` env var and uses `COMPILE_METHOD=local` since it's already inside a container.
 
 #### Job 3: Sign
+
 - **Condition:** Only on push to main OR successful workflow_run
 - **Container:** `ghcr.io/realnedsanders/coordination-trilemma/security:latest`
 - **Steps:**
@@ -142,6 +152,7 @@ flowchart TD
   4. Upload signed PDF and signature bundle
 
 #### Job 4: Deploy
+
 - **Condition:** Only on push to main OR successful workflow_run
 - **Steps:**
   1. Download signed PDF artifact
@@ -153,9 +164,10 @@ flowchart TD
 
 ### 3. `.github/workflows/sign-pdf.yml` (Deprecated)
 
-**Status:** Disabled (signing now integrated into latex-build-deploy.yml)
+**Status:** Disabled (signing now integrated into LaTeX-build-deploy.yml)
 
-Previously signed PDFs after deployment using `workflow_run` trigger, but this meant unsigned PDFs were briefly published. Now deprecated in favor of signing before deployment.
+Previously signed PDFs after deployment using `workflow_run` trigger, but this meant unsigned PDFs
+were briefly published. Now deprecated in favor of signing before deployment.
 
 ## Trigger Logic & Path Filters
 
@@ -164,13 +176,14 @@ Previously signed PDFs after deployment using `workflow_run` trigger, but this m
 GitHub Actions can filter workflow triggers by file paths. This prevents unnecessary runs and avoids conflicts.
 
 **Problem Solved:** When both `docker/**` and `src/tex/**` files change in one push:
+
 - OLD: Both workflows trigger immediately
-  - latex-build-deploy runs first (uses old Docker image) → FAILS
-  - docker-build runs, rebuilds images
-  - docker-build completion triggers latex-build-deploy again → succeeds
-- NEW: Only docker-build triggers
+  - LaTeX-build-deploy runs first (uses old Docker image) → FAILS
+  - Docker-build runs, rebuilds images
+  - Docker-build completion triggers LaTeX-build-deploy again → succeeds
+- NEW: Only Docker-build triggers
   - Rebuilds images
-  - Triggers latex-build-deploy via workflow_run → succeeds once
+  - Triggers LaTeX-build-deploy via workflow_run → succeeds once
 
 **Implementation:**
 
@@ -197,9 +210,11 @@ on:
 
 ### Event Type Handling
 
-Workflows can be triggered by different event types (`push`, `workflow_run`, etc.). Job conditions must handle all relevant types.
+Workflows can be triggered by different event types (`push`, `workflow_run`, etc.). Job conditions
+must handle all relevant types.
 
 **Problem Solved:** Sign and deploy jobs had conditions like:
+
 ```yaml
 if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 ```
@@ -207,6 +222,7 @@ if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 This skipped the jobs when triggered via `workflow_run` (event name is `workflow_run`, not `push`).
 
 **Solution:**
+
 ```yaml
 if: |
   (github.event_name == 'push' && github.ref == 'refs/heads/main') ||
@@ -229,7 +245,9 @@ else
 endif
 ```
 
-**Why:** CI runs inside a container, so using `COMPILE_METHOD=docker` would attempt Docker-in-Docker, which fails. Instead, we use `COMPILE_METHOD=local` to run LaTeX commands directly.
+**Why:** CI runs inside a container, so using `COMPILE_METHOD=docker` would attempt
+Docker-in-Docker, which fails. Instead, we use `COMPILE_METHOD=local` to run LaTeX commands
+directly.
 
 ### Git Configuration
 
@@ -253,24 +271,28 @@ This allows `scripts/generate-build-info.sh` to access git metadata for build pr
     fetch-depth: 0  # Full history, not shallow clone
 ```
 
-**Why:** Build provenance includes git commit information. Shallow clones don't have full history, causing "unknown" in build info.
+**Why:** Build provenance includes git commit information. Shallow clones don't have full history,
+causing "unknown" in build info.
 
 ## Security Model
 
 ### Signing with Cosign
 
 **Method:** Keyless signing via Sigstore
+
 - No long-lived keys to manage
 - Identity from GitHub OIDC token
 - Certificates from Fulcio CA
 - Transparency via Rekor log
 
 **What's Signed:**
-- Docker images (both latex and security)
+
+- Docker images (both LaTeX and security)
 - PDF artifacts
 - All with provenance attestations
 
 **Verification:**
+
 ```bash
 # Verify PDF
 cosign verify-blob --bundle main.pdf.cosign.bundle \
@@ -290,6 +312,7 @@ cosign verify \
 **Level Achieved:** SLSA Build Level 3
 
 **Attestations Include:**
+
 - Build platform (GitHub Actions)
 - Builder identity (workflow)
 - Source materials (git commit, Dockerfile)
@@ -297,6 +320,7 @@ cosign verify \
 - Build metadata (timestamp, parameters)
 
 **Generated By:**
+
 - `actions/attest-build-provenance@v1` for PDFs
 - `docker/build-push-action` + Cosign for images
 
@@ -320,11 +344,13 @@ permissions:
 **Custom Domain:** enlightenment.dev
 **Source:** GitHub Actions deployment
 **Contents:**
+
 - `main.pdf` - Signed PDF
 - `main.pdf.cosign.bundle` - Signature bundle
 - `index.html` - Landing page
 
 **Setup:**
+
 1. Repository Settings → Pages
 2. Source: "GitHub Actions"
 3. Custom domain: enlightenment.dev
@@ -333,11 +359,13 @@ permissions:
 ### Published Artifacts
 
 **Public Access:**
-- https://enlightenment.dev - Landing page
-- https://enlightenment.dev/main.pdf - PDF
-- https://enlightenment.dev/main.pdf.cosign.bundle - Signature
+
+- <https://enlightenment.dev> - Landing page
+- <https://enlightenment.dev/main.pdf> - PDF
+- <https://enlightenment.dev/main.pdf.cosign.bundle> - Signature
 
 **GitHub Artifacts** (time-limited):
+
 - coordination-trilemma-pdf (30 days)
 - coordination-trilemma-pdf-signed (90 days)
 - build-logs (7 days)
@@ -345,6 +373,7 @@ permissions:
 ## Debugging Workflows
 
 ### View Logs
+
 1. Go to GitHub Actions tab
 2. Click on workflow run
 3. Click on job name
@@ -352,17 +381,20 @@ permissions:
 
 ### Common Issues
 
-**Build fails with "docker: command not found":**
+**Build fails with "Docker: command not found":**
+
 - Makefile trying to use Docker inside container
 - Fix: Ensure `GITHUB_ACTIONS` env var is set
 - Makefile auto-detects and uses local compilation
 
 **Sign/deploy jobs skipped:**
+
 - Check event type and conditions
 - Verify workflow_run succeeded
 - Check branch is `main`
 
 **Provenance shows "unknown":**
+
 - Check git is available in container
 - Check full history checkout (`fetch-depth: 0`)
 - Check git safe directory configured
@@ -404,6 +436,7 @@ All workflows support `workflow_dispatch` for manual triggering:
 ## Performance Optimization
 
 **Current Optimizations:**
+
 - Custom Alpine images (~500MB vs ~5GB)
 - No tool installation during runs
 - Cached Docker layers
@@ -411,6 +444,7 @@ All workflows support `workflow_dispatch` for manual triggering:
 - Path filters to skip unnecessary runs
 
 **Build Times:**
+
 - Docker build: ~2-3 minutes
 - LaTeX lint: ~30 seconds
 - PDF build: ~1-2 minutes
@@ -421,6 +455,7 @@ All workflows support `workflow_dispatch` for manual triggering:
 ## Future Improvements
 
 **Potential Enhancements:**
+
 - Reproducible builds (SOURCE_DATE_EPOCH)
 - Dependency pinning for Alpine packages
 - Build cache for faster rebuilds
@@ -433,7 +468,7 @@ All workflows support `workflow_dispatch` for manual triggering:
 - [BUILD.md](BUILD.md) - Local build instructions
 - [SECURITY.md](../.github/SECURITY.md) - Security verification
 - [TROUBLESHOOTING.md](TROUBLESHOOTING.md) - Common issues
-- [docker-setup.md](docker-setup.md) - Docker details
+- [Docker-setup.md](docker-setup.md) - Docker details
 - [SLSA_ROADMAP.md](SLSA_ROADMAP.md) - Path to Level 4
 
 ---

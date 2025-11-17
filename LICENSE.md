@@ -12,14 +12,16 @@ The Coordination Trilemma project uses **dual licensing**:
 **Licensed under Creative Commons Attribution 4.0 International (CC-BY 4.0)**
 
 The academic paper content includes:
+
 - All LaTeX source files in `src/tex/`
-- All markdown versions in `src/md/`
+- All Markdown versions in `src/md/`
 - Generated PDF outputs
 - The article text and its intellectual content
 
 **See:** [ARTICLE-LICENSE.txt](ARTICLE-LICENSE.txt) for full CC-BY 4.0 license text
 
 **Summary:**
+
 - ✅ You may share, copy, and redistribute the material
 - ✅ You may adapt, remix, transform, and build upon the material
 - ✅ For any purpose, even commercially
@@ -28,6 +30,7 @@ The academic paper content includes:
 - ⚠️ You may not apply legal terms or technological measures that restrict others
 
 **Citation:**
+
 ```
 B. Escalera, A. Escalera. "The Coordination Trilemma: A Formal Analysis of
 Large-Scale Human Cooperation." 2025. Available at: https://enlightenment.dev
@@ -40,6 +43,7 @@ Large-Scale Human Cooperation." 2025. Available at: https://enlightenment.dev
 **Licensed under GNU Affero General Public License v3.0 (AGPLv3)**
 
 The software and infrastructure includes:
+
 - Build system (Makefile)
 - Scripts in `scripts/`
 - Docker files in `docker/`
@@ -50,6 +54,7 @@ The software and infrastructure includes:
 **See:** [SOFTWARE-LICENSE.md](SOFTWARE-LICENSE.md) for full AGPLv3 license text
 
 **Summary:**
+
 - ✅ You may use, modify, and distribute the software
 - ✅ You may use it for any purpose, including commercial
 - ⚠️ You must disclose the source code when distributing
@@ -71,12 +76,14 @@ However, documentation may reference or quote from the academic paper content, w
 ## Rationale for Dual Licensing
 
 ### Why CC-BY for the Paper?
+
 - **Academic Freedom:** Allows wide dissemination and building upon the ideas
 - **Attribution:** Ensures proper credit while allowing derivative works
 - **Standard Practice:** Common license for academic publications
 - **Open Access:** Aligns with open scholarship principles
 
 ### Why AGPLv3 for Software?
+
 - **Copyleft:** Ensures improvements to build/deployment infrastructure remain open
 - **Network Provision:** AGPL's network clause prevents proprietary SaaS wrappers
 - **Community Benefits:** Forces sharing of enhancements
@@ -101,6 +108,7 @@ However, documentation may reference or quote from the academic paper content, w
 | README, CONTRIBUTING | AGPLv3 | Project documentation |
 
 **When in Doubt:**
+
 - If it's about the **ideas, proofs, arguments** → CC-BY 4.0
 - If it's about **how to build, deploy, verify** → AGPLv3
 
@@ -122,6 +130,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed contribution guidelines.
 ## Third-Party Dependencies
 
 ### Software Dependencies
+
 - **Docker:** Various licenses (check individual components)
 - **Alpine Linux:** Various licenses
 - **TeXLive:** LaTeX Project Public License (LPPL)
@@ -129,6 +138,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed contribution guidelines.
 - **GitHub Actions:** GitHub Terms of Service
 
 ### LaTeX Packages
+
 All LaTeX packages used are under LPPL or compatible licenses and are properly credited in the document.
 
 ---
@@ -146,8 +156,8 @@ All LaTeX packages used are under LPPL or compatible licenses and are properly c
 
 ## Full License Texts
 
-- **CC-BY 4.0:** See [ARTICLE-LICENSE.txt](ARTICLE-LICENSE.txt) or https://creativecommons.org/licenses/by/4.0/
-- **AGPLv3:** See [SOFTWARE-LICENSE.md](SOFTWARE-LICENSE.md) or https://www.gnu.org/licenses/agpl-3.0.html
+- **CC-BY 4.0:** See [ARTICLE-LICENSE.txt](ARTICLE-LICENSE.txt) or <https://creativecommons.org/licenses/by/4.0/>
+- **AGPLv3:** See [SOFTWARE-LICENSE.md](SOFTWARE-LICENSE.md) or <https://www.gnu.org/licenses/agpl-3.0.html>
 
 ---
 
