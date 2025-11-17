@@ -71,15 +71,25 @@ docker inspect ghcr.io/realnedsanders/coordination-trilemma/latex:latest
 - ✅ SLSA Provenance attestation from GitHub
 - ✅ Build metadata embedded in PDF
 - ✅ Git commit hash in PDF metadata
+- ✅ **Deployed PDF is cryptographically signed** - https://enlightenment.dev serves the signed version
 
-**Verify PDF signature:**
+**Verify the published PDF:**
 ```bash
-# Download the PDF and signature bundle from GitHub Actions artifacts
-# Then verify:
+# Download from enlightenment.dev
+curl -O https://enlightenment.dev/main.pdf
+curl -O https://enlightenment.dev/main.pdf.cosign.bundle
+
+# Verify signature
 cosign verify-blob --bundle main.pdf.cosign.bundle \
   --certificate-identity-regexp="^https://github.com/realnedsanders/Coordination-Trilemma" \
   --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
   main.pdf
+```
+
+**Or download from GitHub Actions artifacts:**
+```bash
+# The signed PDF is also available in GitHub Actions artifacts
+# under the name "coordination-trilemma-pdf-signed"
 ```
 
 **Inspect PDF metadata:**

@@ -99,13 +99,16 @@ As synthetic media makes verification impossible, this window is closing within 
 
 This project achieves **SLSA Build Level 3** with cryptographically signed artifacts:
 - ✅ Docker images signed with Cosign (keyless)
-- ✅ PDF artifacts signed with Cosign
+- ✅ **Published PDF is cryptographically signed** - enlightenment.dev serves only signed versions
 - ✅ SLSA provenance attestations
 - ✅ SBOM (Software Bill of Materials)
 - ✅ Build metadata embedded in artifacts
 
-**Verify artifacts:**
+**Verify the published PDF:**
 ```bash
+# Download and verify
+curl -O https://enlightenment.dev/main.pdf
+curl -O https://enlightenment.dev/main.pdf.cosign.bundle
 ./scripts/verify-signatures.sh
 ```
 

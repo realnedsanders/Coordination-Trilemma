@@ -27,7 +27,12 @@ LATEX = pdflatex
 BIBTEX = bibtex
 
 # Choose compilation method: docker (default) or local
-COMPILE_METHOD ?= docker
+# Auto-detect GitHub Actions and use local compilation (container already provides LaTeX)
+ifdef GITHUB_ACTIONS
+    COMPILE_METHOD ?= local
+else
+    COMPILE_METHOD ?= docker
+endif
 
 # Set commands based on compilation method
 ifeq ($(COMPILE_METHOD),local)

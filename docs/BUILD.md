@@ -81,8 +81,10 @@ This repository uses GitHub Actions to automatically:
 - **Build custom Docker image**: Rebuilds minimal Alpine-based image when Dockerfile changes
 - **Lint LaTeX files**: Checks all .tex files using ChkTeX
 - **Build the PDF**: Compiles using the custom minimal image
-- **Sign artifacts**: Cryptographically signs PDF and generates SLSA provenance
-- **Deploy to GitHub Pages**: Publishes the latest PDF with embedded viewer
+- **Sign the PDF**: Cryptographically signs PDF with Cosign (keyless) and generates SLSA provenance
+- **Deploy to GitHub Pages**: Publishes the **signed** PDF to https://enlightenment.dev
+
+The workflow ensures that only cryptographically signed PDFs are deployed to production. The signature bundle (`main.pdf.cosign.bundle`) is also deployed and can be used to verify authenticity.
 
 ## 📁 Project Structure
 

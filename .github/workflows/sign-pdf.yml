@@ -1,11 +1,17 @@
-name: Sign PDF Artifact
+# NOTE: This workflow is deprecated - signing is now integrated into latex-build-deploy.yml
+# PDF signing now happens before deployment in the main workflow
+# This file can be deleted
+
+name: Sign PDF Artifact (Deprecated)
 
 on:
-  workflow_run:
-    workflows: ["LaTeX Build & Deploy"]
-    types:
-      - completed
-    branches: [main]
+  # Disabled - signing is now in latex-build-deploy.yml
+  workflow_dispatch:  # Only manual trigger, not automatic
+  # workflow_run:
+  #   workflows: ["LaTeX Build & Deploy"]
+  #   types:
+  #     - completed
+  #   branches: [main]
 
 permissions:
   contents: read
