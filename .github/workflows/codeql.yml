@@ -52,29 +52,46 @@ jobs:
     name: Hadolint Docker Lint
     runs-on: ubuntu-latest
 
+    strategy:
+      fail-fast: false
+      matrix:
+        dockerfile:
+          - docker/Dockerfile.latex
+          - docker/Dockerfile.security
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run Hadolint on Dockerfiles
+      - name: Run Hadolint on ${{ matrix.dockerfile }}
         uses: hadolint/hadolint-action@v3.1.0
         with:
-          dockerfile: docker/Dockerfile.*
-          recursive: true
+          dockerfile: ${{ matrix.dockerfile }}
           failure-threshold: warning
           format: sarif
-          output-file: hadolint-results.sarif
+          output-file: hadolint-results-${{ matrix.dockerfile }}.sarif
           no-fail: false
 
       - name: Upload Hadolint results to GitHub Security
         uses: github/codeql-action/upload-sarif@v4
         if: always()
         with:
-          sarif_file: hadolint-results.sarif
-          category: hadolint
+          sarif_file: hadolint-results-${{ matrix.dockerfile }}.sarif
+          category: hadolint-${{ matrix.dockerfile }}
+
+      - name: Show readable output
+        if: failure()
+        run: |
+          echo "::group::Hadolint issues in ${{ matrix.dockerfile }}"
+          docker run --rm -i hadolint/hadolint < ${{ matrix.dockerfile }} || true
+          echo "::endgroup::"
 
       - name: Summary
         if: always()
         run: |
-          echo "### Hadolint Results" >> $GITHUB_STEP_SUMMARY
-          echo "Scanned all Dockerfiles in ./docker directory" >> $GITHUB_STEP_SUMMARY
+          echo "### Hadolint Results for ${{ matrix.dockerfile }}" >> $GITHUB_STEP_SUMMARY
+          if [ -f "hadolint-results-${{ matrix.dockerfile }}.sarif" ]; then
+            echo "✅ Scan completed" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "⚠️ Scan had issues" >> $GITHUB_STEP_SUMMARY
+          fi

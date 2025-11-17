@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **.hadolint.yaml** - Hadolint configuration for Dockerfile linting standards
+
 - **GitHub Community & Best Practices:**
   - **CODE_OF_CONDUCT.md** - Contributor Covenant 2.1 with academic discourse addendum
   - **.github/SUPPORT.md** - Comprehensive support guide for users
@@ -42,7 +44,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Renamed workflow from "CodeQL Security Scan" to "Security Scanning"
   - Kept ShellCheck (for shell scripts) and Hadolint (for Dockerfiles)
   - Updated Hadolint to use CodeQL Action v4 (v3 deprecated December 2026)
+  - Changed to matrix strategy to scan each Dockerfile separately with better error reporting
+  - Added readable output step that shows issues on failure
   - Added job summaries for better visibility
+- **Hadolint configuration** - Created `.hadolint.yaml` to configure Dockerfile linting
+  - Ignores DL3018 (pin apk versions) - Alpine edge packages don't have stable versions
+  - Added trusted registries (docker.io, ghcr.io)
+- **Dockerfile.security** - Fixed shell quoting issues flagged by hadolint
+  - Quoted command substitution in COSIGN_ARCH assignment
+  - Quoted variables in case statement and curl URL
 
 ### Changed
 - **SECURITY.md location** - Moved to .github/SECURITY.md for GitHub auto-detection

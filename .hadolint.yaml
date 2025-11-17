@@ -1,0 +1,19 @@
+# Hadolint configuration for Dockerfile linting
+# See: https://github.com/hadolint/hadolint
+
+# Ignore specific rules that don't apply to this project
+ignored:
+  # DL3018: Pin versions in apk add
+  # Reason: Alpine edge packages (especially texlive) don't have stable versions
+  # We rely on base image pinning and Docker layer caching for reproducibility
+  - DL3018
+
+# Treat these as errors (fail the build)
+failure-threshold: warning
+
+# Rules we want to enforce
+trustedRegistries:
+  - docker.io
+  - ghcr.io
+
+# Inline ignore patterns (can be used in Dockerfiles with # hadolint ignore=DL3018)
