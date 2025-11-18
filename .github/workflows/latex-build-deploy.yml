@@ -86,12 +86,6 @@ jobs:
     if: |
       github.event_name != 'workflow_run' ||
       github.event.workflow_run.conclusion == 'success'
-    container:
-      image: ghcr.io/realnedsanders/coordination-trilemma/models:latest
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-      options: --pull always
 
     steps:
       - name: Checkout code
@@ -113,6 +107,18 @@ jobs:
             echo "models_changed=true" >> $GITHUB_OUTPUT
           fi
 
+      - name: Log in to GitHub Container Registry
+        if: steps.check-models.outputs.models_changed == 'true'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pull models image
+        if: steps.check-models.outputs.models_changed == 'true'
+        run: docker pull ghcr.io/realnedsanders/coordination-trilemma/models:latest
+
       - name: Generate figures
         if: steps.check-models.outputs.models_changed == 'true'
         run: |
@@ -120,16 +126,28 @@ jobs:
           mkdir -p figures/static data/simulations
 
           # Generate ABM simulation figures
-          cd models && python -m python.abm.corruption_dynamics \
-            --steps 200 --enforcers 100 --seed 42 --output ../figures/static
+          docker run --rm \
+            -v ${{ github.workspace }}:/workspace \
+            -w /workspace/models \
+            ghcr.io/realnedsanders/coordination-trilemma/models:latest \
+            python -m python.abm.corruption_dynamics \
+            --steps 200 --enforcers 100 --seed 42 --output /workspace/figures/static
 
           # Generate bifurcation diagram
-          python -m python.abm.cooperation_threshold \
-            --bifurcation --steps 100 --agents 500 --output ../figures/static
+          docker run --rm \
+            -v ${{ github.workspace }}:/workspace \
+            -w /workspace/models \
+            ghcr.io/realnedsanders/coordination-trilemma/models:latest \
+            python -m python.abm.cooperation_threshold \
+            --bifurcation --steps 100 --agents 500 --output /workspace/figures/static
 
           # Generate conceptual diagrams
-          python -m python.analysis.generate_diagrams \
-            --all --output ../figures/static
+          docker run --rm \
+            -v ${{ github.workspace }}:/workspace \
+            -w /workspace/models \
+            ghcr.io/realnedsanders/coordination-trilemma/models:latest \
+            python -m python.analysis.generate_diagrams \
+            --all --output /workspace/figures/static
 
       - name: Verify figures exist
         run: |
