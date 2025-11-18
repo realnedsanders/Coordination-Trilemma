@@ -159,24 +159,7 @@ jobs:
           name: go-computation-results
           path: data/simulations
 
-      - name: Check if model files changed
-        id: check-models
-        run: |
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            # For PRs, check if models changed
-            git fetch origin ${{ github.base_ref }}
-            if git diff --name-only origin/${{ github.base_ref }}...HEAD | grep -q "^models/"; then
-              echo "models_changed=true" >> $GITHUB_OUTPUT
-            else
-              echo "models_changed=false" >> $GITHUB_OUTPUT
-            fi
-          else
-            # For pushes and other events, always check figures exist
-            echo "models_changed=true" >> $GITHUB_OUTPUT
-          fi
-
       - name: Generate figures
-        if: steps.check-models.outputs.models_changed == 'true'
         run: |
           # Create output directories
           mkdir -p figures/static
