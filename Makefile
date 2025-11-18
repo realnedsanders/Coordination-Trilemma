@@ -63,7 +63,7 @@ else
     RUN_BIBTEX = $(DOCKER_RUN) $(BIBTEX)
 endif
 
-.PHONY: all clean cleanall view docker-pull docker-pull-full help local figures figures-force
+.PHONY: all clean cleanall clean-figures view docker-pull docker-pull-full help local figures figures-force
 
 # Default target
 # In GitHub Actions, figures are generated in a separate job, so skip here
@@ -172,9 +172,16 @@ clean:
 	rm -f $(SRC_DIR)/build-info.tex
 	rm -rf $(BUILD_DIR)
 
-# Clean everything including PDF
+# Clean everything including PDF and generated figures
 cleanall: clean
 	rm -f $(MAIN).pdf
+	rm -f $(FIGURES_DIR)/*.png $(FIGURES_DIR)/*.csv
+	rm -rf data/simulations/
+
+# Clean only figures (useful for forcing regeneration)
+clean-figures:
+	rm -f $(FIGURES_DIR)/*.png $(FIGURES_DIR)/*.csv
+	@echo "Figures cleaned. Run 'make figures' to regenerate."
 
 # View the PDF (requires a PDF viewer)
 view: $(MAIN).pdf
