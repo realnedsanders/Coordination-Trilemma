@@ -3,32 +3,13 @@
 
 \subsection{Executive Summary}
 
-\textbf{The core claim.}
-
-\textbf{Within 3-6 years, synthetic media will make routine verification of content authenticity exponentially harder, closing the window for voluntary coordination based on verifiable truth.}
-
-This appendix provides technical evidence for this claim, analyzes the trajectory, examines proposed countermeasures, and assesses timeline uncertainty honestly. The stakes are clear: voluntary coordination requires shared reality, shared reality requires verifiable truth, and verifiable truth requires the ability to distinguish real from synthetic content.
+Within 3-6 years, synthetic media will make routine verification of content authenticity exponentially harder, closing the window for voluntary coordination based on verifiable truth. This appendix provides technical evidence for this claim, analyzes the trajectory, examines proposed countermeasures, and assesses timeline uncertainty honestly. The stakes are clear: voluntary coordination requires shared reality, shared reality requires verifiable truth, and verifiable truth requires the ability to distinguish real from synthetic content.
 
 \bigskip
 
-\textbf{Current state (October 2025).}
+As of October 2025, generation capabilities have advanced dramatically: video generation now produces 20 seconds of 1080p with synchronized audio (OpenAI Sora 2), the open-source gap with commercial models decreased from 4.52\% to 0.69\% in six months, and state control is becoming impossible as consumer hardware can generate deepfakes.
 
-\textbf{Generation Capabilities:}
- \begin{itemize}
- \item Video: 20 seconds of 1080p with synchronized audio (OpenAI Sora 2)
- \item Open-source gap: Decreased from 4.52\% to 0.69\% in six months
- \item State control becoming impossible (consumer hardware can generate deepfakes)
- \end{itemize}
-
-\textbf{Detection Performance:}
-- Human detection overall: \textbf{55.54\% accuracy} (barely above chance)
-- Human detection for high-quality short clips: \textbf{\textasciitilde25\%} (essentially failed)
-- AI detection on real-world deepfakes: \textbf{45-50\% performance drop} vs. academic benchmarks
- \begin{itemize}
- \item Best real-world AI detection: \textasciitilde82\% AUC (vs. 95\%+ on academic datasets)
- \end{itemize}
-
-\textbf{The gap is widening:} Each generation improvement requires detector retraining, but detectors can't train on techniques that don't exist yet.
+Detection performance has deteriorated catastrophically. Human detection overall achieves only 55.54\% accuracy (barely above chance), while human detection for high-quality short clips has fallen to approximately 25\% (essentially failed). AI detection on real-world deepfakes shows 45-50\% performance drop versus academic benchmarks, with best real-world AI detection achieving only approximately 82\% AUC (versus 95\%+ on academic datasets). The gap is widening: each generation improvement requires detector retraining, but detectors cannot train on techniques that don't exist yet.
 
 \textbf{Timeline with confidence levels.}
 
@@ -52,67 +33,15 @@ Feature-length generation viable &   Low (<50\%) &   2028-2035 range \\
 
 \bigskip
 
-\textbf{Why countermeasures will likely fail.}
-
-\textbf{Cryptographic content authentication:}
- \begin{itemize}
- \item Requires universal hardware replacement (trillions of dollars, decades)
- \item Bootstrapping problem: can't coordinate transition when can't trust information
- \item State-level actors can compromise hardware, mandate backdoors
- \item Who controls verification infrastructure?
- \end{itemize}
-
-\textbf{AI detection improvements:}
- \begin{itemize}
- \item Structural disadvantage: generators see detectors, iterate faster
- \item Economic incentive disparity: 1000:1 funding ratio favoring generation
- \item Mathematical limit: as generators approach perfection, detection becomes theoretically impossible
- \end{itemize}
-
-\textbf{Cultural adaptation:}
- \begin{itemize}
- \item Too slow (generations vs. years)
- \item Extreme skepticism prevents coordination as much as credulity
- \item Previous media revolutions took decades; we don't have decades
- \end{itemize}
+Countermeasures will likely fail for structural reasons. Cryptographic content authentication requires universal hardware replacement costing trillions of dollars and taking decades, faces a bootstrapping problem where transition cannot be coordinated when information cannot be trusted, and remains vulnerable to state-level actors who can compromise hardware and mandate backdoors while raising questions about who controls verification infrastructure. AI detection improvements face structural disadvantage because generators see detectors and iterate faster, confront a 1000:1 funding disparity favoring generation, and approach a mathematical limit where as generators approach perfection, detection becomes theoretically impossible. Cultural adaptation is too slow (generations versus years), and extreme skepticism prevents coordination as much as credulity does, while previous media revolutions took decades that we don't have.
 
 \bigskip
 
-\textbf{Implications for voluntary coordination.}
+After the threshold, coordination becomes impossible: you cannot verify traditions against source texts because texts can be fabricated, cannot see institutional betrayals clearly because evidence is dismissed as "deepfakes," cannot coordinate around observable truth because truth becomes unknowable, and cannot build trust networks because no foundation for verification exists. Voluntary coordination requires shared reality, shared reality requires verifiable truth, and that window is closing.
 
-\textbf{After the threshold:}
- \begin{itemize}
- \item Cannot verify traditions against source texts (texts can be fabricated)
- \item Cannot see institutional betrayals clearly (evidence dismissed as "deepfakes")
- \item Cannot coordinate around observable truth (truth becomes unknowable)
- \item Cannot build trust networks (no foundation for verification)
- \end{itemize}
+This timeline would be falsified if detection accuracy improves faster than generation quality for 3+ consecutive years, if cryptographic signing achieves greater than 80\% market adoption by 2030, if verification cost decreases relative to generation cost, or if a fundamental new detection approach emerges that generators cannot evade. Current status: all metrics are moving in the predicted direction with no indication of reversal.
 
-\textbf{Voluntary coordination requires shared reality. Shared reality requires verifiable truth. That window is closing.}
-
-\textbf{What would falsify this timeline.}
-
-We're wrong if:
-\begin{enumerate}
- \item Detection accuracy improves faster than generation quality for 3+ consecutive years
- \item Cryptographic signing achieves >80\% market adoption by 2030
- \item Verification cost decreases relative to generation cost
- \item Fundamental new detection approach emerges that generators cannot evade
-\end{enumerate}
-
-\textbf{Current status:} All metrics moving in predicted direction. No indication of reversal.
-
-\textbf{Decision framework.}
-
-\textbf{Asymmetry of outcomes:}
- \begin{itemize}
- \item Wrong pessimistically (window is 10 years, not 3): No harm from acting early
- \item Wrong optimistically (window is 3 years, not 10): Catastrophic harm from delay
- \end{itemize}
-
-\textbf{Rational choice:} Act as if the aggressive timeline is correct.
-
-You can examine beliefs while truth is verifiable, or wait until it's impossible. This appendix proves the window is closing.
+The asymmetry of outcomes determines rational action. If we are wrong pessimistically (window is 10 years, not 3), there is no harm from acting early. If we are wrong optimistically (window is 3 years, not 10), catastrophic harm results from delay. The rational choice is to act as if the aggressive timeline is correct. You can examine beliefs while truth is verifiable, or wait until it's impossible. This appendix proves the window is closing.
 
 
 \subsection{Current State (October 2025)}
@@ -123,24 +52,9 @@ You can examine beliefs while truth is verifiable, or wait until it's impossible
 
 The field has advanced dramatically in 2025:
 
-\textbf{OpenAI Sora 2~\cite{openai2025sora2,openai2025sora2systemcard} (September 30, 2025):}
- \begin{itemize}
- \item Generates up to 20 seconds of 1080p video from text prompts
- \item Synchronized audio generation (dialogue, sound effects, ambient audio)
- \item Significantly improved physics simulation compared to Sora 1:
- \item Basketball rebounds follow actual physics (no longer "teleport" to hoop)
- \item Improved momentum, collisions, buoyancy, rigidity modeling
- \item Better adherence to real-world dynamics
- \item Consistent character/object tracking across frames
- \item Main remaining artifacts: Occasional physics violations, consistency issues across cuts
- \end{itemize}
+\textbf{OpenAI Sora 2~\cite{openai2025sora2,openai2025sora2systemcard} (September 30, 2025)} generates up to 20 seconds of 1080p video from text prompts with synchronized audio generation including dialogue, sound effects, and ambient audio. Physics simulation has significantly improved compared to Sora 1: basketball rebounds now follow actual physics rather than "teleporting" to the hoop, with improved momentum, collisions, buoyancy, and rigidity modeling that better adheres to real-world dynamics. Character and object tracking remains consistent across frames. The main remaining artifacts are occasional physics violations and consistency issues across cuts.
 
-\textbf{Open-source alternatives:}
-- Open-Sora v1.2: Performance gap with commercial Sora decreased from \textbf{4.52\%} (October 2024) to \textbf{0.69\%} (March 2025)
- \begin{itemize}
- \item This rapid convergence means state control of generation technology is becoming impossible
- \item Anyone with consumer hardware (RTX 4090) can generate high-quality deepfakes locally
- \end{itemize}
+\textbf{Open-source alternatives} have closed the gap rapidly. Open-Sora v1.2 decreased its performance gap with commercial Sora from 4.52\% (October 2024) to 0.69\% (March 2025). This rapid convergence means state control of generation technology is becoming impossible---anyone with consumer hardware (RTX 4090) can generate high-quality deepfakes locally.
 
 \textbf{Feature-length generation claims:}
 Some industry figures have claimed feature-length movie generation by 2026-2027. Current proven capability is 6-20 second clips. Feature-length represents 300-900x scaling with no demonstrated intermediate milestones. 
@@ -149,13 +63,7 @@ Some industry figures have claimed feature-length movie generation by 2026-2027.
 
 \textbf{Audio Generation}
 
-Voice cloning has reached practical indistinguishability:
-\begin{itemize}
- \item ElevenLabs and Vall-E (Microsoft): 3 seconds of reference audio sufficient
- \item Real-time voice conversion with < 100ms latency
- \item Entirely synthetic voices indistinguishable from real speakers
- \item Music generation (Suno AI, Stable Audio): Full songs with lyrics from text prompts
-\end{itemize}
+Voice cloning has reached practical indistinguishability. ElevenLabs and Vall-E (Microsoft) require only 3 seconds of reference audio to clone a voice, with real-time voice conversion achieving less than 100ms latency. Entirely synthetic voices are now indistinguishable from real speakers. Music generation through Suno AI and Stable Audio produces full songs with lyrics from text prompts.
 
 \textbf{Image and Text}
 
@@ -167,60 +75,15 @@ Image generation (Midjourney v6, DALL-E 3, Stable Diffusion XL) produces photore
 
 The most comprehensive meta-analysis to date~\cite{diel2024deepfakes} examined 56 studies involving 86,155 participants:
 
-- \textbf{Overall accuracy: 55.54\%} (95\% CI [48.87, 62.10])
- \begin{itemize}
- \item Detection rates not significantly above chance (50\%), with confidence intervals crossed chance threshold
- \item By modality:
- \item Video: 57.31\% [47.80, 66.57]
- \item Audio: 62.08\% [38.23, 83.18]
- \item Images: 53.16\% [42.12, 64.64]
- \item Text: 52.00\% [37.42, 65.88]
- \item With training interventions: Improved to 65.14\% [55.21, 74.46]
- \end{itemize}
+Overall accuracy reached only 55.54\% (95\% CI [48.87, 62.10]), with detection rates not significantly above chance (50\%) since confidence intervals crossed the chance threshold. By modality, video achieved 57.31\% [47.80, 66.57], audio 62.08\% [38.23, 83.18], images 53.16\% [42.12, 64.64], and text 52.00\% [37.42, 65.88]. Training interventions improved accuracy to 65.14\% [55.21, 74.46], but this remains far from reliable detection.
 
-\textbf{Why humans fail:}
- \begin{itemize}
- \item Focus on wrong cues (blinking, skin texture) that generators have learned to fake
- \item Confirmation bias drives perception
- \item Cognitive load prevents critical analysis of every piece of media
- \item Resolution improvements have eliminated obvious artifacts
- \end{itemize}
+Humans fail at detection for several reasons: they focus on wrong cues (blinking, skin texture) that generators have learned to fake, confirmation bias drives perception, cognitive load prevents critical analysis of every piece of media, and resolution improvements have eliminated obvious artifacts.
 
-\textbf{AI Detection}
+The AI detection picture is deeply troubling. On training distribution (known techniques), accuracy reaches 95-99\% with low false positive rates and fast processing. On "in the wild" deepfakes~\cite{chandra2025deepfakeeval}, the most comprehensive recent study collected real-world deepfakes from social media and tested state-of-the-art open-source models, revealing catastrophic performance degradation: video models averaged 50\% drop in AUC compared to academic benchmarks, audio models averaged 48\% drop, and image models averaged 45\% drop. Best-performing models on real-world data achieved only 82\% AUC versus 95\%+ on academic datasets, with many models performing barely above chance (53-56\% AUC).
 
-The picture is deeply troubling:
+The fundamental problem is that this is an adversarial arms race where generation has structural advantages. Generators see detectors because detection methods must be public to be trusted, so generators train against them. Generators iterate faster because they test offline while detectors wait for real-world deployments. Costs are asymmetric because one evasion technique works broadly while detection must handle all techniques. Economic incentives favor generation (entertainment, advertising) over detection. Training data lags because detectors train on past techniques while generators use current/future techniques.
 
-\emph{On training distribution (known techniques):}
- \begin{itemize}
- \item Accuracy: 95-99\%
- \item Low false positive rates
- \item Fast processing
- \end{itemize}
-
-\emph{On "in the wild" deepfakes~\cite{chandra2025deepfakeeval}:}
-
-The most comprehensive recent study collected real-world deepfakes from social media and tested state-of-the-art open-source models:
-
-- \textbf{Catastrophic performance degradation:}
- - Video models: Average \textbf{50\% drop in AUC} compared to academic benchmarks
- - Audio models: Average \textbf{48\% drop in AUC}
- - Image models: Average \textbf{45\% drop in AUC}
-- Best-performing models on real-world data: \textbf{82\% AUC} vs. 95\%+ on academic datasets
- \begin{itemize}
- \item Many models performed barely above chance (53-56\% AUC)
- \end{itemize}
-
-\textbf{The fundamental problem:} This is an adversarial arms race where generation has structural advantages:
-
-1. \textbf{Generator sees detector} - Detection methods must be public to be trusted; generators train against them
-2. \textbf{Faster iteration} - Generators test offline; detectors wait for real-world deployments
-3. \textbf{Asymmetric costs} - One evasion technique works broadly; detection must handle all techniques
-4. \textbf{Economic incentives} - More investment in generation (entertainment, advertising) than detection
-5. \textbf{Training data lag} - Detectors trained on past techniques; generators use current/future techniques
-
-Academic benchmarks fail to predict real-world performance because they use synthetic, controlled deepfakes with known generation techniques. Real-world deepfakes use latest models, custom techniques, and adversarial adjustments.
-
-\textbf{Well-resourced actors:} State-level capabilities (Russian Internet Research Agency, Chinese APT groups, Iranian operations) have demonstrated ability to evade detection for extended periods.
+Academic benchmarks fail to predict real-world performance because they use synthetic, controlled deepfakes with known generation techniques, while real-world deepfakes use latest models, custom techniques, and adversarial adjustments. State-level capabilities (Russian Internet Research Agency, Chinese APT groups, Iranian operations) have demonstrated ability to evade detection for extended periods.
 
 \textbf{The trajectory.}
 
@@ -268,77 +131,25 @@ Year &   Generation Quality &   Human Detection &   AI Detection (in-the-wild) &
 
 \textbf{The critical threshold.}
 
-\textbf{Definition:} The threshold is crossed when:
- \begin{itemize}
- \item Expert detection drops below 60\% accuracy with tools
- \item Public detection drops below 25\% accuracy (essentially failed)
- \item Detection cost exceeds creation cost by 10x or more
- \item Fake content volume creates signal-to-noise collapse
- \end{itemize}
+The threshold is crossed when expert detection drops below 60\% accuracy with tools, public detection drops below 25\% accuracy (essentially failed), detection cost exceeds creation cost by 10x or more, and fake content volume creates signal-to-noise collapse.
 
-\textbf{Current status (October 2025):}
- \begin{itemize}
- \item Expert detection: ~75\% accuracy with tools (still possible but difficult)
- \end{itemize}
-- Public detection: ~56\% overall, \textbf{~25\% for high-quality short clips} $\leftarrow$ \textbf{Threshold crossed for general public on high-quality content}
- \begin{itemize}
- \item Cost ratio: ~5x (approaching threshold)
- \item Content volume: Manageable but growing exponentially
- \end{itemize}
+As of October 2025, expert detection achieves approximately 75\% accuracy with tools (still possible but difficult). Public detection sits at approximately 56\% overall, but \textbf{approximately 25\% for high-quality short clips}---meaning the threshold has already been crossed for the general public on high-quality content. The cost ratio is approximately 5x (approaching threshold), and content volume remains manageable but is growing exponentially.
 
 \textbf{Confidence-calibrated timeline.}
 
-\textbf{Very High Confidence (>90\%):}
- \begin{itemize}
- \item Short-form video (<20 seconds) has crossed public detectability threshold
- \item Open-source models will continue closing gap with commercial systems
- \item Economic incentives favor generation over detection
- \item Generation quality improvement rate will continue in near term
- \end{itemize}
+With very high confidence (>90\%), we can state that short-form video (<20 seconds) has crossed the public detectability threshold, open-source models will continue closing the gap with commercial systems, economic incentives favor generation over detection, and generation quality improvement rates will continue in the near term.
 
-\textbf{High Confidence (>80\%):}
- \begin{itemize}
- \item Expert detection will fail for most content within 3-6 years
- \item AI detection degrades catastrophically on real-world content
- \item Cryptographic signing will not achieve >50\% adoption within 10 years
- \item Information asymmetry gives generators permanent advantage
- \end{itemize}
+With high confidence (>80\%), expert detection will fail for most content within 3-6 years, AI detection degrades catastrophically on real-world content, cryptographic signing will not achieve greater than 50\% adoption within 10 years, and information asymmetry gives generators a permanent advantage.
 
-\textbf{Medium Confidence (50-80\%):}
- \begin{itemize}
- \item Generation quality improvement rate continues long-term (no precedent for sudden stops)
- \item Open-source proliferation will make control impossible
- \item Cultural adaptation mechanisms insufficient
- \item Verification becomes exponentially (not just linearly) harder
- \end{itemize}
+With medium confidence (50-80\%), generation quality improvement rates will continue long-term (there is no precedent for sudden stops), open-source proliferation will make control impossible, cultural adaptation mechanisms will prove insufficient, and verification will become exponentially (not just linearly) harder.
 
-\textbf{Low Confidence (20-50\%):}
- \begin{itemize}
- \item Exact timeline for expert detection failure (significant variance)
- \item When/if feature-length generation becomes viable (2028-2035 range)
- \item Whether detection can achieve breakthrough improvements
- \item Regulatory/technical intervention effectiveness
- \end{itemize}
+With low confidence (20-50\%), predictions include the exact timeline for expert detection failure (significant variance exists), when or if feature-length generation becomes viable (2028-2035 range), whether detection can achieve breakthrough improvements, and the effectiveness of regulatory or technical intervention.
 
 \textbf{Uncertainty factors.}
 
-\textbf{What could delay the threshold:}
- \begin{itemize}
- \item Technical barriers we haven't identified
- \item Effective regulation limiting development/deployment
- \item Breakthrough in detection technology (e.g., fundamental physical signatures)
- \item Social adaptation creating cultural immune response
- \item Economic disincentives for generation
- \end{itemize}
+Several factors could delay the threshold: technical barriers we haven't identified, effective regulation limiting development and deployment, breakthroughs in detection technology (such as fundamental physical signatures), social adaptation creating a cultural immune response, and economic disincentives for generation.
 
-\textbf{What could accelerate the threshold:}
- \begin{itemize}
- \item AI capability breakthrough (GPT-5 level models)
- \item Proliferation to hostile actors
- \item Deliberate flooding attacks
- \item Loss of trust in verification systems
- \item Recursive improvement (AI improving AI generation)
- \end{itemize}
+Conversely, several factors could accelerate the threshold: AI capability breakthroughs (GPT-5 level models), proliferation to hostile actors, deliberate flooding attacks, loss of trust in verification systems, and recursive improvement (AI improving AI generation).
 
 \textbf{Honest assessment:} Direction is clear (detection losing). Timeline has uncertainty (3-6 year range). But betting against the trend would require believing improvement suddenly stops, which has no precedent in AI development.
 
@@ -348,72 +159,25 @@ To make our projections more rigorous, we model three scenarios based on differe
 
 \textbf{Baseline Projection (Current Trajectory):}
 
-Assumptions:
-\begin{itemize}
- \item Detection accuracy improves: 5\% annually (current trend)
- \item Generation quality improves: 15\% annually (current trend)
- \item Gap widening rate: 10\% annually
- \item Current state: Human detection 55.54\%, expert detection ~75\%
-\end{itemize}
+This scenario assumes detection accuracy improves at 5\% annually (current trend), generation quality improves at 15\% annually (current trend), the gap widens at 10\% annually, and current state shows human detection at 55.54\% and expert detection at approximately 75\%.
 
-Timeline to threshold:
-- Expert detection falls below 60\%: \textbf{3-4 years} (2028-2029)
-- Public detection falls below 25\% for all content: \textbf{5-6 years} (2030-2031)
-- Cost ratio exceeds 10x: \textbf{4-5 years} (2029-2030)
-
-\textbf{Confidence:} High (>80\%) - Extrapolates current demonstrated trends
+Under these assumptions, expert detection falls below 60\% in 3-4 years (2028-2029), public detection falls below 25\% for all content in 5-6 years (2030-2031), and cost ratio exceeds 10x in 4-5 years (2029-2030). This projection has high confidence (>80\%) as it extrapolates current demonstrated trends.
 
 \textbf{Optimistic Scenario (Detection Breakthrough):}
 
-Assumptions:
-\begin{itemize}
- \item Detection accuracy improves: 20\% annually (requires major breakthrough)
- \item Generation quality improves: 15\% annually (continues current)
- \item Gap narrowing rate: 5\% annually
- \item Breakthrough occurs in next 1-2 years
-\end{itemize}
+This scenario assumes detection accuracy improves at 20\% annually (requiring a major breakthrough), generation quality improves at 15\% annually (continuing current trends), the gap narrows at 5\% annually, and a breakthrough occurs in the next 1-2 years.
 
-Timeline to threshold:
-- Expert detection maintains >60\%: \textbf{8-12 years} (2033-2037)
- \begin{itemize}
- \item Public detection stabilizes ~40\%: Beyond 10 years
- \item Cost ratio stays <10x: 7-10 years
- \end{itemize}
+Under these assumptions, expert detection maintains above 60\% for 8-12 years (2033-2037), public detection stabilizes at approximately 40\% beyond 10 years, and cost ratio stays below 10x for 7-10 years. This projection has low confidence (<30\%) as it requires unprecedented detection advancement with no historical precedent.
 
-\textbf{Confidence:} Low (<30\%) - Requires unprecedented detection advancement with no historical precedent
-
-\textbf{What would cause this:}
- \begin{itemize}
- \item Fundamental physical signatures discovered that generators cannot spoof
- \item Quantum-based verification deployed at scale
- \item International cooperation enforces generation limits (extremely unlikely)
- \item AI development plateau (no historical precedent)
- \end{itemize}
+This scenario would require fundamental physical signatures being discovered that generators cannot spoof, quantum-based verification deployed at scale, international cooperation enforcing generation limits (extremely unlikely), or an AI development plateau (no historical precedent).
 
 \textbf{Pessimistic Scenario (Generation Acceleration):}
 
-Assumptions:
-\begin{itemize}
- \item Detection accuracy improves: 5\% annually (current trend continues)
- \item Generation quality improves: 25\% annually (GPT-5 level advancement)
- \item Gap widening rate: 20\% annually
- \item Major AI capability jump in next 1-2 years
-\end{itemize}
+This scenario assumes detection accuracy improves at 5\% annually (current trend continues), generation quality improves at 25\% annually (GPT-5 level advancement), the gap widens at 20\% annually, and a major AI capability jump occurs in the next 1-2 years.
 
-Timeline to threshold:
-- Expert detection falls below 60\%: \textbf{1.5-2.5 years} (late 2026-late 2027)
-- Public detection already below 25\% for most content: \textbf{2-3 years} (2027-2028)
-- Cost ratio exceeds 10x: \textbf{2-3 years} (2027-2028)
+Under these assumptions, expert detection falls below 60\% in 1.5-2.5 years (late 2026-late 2027), public detection falls below 25\% for most content in 2-3 years (2027-2028), and cost ratio exceeds 10x in 2-3 years (2027-2028). This projection has medium confidence (40-60\%) as it is plausible given AI development trajectory and economic incentives.
 
-\textbf{Confidence:} Medium (40-60\%) - Plausible given AI development trajectory and economic incentives
-
-\textbf{What would cause this:}
- \begin{itemize}
- \item GPT-5 or equivalent released with major capability jump
- \item Open-source models reach parity with best commercial systems (already happening: 0.69\% gap)
- \item Recursive self-improvement in generation models
- \item State actors deliberately flood information space
- \end{itemize}
+This scenario would be triggered by GPT-5 or equivalent being released with a major capability jump, open-source models reaching parity with the best commercial systems (already happening with the 0.69\% gap), recursive self-improvement in generation models, or state actors deliberately flooding the information space.
 
 \textbf{Current Indicators:}
 
@@ -451,13 +215,9 @@ Based on current indicators:
 
 Even under optimistic scenario (8-12 years), examination requires years and must begin immediately. Under baseline/pessimistic scenarios, window is critically short.
 
-\textbf{Asymmetry of risk remains total:}
- \begin{itemize}
- \item Act on pessimistic timeline, turns out optimistic: No harm, extra time is bonus
- \item Act on optimistic timeline, turns out pessimistic: Catastrophic, miss window entirely
- \end{itemize}
+The asymmetry of risk remains total: if we act on the pessimistic timeline and it turns out optimistic, there is no harm and extra time is a bonus; if we act on the optimistic timeline and it turns out pessimistic, the result is catastrophic and we miss the window entirely.
 
-\textbf{Rational strategy: Act on pessimistic timeline (1.5-2.5 years).} Even if probability is only 40\%, the cost of being wrong is infinite.
+The rational strategy is to act on the pessimistic timeline (1.5-2.5 years). Even if its probability is only 40\%, the cost of being wrong is infinite.
 
 
 \subsection{Why Countermeasures Will Likely Fail}
@@ -468,31 +228,13 @@ Even under optimistic scenario (8-12 years), examination requires years and must
 
 \textbf{Technical soundness:} The cryptography is mathematically robust. This could theoretically work.
 
-\textbf{Adoption barriers make success unlikely:}
+\textbf{Adoption barriers make success unlikely.}
 
-\textbf{Hardware requirements:}
- \begin{itemize}
- \item Universal hardware replacement (every camera, microphone globally)
- \item Legacy devices remain unsigned (everything before implementation)
- \item Cost: Trillions of dollars globally
- \item Timeline: Decades for full adoption
- \end{itemize}
+Hardware requirements present the first major barrier: universal hardware replacement would be needed for every camera and microphone globally, legacy devices would remain unsigned (everything manufactured before implementation), costs would reach trillions of dollars globally, and full adoption would take decades.
 
-\textbf{Technical vulnerabilities:}
- \begin{itemize}
- \item Hardware compromise: State actors can extract keys
- \item Supply chain attacks: Compromised devices at manufacture
- \item Key management: Who controls root certificates?
- \item Side-channel attacks: Keys extractable through various methods
- \end{itemize}
+Technical vulnerabilities compound this problem. State actors can extract keys through hardware compromise, supply chain attacks can compromise devices at manufacture, key management raises the question of who controls root certificates, and side-channel attacks make keys extractable through various methods.
 
-\textbf{Governance problems:}
- \begin{itemize}
- \item International coordination requirement (divergent state interests)
- \item States can mandate backdoors
- \item Authoritarian regimes can control key distribution
- \item Corporate control of signing infrastructure
- \end{itemize}
+Governance problems add another layer. International coordination would be required despite divergent state interests, states can mandate backdoors, authoritarian regimes can control key distribution, and corporations would control the signing infrastructure.
 
 \textbf{The bootstrapping problem:} During the transition period (which could last decades), the information commons is already poisoned. You can't coordinate a global transition when you can't trust information about the transition itself.
 
@@ -502,14 +244,7 @@ Even under optimistic scenario (8-12 years), examination requires years and must
 
 \textbf{The proposal:} Record content creation and modifications on blockchain for immutable audit trail.
 
-\textbf{Fundamental flaw:} Blockchain verifies the record, not the content. "Garbage in, garbage out."
-
-\begin{itemize}
- \item Can record a deepfake was created at time T
- \item Cannot verify content authenticity at capture
- \item Doesn't solve the initial verification problem
- \item No mechanism to remove false information once recorded
-\end{itemize}
+\textbf{Fundamental flaw:} Blockchain verifies the record, not the content. "Garbage in, garbage out." It can record that a deepfake was created at time T but cannot verify content authenticity at capture, doesn't solve the initial verification problem, and provides no mechanism to remove false information once recorded.
 
 \textbf{Confidence assessment:} This doesn't solve the verification problem at all.
 
@@ -519,21 +254,9 @@ Even under optimistic scenario (8-12 years), examination requires years and must
 
 If a generator reaches perfection (statistically indistinguishable from real), detection becomes theoretically impossible. We're approaching this limit. Best generators already fool expert humans. Detection relies on generator imperfections. As imperfections vanish, detection fails.
 
-\textbf{Resource asymmetry:}
- \begin{itemize}
- \item Billions invested in generation vs. millions in detection (1000:1 funding disparity)
- \item Generation has positive economic value (entertainment, advertising, productivity)
- \item Detection is a cost center with no revenue
- \item Market forces structurally favor generation
- \end{itemize}
+Resource asymmetry heavily favors generation: billions are invested in generation versus millions in detection (a 1000:1 funding disparity), generation has positive economic value through entertainment, advertising, and productivity while detection is a cost center with no revenue, and market forces structurally favor generation.
 
-\textbf{The adversarial advantage:}
- \begin{itemize}
- \item Generators can train specifically to evade detection
- \item Detection methods must be public (to be trusted)
- \item Generators iterate faster (offline testing vs. deployment)
- \item One evasion technique defeats many detectors
- \end{itemize}
+The adversarial advantage compounds this asymmetry. Generators can train specifically to evade detection, detection methods must be public to be trusted, generators iterate faster through offline testing versus deployment cycles, and one evasion technique defeats many detectors.
 
 \textbf{Confidence assessment:} Low confidence (<30\%) that detection keeps pace with generation over 5+ years.
 
@@ -556,43 +279,17 @@ If a generator reaches perfection (statistically indistinguishable from real), d
 
 \textbf{Documented harms (October 2025).}
 
-\textbf{Political sphere:}
- \begin{itemize}
- \item Fabricated politician statements during elections (documented in multiple countries)
- \item False video "evidence" of corruption
- \item Synthetic "endorsements" from respected figures
- \item Growing problem across democracies and autocracies
- \end{itemize}
+In the political sphere, documented harms include fabricated politician statements during elections in multiple countries, false video "evidence" of corruption, synthetic "endorsements" from respected figures, and a growing problem across both democracies and autocracies.
 
-\textbf{Financial fraud:}
- \begin{itemize}
- \item CEO voice deepfakes authorizing wire transfers (\$35M loss in one documented case)
- \item Synthetic video meetings for social engineering
- \item Fake product reviews and testimonials at scale
- \item Stock manipulation through fabricated news
- \end{itemize}
+Financial fraud has escalated dramatically. CEO voice deepfakes authorizing wire transfers have caused \$35M losses in one documented case, synthetic video meetings enable social engineering attacks, fake product reviews and testimonials operate at scale, and stock manipulation occurs through fabricated news.
 
-\textbf{Social manipulation:}
- \begin{itemize}
- \item Non-consensual intimate imagery (predominantly targeting women)
- \item Fabricated evidence in legal disputes
- \item Synthetic personas spreading disinformation
- \item Harassment through impersonation
- \end{itemize}
+Social manipulation takes particularly harmful forms: non-consensual intimate imagery predominantly targeting women, fabricated evidence in legal disputes, synthetic personas spreading disinformation, and harassment through impersonation.
 
-\textbf{Erosion of trust ("liar's dividend"):}
- \begin{itemize}
- \item Real videos dismissed as deepfakes
- \item Inability to verify footage from conflict zones
- \item Politicians pre-emptively claiming videos are fake
- \item General paralysis in information evaluation
- \end{itemize}
+Perhaps most insidiously, the erosion of trust creates a "liar's dividend." Real videos are dismissed as deepfakes, footage from conflict zones cannot be verified, politicians pre-emptively claim videos are fake, and general paralysis affects information evaluation.
 
 \textbf{The qualitative shift.}
 
-- \textbf{2020-2023:} Deepfakes were novelties, expensive, obvious
-- \textbf{2024-2025:} Deepfakes are cheap, accessible, convincing
-- \textbf{2026+ (projected):} Indistinguishable at scale
+From 2020-2023, deepfakes were novelties---expensive and obvious. In 2024-2025, deepfakes became cheap, accessible, and convincing. By 2026 and beyond (projected), they will be indistinguishable at scale.
 
 The question has shifted from "can it be done?" to "can it be detected?" to "can anything be trusted?"
 
@@ -601,29 +298,11 @@ The question has shifted from "can it be done?" to "can it be detected?" to "can
 
 \textbf{Why the window is closing.}
 
-\textbf{Now (October 2025):}
- \begin{itemize}
- \item Can still verify truth with effort (experts can distinguish most content)
- \item Expert tools still work on most content with careful analysis
- \item Obvious deepfakes remain identifiable
- \item Institutions haven't fully adapted to threat
- \end{itemize}
+Now (October 2025), truth can still be verified with effort as experts can distinguish most content, expert tools still work on most content with careful analysis, obvious deepfakes remain identifiable, and institutions haven't fully adapted to the threat.
 
-\textbf{Soon (2-5 years):}
- \begin{itemize}
- \item Routine verification becomes exponentially harder
- \item Expert tools fail on most content
- \item No reliable way to distinguish real from fake for most people
- \item Trust in all media collapses
- \end{itemize}
+Soon (2-5 years), routine verification becomes exponentially harder, expert tools fail on most content, no reliable way exists to distinguish real from fake for most people, and trust in all media collapses.
 
-\textbf{After threshold:}
- \begin{itemize}
- \item Coordination requires trust
- \item Trust requires verification
- \item Verification becomes impossible
- \item Coordination collapses
- \end{itemize}
+After the threshold, coordination requires trust, trust requires verification, verification becomes impossible, and therefore coordination collapses.
 
 \textbf{Why this matters for voluntary coordination.}
 
@@ -639,98 +318,40 @@ Voluntary coordination requires:
 
 \textbf{The asymmetry of risk.}
 
-\textbf{Scenario 1: Threshold is 10 years away}
- \begin{itemize}
- \item We have more time than expected
- \item Early action still benefits from extra time
- \item No cost to acting sooner (examination still valuable)
- \item Preparation helps even if timeline is longer
- \end{itemize}
+If the threshold is 10 years away, we have more time than expected, early action still benefits from the extra time, there is no cost to acting sooner since examination is still valuable, and preparation helps even if the timeline is longer.
 
-\textbf{Scenario 2: Threshold is 2 years away}
- \begin{itemize}
- \item We have much less time than hoped
- \item Delay is catastrophic
- \item Acting immediately is essential
- \item No time for preparation
- \end{itemize}
+If the threshold is 2 years away, we have much less time than hoped, delay is catastrophic, acting immediately is essential, and there is no time for preparation.
 
-\textbf{Rational choice:} Act as if the aggressive timeline is correct.
+The rational choice is to act as if the aggressive timeline is correct. The cost of being wrong is asymmetric: if wrong about a long timeline and we act unnecessarily early, the cost is minimal since examination is still valuable; if wrong about a short timeline and we delay when time is critical, the cost is catastrophic and results in inability to coordinate for survival.
 
-\textbf{The cost of being wrong:}
- \begin{itemize}
- \item Wrong about long timeline (we act unnecessarily early): Minimal cost, examination still valuable
- \item Wrong about short timeline (we delay when time is critical): Catastrophic cost, inability to coordinate for survival
- \end{itemize}
-
-\textbf{Decision theory:} Expected value maximization requires acting on aggressive timeline.
+Decision theory requires expected value maximization, which dictates acting on the aggressive timeline.
 
 
 \subsection{Uncertainty and Falsification}
 
 \textbf{What we know vs. what we don't.}
 
-\textbf{Very High Confidence (>90\%):}
- \begin{itemize}
- \item Short-form video has crossed public detection threshold
- \item Open-source closing gap with commercial models
- \item Economic incentives structurally favor generation
- \item Detection degrades on real-world content
- \item Generation quality improving rapidly
- \end{itemize}
+With very high confidence (>90\%), short-form video has crossed the public detection threshold, open-source is closing the gap with commercial models, economic incentives structurally favor generation, detection degrades on real-world content, and generation quality is improving rapidly.
 
-\textbf{High Confidence (>80\%):}
- \begin{itemize}
- \item Expert detection will fail for most content within 3-6 years
- \item Cryptographic signing won't achieve critical mass
- \item Information asymmetry gives generators permanent advantage
- \item Cultural adaptation insufficient
- \end{itemize}
+With high confidence (>80\%), expert detection will fail for most content within 3-6 years, cryptographic signing won't achieve critical mass, information asymmetry gives generators a permanent advantage, and cultural adaptation will prove insufficient.
 
-\textbf{Medium Confidence (50-80\%):}
- \begin{itemize}
- \item Verification becomes exponentially (not just linearly) harder
- \item Feature-length generation viable by 2030-2035
- \item Countermeasures fail to prevent threshold crossing
- \item Timeline estimate accuracy ($\pm$2 years)
- \end{itemize}
+With medium confidence (50-80\%), verification becomes exponentially (not just linearly) harder, feature-length generation becomes viable by 2030-2035, countermeasures fail to prevent threshold crossing, and timeline estimates have $\pm$2 year accuracy.
 
-\textbf{Low Confidence (20-50\%):}
- \begin{itemize}
- \item Exact timeline for various milestones
- \item Effectiveness of unknown countermeasures
- \item Rate of cultural adaptation
- \item Whether breakthrough detection methods possible
- \end{itemize}
+With low confidence (20-50\%), we cannot precisely predict the exact timeline for various milestones, the effectiveness of unknown countermeasures, the rate of cultural adaptation, or whether breakthrough detection methods are possible.
 
 \textbf{Falsification criteria.}
 
 \textbf{We're wrong if:}
 
-\textbf{Prediction 1:} Detection accuracy improves faster than generation quality for 3+ consecutive years
-- \textbf{Current status:} Generation improving faster (gap widening)
-- \textbf{Metric to track:} Human detection accuracy, AI detection AUC on real-world content
+\textbf{Prediction 1:} Detection accuracy improves faster than generation quality for 3+ consecutive years. Current status: generation is improving faster (gap widening). Metric to track: human detection accuracy and AI detection AUC on real-world content.
 
-\textbf{Prediction 2:} Cryptographic content authentication achieves >80\% market adoption by 2030
-- \textbf{Current status:} <1\% adoption, no clear path to deployment
-- \textbf{Metric to track:} Percentage of devices with signing capability
+\textbf{Prediction 2:} Cryptographic content authentication achieves greater than 80\% market adoption by 2030. Current status: less than 1\% adoption with no clear path to deployment. Metric to track: percentage of devices with signing capability.
 
-\textbf{Prediction 3:} Verification cost decreases relative to generation cost
-- \textbf{Current status:} Cost ratio ~5x and growing
-- \textbf{Metric to track:} Cost(verification)/Cost(generation)
+\textbf{Prediction 3:} Verification cost decreases relative to generation cost. Current status: cost ratio is approximately 5x and growing. Metric to track: Cost(verification)/Cost(generation).
 
-\textbf{Prediction 4:} A fundamentally new detection approach emerges that generators cannot evade
-- \textbf{Current status:} No such approach identified
-- \textbf{Metric to track:} Detection accuracy on adversarially-generated content
+\textbf{Prediction 4:} A fundamentally new detection approach emerges that generators cannot evade. Current status: no such approach has been identified. Metric to track: detection accuracy on adversarially-generated content.
 
-\textbf{How to track these metrics:}
- \begin{itemize}
- \item Human detection accuracy on latest models (currently 55.54\%)
- \item AI detection AUC on real-world deepfakes (currently ~60\%)
- \item Open-source vs. commercial performance gap (currently 0.69\%)
- \item Cost ratio: verification/generation (currently ~5x)
- \item Cryptographic signing adoption rate (currently ~0\%)
- \end{itemize}
+These metrics can be tracked through human detection accuracy on latest models (currently 55.54\%), AI detection AUC on real-world deepfakes (currently approximately 60\%), open-source versus commercial performance gap (currently 0.69\%), cost ratio of verification to generation (currently approximately 5x), and cryptographic signing adoption rate (currently approximately 0\%).
 
 \textbf{Comparison to previous failed predictions.}
 
@@ -738,41 +359,15 @@ Voluntary coordination requires:
 
 Malthus predicted population collapse based on fixed technology. He was logically sound given his assumptions, but technology improved (Green Revolution, mechanization, etc.). His error was assuming technology was static.
 
-\textbf{Our prediction explicitly accounts for technology improvement:}
- \begin{itemize}
- \item We predict generation improves faster than detection (this IS the technology improvement)
- \end{itemize}
-- Our claim is about the \emph{relative trajectory}, not absolute capability
- \begin{itemize}
- \item Falsification requires detection improving faster than generation (testable)
- \end{itemize}
+Our prediction explicitly accounts for technology improvement: we predict generation improves faster than detection, which \emph{is} the technology improvement. Our claim concerns the relative trajectory, not absolute capability, and falsification requires detection improving faster than generation (which is testable).
 
-\textbf{Key difference:} Malthus assumed technology was static and was proved wrong. We assume technology improves and base predictions on which technology (generation vs. detection) has structural advantages.
+The key difference from Malthus is that he assumed technology was static and was proved wrong. We assume technology improves and base predictions on which technology (generation versus detection) has structural advantages.
 
-\textbf{Similar failed predictions:} "End of history," various "singularity" predictions with precise dates, Y2K catastrophe predictions. These failed because they:
- \begin{itemize}
- \item Underestimated human adaptation
- \item Overestimated single-factor importance
- \item Ignored feedback mechanisms
- \item Made overly precise predictions
- \end{itemize}
+Similar failed predictions include "end of history," various "singularity" predictions with precise dates, and Y2K catastrophe predictions. These failed because they underestimated human adaptation, overestimated single-factor importance, ignored feedback mechanisms, and made overly precise predictions.
 
-\textbf{Why our prediction is different:}
- \begin{itemize}
- \item We explicitly model the adversarial arms race
- \item We account for economic and structural advantages
- \item We provide ranges, not precise dates
- \item We have empirical evidence of current trajectory
- \item We specify falsification criteria
- \end{itemize}
+Our prediction differs in several ways: we explicitly model the adversarial arms race, account for economic and structural advantages, provide ranges rather than precise dates, have empirical evidence of the current trajectory, and specify falsification criteria.
 
-\textbf{However:} We could still be wrong. Maybe:
- \begin{itemize}
- \item Detection breakthrough we haven't envisioned
- \item Cultural adaptation faster than expected
- \item Regulatory coordination succeeds unexpectedly
- \item Economic incentives shift dramatically
- \end{itemize}
+However, we could still be wrong. Perhaps there will be a detection breakthrough we haven't envisioned, cultural adaptation proves faster than expected, regulatory coordination succeeds unexpectedly, or economic incentives shift dramatically.
 
 The difference is: we've made our assumptions explicit, provided falsification criteria, and shown why the trajectory is structurally determined.
 
@@ -790,14 +385,7 @@ The difference is: we've made our assumptions explicit, provided falsification c
 
 \textbf{Regulatory breakthroughs:} International coordination on AI development restrictions. Low probability given state competition dynamics.
 
-\textbf{The honest assessment:} We don't know what we don't know. The best we can do is:
- \begin{itemize}
- \item Make assumptions explicit
- \item Provide falsification criteria
- \item Track metrics in real-time
- \item Update as evidence changes
- \item Act on best available evidence
- \end{itemize}
+The honest assessment is that we don't know what we don't know. The best we can do is make assumptions explicit, provide falsification criteria, track metrics in real-time, update as evidence changes, and act on the best available evidence.
 
 \textbf{Why uncertainty doesn't change urgency.}
 
@@ -820,13 +408,7 @@ Threshold in 10+ years &   10\% &   Act immediately \\
 \end{table}
 
 
-\textbf{All scenarios require immediate action} because:
- \begin{itemize}
- \item Examination takes time (can't be rushed)
- \item If you wait for certainty, it's too late
- \item No cost to acting early if timeline is longer
- \item Catastrophic cost to acting late if timeline is shorter
- \end{itemize}
+All scenarios require immediate action because examination takes time and cannot be rushed, waiting for certainty means it's already too late, there is no cost to acting early if the timeline is longer, and the cost of acting late is catastrophic if the timeline is shorter.
 
 \textbf{Expected value calculation:}
 
@@ -859,115 +441,34 @@ Full references are provided in the bibliography at the end of this document. Ke
 
 \textbf{Citation quality assessment.}
 
-\textbf{High confidence (peer-reviewed, reputable journals):}
-- All citations from \emph{Computers in Human Behavior}, \emph{Human Behavior and Emerging Technologies}, \emph{PNAS}, \emph{Applied Sciences}, \emph{Frontiers} journals
- \begin{itemize}
- \item Methodology transparent and reproducible
- \item Independent verification possible
- \end{itemize}
+High confidence sources come from peer-reviewed, reputable journals including \emph{Computers in Human Behavior}, \emph{Human Behavior and Emerging Technologies}, \emph{PNAS}, \emph{Applied Sciences}, and \emph{Frontiers} journals. These feature transparent and reproducible methodology with independent verification possible.
 
-\textbf{Medium confidence (industry documentation, preprints):}
- \begin{itemize}
- \item Deepfake-Eval-2024 (arXiv preprint; methodology sound but not yet peer-reviewed)
- \item OpenAI technical documentation (industry source, no independent verification)
- \end{itemize}
+Medium confidence sources include industry documentation and preprints: Deepfake-Eval-2024 (arXiv preprint with sound methodology but not yet peer-reviewed) and OpenAI technical documentation (industry source without independent verification).
 
-\textbf{Lower confidence (journalistic coverage):}
- \begin{itemize}
- \item Media coverage of capabilities (reporting on claims without independent testing)
- \item Feature-length movie claims (social media posts, no technical roadmap)
- \end{itemize}
+Lower confidence sources include journalistic coverage: media coverage of capabilities that reports on claims without independent testing, and feature-length movie claims based on social media posts without technical roadmaps.
 
-\textbf{Critical gaps in available evidence:}
- \begin{itemize}
- \item Limited independent benchmarking of commercial systems
- \item No peer-reviewed papers on some claimed capabilities
- \item Timeline predictions lack formal uncertainty quantification in source material
- \end{itemize}
+Critical gaps in available evidence include limited independent benchmarking of commercial systems, no peer-reviewed papers on some claimed capabilities, and timeline predictions that lack formal uncertainty quantification in the source material.
 
 
 \subsection{Conclusion}
 
-\textbf{What the evidence establishes.}
+The evidence establishes several facts with very high confidence: current generation capabilities have crossed the public detectability threshold for short-form content, human detection has failed at 55.54\% overall accuracy (barely above chance), AI detection degrades catastrophically on real-world content (45-50\% performance drop), open-source proliferation makes control impossible, economic incentives strongly favor generation over detection, and the gap is widening rather than closing.
 
-\textbf{Very high confidence:}
-\begin{enumerate}
- \item Current generation capabilities have crossed public detectability threshold for short-form content
- \item Human detection has failed at 55.54\% overall accuracy (barely above chance)
- \item AI detection degrades catastrophically on real-world content (45-50\% performance drop)
- \item Open-source proliferation makes control impossible
- \item Economic incentives strongly favor generation over detection
- \item The gap is widening, not closing
-\end{enumerate}
+With high confidence, we can state that expert detection will fail for most content within 3-6 years, cryptographic countermeasures face insurmountable adoption barriers, cultural adaptation is too slow to prevent a crisis period, and verification will become exponentially harder.
 
-\textbf{High confidence:}
-\begin{enumerate}
- \item Expert detection will fail for most content within 3-6 years
- \item Cryptographic countermeasures face insurmountable adoption barriers
- \item Cultural adaptation too slow to prevent crisis period
- \item Verification will become exponentially harder
-\end{enumerate}
+What remains uncertain includes the exact timeline to expert detection failure (range: 3-6 years), whether detection can achieve breakthrough improvement, effectiveness of cultural adaptation, whether regulatory intervention can meaningfully slow development, and the feature-length generation timeline (2028-2035 range, high variance).
 
-\textbf{What remains uncertain:}
-\begin{enumerate}
- \item Exact timeline to expert detection failure (range: 3-6 years)
- \item Whether detection can achieve breakthrough improvement
- \item Effectiveness of cultural adaptation
- \item Whether regulatory intervention can meaningfully slow development
- \item Feature-length generation timeline (2028-2035 range, high variance)
-\end{enumerate}
-
-\textbf{The direction is certain, the timeline is uncertain.}
-
-\textbf{But uncertainty about timeline doesn't change the fundamental trajectory.}
+The direction is certain; the timeline is uncertain. But uncertainty about timeline doesn't change the fundamental trajectory.
 
 Voluntary coordination requires verifiable truth. Within years, routine verification becomes exponentially harder or impossible. The window for building coordination systems based on verifiable reality is closing.
 
 \textbf{You can examine source texts, verify institutional betrayals, and coordinate around observable truth NOW while verification is still possible.} After the threshold, these foundations become unavailable. The examination must happen while truth remains knowable.
 
-\textbf{Decision framework.}
+Given timeline uncertainty, how should we act? The conservative estimate of 6 years to threshold provides some breathing room but still requires immediate action because examination takes years, with no room for delay. The aggressive estimate of 2-3 years to threshold requires immediate action with no time for delay or preparation, meaning examination must begin now. The rational strategy is to act on the aggressive timeline. If the conservative estimate is correct and we act aggressively, there is no harm and extra time is a bonus. If the aggressive estimate is correct and we delay, the outcome is catastrophic and we miss the window entirely. Expected value maximization requires acting on the short timeline.
 
-\textbf{Given timeline uncertainty, how should we act?}
+This is not speculation but documented technological reality unfolding in real-time: human detection at 55.54\% (published meta-analysis), AI detection degradation of 45-50\% drop (peer-reviewed studies), open-source gap decreasing from 4.52\% to 0.69\% in 6 months (documented), and economic incentives showing 1000:1 funding disparity (observable). The evidence is clear. The trajectory is established. The window is closing.
 
-\textbf{Conservative estimate:} 6 years to threshold
- \begin{itemize}
- \item Provides some breathing room
- \item Still requires immediate action (examination takes years)
- \item No room for delay
- \end{itemize}
-
-\textbf{Aggressive estimate:} 2-3 years to threshold
- \begin{itemize}
- \item Requires immediate action
- \item No time for delay or preparation
- \item Must begin examination now
- \end{itemize}
-
-\textbf{Rational strategy:} Act on aggressive timeline.
-
-\textbf{Why?} Asymmetry of outcomes:
- \begin{itemize}
- \item If conservative estimate correct and we act aggressively: No harm, extra time is bonus
- \item If aggressive estimate correct and we delay: Catastrophic, miss window entirely
- \end{itemize}
-
-\textbf{Expected value maximization requires acting on short timeline.}
-
-\textbf{This is not speculation.}
-
-This is documented technological reality unfolding in real-time:
-\begin{itemize}
- \item Human detection: 55.54\% (published meta-analysis)
- \item AI detection degradation: 45-50\% drop (peer-reviewed studies)
- \item Open-source gap: 4.52\% $\to$ 0.69\% in 6 months (documented)
- \item Economic incentives: 1000:1 funding disparity (observable)
-\end{itemize}
-
-The evidence is clear. The trajectory is established. The window is closing.
-
-\textbf{You can examine while truth is verifiable, or wait until it's impossible.}
-
-The choice is yours, but the window won't wait for you to decide.
+You can examine while truth is verifiable, or wait until it's impossible. The choice is yours, but the window won't wait for you to decide.
 
 
 \textbf{Notation and terminology reference.}
@@ -997,13 +498,7 @@ Academic benchmarks &   Controlled test datasets with known generation technique
 
 \textbf{Final assessment.}
 
-This appendix establishes:
-- \textbf{Current state:} Public detection has failed; expert detection struggling
-- \textbf{Trajectory:} Gap widening as generation improves faster than detection
-- \textbf{Timeline:} 3-6 years (high confidence) until expert detection fails
-- \textbf{Countermeasures:} Unlikely to prevent threshold crossing
-- \textbf{Implications:} Window for verification-based coordination is closing
-- \textbf{Action required:} Examine NOW while truth remains verifiable
+This appendix establishes the current state (public detection has failed and expert detection is struggling), the trajectory (gap widening as generation improves faster than detection), the timeline (3-6 years with high confidence until expert detection fails), the likely failure of countermeasures to prevent threshold crossing, the implications (the window for verification-based coordination is closing), and the required action (examine NOW while truth remains verifiable).
 
-\textbf{The evidence is conclusive. The stakes are absolute. The window is closing.}
+The evidence is conclusive. The stakes are absolute. The window is closing.
 

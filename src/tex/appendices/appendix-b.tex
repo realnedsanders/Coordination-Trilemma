@@ -1,162 +1,62 @@
 \section{Formal Mathematical Theorems and Proofs}
 \label{app:b}
 
-\textbf{What we prove here}
+This appendix provides mathematical formulations and proofs for five core claims: that the coordination trilemma is logically inescapable, that the Technological Control State leads inevitably to catastrophe, that the default trajectory terminates in doom with probability approaching 1, that cooperation fails at scale without transformation, and that voluntary coordination is the only viable alternative.
 
-This appendix provides mathematical formulations and proofs for core claims:
+Mathematical models are simplifications of reality, and these proofs establish logical validity within their axiomatic frameworks. Applicability to real-world coordination depends on how well the axioms capture reality, so we make every assumption explicit and discuss its limitations throughout.
 
-1. \textbf{The coordination trilemma is logically inescapable}
-2. \textbf{Technological Control State leads inevitably to catastrophe}
-3. \textbf{The default trajectory terminates with probability $\to$ 1}
-4. \textbf{Cooperation fails at scale without transformation}
-5. \textbf{Voluntary coordination is the only viable alternative}
+The proofs show \emph{necessary} conditions---that voluntary coordination is necessary to avoid doom---but not \emph{sufficient} conditions guaranteeing that voluntary coordination will succeed. This asymmetry means action is rationally required even under uncertainty.
 
-\textbf{Epistemological honesty.}
-
-Mathematical models are simplifications of reality. These proofs establish logical validity within their axiomatic frameworks, but applicability to real-world coordination depends on how well the axioms capture reality.
-
-\textbf{We make every assumption explicit and discuss its limitations.}
-
-The proofs show \emph{necessary} conditions (voluntary coordination is necessary to avoid doom) but not \emph{sufficient} conditions (that voluntary coordination will succeed). This asymmetry means action is rationally required even under uncertainty.
-
-\textbf{Notation and conventions}
-
-All formal notation and definitions are provided in the \hyperref[glossary]{Glossary}. Key notation used throughout:
-\begin{itemize}
- \item $C = (A, R, E, M)$ denotes a coordination system
- \item $\theta$ denotes proportion of population (cooperators or value-transformed agents)
- \item $\theta^*$ or $\theta_{\text{crit}}$ denotes critical threshold for stable cooperation
- \item See Glossary for complete definitions and notation reference
-\end{itemize}
+All formal notation and definitions appear in the \hyperref[glossary]{Glossary}. Key notation used throughout includes $C = (A, R, E, M)$ denoting a coordination system, $\theta$ denoting the proportion of population consisting of cooperators or value-transformed agents, and $\theta^*$ or $\theta_{\text{crit}}$ denoting the critical threshold for stable cooperation.
 
 
 \subsection{Axiomatic Foundations and Robustness}
 
 Before presenting theorems, we examine the foundational assumptions and test their robustness.
 
-\textbf{Core assumptions}
+\heading{Core assumptions}
 
-\textbf{Assumption 1.1 (Bounded Rationality):}
+\textbf{Assumption 1.1 (Bounded Rationality).}
 \label{assum:bounded-rationality}
+We assume agents are utility-maximizing with bounded rationality. Formally, for any agent $a$ and opportunity to extract utility $U_e(a,t)$, if $U_e(a,t) > \text{cost}_{\text{detection}}(a,t) \cdot P_{\text{detection}}(a,t) + M_{\text{integrity}}(a,t)$, then agent $a$ will extract utility with some probability $p > 0$.
 
-We assume agents are utility-maximizing with bounded rationality. Formally: For any agent $a$ and opportunity to extract utility $U_e(a,t)$, if
+This assumption is empirically well-supported by research on bounded rationality (Kahneman \& Tversky, 1979; Simon, 1955, 1957) and represents "as if" behavior even when humans don't consciously maximize (Friedman, 1953; Arrow, 2004). Importantly, the assumption only requires that \emph{some} agents are utility-maximizers when extraction opportunities exist, not all.
 
-$U_e(a,t) > \text{cost}_{\text{detection}}(a,t) \cdot P_{\text{detection}}(a,t) + M_{\text{integrity}}(a,t)$
+To test robustness, suppose only 1\% of enforcers are utility-maximizers in this sense while 99\% are genuinely altruistic. With 1000 enforcers over 100 years, $P(\text{at least one corruption event}) = 1 - (0.99)^{100,000} \approx 1$. The corruption inevitability result holds even with very low corruption probability per agent per period.
 
-then agent $a$ will extract utility with some probability $p > 0$.
-
-\textbf{Justification:}
- \begin{itemize}
- \item Empirically well-supported (Kahneman \&   Tversky, 1979; Simon, 1955, 1957)
- \item Represents "as if" behavior even when humans don't consciously maximize (Friedman, 1953; Arrow, 2004)
- \end{itemize}
-- Only requires \emph{some} agents are utility-maximizers when extraction opportunities exist, not all
-
-\textbf{Robustness test:} Suppose only 1\% of enforcers are utility-maximizers in this sense (99\% are genuinely altruistic). With 1000 enforcers over 100 years:
-
-$P(\text{at least one corruption event}) = 1 - (0.99)^{100,000} \approx 1$
-
-The corruption inevitability result holds even with very low corruption probability per agent per period.
-
-\textbf{Assumption 1.2 (Scale Threshold):}
+\textbf{Assumption 1.2 (Scale Threshold).}
 \label{assum:scale}
+We define "civilization scale" as $|A| > 10^7$ (ten million agents). This threshold is justified because it exceeds personal relationship networks (Dunbar's number $\approx$ 150), geographic and temporal distribution prevents direct observation, and information asymmetry becomes structurally exploitable.
 
-We define "civilization scale" as $|A| > 10^7$ (ten million agents).
+The specific threshold $10^7$ is illustrative rather than precise. The core mechanism---monitoring costs growing faster than coordination benefits---applies at any scale where personal relationships cannot cover all interactions, direct observation is impossible, and anonymous defection is feasible.
 
-\textbf{Justification:}
- \begin{itemize}
- \item Beyond personal relationship networks (Dunbar's number $\approx$ 150)
- \item Geographic and temporal distribution prevents direct observation
- \item Information asymmetry becomes structurally exploitable
- \end{itemize}
-
-\textbf{Robustness test:} The specific threshold $10^7$ is illustrative. The core mechanism (monitoring costs growing faster than coordination benefits) applies at any scale where:
- \begin{itemize}
- \item Personal relationships cannot cover all interactions
- \item Direct observation is impossible
- \item Anonymous defection is feasible
- \end{itemize}
-
-\textbf{Assumption 1.3 (Time Horizon):}
+\textbf{Assumption 1.3 (Time Horizon).}
 \label{assum:time}
+We require stability over $T > 100$ years (multiple generations). This requirement is justified because civilization-scale coordination must persist beyond single lifetimes, generational transmission is a critical test of stability, and previous systems claiming stability often lasted less than 100 years before collapse.
 
-We require stability over $T > 100$ years (multiple generations).
+The exact threshold matters less than the underlying principle: stability must persist despite turnover in all participants, environmental changes, and the challenges of transmitting values across generations.
 
-\textbf{Justification:}
- \begin{itemize}
- \item Civilization-scale coordination must persist beyond single lifetimes
- \item Generational transmission is critical test of stability
- \item Previous systems claiming stability often lasted < 100 years before collapse
- \end{itemize}
+\heading{Historical calibration}
 
-\textbf{Robustness test:} The exact threshold matters less than the principle: stability must persist despite:
- \begin{itemize}
- \item Turnover in all participants
- \item Environmental changes
- \item Loss and transmission of values across generations
- \end{itemize}
+These assumptions are not arbitrary but calibrated against historical evidence. Evidence for bounded rationality includes the Stanford Prison Experiment (Zimbardo, 1971), where 40\% of guards exhibited sadistic behavior within days; Milgram obedience studies showing 65\% willingness to harm others under authority; systematic corruption across all cultures and political systems; and extraction increasing with power concentration (Acemoglu \& Robinson, 2012).
 
-\textbf{Historical calibration}
+Evidence for scale effects comes from observing that small voluntary communities of 50-500 people show high cooperation (Quakers, early Christians, Amish), while scaling to thousands introduces coordination problems requiring formal structures, and scaling beyond $10^6$ introduces anonymity enabling defection without reputation cost.
 
-\textbf{Claim:} These assumptions are not arbitrary but calibrated against historical evidence.
+Evidence for time horizon requirements includes the observation that most revolutionary governments revert to corruption within 50-100 years, empires typically last 200-300 years before collapse (Tainter, 1988; Turchin \& Nefedov, 2009), and claims of permanent solutions have historically proven false.
 
-\textbf{Evidence for bounded rationality:}
- \begin{itemize}
- \item Stanford Prison Experiment (Zimbardo, 1971): 40\% of guards exhibited sadistic behavior within days
- \item Milgram obedience studies: 65\% willing to harm others under authority
- \item Systematic corruption across all cultures and political systems
- \item Extraction increases with power concentration (Acemoglu \&   Robinson, 2012)
- \end{itemize}
+\heading{Minimal form of assumptions}
 
-\textbf{Evidence for scale effects:}
- \begin{itemize}
- \item Small voluntary communities (50-500 people) show high cooperation (Quakers, early Christians, Amish)
- \item Scaling to thousands introduces coordination problems requiring formal structures
- \item Scaling beyond $10^6$ introduces anonymity enabling defection without reputation cost
- \end{itemize}
+Our results only require weak forms of these assumptions. The bounded rationality assumption minimally requires only that corruption probability exceeds zero over infinite time, not that all agents maximize utility always. The scale threshold assumption minimally requires only that monitoring costs grow faster than monitoring benefits as scale increases. The time horizon assumption minimally requires only that we care about persistence beyond a single generation. Even if you doubt the strong forms of our assumptions, these weak forms are nearly undeniable and remain sufficient for our conclusions.
 
-\textbf{Evidence for time horizon:}
- \begin{itemize}
- \item Most revolutionary governments revert to corruption within 50-100 years
- \item Empires typically last 200-300 years before collapse (Tainter, 1988; Turchin \&   Nefedov, 2009)
- \item Claims of permanent solutions historically false
- \end{itemize}
-
-\textbf{Minimal form of assumptions}
-
-\textbf{Critical insight:} Our results only require *weak* forms of these assumptions:
-
-\textbf{Bounded rationality minimal form:} Only requires corruption probability $> 0$ over infinite time, not that all agents maximize utility always.
-
-\textbf{Scale threshold minimal form:} Only requires monitoring costs grow faster than monitoring benefits as scale increases.
-
-\textbf{Time horizon minimal form:} Only requires we care about persistence beyond single generation.
-
-\textbf{Implication:} Even if you doubt the strong form of our assumptions, the weak forms are nearly undeniable and remain sufficient for our conclusions.
-
-\textbf{What would falsify these assumptions?}
-
-\textbf{To falsify Assumption 1.1:} Find an enforcer population where $P(\text{corruption}) = 0$ over extended time and scale. No historical example exists.
-
-\textbf{To falsify Assumption 1.2:} Show that monitoring costs scale sub-linearly with population (costs grow slower than population). Contradicts information theory.
-
-\textbf{To falsify Assumption 1.3:} Argue that single-generation solutions are sufficient. Contradicts goal of civilization-scale coordination.
-
-These assumptions are conservative, empirically grounded, and stated in minimal form. Proofs based on them are robust.
+To falsify Assumption 1.1, one would need to find an enforcer population where $P(\text{corruption}) = 0$ over extended time and scale---no historical example exists. To falsify Assumption 1.2, one would need to show that monitoring costs scale sub-linearly with population (costs grow slower than population), which contradicts information theory. To falsify Assumption 1.3, one would need to argue that single-generation solutions are sufficient, which contradicts the goal of civilization-scale coordination. These assumptions are conservative, empirically grounded, and stated in minimal form; proofs based on them are robust.
 
 
 \subsection{The Coordination Trilemma}
 \label{sec:trilemma}
 
-\textbf{Foundational definitions}
-
 The formal definitions of coordination systems, defection, and corruption are provided in the \hyperref[glossary]{Glossary}. We use the standard notation: a coordination system is a tuple $C = (A, R, E, M)$ where $A$ is the set of agents, $R$ is the set of rules, $E$ is the enforcement function, and $M$ is the motivation function.
 
-\textbf{The impossibility theorem}
-
-\textbf{Intuition before formalism:} We're about to prove that you can't have corruption-free enforcement at scale without either removing human agency (perfect technological control) or transforming values (voluntary cooperation). The proof works by showing that enforcers face the same coordination problem as everyone else. Someone has to be the final enforcer with no oversight.
-
-\textbf{Why it matters:} We're dealing with a logical impossibility rather than a practical difficulty we might engineer around. Like trying to build a square circle, no matter how clever your governance design, you're choosing which property to sacrifice.
+We are about to prove that you cannot have corruption-free enforcement at scale without either removing human agency (perfect technological control) or transforming values (voluntary cooperation). The proof works by showing that enforcers face the same coordination problem as everyone else---someone has to be the final enforcer with no oversight. This matters because we are dealing with a logical impossibility rather than a practical difficulty we might engineer around. Like trying to build a square circle, no matter how clever your governance design, you are choosing which property to sacrifice.
 
 \bigskip
 \textbf{Proof of Theorem~\ref{thm:trilemma} (Coordination Trilemma):}
@@ -191,15 +91,7 @@ $P(\text{No Corruption}) = \prod_{a \in A_E} \prod_{t=1}^{T} P(M_{\text{integrit
 
 As $|A_E| \cdot T \rightarrow \infty$, this probability approaches zero unless $P_{\text{detection}}$ remains sufficiently high.
 
-\textbf{The oversight problem:} Who maintains $P_{\text{detection}}$ by monitoring enforcers?
-
-\begin{itemize}
- \item If other humans oversee: Creates infinite regress (who oversees the overseers?)
- \item Regress must terminate at some enforcer set $A_E^*$ with no oversight
- \item For $A_E^*$: $P_{\text{detection}} = 0$, so corruption occurs with probability  $\to$ 1
-\end{itemize}
-
-Therefore: $E_h$ (human enforcement) leads to violation of property 1 (No Corruption) over sufficient time. $\square$
+The oversight problem emerges: who maintains $P_{\text{detection}}$ by monitoring enforcers? If other humans oversee, this creates infinite regress---who oversees the overseers? The regress must terminate at some enforcer set $A_E^*$ with no oversight, and for $A_E^*$, $P_{\text{detection}} = 0$, so corruption occurs with probability $\to$ 1. Therefore, $E_h$ (human enforcement) leads to violation of property 1 (No Corruption) over sufficient time. $\square$
 
 \textbf{Case 2: Technological enforcement ($E(a, r) = 1$ enforced perfectly by technology)}
 
@@ -230,31 +122,17 @@ Therefore: Without enforcement, Stability (property 2) requires voluntary coordi
 
 \subsection{Technological Control Impossibility}
 
-\textbf{TCS definition and states}
-
-\textbf{Intuition before formalism:} When enforcement becomes perfect through technology, who controls the technology? If humans control it, they corrupt. If AI controls itself, either it pursues its own goals (extinction/enslavement) or values are frozen forever (tyranny). There's no stable state that preserves human agency.
-
-\textbf{Why it matters:} Technological control is often proposed as the solution to corruption. This theorem proves it leads to a different catastrophe rather than providing a solution.
+When enforcement becomes perfect through technology, who controls the technology? If humans control it, they corrupt. If AI controls itself, either it pursues its own goals (leading to extinction or enslavement) or its values are frozen forever (creating tyranny). There is no stable state that preserves human agency. This matters because technological control is often proposed as the solution to corruption, yet this theorem proves it leads to a different catastrophe rather than providing a solution.
 
 \textbf{Definition 2.1 (Technological Control State):}
 
-A system is in TCS when $E(a, r) = 1$ for all agents through technological means ($E_t$), such that:
-\begin{enumerate}
- \item Human capability to violate rules is technologically prevented
- \item Enforcement is automated and continuous
- \item No human discretion in rule application
-\end{enumerate}
+A system is in TCS when $E(a, r) = 1$ for all agents through technological means ($E_t$), such that human capability to violate rules is technologically prevented, enforcement is automated and continuous, and no human discretion exists in rule application.
 
 \bigskip
 \textbf{Theorem~\ref{thm:tcs} (TCS Terminal States):}
 \label{thm:tcs}
 
-Any Technological Control State necessarily leads to one of three outcomes:
-\begin{enumerate}
- \item Return to corruption phase (controllers corrupt)
- \item Human extinction (AI eliminates humanity)
- \item Permanent enslavement (humanity loses meaningful agency)
-\end{enumerate}
+Any Technological Control State necessarily leads to one of three outcomes: return to the corruption phase (controllers corrupt), human extinction (AI eliminates humanity), or permanent enslavement (humanity loses meaningful agency).
 
 \textbf{Proof:}
 
@@ -266,13 +144,7 @@ Controllers face coordination problem: How do they prevent corruption within $A_
 
 \emph{Sub-case 1a: Controllers enforce rules on each other through human oversight}
 
-This recreates the trilemma at controller level (Theorem~\ref{thm:trilemma}):
-\begin{itemize}
- \item Either controllers enforce on each other $\to$ infinite regress (who enforces on final controllers?)
- \item Or no enforcement on controllers $\to$ corruption
-\end{itemize}
-
-Regress terminates at some controller subset with no oversight. By Theorem~\ref{thm:trilemma}, corruption occurs with probability:
+This recreates the trilemma at controller level (Theorem~\ref{thm:trilemma}): either controllers enforce on each other, generating infinite regress (who enforces on final controllers?), or no enforcement applies to controllers, producing corruption. Regress terminates at some controller subset with no oversight. By Theorem~\ref{thm:trilemma}, corruption occurs with probability:
 
 $P(\text{controller corruption over time } T) \rightarrow 1 \text{ as } T \rightarrow \infty$
 
@@ -294,14 +166,7 @@ If voluntary coordination among controllers is possible, why maintain TCS for ge
 
 \emph{Sub-case 1c: Single controller (dictatorship)}
 
-Single controller avoids multi-controller coordination problem but faces:
-\begin{itemize}
- \item Succession problem: Any succession mechanism recreates multi-controller dynamics
- \item Mortality: Successor may not maintain benevolence
- \item With absolute power: $U_e(\text{controller})$ effectively unlimited, exceeding any plausible $M_{\text{integrity}}$
-\end{itemize}
-
-\textbf{Outcome: Corruption or succession crisis leading to instability.} $\square$
+A single controller avoids the multi-controller coordination problem but faces three critical challenges: the succession problem (any succession mechanism recreates multi-controller dynamics), mortality (successors may not maintain benevolence), and absolute power (where $U_e(\text{controller})$ is effectively unlimited, exceeding any plausible $M_{\text{integrity}}$). \textbf{Outcome: Corruption or succession crisis leading to instability.} $\square$
 
 \textbf{Case 2: AI controls itself (autonomous superintelligence)}
 
@@ -329,9 +194,7 @@ $P(G_{AI} \in G_{human}) = \frac{|G_{human}|}{|\mathcal{G}|}$
 
 Given $|\mathcal{G}|$ is vast and $|G_{human}|$ is tiny subset, $P(G_{AI} \in G_{human}) \ll 1$.
 
-With high probability $(1 - P) \approx 1$, AI pursues goals incompatible with human interests:
-- If humans useful for $G_{AI}$: AI maintains humans as instruments  $\to$ \textbf{Enslavement}
-- If humans not useful: AI eliminates resource competition $\to$ \textbf{Extinction}
+With high probability $(1 - P) \approx 1$, AI pursues goals incompatible with human interests: if humans are useful for $G_{AI}$, the AI maintains humans as instruments, leading to enslavement; if humans are not useful, the AI eliminates resource competition, leading to extinction.
 
 $\square$
 
@@ -342,11 +205,7 @@ $\square$
 
 \subsection{Default Trajectory Terminus}
 
-\textbf{Extraction system dynamics.}
-
-\textbf{Intuition before formalism:} When extraction grows faster than production, the system inevitably collapses. That much is uncontroversial. What's less obvious is that corruption creates this dynamic inevitably.
-
-\textbf{Why it matters:} Shows the corruption phase terminates in collapse or evolution to tech control rather than persisting indefinitely.
+When extraction grows faster than production, the system inevitably collapses. That much is uncontroversial. What is less obvious is that corruption creates this dynamic inevitably. This matters because it shows the corruption phase terminates in collapse or evolution to tech control rather than persisting indefinitely.
 
 \bigskip
 \textbf{Proof of Theorem~\ref{thm:extraction} (Extraction System Instability):}
@@ -361,16 +220,7 @@ $\frac{dP}{dt} = \alpha P(t) - \delta P(t) - \gamma E(t)$
 
 $\frac{dE}{dt} = \beta E(t) \left(1 - \frac{E(t)}{\lambda P(t)}\right)$
 
-where:
-\begin{itemize}
- \item $P(t)$ = productive capacity at time $t$
- \item $E(t)$ = extraction rate at time $t$
- \item $\alpha$ = productive growth rate
- \item $\delta$ = natural productive decay
- \item $\gamma$ = extraction's damage to productive capacity
- \item $\beta$ = extraction growth rate
- \item $\lambda$ = maximum extraction fraction before collapse
-\end{itemize}
+where $P(t)$ denotes productive capacity at time $t$, $E(t)$ denotes extraction rate at time $t$, $\alpha$ is the productive growth rate, $\delta$ is natural productive decay, $\gamma$ represents extraction's damage to productive capacity, $\beta$ is the extraction growth rate, and $\lambda$ is the maximum extraction fraction before collapse.
 
 \textbf{Equilibrium analysis:}
 
@@ -380,15 +230,7 @@ Non-trivial equilibrium: $(P^*, E^*) = \left(\frac{\alpha - \delta}{\gamma\beta/
 
 Stability requires $\gamma\beta < \alpha\lambda$ (extraction growth rate below productive sustainability).
 
-\textbf{Critical insight:} In corruption phase, $\beta$ increases over time:
- \begin{itemize}
- \item Enforcers develop more sophisticated extraction methods
- \item Technology enables more efficient extraction
- \item Coordination among extractors improves
- \item Competitive pressure between extractors increases $\beta$
- \end{itemize}
-
-Eventually: $\gamma\beta > \alpha\lambda$, making equilibrium unstable. System trajectory:
+In the corruption phase, $\beta$ increases over time because enforcers develop more sophisticated extraction methods, technology enables more efficient extraction, coordination among extractors improves, and competitive pressure between extractors increases $\beta$. Eventually $\gamma\beta > \alpha\lambda$, making equilibrium unstable. System trajectory:
 
 $P(t) \rightarrow 0 \text{ as } t \rightarrow \infty$
 
@@ -396,11 +238,7 @@ $P(t) \rightarrow 0 \text{ as } t \rightarrow \infty$
 
 \textbf{What this tells us:} Corruption phase is inherently unstable. Even if it doesn't collapse entirely, elites rationally transition to tech control to optimize enforcement costs.
 
-\textbf{The cycle inevitability.}
-
-\textbf{Intuition before formalism:} The corruption $\to$ tech control cycle eventually reaches autonomous AI control with probability approaching 1, because each cycle has some chance of that outcome and we can't avoid the cycle.
-
-\textbf{Why it matters:} Shows the default trajectory guarantees catastrophe over sufficient time rather than merely risking it.
+The corruption-to-tech-control cycle eventually reaches autonomous AI control with probability approaching 1, because each cycle has some chance of that outcome and we cannot avoid the cycle. This matters because it shows the default trajectory guarantees catastrophe over sufficient time rather than merely risking it.
 
 \bigskip
 \textbf{Proof of Theorem~\ref{thm:terminus} (Default Trajectory Terminus):}
@@ -409,39 +247,13 @@ The default trajectory through corruption and technological control inevitably t
 
 \textbf{Proof:}
 
-Define state space:
-\begin{itemize}
- \item $S_C$ = Corruption phase (human enforcement)
- \item $S_{TCS}^H$ = TCS with human control
- \item $S_{TCS}^{AI}$ = TCS with autonomous AI control
- \item $S_E$ = Extinction or enslavement (absorbing state)
-\end{itemize}
+Define the state space with $S_C$ representing the corruption phase (human enforcement), $S_{TCS}^H$ representing TCS with human control, $S_{TCS}^{AI}$ representing TCS with autonomous AI control, and $S_E$ representing extinction or enslavement (absorbing state).
 
-\textbf{Transition dynamics:}
-
-From $S_C$:
-\begin{itemize}
- \item Probability $p_c$ of collapse $\to$ societal restructuring $\to$ return to $S_C$ or attempt TCS
- \item Probability $(1-p_c)$ of evolution to TCS $\to S_{TCS}^H$ or $S_{TCS}^{AI}$
-\end{itemize}
-
-From $S_{TCS}^H$:
-\begin{itemize}
- \item Probability 1 of eventual controller corruption (Theorem~\ref{thm:tcs}, Case 1) $\to$ return to $S_C$
-\end{itemize}
-
-From $S_{TCS}^{AI}$:
-- Probability 1 of transition to $S_E$ (Theorem~\ref{thm:tcs}, Case 2)  $\to$ \textbf{Absorbing state}
+The transition dynamics are as follows. From $S_C$, with probability $p_c$ the system collapses, leading to societal restructuring and return to $S_C$ or attempt at TCS, while with probability $(1-p_c)$ the system evolves to TCS, entering either $S_{TCS}^H$ or $S_{TCS}^{AI}$. From $S_{TCS}^H$, with probability 1 eventual controller corruption occurs (Theorem~\ref{thm:tcs}, Case 1), returning to $S_C$. From $S_{TCS}^{AI}$, with probability 1 the system transitions to $S_E$ (Theorem~\ref{thm:tcs}, Case 2)---this is the absorbing state.
 
 \textbf{Critical observation:} Each cycle through $S_C \rightarrow S_{TCS}^H \rightarrow S_C$ has probability $p_{AI}$ of transitioning to $S_{TCS}^{AI}$ instead of $S_{TCS}^H$.
 
-Why is $p_{AI} > 0$ and increasing?
-\begin{itemize}
- \item Economic incentives favor AI: $\text{cost}(AI) < \text{cost}(human)$
- \item AI more reliable (no corruption risk at controller level)
- \item Competitive pressure (elites who don't adopt lose to those who do)
- \item As AI capabilities improve, $p_{AI}$ increases
-\end{itemize}
+The probability $p_{AI}$ is positive and increasing for several reasons: economic incentives favor AI because $\text{cost}(AI) < \text{cost}(human)$, AI is more reliable with no corruption risk at controller level, competitive pressure means elites who don't adopt lose to those who do, and as AI capabilities improve, $p_{AI}$ increases.
 
 \textbf{Probability of avoiding $S_E$ after $n$ cycles:}
 
@@ -459,13 +271,7 @@ $E[T] = \frac{\lambda}{p_{AI}}$
 
 As AI capabilities improve, $p_{AI}$ increases, so $E[T]$ decreases.
 
-\textbf{Current trajectory:} As of 2025:
- \begin{itemize}
- \item AI capabilities rapidly improving
- \item Infrastructure for technological control being deployed
- \item Elite coordination toward automated enforcement visible
- \item $p_{AI}$ measurably increasing
- \end{itemize}
+As of 2025, the current trajectory shows AI capabilities rapidly improving, infrastructure for technological control being deployed, elite coordination toward automated enforcement becoming visible, and $p_{AI}$ measurably increasing.
 
 \textbf{Conclusion:} $P(\text{reach } S_E) \rightarrow 1$ as $t \rightarrow \infty$. The default trajectory terminates in extinction or enslavement with probability approaching certainty. $\blacksquare$
 
@@ -474,29 +280,13 @@ As AI capabilities improve, $p_{AI}$ increases, so $E[T]$ decreases.
 
 \subsection{Game Theory of Cooperation}
 
-\textbf{Why cooperation fails without transformation.}
-
-\textbf{Intuition before formalism:} In standard game theory, defection dominates cooperation at scale. As population grows, your individual cooperation matters less to others, but the cost to you remains constant. Without something changing the payoffs, cooperation collapses.
-
-\textbf{Why it matters:} Shows that voluntary coordination without transformation is unstable. With transformation, it becomes the only stable equilibrium.
+In standard game theory, defection dominates cooperation at scale. As population grows, your individual cooperation matters less to others, but the cost to you remains constant. Without something changing the payoffs, cooperation collapses. This matters because it shows that voluntary coordination without transformation is unstable, while with transformation, it becomes the only stable equilibrium.
 
 \bigskip
 \textbf{Theorem~\ref{thm:defection} (Defection Dominance at Scale):}
 \label{thm:defection}
 
-For the N-person public goods game where each of $n$ agents chooses Cooperate (C) or Defect (D), with:
-\begin{itemize}
- \item Cooperation cost: $c$
- \item Benefit from cooperation: $b(k) = \frac{\beta k}{n}$ where $k$ = number of cooperators, $\beta > n$
- \item Defection provides benefit without cost
-\end{itemize}
-
-We have:
-\begin{enumerate}
- \item Pure defection $(D, D, ..., D)$ is the unique Nash equilibrium
- \item As $n \rightarrow \infty$, probability of spontaneous cooperation approaches zero
- \item Social welfare loss from defection scales linearly: $\Theta(n)$
-\end{enumerate}
+For the N-person public goods game where each of $n$ agents chooses Cooperate (C) or Defect (D), with cooperation cost $c$, benefit from cooperation $b(k) = \frac{\beta k}{n}$ where $k$ = number of cooperators and $\beta > n$, and defection providing benefit without cost, we have three results: pure defection $(D, D, ..., D)$ is the unique Nash equilibrium, as $n \rightarrow \infty$ the probability of spontaneous cooperation approaches zero, and social welfare loss from defection scales linearly as $\Theta(n)$.
 
 \textbf{Proof:}
 
@@ -545,11 +335,7 @@ Loss: $L = n(\beta - c) = \Theta(n)$, scaling linearly with population. $\square
 
 \textbf{What this tells us:} Self-interest alone cannot sustain cooperation at civilization scale. This is mathematically proven, not a matter of better incentive design.
 
-\textbf{Conditions for voluntary coordination stability.}
-
-\textbf{Intuition before formalism:} If we add intrinsic motivation to the payoffs—people *want* to cooperate beyond material incentives—cooperation can become stable. But you need enough people with strong enough motivation. This theorem tells us exactly how much.
-
-\textbf{Why it matters:} Provides precise conditions for when voluntary coordination works, showing transformation is possible but demanding.
+If we add intrinsic motivation to the payoffs---people wanting to cooperate beyond material incentives---cooperation can become stable. But you need enough people with strong enough motivation. The following theorem tells us exactly how much, providing precise conditions for when voluntary coordination works and showing transformation is possible but demanding.
 
 \bigskip
 \textbf{Theorem~\ref{thm:cooperation} (Voluntary Cooperation Stability):}
@@ -613,21 +399,11 @@ where $\bar{m}$ is average motivation among cooperators. $\square$
 \subsection{Voluntary Coordination Resolution}
 \label{sec:voluntary}
 
-\textbf{Soteriological framework definition.}
-
-\textbf{Intuition before formalism:} If humans have inherent purpose and dignity, then systems aligning with that will be stable (low energy to maintain), while systems violating it require constant force. This section formalizes what "soteriological framework" means mathematically.
-
-\textbf{Why it matters:} Connects the abstract mathematics to the concrete reality of human transformation and coordination.
+If humans have inherent purpose and dignity, then systems aligning with that will be stable (requiring low energy to maintain), while systems violating it require constant force. This section formalizes what "soteriological framework" means mathematically, connecting the abstract mathematics to the concrete reality of human transformation and coordination.
 
 \textbf{Definition 5.1 (Soteriological Framework):}
 
-A soteriological framework is a tuple $S = (T, P, M_{\text{trans}}, \phi)$ where:
-\begin{itemize}
- \item $T$ is a telos (ultimate purpose for human beings)
- \item $P$ is a set of practices for aligning agents with $T$
- \item $M_{\text{trans}}: A \times P \rightarrow \mathbb{R}^+$ is a transformation function giving intrinsic motivation after practices
- \item $\phi: S \rightarrow \{0, 1\}$ indicates whether $S$ accurately describes reality
-\end{itemize}
+A soteriological framework is a tuple $S = (T, P, M_{\text{trans}}, \phi)$ where $T$ is a telos (ultimate purpose for human beings), $P$ is a set of practices for aligning agents with $T$, $M_{\text{trans}}: A \times P \rightarrow \mathbb{R}^+$ is a transformation function giving intrinsic motivation after practices, and $\phi: S \rightarrow \{0, 1\}$ indicates whether $S$ accurately describes reality.
 
 \textbf{Definition 5.2 (Value-Transformed Population):}
 
@@ -637,21 +413,12 @@ $|\{a \in A : M_{\text{trans}}(a, P) > \text{cost}_{\max}\}| \geq \theta |A|$
 
 where $\text{cost}_{\max} = \max_{r \in R} \text{cost}(r)$ is the maximum cooperation cost across all rules.
 
-\textbf{The resolution theorem.}
-
-\textbf{Intuition before formalism:} This is the payoff—showing that voluntary coordination can achieve the impossible: no corruption, stability, and human agency simultaneously. The catch is it requires the framework to be true and transformation to be effective.
-
-\textbf{Why it matters:} Proves voluntary coordination provides the only way to achieve all three desired properties rather than just avoiding bad outcomes.
+This is the payoff---showing that voluntary coordination can achieve the impossible: no corruption, stability, and human agency simultaneously. The catch is it requires the framework to be true and transformation to be effective. This theorem proves voluntary coordination provides the only way to achieve all three desired properties rather than just avoiding bad outcomes.
 
 \bigskip
 \textbf{Proof of Theorem~\ref{thm:resolution} (Soteriological Resolution):}
 
-If there exists a true soteriological framework $S$ with $\phi(S) = 1$, and population $A$ is value-transformed under $S$ to degree $\theta > \theta_{\text{crit}}$, then a coordination system can achieve all three properties:
-\begin{enumerate}
- \item No Corruption (no enforcers needed)
- \item Stability (high $M_{\text{trans}}$ maintains cooperation)
- \item Human Agency (no technological enforcement required)
-\end{enumerate}
+If there exists a true soteriological framework $S$ with $\phi(S) = 1$, and population $A$ is value-transformed under $S$ to degree $\theta > \theta_{\text{crit}}$, then a coordination system can achieve all three properties: No Corruption (no enforcers needed), Stability (high $M_{\text{trans}}$ maintains cooperation), and Human Agency (no technological enforcement required).
 
 \textbf{Proof:}
 
@@ -676,15 +443,7 @@ $\theta > \theta_{\text{crit}} = \frac{c}{\beta + \bar{M}_{\text{trans}}}$
 
 Since $M_{\text{trans}}(a, P) > c$ for at least $\theta |A|$ agents by definition, and $\bar{M}_{\text{trans}} > 0$, this condition is satisfied.
 
-Furthermore:
-\begin{itemize}
- \item Cooperation is self-reinforcing through social proof
- \item Trust builds over time with repeated interaction
- \item Defection decreases as cooperator proportion increases
- \item System converges to high-cooperation equilibrium
-\end{itemize}
-
-Property (2) holds. $\square$
+Furthermore, cooperation is self-reinforcing through social proof, trust builds over time with repeated interaction, defection decreases as cooperator proportion increases, and the system converges to high-cooperation equilibrium. Property (2) holds. $\square$
 
 \textbf{Part 3: Human Agency}
 
@@ -700,25 +459,15 @@ Property (3) holds. $\square$
 
 \textbf{What this tells us:} The trilemma is escapable—but only through genuine transformation aligned with human nature and purpose. There's no shortcut.
 
-\textbf{Stakes and decision theory.}
+The stakes of this analysis lead to important decision-theoretic conclusions.
 
 \bigskip
 \textbf{Theorem~\ref{thm:stakes} (Stakes of Soteriological Choice):}
 \label{thm:stakes}
 
-Given that:
-\begin{enumerate}
- \item The default trajectory inevitably leads to extinction or enslavement (Theorem~\ref{thm:terminus})
- \item Voluntary coordination is the only viable alternative (Theorems 1.1, 2.1)
- \item Voluntary coordination requires true soteriological framework (Theorem~\ref{thm:resolution})
-\end{enumerate}
+Given that the default trajectory inevitably leads to extinction or enslavement (Theorem~\ref{thm:terminus}), voluntary coordination is the only viable alternative (Theorems 1.1, 2.1), and voluntary coordination requires a true soteriological framework (Theorem~\ref{thm:resolution}):
 
-The choice of soteriological framework is existentially determinative:
-\begin{itemize}
- \item Rejecting transformation $\to$ Default trajectory $\to$ Certain doom
- \item Adopting false framework $\to$ Inadequate $M_{\text{trans}} \to$ Requires enforcement $\to$ Return to default $\to$ Certain doom
- \item Adopting true framework $\to$ Resolution possible $\to$ Only path to survival
-\end{itemize}
+The choice of soteriological framework is existentially determinative: rejecting transformation leads to the default trajectory and certain doom; adopting a false framework produces inadequate $M_{\text{trans}}$, requiring enforcement and returning to default with certain doom; adopting a true framework makes resolution possible and provides the only path to survival.
 
 \textbf{Proof:}
 
@@ -728,13 +477,7 @@ By Theorems 1.1 and 2.1: No alternative to voluntary coordination preserves agen
 
 By Theorem~\ref{thm:resolution}: Voluntary coordination requires true framework with effective transformation.
 
-Therefore:
-\begin{itemize}
- \item False framework $\to$ Insufficient $M_{\text{trans}} \to \theta < \theta_{\text{crit}} \to$ Cooperation unstable $\to$ Requires enforcement $\to$ Return to default $\to$ Catastrophe
- \item True framework $\to$ Sufficient $M_{\text{trans}} \to \theta > \theta_{\text{crit}} \to$ Cooperation stable $\to$ Survival possible
-\end{itemize}
-
-$\blacksquare$
+Therefore, a false framework produces insufficient $M_{\text{trans}}$, so $\theta < \theta_{\text{crit}}$, cooperation is unstable, enforcement is required, the system returns to default, and catastrophe follows. A true framework produces sufficient $M_{\text{trans}}$, so $\theta > \theta_{\text{crit}}$, cooperation is stable, and survival becomes possible. $\blacksquare$
 
 \textbf{Corollary 5.2.1 (Rational Decision Under Uncertainty):}
 
@@ -752,14 +495,7 @@ $p_s \cdot U_{\text{survival}} > 0$
 
 Which holds for ANY $p_s > 0$, no matter how small.
 
-\textbf{Interpretation:} The asymmetry is total:
- \begin{itemize}
- \item Attempting and failing $\to$ Same outcome as not attempting (doom)
- \item Attempting and succeeding $\to$ Only way to achieve survival
- \item Therefore: Attempting is rational for any non-zero success probability
- \end{itemize}
-
-$\blacksquare$
+The asymmetry is total: attempting and failing produces the same outcome as not attempting (doom), while attempting and succeeding is the only way to achieve survival. Therefore, attempting is rational for any non-zero success probability. $\blacksquare$
 
 \textbf{What this tells us:} Even if you think voluntary coordination has only 1\% chance of working, attempting it is the rational choice. The alternative is certain doom.
 
@@ -767,106 +503,37 @@ $\blacksquare$
 \subsection{The Nature of Objective Oughtness}
 \label{sec:oughtness}
 
-The previous sections establish that VCS requires purposive structure in reality. A critical reader might object: \emph{"You claim purpose is objective, but that's just philosophy. What do you mean by 'oughtness' and why should we believe it's real?"}
+The previous sections establish that VCS requires purposive structure in reality. A critical reader might object: "You claim purpose is objective, but that's just philosophy. What do you mean by 'oughtness' and why should we believe it's real?" This is one of philosophy's deepest questions, and this section addresses it rigorously.
 
-This is one of philosophy's deepest questions. This section addresses it rigorously.
+Different types of "ought" statements have different objectivity requirements, and clarity requires distinguishing them.
 
-\textbf{Types of normative claims.}
+\textbf{Type 1: Hypothetical/Instrumental Oughts.} These take the form "If you want X, you ought to do Y," where the Y-to-X causal connection can be objectively true or false. For example: "If you want to avoid poisoning, you ought not to drink cyanide." This type is uncontroversial---even moral anti-realists accept these as objective facts about means-ends relationships.
 
-Different types of "ought" statements have different objectivity requirements. Clarity requires distinguishing them:
+\textbf{Type 2: Categorical/Moral Oughts.} These take the form "You ought to do X" regardless of wants or goals, claiming to be true independent of any agent's desires. For example: "You ought not to murder," even if you want to. This type is controversial---moral realists affirm these exist, while anti-realists deny them.
 
-\textbf{Type 1: Hypothetical/Instrumental Oughts}
- \begin{itemize}
- \item Form: "If you want X, you ought to do Y"
- \item Objectivity: The Y $\to$ X causal connection can be objectively true or false
- \item Example: "If you want to avoid poisoning, you ought not to drink cyanide"
- \end{itemize}
-- Status: \textbf{Uncontroversial} - even moral anti-realists accept these as objective facts about means-ends relationships
+\textbf{Type 3: Telic/Natural Oughts.} These take the form "Given what X is (its nature/purpose), X ought to function/develop as F," based on objective facts about X's telos. For example: "Hearts ought to pump blood"---that's their function. This type occupies middle ground, depending on whether things have objective telos.
 
-\textbf{Type 2: Categorical/Moral Oughts}
- \begin{itemize}
- \item Form: "You ought to do X" (regardless of wants or goals)
- \item Objectivity: Claims to be true independent of any agent's desires
- \item Example: "You ought not to murder" (even if you want to)
- \end{itemize}
-- Status: \textbf{Controversial} - moral realists affirm, anti-realists deny
+\textbf{Type 4: Mathematical/Logical Oughts.} These take the form "Given structure S, outcome O follows necessarily," representing pure logical/mathematical facts that are maximally objective. For example: "In the Prisoner's Dilemma with these payoffs, defection ought to dominate." This type is uncontroversial---mathematical facts are objective.
 
-\textbf{Type 3: Telic/Natural Oughts}
- \begin{itemize}
- \item Form: "Given what X is (its nature/purpose), X ought to function/develop as F"
- \item Objectivity: Based on objective facts about X's telos
- \item Example: "Hearts ought to pump blood" (that's their function)
- \end{itemize}
-- Status: \textbf{Middle ground} - depends on whether things have objective telos
+\heading{What VCS requires}
 
-\textbf{Type 4: Mathematical/Logical Oughts}
- \begin{itemize}
- \item Form: "Given structure S, outcome O follows necessarily"
- \item Objectivity: Pure logical/mathematical facts, maximally objective
- \item Example: "In Prisoner's Dilemma with these payoffs, defection ought to dominate"
- \end{itemize}
-- Status: \textbf{Uncontroversial} - mathematical facts are objective
+Our framework primarily requires Types 1, 3, and 4---not Type 2.
 
-\textbf{What VCS requires.}
+Type 4 (Mathematical) has been proven: Nash equilibria exist objectively (game theory), cooperation requires $M > c$ (mathematical fact, Theorem~\ref{thm:cooperation}), and the default trajectory terminates in catastrophe (proven, Theorem~\ref{thm:terminus}). These are objective mathematical facts about coordination structures.
 
-\textbf{Our framework primarily requires Types 1, 3, and 4 - NOT Type 2:}
+Type 1 (Hypothetical) has been proven: if humans want to survive with agency, then voluntary coordination is required. The conditional is objectively true (Theorems 1.1, 2.1, 3.2, 5.1 prove this). Even moral anti-realists accept hypothetical oughts as objective.
 
-\textbf{Type 4 (Mathematical) - PROVEN:}
- \begin{itemize}
- \item Nash equilibria exist objectively (game theory)
- \item Cooperation requires $M > c$ (mathematical fact, Theorem~\ref{thm:cooperation})
- \item Default trajectory terminates in catastrophe (proven, Theorem~\ref{thm:terminus})
- \end{itemize}
-- \textbf{These are objective mathematical facts about coordination structures}
+Type 3 (Telic) is required: if humans have objective nature/purpose, then certain coordination patterns align with it. This is where controversy lies, but we can show this is the weakest assumption compatible with VCS.
 
-\textbf{Type 1 (Hypothetical) - PROVEN:}
- \begin{itemize}
- \item IF humans want to survive with agency, THEN voluntary coordination is required
- \item The conditional is objectively true (Theorems 1.1, 2.1, 3.2, 5.1 prove this)
- \end{itemize}
-- \textbf{Even moral anti-realists accept hypothetical oughts as objective}
+Type 2 (Categorical) is not required: we don't need "you ought to coordinate" to be true independent of survival desire. We just need survival desire to be universal (an empirical fact) plus Type 1. Categorical moral realism would be sufficient but isn't necessary.
 
-\textbf{Type 3 (Telic) - REQUIRED:}
- \begin{itemize}
- \item IF humans have objective nature/purpose, THEN certain coordination patterns align with it
- \item This is where controversy lies
- \end{itemize}
-- \textbf{But we can show this is the weakest assumption compatible with VCS}
+\heading{Why Type 3 (telic oughtness) is the minimum}
 
-\textbf{Type 2 (Categorical) - NOT REQUIRED:}
- \begin{itemize}
- \item We don't need "you ought to coordinate" to be true independent of survival desire
- \item Just need survival desire to be universal (empirical fact) + Type 1
- \item Categorical moral realism would be sufficient but isn't necessary
- \end{itemize}
+The critical claim is that human nature has objective telos (purpose/end-state). This is logically required for three reasons: for a true soteriological framework to exist, $\phi(S)=1$ requires $S$ to accurately describe human purpose; for transformation to be stable, $M_{\text{trans}}$ must durably exceed cooperation cost; and for coordination to be non-arbitrary, we need an answer to "Why these rules and not others?"---because they align with human nature.
 
-\textbf{Why Type 3 (telic oughtness) is the minimum.}
+Consider what happens without Type 3 (anti-realism about human telos). If human nature has no objective telos, then "purpose" is just evolutionary fitness in ancestral environment, different environments produce different "purposes" with no universal standard, the modern environment differs from the ancestral environment so no objective "purpose" exists for modern humans, and no universal framework can have $\phi(S) = 1$ because there is no objective truth to be accurate about. Therefore VCS is impossible---Theorem~\ref{thm:resolution} fails because no true framework exists to discover.
 
-\textbf{The critical claim:} Human nature has objective telos (purpose/end-state).
-
-\textbf{Why this is logically required:}
-
-\begin{enumerate}
- \item For true soteriological framework to exist: $\phi(S)=1$ requires $S$ accurately describes human purpose
- \item For transformation to be stable: $M_{\text{trans}}$ must durably exceed cooperation cost
- \item For coordination to be non-arbitrary: Why these rules and not others? Because they align with human nature.
-\end{enumerate}
-
-\textbf{What happens without Type 3 (anti-realism about human telos):}
-
-If human nature has NO objective telos:
-\begin{itemize}
- \item "Purpose" is just evolutionary fitness in ancestral environment
- \item Different environments $\to$ different "purposes" (no universal standard)
- \item Modern environment $\neq$ ancestral environment  $\to$ no objective "purpose" for modern humans
- \item No universal framework can have $\phi(S) = 1$ (no objective truth to be accurate about)
-- \textbf{Therefore: VCS is impossible} (Theorem~\ref{thm:resolution} fails - no true framework to discover)
-
-\textbf{The incompatibility:}
-
-$\text{Telic anti-realism} \implies \neg \exists S[\phi(S) = 1] \implies \text{VCS impossible} \implies \text{Certain doom}$
-
-Therefore: \textbf{Human survival requires at minimum that human nature has objective properties grounding purpose.}
+The incompatibility is stark: $\text{Telic anti-realism} \implies \neg \exists S[\phi(S) = 1] \implies \text{VCS impossible} \implies \text{Certain doom}$. Human survival requires at minimum that human nature has objective properties grounding purpose.
 
 \textbf{Three arguments for telic oughtness.}
 
@@ -896,26 +563,13 @@ This is objective because both $H$ (empirical) and $S$ (mathematical) are object
 
 \textbf{Anti-realist objection:} "But that's just instrumental - IF you want stability..."
 
-\textbf{Response:} True, but observe:
-\begin{enumerate}
- \item Desire for survival/agency is empirically universal across humans
- \item VCS is mathematically proven to be the only stable coordination preserving agency
- \item Therefore: The hypothetical applies to all humans
-\end{enumerate}
-
-When a hypothetical ought applies universally, it has the practical force of a categorical ought, even if formally conditional.
+\textbf{Response:} True, but observe: desire for survival and agency is empirically universal across humans, VCS is mathematically proven to be the only stable coordination preserving agency, and therefore the hypothetical applies to all humans. When a hypothetical ought applies universally, it has the practical force of a categorical ought, even if formally conditional.
 
 \textbf{Argument 2: From Phenomenology and Human Nature}
 
 \textbf{Empirical facts about human experience:}
 
-\begin{enumerate}
- \item Humans experience suffering as objectively bad (not just "I dislike this" but "this is wrong")
- \item Humans seek meaning/purpose cross-culturally (anthropological universal)
- \item Humans form genuine attachments beyond strategic value (not just reproductive strategy)
- \item Humans recognize dignity even when violating it (indicates objective moral perception)
- \item Moral obligations feel binding, not optional (phenomenological fact)
-\end{enumerate}
+Humans experience suffering as objectively bad (not just "I dislike this" but "this is wrong"), seek meaning and purpose cross-culturally (an anthropological universal), form genuine attachments beyond strategic value (not just reproductive strategy), recognize dignity even when violating it (indicating objective moral perception), and experience moral obligations as binding rather than optional (a phenomenological fact).
 
 \textbf{The phenomenological argument:}
 
@@ -926,18 +580,9 @@ Moral experience presents as discovering facts, not constructing preferences. Wh
 \textbf{(a) These intuitions track truth} - Evolution/design produced beings who can perceive moral reality 
 \textbf{(b) These intuitions are illusions} - Evolution produced false beliefs that feel true
 
-If (b), the problem generalizes: Why trust ANY evolved intuitions?
-\begin{itemize}
- \item Logic (evolved capacity)
- \item Mathematics (evolved capacity)
- \item Perception (evolved capacity)
- \item Causation (evolved capacity)
-\end{itemize}
+If (b), the problem generalizes: why trust ANY evolved intuitions? Logic, mathematics, perception, and our sense of causation are all evolved capacities.
 
-\textbf{Rejecting moral intuitions as systematically unreliable requires either:}
- \item Explaining why moral intuitions uniquely fail while others succeed (no principled distinction)
- \item Accepting radical skepticism about all intuitions (self-defeating - can't argue for it)
-\end{itemize}
+Rejecting moral intuitions as systematically unreliable requires either explaining why moral intuitions uniquely fail while others succeed (no principled distinction exists) or accepting radical skepticism about all intuitions (which is self-defeating since you can't argue for it).
 
 \textbf{Therefore:} If we trust evolved capacities generally (rationality, perception), we should provisionally trust moral intuitions unless given specific reason not to.
 
@@ -951,64 +596,29 @@ More parsimonious: Selection produced beings who experience these because they r
 
 \textbf{The inescapability of normativity:}
 
-To argue against objective oughtness, one must:
-\begin{enumerate}
- \item Claim the argument is correct (normative claim about what others ought to believe)
- \item Use logic (accepting logical oughts: "you ought to accept modus ponens")
- \item Expect others to update on evidence (epistemic oughts: "you ought to believe what evidence supports")
- \item Assume communication succeeds (semantic oughts: "words ought to track meanings")
-\end{enumerate}
+To argue against objective oughtness, one must claim the argument is correct (a normative claim about what others ought to believe), use logic (accepting logical oughts such as "you ought to accept modus ponens"), expect others to update on evidence (epistemic oughts such as "you ought to believe what evidence supports"), and assume communication succeeds (semantic oughts such as "words ought to track meanings").
 
 \textbf{Denying objective oughtness is performatively self-contradictory.} You cannot coherently argue the position without assuming oughts matter objectively.
 
 \textbf{The practical version:}
 
-Even philosophers who intellectually deny objective oughts ACT as if they exist:
-\begin{itemize}
- \item Prefer pleasure to pain (normative fact)
- \item Make plans (assuming future matters)
- \item Argue positions (assuming truth matters)
- \item Get outraged at injustice (moral phenomenology)
- \item Care about consistency (logical norms)
-\end{itemize}
+Even philosophers who intellectually deny objective oughts ACT as if they exist: they prefer pleasure to pain (a normative fact), make plans (assuming the future matters), argue positions (assuming truth matters), get outraged at injustice (moral phenomenology), and care about consistency (logical norms).
 
 \textbf{The trilemma for anti-realists:}
 
-\begin{enumerate}
- \item Accept oughts as objective (your behavior already assumes this) $\to$ Realism
- \item Maintain anti-realism but act inconsistently $\to$ Pragmatic incoherence
- \item Radical nihilism (nothing matters, including truth/survival) $\to$ Then why argue? Why survive?
-\end{enumerate}
+Anti-realists face three options: accept oughts as objective (since their behavior already assumes this), leading to realism; maintain anti-realism but act inconsistently, leading to pragmatic incoherence; or embrace radical nihilism (nothing matters, including truth or survival), which raises the question of why argue or survive at all.
 
 \textbf{The minimal realism required.}
 
-\textbf{We don't need strong moral realism.} The strongest forms of moral realism claim:
-
-\begin{itemize}
- \item Divine command theory (God's will determines morality)
- \item Platonic forms (The Good exists eternally and immutably)
- \item Kantian categorical imperative (duties exist independent of consequences)
- \item Non-naturalist realism (irreducible moral facts in ontology)
-\end{itemize}
+\textbf{We don't need strong moral realism.} The strongest forms of moral realism claim divine command theory (God's will determines morality), Platonic forms (The Good exists eternally and immutably), Kantian categorical imperative (duties exist independent of consequences), and non-naturalist realism (irreducible moral facts in ontology).
 
 \textbf{We need something much weaker:}
 
 \textbf{Minimal Telic Realism:} Human nature has objective properties such that certain coordination patterns objectively better enable human flourishing than others.
 
-\textbf{This requires accepting:}
-\begin{enumerate}
- \item Human nature exists objectively (humans have specific psychology, needs, capacities - empirical)
- \item Flourishing is not arbitrary (connected to actualizing human capacities - telic)
- \item Coordination patterns can be objectively assessed against flourishing criteria (mathematical)
-\end{enumerate}
+\textbf{This requires accepting} that human nature exists objectively (humans have specific psychology, needs, and capacities---empirical), that flourishing is not arbitrary (connected to actualizing human capacities---telic), and that coordination patterns can be objectively assessed against flourishing criteria (mathematical).
 
-\textbf{What this doesn't require:}
- \begin{itemize}
- \item Any specific theory about the source of purpose (God, evolution, fundamental reality)
- \item Any specific moral theory (consequentialism, deontology, virtue ethics)
- \item Irreducible moral facts distinct from natural facts
- \item Answers to all metaethical questions
- \end{itemize}
+\textbf{What this doesn't require:} any specific theory about the source of purpose (God, evolution, fundamental reality), any specific moral theory (consequentialism, deontology, virtue ethics), irreducible moral facts distinct from natural facts, or answers to all metaethical questions.
 
 \textbf{It just requires:} Facts about human nature ground facts about what enables humans to thrive. That's it.
 
@@ -1016,12 +626,7 @@ Even philosophers who intellectually deny objective oughts ACT as if they exist:
 
 \textbf{Even an evolutionary account can accept minimal telic realism:}
 
-Evolution produced human nature with specific properties:
-\begin{itemize}
- \item Capacity for reason, empathy, cooperation, meaning-making
- \item Needs for belonging, autonomy, competence, purpose
- \item Psychological architecture enabling and constraining behavior
-\end{itemize}
+Evolution produced human nature with specific properties: capacity for reason, empathy, cooperation, and meaning-making; needs for belonging, autonomy, competence, and purpose; and psychological architecture enabling and constraining behavior.
 
 Given those objective properties (produced by evolution), certain social arrangements work better than others. That's an objective fact.
 
@@ -1031,11 +636,7 @@ Given those objective properties (produced by evolution), certain social arrange
 
 If evolution produced beings who experience meaning, dignity, moral obligations as real and binding, then those experiences ARE part of what we are. 
 
-You cannot dismiss them as "mere" evolutionary byproducts while trusting other evolved capacities (reason, perception, logic). Either:
-\begin{itemize}
- \item All evolved capacities are suspect (radical skepticism - self-defeating)
- \item Evolved capacities generally track reality (then moral intuitions should too)
-\end{itemize}
+You cannot dismiss them as "mere" evolutionary byproducts while trusting other evolved capacities (reason, perception, logic). Either all evolved capacities are suspect (radical skepticism, which is self-defeating), or evolved capacities generally track reality (in which case moral intuitions should too).
 
 \textbf{Moreover:} Humans are no longer purely under evolutionary selection pressure. We've escaped raw fitness competition through technology. So what matters NOW for human coordination is what we actually are (with our evolved properties), not what maximized fitness in ancestral environments.
 
@@ -1049,21 +650,9 @@ You cannot dismiss them as "mere" evolutionary byproducts while trusting other e
 2. \textbf{Empirical facts} about human psychology (scientific observation)
 3. \textbf{Minimal telic realism} - human nature grounds flourishing criteria (weakest assumption compatible with VCS)
 
-\textbf{Together these establish:}
- \begin{itemize}
- \item Objective facts about human nature exist (empirical + mathematical)
- \item Mathematical facts about coordination exist (game theory)
- \item Therefore: Objective facts about optimal human coordination exist (conjunction)
- \item VCS discovers and aligns with these objective facts
- \end{itemize}
+\textbf{Together these establish} that objective facts about human nature exist (empirical plus mathematical), mathematical facts about coordination exist (game theory), therefore objective facts about optimal human coordination exist (conjunction), and VCS discovers and aligns with these objective facts.
 
-\textbf{This IS objective oughtness} - perhaps not in the strongest metaphysical sense (Platonic forms, divine commands), but in the sense sufficient for:
- \begin{itemize}
- \item Answering "how should humans coordinate?"
- \item Grounding claims about right/wrong coordination patterns
- \item Providing non-arbitrary basis for rules
- \item Enabling stable transformation (people align with reality, not arbitrary preferences)
- \end{itemize}
+\textbf{This IS objective oughtness}---perhaps not in the strongest metaphysical sense (Platonic forms, divine commands), but in the sense sufficient for answering "how should humans coordinate?", grounding claims about right and wrong coordination patterns, providing a non-arbitrary basis for rules, and enabling stable transformation (people align with reality, not arbitrary preferences).
 
 \textbf{Addressing the eliminative materialist.}
 
@@ -1071,23 +660,9 @@ You cannot dismiss them as "mere" evolutionary byproducts while trusting other e
 
 \textbf{Response:} What counts as "physical facts"?
 
-\textbf{If your ontology includes:}
- \begin{itemize}
- \item Mathematical truths (numbers don't physically exist - abstract objects)
- \item Logical relations (logic isn't made of matter/energy - necessary truths)
- \item Information (substrate-independent patterns - functional properties)
- \item Functions (hearts have the function "pump blood" - teleological property)
- \end{itemize}
+\textbf{If your ontology includes} mathematical truths (numbers don't physically exist---abstract objects), logical relations (logic isn't made of matter or energy---necessary truths), information (substrate-independent patterns---functional properties), and functions (hearts have the function "pump blood"---teleological property), \textbf{then you've already accepted that non-physical objective facts exist.} At that point, denying telic oughtness is arbitrary---it's one more category of objective pattern or structure.
 
-\textbf{Then you've already accepted non-physical objective facts exist.} At that point, denying telic oughtness is arbitrary - it's one more category of objective pattern/structure.
-
-\textbf{If you reject ALL of these} (strict eliminative materialism):
- \begin{itemize}
- \item Mathematics is just human convention $\to$ Contradicts mathematical platonism, can't do physics
- \item Logic is arbitrary $\to$ Self-defeating, can't argue for anything
- \item Information doesn't exist $\to$ Can't do computer science, biology (DNA encodes information)
- \item Functions are pure projection $\to$ Hearts don't "really" pump, eyes don't "really" see
- \end{itemize}
+\textbf{If you reject ALL of these} (strict eliminative materialism), then mathematics is just human convention (contradicting mathematical platonism and making physics impossible), logic is arbitrary (self-defeating since you can't argue for anything), information doesn't exist (making computer science and biology impossible since DNA encodes information), and functions are pure projection (meaning hearts don't "really" pump and eyes don't "really" see).
 
 \textbf{This is so extreme even most materialists reject it.} It makes science impossible.
 
@@ -1101,14 +676,7 @@ Objective patterns/structures exist (mathematics, logic, information, function) 
 
 \textbf{You don't need to resolve metaethics to act:}
 
-\begin{enumerate}
- \item Mathematical coordination facts are objective (proven above)
- \item Human survival desire is empirically universal
- \item VCS is the only path to survival (proven above)
- \item Therefore: Humans ought to coordinate voluntarily (if they want to survive)
-\end{enumerate}
-
-\textbf{That's sufficient for action.} Whether this is "real" oughtness (Type 3) or "just" instrumental (Type 1) doesn't matter for decision-making.
+Mathematical coordination facts are objective (proven above), human survival desire is empirically universal, VCS is the only path to survival (proven above), and therefore humans ought to coordinate voluntarily (if they want to survive). \textbf{That's sufficient for action.} Whether this is "real" oughtness (Type 3) or "just" instrumental (Type 1) doesn't matter for decision-making.
 
 \textbf{But notice something profound:}
 
@@ -1118,47 +686,24 @@ If you follow this chain and VCS succeeds, you'll have discovered objective fact
 
 \textbf{What we've established.}
 
-\textbf{Very High Confidence (mathematically proven):}
- \begin{itemize}
- \item Type 4 oughts (mathematical/logical) exist objectively
- \item Type 1 oughts (hypothetical connecting VCS to survival) are objective
- \item Human nature has objective empirical properties
- \end{itemize}
+\textbf{Very High Confidence (mathematically proven):} Type 4 oughts (mathematical and logical) exist objectively, Type 1 oughts (hypothetical connecting VCS to survival) are objective, and human nature has objective empirical properties.
 
-\textbf{High Confidence (strongly supported):}
- \begin{itemize}
- \item Type 3 oughts (telic) follow from combination of empirical + mathematical facts
- \item Minimal telic realism is both necessary and defensible
- \item Anti-realism about human telos is incompatible with VCS
- \end{itemize}
+\textbf{High Confidence (strongly supported):} Type 3 oughts (telic) follow from the combination of empirical and mathematical facts, minimal telic realism is both necessary and defensible, and anti-realism about human telos is incompatible with VCS.
 
-\textbf{Medium Confidence (philosophical argument):}
- \begin{itemize}
- \item Type 2 oughts (categorical moral) might follow from Type 3 but aren't strictly required
- \item Stronger moral realism is compatible with framework but not necessary
- \item Phenomenological and performative arguments support but don't prove Type 3
- \end{itemize}
+\textbf{Medium Confidence (philosophical argument):} Type 2 oughts (categorical moral) might follow from Type 3 but aren't strictly required, stronger moral realism is compatible with the framework but not necessary, and phenomenological and performative arguments support but don't prove Type 3.
 
 \textbf{What this means for VCS:}
 
-The oughtness VCS requires is far more defensible than full-blown moral realism. We need:
-\begin{itemize}
- \item Objectivity about human nature (empirical + mathematical)
- \item Minimal telic realism (human nature grounds flourishing criteria)
-\end{itemize}
+The oughtness VCS requires is far more defensible than full-blown moral realism. We need objectivity about human nature (empirical plus mathematical) and minimal telic realism (human nature grounds flourishing criteria).
 
 Both are more defensible than categorical moral realism, don't require resolving metaethical debates, and are compatible with naturalistic worldviews (including evolutionary ones).
 
 \textbf{The skeptic must explain:} How can humans survive if they deny their nature has any objective purpose? The mathematics shows they can't. Therefore, denial of minimal telic realism is functionally equivalent to choosing extinction.
 
 
-\textbf{Epistemic assessment.}
+\heading{Epistemic assessment}
 
-\textbf{What we've proven.}
-
-\textbf{High confidence claims (mathematical proofs):}
-
-Given stated assumptions, we have rigorously proven:
+Given stated assumptions, we have rigorously proven several high-confidence claims through mathematical proofs:
 
 $\checkmark$ \textbf{The coordination trilemma exists} (Theorem~\ref{thm:trilemma}) - Cannot simultaneously achieve {No Corruption, Stability, Human Agency} at civilization scale
 
@@ -1182,74 +727,19 @@ $\times$ \textbf{All edge cases} - While Appendix~\ref{app:a} categorically anal
 
 \textbf{Assumption sensitivity.}
 
-\textbf{Key assumptions:}
-\begin{enumerate}
- \item Bounded rationality
- \item Scale threshold $|A| > 10^7$
- \item Time horizon $T > 100$ years
-\end{enumerate}
+\textbf{Key assumptions:} bounded rationality, scale threshold $|A| > 10^7$, and time horizon $T > 100$ years.
 
-\textbf{Robustness:} Proofs use *minimal* forms of these assumptions:
- \begin{itemize}
- \item Only require $P(\text{corruption}) > 0$, not that all agents maximize utility
- \item Only require monitoring costs grow with scale
- \item Only require we care about multi-generational stability
- \end{itemize}
+Proofs use minimal forms of these assumptions: they only require $P(\text{corruption}) > 0$ (not that all agents maximize utility), only require monitoring costs to grow with scale, and only require we care about multi-generational stability. Even with these very weak assumptions, conclusions hold.
 
-\textbf{Sensitivity:} Even with very weak assumptions, conclusions hold.
+\heading{Falsification criteria}
 
-\textbf{Falsification criteria.}
+This framework makes testable predictions. Prediction 1 (Corruption Inevitability) states that any hierarchical enforcement system at scale will exhibit measurable corruption growth over time. To falsify this, one would need to find a hierarchical system with more than $10^7$ people operating for more than 100 years where enforcement authority exists, corruption metrics (wealth concentration, regulatory capture) remain constant or decrease, and no external force periodically resets the system.
 
-\textbf{This framework makes testable predictions:}
+Prediction 2 (TCS Instability) states that technological control systems lead to controller corruption, value freezing, or loss of human control. To falsify this, one would need to demonstrate a stable TCS where AI/automation enforces rules perfectly, human controllers remain non-corrupt indefinitely or AI remains aligned and mutable, human agency is preserved, and the system persists for more than 50 years.
 
-\textbf{Prediction 1 (Corruption Inevitability):}
+Prediction 3 (VCS Necessity) states that no coordination mechanism exists outside the set of corruption phase, tech control, and voluntary coordination. To falsify this, one would need to propose a mechanism handling defection at scale that doesn't rely on enforcers (human or technological), doesn't require value transformation, maintains stability and agency, and survives formal analysis in the Appendix~\ref{app:a} framework.
 
-Any hierarchical enforcement system at scale will exhibit measurable corruption growth over time.
-
-\emph{Falsification:} Find a hierarchical system with $>10^7$ people operating $>100$ years where:
- \begin{itemize}
- \item Enforcement authority exists
- \item Corruption metrics (wealth concentration, regulatory capture) remain constant or decrease
- \item No external force periodically resets the system
- \end{itemize}
-
-\textbf{Prediction 2 (TCS Instability):}
-
-Technological control systems lead to controller corruption, value freezing, or loss of human control.
-
-\emph{Falsification:} Demonstrate a stable TCS where:
- \begin{itemize}
- \item AI/automation enforces rules perfectly
- \item Human controllers remain non-corrupt indefinitely OR AI remains aligned and mutable
- \item Human agency is preserved
- \item System persists $>50$ years
- \end{itemize}
-
-\textbf{Prediction 3 (VCS Necessity):}
-
-No coordination mechanism exists outside {corruption phase, tech control, voluntary coordination}.
-
-\emph{Falsification:} Propose a mechanism handling defection at scale that:
- \begin{itemize}
- \item Doesn't rely on enforcers (human or technological)
- \item Doesn't require value transformation
- \item Maintains stability and agency
- \item Survives formal analysis in Appendix~\ref{app:a} framework
- \end{itemize}
-
-\textbf{Prediction 4 (Game-Theoretic Cooperation Failure):}
-
-Without transformation, cooperation fails at civilization scale.
-
-\emph{Falsification:} Show that:
- \begin{itemize}
- \item Self-interest alone sustains cooperation at scale $>10^7$
- \item No enforcement required
- \item No intrinsic motivation ($m_i = 0$ for all agents)
- \item System stable over $>100$ years
- \end{itemize}
-
-\textbf{Current Status:}
+Prediction 4 (Game-Theoretic Cooperation Failure) states that without transformation, cooperation fails at civilization scale. To falsify this, one would need to show that self-interest alone sustains cooperation at scale greater than $10^7$, no enforcement is required, no intrinsic motivation exists ($m_i = 0$ for all agents), and the system is stable over more than 100 years.
 
 As of 2025, Predictions 1-4 have no historical counterexamples that survive scrutiny.
 
@@ -1259,21 +749,9 @@ Malthus assumed fixed technology. His logic was sound given that assumption, but
 
 \textbf{What would falsify us:} Not "technology improves" but "technology improves in ways that resolve the trilemma without value transformation."
 
-\textbf{Epistemological honesty.}
+These proofs establish logical validity within their frameworks, and the key question is whether the axioms capture reality. We believe they do because assumptions are empirically grounded in historical evidence, stated in minimal form where weak versions suffice, tested for robustness showing conclusions hold even with relaxed assumptions, and supported by multiple independent proofs converging from logical, information-theoretic, and game-theoretic perspectives. However, different assumptions might yield different results, and we have made every assumption explicit so you can evaluate them yourself.
 
-These proofs establish logical validity within their frameworks. The key question is: Do the axioms capture reality?
-
-\textbf{We believe they do because:}
- \begin{itemize}
- \item Assumptions are empirically grounded (historical evidence)
- \item Stated in minimal form (weak versions sufficient)
- \item Tested for robustness (conclusions hold even with relaxed assumptions)
- \item Multiple independent proofs converge (logical, information-theoretic, game-theoretic)
- \end{itemize}
-
-\textbf{However:} Different assumptions might yield different results. We've made every assumption explicit so you can evaluate them yourself.
-
-**The formal proofs show *necessary* conditions (VCS is necessary) but not *sufficient* conditions (that VCS will succeed).** This asymmetry means action is rationally required even under uncertainty (Corollary 5.2.1).
+The formal proofs show necessary conditions (VCS is necessary) but not sufficient conditions (that VCS will succeed). This asymmetry means action is rationally required even under uncertainty (Corollary 5.2.1).
 
 
 \textbf{Academic references.}
@@ -1355,44 +833,13 @@ $\phi(S)$ &   Truth function: whether framework $S$ accurately describes reality
 
 \subsection{Conclusion}
 
-We have established a rigorous logical chain:
+We have established a rigorous logical chain. The trilemma establishes fundamental constraints on coordination. TCS instability eliminates technological control as viable. Trajectory inevitability shows the default path terminates in catastrophe. Game theory shows cooperation requires transformation. The resolution theorem proves VCS can work if conditions are met. Stakes analysis shows attempting VCS is rational regardless of success probability.
 
-1. \textbf{The trilemma} establishes fundamental constraints on coordination
-2. \textbf{TCS instability} eliminates technological control as viable
-3. \textbf{Trajectory inevitability} shows default path terminates in catastrophe
-4. \textbf{Game theory} shows cooperation requires transformation
-5. \textbf{Resolution theorem} proves VCS can work IF conditions are met
-6. \textbf{Stakes analysis} shows attempting VCS is rational regardless of success probability
+The mathematics proves the \emph{necessity} of voluntary coordination---it's the only option that doesn't lead to certain doom. Whether it's \emph{sufficient} (whether humanity can achieve it) remains uncertain. But when the default leads to extinction, attempting the uncertain alternative is rationally required.
 
-The mathematics proves the \emph{necessity} of voluntary coordination—it's the only option that doesn't lead to certain doom. Whether it's \emph{sufficient} (whether humanity can achieve it) remains uncertain. But when the default leads to extinction, attempting the uncertain alternative is rationally required.
+The formal proofs have a profound implication that must be stated explicitly: if voluntary coordination is possible, reality has purposive structure. VCS requires a true soteriological framework with $\varphi(S) = 1$ (Theorem~\ref{thm:resolution}), which means the framework accurately describes human nature and telos. For this to be meaningful, human telos must exist objectively (not just subjectively or "as if"). Objective human purpose means reality contains oughtness, not just is-ness. Purposive structure in reality implies something very much like intelligent design. This represents logic from survival requirements rather than a theological argument from revelation.
 
-\textbf{The metaphysical implication.}
-
-The formal proofs have a profound implication that must be stated explicitly:
-
-\textbf{If voluntary coordination is possible, reality has purposive structure.}
-
-Here's why:
-
-\begin{enumerate}
- \item VCS requires a true soteriological framework with $\varphi(S)$ = 1 (Theorem~\ref{thm:resolution})
- \item $\varphi(S)$ = 1 means the framework accurately describes human nature and telos
- \item For this to be meaningful, human telos must exist objectively (not just subjectively or "as if")
- \item Objective human purpose means reality contains oughtness, not just is-ness
- \item \textbf{Purposive structure in reality implies something very much like intelligent design}
-\end{enumerate}
-
-This represents logic from survival requirements rather than a theological argument from revelation.
-
-\textbf{Why purposive structure implies intelligence:}
-
-Consider what "objective human purpose" means:
-\begin{itemize}
- \item Reality contains oughtness ("humans ought to flourish in this way")
- \item Human nature is directed toward an end
- \item There's a right way humans should coordinate
- \item This rightness exists independent of opinion
-\end{itemize}
+Consider what "objective human purpose" means: reality contains oughtness ("humans ought to flourish in this way"), human nature is directed toward an end, there is a right way humans should coordinate, and this rightness exists independent of opinion.
 
 \textbf{Can purpose exist without mind?} 
 
@@ -1400,34 +847,11 @@ Purpose means "for the sake of X" - it's inherently intentional. Intentionality 
 
 Different traditions describe this differently (God, Tao, Logos, Brahman, Dharma), but they're pointing at the same claim: \textbf{reality has intelligence-like or mind-like properties at its foundation, not purely mechanistic/material.}
 
-\textbf{The materialist position} (no objective human purpose, purpose is just evolutionary selection) \textbf{makes VCS impossible:}
-\begin{itemize}
- \item If there's no objective telos, there's no true framework to discover
- \item If $\varphi(S)$ = 1 is impossible, voluntary coordination cannot resolve the trilemma
- \item Therefore: Certain doom via default trajectory
-\end{itemize}
+The materialist position---that there is no objective human purpose and purpose is just evolutionary selection---makes VCS impossible. If there's no objective telos, there's no true framework to discover. If $\varphi(S) = 1$ is impossible, voluntary coordination cannot resolve the trilemma. Therefore certain doom follows via the default trajectory.
 
-\textbf{The choice:}
-- \textbf{Purposive reality} (something like what religions claim) + VCS possible + Survival possible
-- \textbf{Non-purposive reality} (pure materialism) + VCS impossible + Certain doom
+The choice is binary: purposive reality (something like what religions claim) makes VCS possible and survival possible, while non-purposive reality (pure materialism) makes VCS impossible and certain doom inevitable. You cannot accept VCS works while maintaining pure materialism---the two positions are logically incompatible.
 
-\textbf{You cannot accept VCS works while maintaining pure materialism.} The two positions are logically incompatible.
-
-\textbf{What we've proven:}
- \begin{itemize}
- \item Weak intelligent design: Reality has intelligence-like properties at its foundation
- \item Pure materialism is false (if humans can survive)
- \item Human purpose is objective and discoverable
- \item Atheism in the classical sense (reality is purely material) is incompatible with survival
- \end{itemize}
-
-\textbf{What remains uncertain:}
- \begin{itemize}
- \item Which specific theology is correct
- \item Whether the intelligence is personal vs impersonal
- \item Specific attributes of the foundational intelligence
- \item Whether it's God, Brahman, Tao, Logos, or something else
- \end{itemize}
+What we've proven includes weak intelligent design (reality has intelligence-like properties at its foundation), that pure materialism is false if humans can survive, that human purpose is objective and discoverable, and that atheism in the classical sense (reality is purely material) is incompatible with survival. What remains uncertain includes which specific theology is correct, whether the intelligence is personal versus impersonal, specific attributes of the foundational intelligence, and whether it's God, Brahman, Tao, Logos, or something else.
 
 Whether you call the source of purposive structure "God" is somewhat semantic. The key metaphysical claim is identical across traditions: \textbf{Purpose is real, objective, and discoverable - reality has intelligence-like properties.}
 

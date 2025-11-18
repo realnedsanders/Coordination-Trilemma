@@ -1,0 +1,84 @@
+name: Prose Quality Check
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'src/tex/**'
+      - 'scripts/prose-lint.sh'
+      - '.github/workflows/prose-lint.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'src/tex/**'
+      - 'scripts/prose-lint.sh'
+      - '.github/workflows/prose-lint.yml'
+  workflow_dispatch:
+
+jobs:
+  prose-lint:
+    name: Check Prose Quality
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install prose linting tools
+        run: |
+          npm install -g write-good
+          pip install proselint
+
+      - name: Run write-good on extracted text
+        run: |
+          echo "=== write-good Analysis ==="
+          for file in src/tex/*.tex src/tex/appendices/*.tex; do
+            if [ -f "$file" ]; then
+              echo ""
+              echo "--- Checking $file ---"
+              # Extract text from LaTeX (basic extraction)
+              # Remove comments, math, and commands for prose analysis
+              sed 's/%.*$//' "$file" | \
+              sed 's/\$[^$]*\$//g' | \
+              sed 's/\\[a-zA-Z]*\*\?{[^}]*}//g' | \
+              sed 's/\\[a-zA-Z]*//g' | \
+              sed 's/[{}]//g' | \
+              write-good --no-passive || true
+            fi
+          done
+        continue-on-error: true
+
+      - name: Check for anti-patterns
+        run: |
+          chmod +x scripts/prose-lint.sh
+          ./scripts/prose-lint.sh
+        continue-on-error: true
+
+      - name: Run proselint
+        run: |
+          echo "=== proselint Analysis ==="
+          for file in src/tex/*.tex src/tex/appendices/*.tex; do
+            if [ -f "$file" ]; then
+              echo ""
+              echo "--- Checking $file ---"
+              # Extract and check
+              sed 's/%.*$//' "$file" | \
+              sed 's/\$[^$]*\$//g' | \
+              proselint /dev/stdin || true
+            fi
+          done
+        continue-on-error: true
+
+      - name: Summary
+        run: |
+          echo ""
+          echo "=========================================="
+          echo "Prose quality checks complete."
+          echo "Review warnings above for style improvements."
+          echo "See docs/STYLE_GUIDE.md for guidelines."
+          echo "=========================================="
