@@ -5,14 +5,14 @@ on:
     branches: [ main ]
     paths:
       - 'docker/Dockerfile*'
-      - 'models/Dockerfile'
+      - 'models/python/Dockerfile'
       - 'models/go/Dockerfile'
       - '.github/workflows/docker-build.yml'
       - '.hadolint.yaml'  # Rebuild when linting config changes
   pull_request:
     paths:
       - 'docker/Dockerfile*'
-      - 'models/Dockerfile'
+      - 'models/python/Dockerfile'
       - 'models/go/Dockerfile'
       - '.github/workflows/docker-build.yml'
       - '.hadolint.yaml'
@@ -35,7 +35,7 @@ jobs:
             dockerfile: docker/Dockerfile.security
             description: "Security Tools (cosign)"
           - name: models
-            dockerfile: models/Dockerfile
+            dockerfile: models/python/Dockerfile
             context: models
             description: "Python ABM Models"
     permissions:

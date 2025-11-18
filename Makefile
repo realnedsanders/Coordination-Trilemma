@@ -64,6 +64,7 @@ else
 endif
 
 .PHONY: all clean cleanall clean-figures view docker-pull docker-pull-full help local figures figures-force
+.PHONY: models models-test models-help models-clean
 
 # Default target
 # In GitHub Actions, figures are generated in a separate job, so skip here
@@ -197,6 +198,26 @@ view: $(MAIN).pdf
 shell:
 	docker run --rm -it -v $(PWD):/workdir -w /workdir $(DOCKER_IMAGE) /bin/bash
 
+# ============================================================================
+# Computational Models (Python ABM + Go Monte Carlo)
+# ============================================================================
+
+# Build model containers and run all simulations
+models:
+	cd $(MODELS_DIR) && $(MAKE) build
+
+# Run model tests
+models-test:
+	cd $(MODELS_DIR) && $(MAKE) test
+
+# Show model help
+models-help:
+	cd $(MODELS_DIR) && $(MAKE) help
+
+# Clean model containers
+models-clean:
+	cd $(MODELS_DIR) && $(MAKE) clean
+
 # Help message
 help:
 	@echo "Coordination Trilemma LaTeX Build System"
@@ -213,6 +234,12 @@ help:
 	@echo "  make view            - Open the PDF"
 	@echo "  make shell           - Open interactive Docker shell for debugging"
 	@echo "  make help            - Show this help message"
+	@echo ""
+	@echo "Computational models:"
+	@echo "  make models          - Build model containers"
+	@echo "  make models-test     - Run model tests"
+	@echo "  make models-help     - Show detailed model targets"
+	@echo "  make models-clean    - Clean model containers"
 	@echo ""
 	@echo "First time setup:"
 	@echo "  1. Install Docker: https://docs.docker.com/get-docker/"

@@ -3,6 +3,7 @@ services:
   abm:
     build:
       context: .
+      dockerfile: python/Dockerfile
       target: base
     volumes:
       - ./python:/app/python:ro
@@ -20,6 +21,7 @@ services:
   sweep:
     build:
       context: .
+      dockerfile: python/Dockerfile
       target: base
     volumes:
       - ./python:/app/python:ro
@@ -36,6 +38,7 @@ services:
   dev:
     build:
       context: .
+      dockerfile: python/Dockerfile
       target: dev
     ports:
       - "8888:8888"
@@ -49,6 +52,7 @@ services:
   cooperation:
     build:
       context: .
+      dockerfile: python/Dockerfile
       target: base
     volumes:
       - ./python:/app/python:ro
@@ -94,6 +98,7 @@ services:
   ostrom:
     build:
       context: .
+      dockerfile: python/Dockerfile
       target: base
     volumes:
       - ./python:/app/python:ro
@@ -111,6 +116,7 @@ services:
   bifurcation:
     build:
       context: .
+      dockerfile: python/Dockerfile
       target: base
     volumes:
       - ./python:/app/python:ro
@@ -145,6 +151,7 @@ services:
   montecarlo-viz:
     build:
       context: .
+      dockerfile: python/Dockerfile
       target: base
     volumes:
       - ./python:/app/python:ro
@@ -161,6 +168,7 @@ services:
   scenario-compare:
     build:
       context: .
+      dockerfile: python/Dockerfile
       target: base
     volumes:
       - ./python:/app/python:ro
@@ -176,6 +184,7 @@ services:
   test:
     build:
       context: .
+      dockerfile: python/Dockerfile
       target: base
     volumes:
       - ./python:/app/python:ro
