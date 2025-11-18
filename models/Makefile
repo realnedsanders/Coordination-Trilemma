@@ -8,8 +8,8 @@
 
 .PHONY: help build clean test
 .PHONY: all-figures all-simulations
-.PHONY: python-abm python-corruption python-cooperation python-polycentric python-diagrams
-.PHONY: go-montecarlo go-motivation go-ostrom
+.PHONY: python-abm python-corruption python-cooperation python-cooperation-legacy python-polycentric python-diagrams
+.PHONY: go-montecarlo go-motivation go-ostrom go-bifurcation
 .PHONY: motivation-scale motivation-threshold motivation-transition montecarlo-alignment montecarlo-scale ostrom-scale
 .PHONY: montecarlo-scenarios scenario-comparison
 
@@ -32,7 +32,8 @@ help:
 	@echo "Python ABM Models (Mesa/NumPy/Matplotlib):"
 	@echo "  make python-abm         - Run all Python ABM simulations"
 	@echo "  make python-corruption  - Corruption dynamics (Theorem 1.1)"
-	@echo "  make python-cooperation - Cooperation threshold (Theorem 4.2)"
+	@echo "  make python-cooperation - Cooperation threshold (Theorem 4.2) [uses fast Go bifurcation]"
+	@echo "  make python-cooperation-legacy - Same but Python-only (slower)"
 	@echo "  make python-polycentric - Polycentric governance comparison"
 	@echo "  make python-diagrams    - Generate conceptual diagrams"
 	@echo "  make python-sweep       - Parameter sensitivity sweep (slow)"
@@ -42,6 +43,7 @@ help:
 	@echo "  make go-montecarlo      - Monte Carlo AI alignment simulation"
 	@echo "  make go-motivation      - Motivation foundations model"
 	@echo "  make go-ostrom          - Ostrom polycentric governance"
+	@echo "  make go-bifurcation     - Bifurcation analysis (fast Go version)"
 	@echo "  make montecarlo-scenarios - Generate all scenario data (pessimistic/baseline/optimistic)"
 	@echo "  make scenario-comparison  - Generate scenario comparison figure"
 	@echo ""
@@ -112,11 +114,22 @@ python-corruption: build
 		--steps 200 --enforcers 100 --seed 42 --output /app/figures
 
 # Cooperation threshold - validates Theorem 4.2 (Voluntary Cooperation)
+# Uses fast Go bifurcation by default, with Python visualization
 python-cooperation: build
 	@mkdir -p ../figures/static ../data/simulations
 	@echo "Running cooperation threshold simulation..."
 	docker-compose run --rm cooperation
-	@echo "Running bifurcation analysis..."
+	@echo "Running bifurcation analysis (Go - fast)..."
+	docker-compose run --user $$(id -u):$$(id -g) --rm bifurcation-go
+	@echo "Generating bifurcation figure..."
+	docker-compose run --rm bifurcation-viz
+
+# Cooperation threshold using Python-only (slower, for compatibility)
+python-cooperation-legacy: build
+	@mkdir -p ../figures/static ../data/simulations
+	@echo "Running cooperation threshold simulation..."
+	docker-compose run --rm cooperation
+	@echo "Running bifurcation analysis (Python - slower)..."
 	docker-compose run --rm bifurcation
 
 # Polycentric governance comparison
@@ -207,6 +220,14 @@ go-ostrom: build
 	@mkdir -p ../data/simulations
 	@echo "Running Ostrom model..."
 	docker-compose run --user $$(id -u):$$(id -g) --rm ostrom-go
+
+# Bifurcation analysis (Go implementation - fast)
+go-bifurcation: build
+	@mkdir -p ../data/simulations ../figures/static
+	@echo "Running Go bifurcation analysis..."
+	docker-compose run --user $$(id -u):$$(id -g) --rm bifurcation-go
+	@echo "Generating bifurcation figure..."
+	docker-compose run --rm bifurcation-viz
 
 # ============================================================================
 # Appendix F - Motivation Foundations Experiments

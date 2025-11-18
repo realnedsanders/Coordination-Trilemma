@@ -112,7 +112,7 @@ services:
       --participants 100
       --output /app/figures
 
-  # Bifurcation analysis
+  # Bifurcation analysis (Python - with parallelization)
   bifurcation:
     build:
       context: .
@@ -128,7 +128,40 @@ services:
       --steps 100
       --agents 500
       --bifurcation
+      --workers 4
       --output /app/figures
+
+  # Bifurcation analysis (Go - high performance)
+  bifurcation-go:
+    build:
+      context: ./go
+      dockerfile: Dockerfile
+    volumes:
+      - ../data/simulations:/app/output
+    entrypoint: ["/app/bifurcation"]
+    command: >
+      -n 1000
+      -steps 100
+      -reps 5
+      -rates 17
+      -output /app/output/bifurcation_results.json
+
+  # Visualize bifurcation results from Go JSON
+  bifurcation-viz:
+    build:
+      context: .
+      dockerfile: python/Dockerfile
+      target: base
+    volumes:
+      - ./python:/app/python:ro
+      - ../data/simulations:/app/data
+      - ../figures/static:/app/figures
+    working_dir: /app
+    command: >
+      python -m python.analysis.visualize_bifurcation
+      --json /app/data/bifurcation_results.json
+      --output /app/figures
+      --stats
 
   # Go Monte Carlo simulations
   montecarlo:

@@ -16,6 +16,8 @@ import numpy as np
 from mesa import Agent, Model
 from mesa.datacollection import DataCollector
 from typing import Optional
+from concurrent.futures import ProcessPoolExecutor
+import os
 import yaml
 
 
@@ -257,10 +259,38 @@ def run_experiment(config_path: str = None, **kwargs) -> dict:
     }
 
 
+def _run_single_bifurcation(args: tuple) -> dict:
+    """
+    Worker function for parallel bifurcation analysis.
+
+    Args:
+        args: Tuple of (init_rate, rep, n_steps, model_params)
+
+    Returns:
+        Dictionary with single run results
+    """
+    init_rate, rep, n_steps, model_params = args
+
+    model = CooperationModel(
+        initial_cooperation=init_rate,
+        seed=rep,
+        **model_params
+    )
+    model.run(n_steps)
+
+    return {
+        "initial_rate": init_rate,
+        "final_rate": model._cooperation_rate(),
+        "theta_crit": model.theta_crit,
+        "replication": rep,
+    }
+
+
 def run_bifurcation_analysis(
     initial_rates: list = None,
     n_replications: int = 5,
     n_steps: int = 100,
+    n_workers: int = None,
     **model_params
 ) -> dict:
     """
@@ -273,6 +303,7 @@ def run_bifurcation_analysis(
         initial_rates: List of initial cooperation rates to test
         n_replications: Replications per initial rate
         n_steps: Steps per run
+        n_workers: Number of parallel workers (default: CPU count)
         **model_params: Parameters for CooperationModel
 
     Returns:
@@ -281,23 +312,23 @@ def run_bifurcation_analysis(
     if initial_rates is None:
         initial_rates = np.linspace(0.1, 0.9, 17)
 
-    results = []
+    if n_workers is None:
+        n_workers = os.cpu_count() or 4
 
-    for init_rate in initial_rates:
-        for rep in range(n_replications):
-            model = CooperationModel(
-                initial_cooperation=init_rate,
-                seed=rep,
-                **model_params
-            )
-            model.run(n_steps)
+    # Create all job arguments
+    jobs = [
+        (init_rate, rep, n_steps, model_params)
+        for init_rate in initial_rates
+        for rep in range(n_replications)
+    ]
 
-            results.append({
-                "initial_rate": init_rate,
-                "final_rate": model._cooperation_rate(),
-                "theta_crit": model.theta_crit,
-                "replication": rep,
-            })
+    # Run in parallel
+    if n_workers > 1 and len(jobs) > 1:
+        with ProcessPoolExecutor(max_workers=n_workers) as executor:
+            results = list(executor.map(_run_single_bifurcation, jobs))
+    else:
+        # Sequential fallback
+        results = [_run_single_bifurcation(job) for job in jobs]
 
     return {
         "results": results,
@@ -316,16 +347,20 @@ if __name__ == "__main__":
     parser.add_argument("--seed", type=int, default=42, help="Random seed")
     parser.add_argument("--output", type=str, help="Output directory for figures")
     parser.add_argument("--bifurcation", action="store_true", help="Run bifurcation analysis")
+    parser.add_argument("--workers", type=int, default=None, help="Number of parallel workers (default: CPU count)")
+    parser.add_argument("--reps", type=int, default=5, help="Number of replications per initial rate")
 
     args = parser.parse_args()
 
     if args.bifurcation:
         # Run bifurcation analysis
-        print("Running bifurcation analysis...")
+        n_workers = args.workers or os.cpu_count() or 4
+        print(f"Running bifurcation analysis with {n_workers} workers...")
         bifurc = run_bifurcation_analysis(
             n_agents=args.agents,
             n_steps=args.steps,
-            n_replications=5
+            n_replications=args.reps,
+            n_workers=n_workers
         )
 
         # Plot bifurcation diagram

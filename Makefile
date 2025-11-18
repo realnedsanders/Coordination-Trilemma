@@ -127,7 +127,9 @@ figures-force: $(BUILD_DIR)/.models-built
 	@echo ""
 	@echo "--- ABM Simulations ---"
 	cd $(MODELS_DIR) && docker-compose run --rm abm python -m python.abm.corruption_dynamics --steps 200 --enforcers 100 --seed 42 --output /app/figures
-	cd $(MODELS_DIR) && docker-compose run --rm bifurcation python -m python.abm.cooperation_threshold --bifurcation --steps 100 --agents 500 --output /app/figures
+	@echo "--- Bifurcation Analysis (Go → Python) ---"
+	cd $(MODELS_DIR) && docker-compose run --user $$(id -u):$$(id -g) --rm bifurcation-go
+	cd $(MODELS_DIR) && docker-compose run --rm bifurcation-viz
 	@echo ""
 	@echo "--- Conceptual Diagrams ---"
 	cd $(MODELS_DIR) && docker-compose run --rm abm python -m python.analysis.generate_diagrams --all --output /app/figures
@@ -146,9 +148,11 @@ $(FIGURES_DIR)/corruption_dynamics.png: $(PYTHON_ABM_SOURCES) $(BUILD_DIR)/.mode
 	@echo "Generating corruption dynamics figure..."
 	cd $(MODELS_DIR) && docker-compose run --rm abm python -m python.abm.corruption_dynamics --steps 200 --enforcers 100 --seed 42 --output /app/figures
 
-$(FIGURES_DIR)/bifurcation_analysis.png: $(PYTHON_ABM_SOURCES) $(BUILD_DIR)/.models-built | $(FIGURES_DIR)
-	@echo "Generating bifurcation analysis figure..."
-	cd $(MODELS_DIR) && docker-compose run --rm bifurcation python -m python.abm.cooperation_threshold --bifurcation --steps 100 --agents 500 --output /app/figures
+# Bifurcation analysis uses Go for speed, Python for visualization
+$(FIGURES_DIR)/bifurcation_analysis.png: $(GO_SOURCES) $(PYTHON_ANALYSIS_SOURCES) $(BUILD_DIR)/.models-built | $(FIGURES_DIR) $(DATA_DIR)
+	@echo "Generating bifurcation analysis (Go → Python pipeline)..."
+	cd $(MODELS_DIR) && docker-compose run --user $$(id -u):$$(id -g) --rm bifurcation-go
+	cd $(MODELS_DIR) && docker-compose run --rm bifurcation-viz
 
 # Conceptual diagrams - depend on generate_diagrams.py and built containers
 $(FIGURES_DIR)/coordination_trilemma.png $(FIGURES_DIR)/default_trajectory_state_machine.png $(FIGURES_DIR)/scale_degradation_curves.png $(FIGURES_DIR)/enforcement_regress.png $(FIGURES_DIR)/detection_timeline.png $(FIGURES_DIR)/longevity_scatter.png: $(MODELS_DIR)/python/analysis/generate_diagrams.py $(BUILD_DIR)/.models-built | $(FIGURES_DIR)

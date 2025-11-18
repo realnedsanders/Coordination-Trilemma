@@ -78,10 +78,43 @@ jobs:
         run: chktex -q -n 1 -n 2 -n 3 -n 8 -n 13 -n 25 -n 36 src/tex/glossary.tex || true
         continue-on-error: true
 
+  # Run fast Go computations (bifurcation analysis)
+  go-computations:
+    name: Go Computations
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name != 'workflow_run' ||
+      github.event.workflow_run.conclusion == 'success'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+
+      - name: Build and run bifurcation analysis
+        run: |
+          mkdir -p data/simulations
+          cd models/go
+          go build -o bifurcation ./bifurcation/main.go
+          ./bifurcation -n 1000 -steps 100 -reps 5 -rates 17 \
+            -output ../../data/simulations/bifurcation_results.json
+
+      - name: Upload computation results
+        uses: actions/upload-artifact@v4
+        with:
+          name: go-computation-results
+          path: data/simulations/*.json
+          retention-days: 7
+
   # Generate figures from computational models
   generate-figures:
     name: Generate Figures
     runs-on: ubuntu-latest
+    needs: go-computations
     # Skip if triggered by a failed workflow_run
     if: |
       github.event_name != 'workflow_run' ||
@@ -96,6 +129,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
+
+      - name: Download Go computation results
+        uses: actions/download-artifact@v4
+        with:
+          name: go-computation-results
+          path: data/simulations
 
       - name: Check if model files changed
         id: check-models
@@ -117,15 +156,16 @@ jobs:
         if: steps.check-models.outputs.models_changed == 'true'
         run: |
           # Create output directories
-          mkdir -p figures/static data/simulations
+          mkdir -p figures/static
 
           # Generate ABM simulation figures
           cd models && python -m python.abm.corruption_dynamics \
             --steps 200 --enforcers 100 --seed 42 --output ../figures/static
 
-          # Generate bifurcation diagram
-          python -m python.abm.cooperation_threshold \
-            --bifurcation --steps 100 --agents 500 --output ../figures/static
+          # Generate bifurcation diagram from Go results
+          python -m python.analysis.visualize_bifurcation \
+            --json ../data/simulations/bifurcation_results.json \
+            --output ../figures/static
 
           # Generate conceptual diagrams
           python -m python.analysis.generate_diagrams \
