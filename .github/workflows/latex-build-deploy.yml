@@ -95,19 +95,42 @@ jobs:
         with:
           go-version: '1.21'
 
-      - name: Build and run bifurcation analysis
+      - name: Build Go binaries
         run: |
           mkdir -p data/simulations
           cd models/go
           go build -o bifurcation-bin ./bifurcation/main.go
+          go build -o montecarlo-bin ./montecarlo/main.go
+
+      - name: Run bifurcation analysis
+        run: |
+          cd models/go
           ./bifurcation-bin -n 1000 -steps 100 -reps 5 -rates 17 \
             -output ../../data/simulations/bifurcation_results.json
+
+      - name: Run Monte Carlo scenarios
+        run: |
+          cd models/go
+          # Pessimistic scenario
+          ./montecarlo-bin -n 100000 -p-ai 0.15 -cycle 35 -cycle-std 20 -growth 0.25 -max-time 1000 \
+            -output ../../data/simulations/montecarlo_pessimistic.csv \
+            -json ../../data/simulations/montecarlo_pessimistic.json
+          # Baseline scenario
+          ./montecarlo-bin -n 100000 -max-time 1000 \
+            -output ../../data/simulations/montecarlo_results.csv \
+            -json ../../data/simulations/montecarlo_stats.json
+          # Optimistic scenario
+          ./montecarlo-bin -n 100000 -p-ai 0.03 -cycle 60 -cycle-std 30 -growth 0.08 -max-time 1000 \
+            -output ../../data/simulations/montecarlo_optimistic.csv \
+            -json ../../data/simulations/montecarlo_optimistic.json
 
       - name: Upload computation results
         uses: actions/upload-artifact@v4
         with:
           name: go-computation-results
-          path: data/simulations/*.json
+          path: |
+            data/simulations/*.json
+            data/simulations/*.csv
           retention-days: 7
 
   # Generate figures from computational models
@@ -171,12 +194,24 @@ jobs:
           python -m python.analysis.generate_diagrams \
             --all --output ../figures/static
 
+          # Generate Monte Carlo scenario comparison figures
+          python -m python.analysis.compare_scenarios \
+            --data-dir ../data/simulations --output ../figures/static
+
+          # Generate Monte Carlo visualization figures
+          python -m python.analysis.visualize_montecarlo \
+            --csv ../data/simulations/montecarlo_results.csv \
+            --json ../data/simulations/montecarlo_stats.json \
+            --output ../figures/static
+
       - name: Verify figures exist
         run: |
           echo "Checking for required figures..."
           for fig in corruption_dynamics bifurcation_analysis coordination_trilemma \
                      default_trajectory_state_machine scale_degradation_curves \
-                     enforcement_regress detection_timeline longevity_scatter; do
+                     enforcement_regress detection_timeline longevity_scatter \
+                     scenario_comparison timeline_ranges \
+                     montecarlo_time_dist montecarlo_cycles_dist montecarlo_dashboard; do
             if [ -f "figures/static/${fig}.png" ]; then
               echo "✓ ${fig}.png exists"
             else
