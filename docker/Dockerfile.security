@@ -10,7 +10,7 @@
 #
 # Base: Alpine Linux for minimal size
 
-FROM alpine:3.19
+FROM alpine:3.22
 
 # Build arguments for provenance metadata
 ARG BUILD_DATE
