@@ -125,7 +125,7 @@ jobs:
             -json ../../data/simulations/montecarlo_optimistic.json
 
       - name: Upload computation results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: go-computation-results
           path: |
@@ -222,7 +222,7 @@ jobs:
           echo "All required figures present"
 
       - name: Upload figures artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: generated-figures
           path: figures/static/*.png
@@ -283,7 +283,7 @@ jobs:
           fi
 
       - name: Upload PDF artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: coordination-trilemma-pdf
           path: main.pdf
@@ -291,7 +291,7 @@ jobs:
 
       - name: Upload build logs
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: build-logs
           path: |
@@ -373,7 +373,7 @@ jobs:
           subject-path: 'main.pdf'
 
       - name: Upload signed PDF and signature
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: coordination-trilemma-pdf-signed
           path: |
