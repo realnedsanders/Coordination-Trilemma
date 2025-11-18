@@ -5,11 +5,31 @@
 SRC_DIR = src/tex
 SCRIPTS_DIR = scripts
 BUILD_DIR = build
+MODELS_DIR = models
+FIGURES_DIR = figures/static
 
 # Main tex file (in src/tex/)
 MAIN = main
 # Bibliography file
 BIB = references
+
+# Figure source files (for dependency tracking)
+PYTHON_ABM_SOURCES = $(wildcard $(MODELS_DIR)/python/abm/*.py)
+PYTHON_ANALYSIS_SOURCES = $(wildcard $(MODELS_DIR)/python/analysis/*.py)
+GO_SOURCES = $(wildcard $(MODELS_DIR)/go/*/*.go)
+MODEL_SOURCES = $(PYTHON_ABM_SOURCES) $(PYTHON_ANALYSIS_SOURCES) $(GO_SOURCES)
+
+# Generated figures
+GENERATED_FIGURES = \
+	$(FIGURES_DIR)/corruption_dynamics.png \
+	$(FIGURES_DIR)/bifurcation_analysis.png \
+	$(FIGURES_DIR)/scenario_comparison.png \
+	$(FIGURES_DIR)/coordination_trilemma.png \
+	$(FIGURES_DIR)/default_trajectory_state_machine.png \
+	$(FIGURES_DIR)/scale_degradation_curves.png \
+	$(FIGURES_DIR)/enforcement_regress.png \
+	$(FIGURES_DIR)/detection_timeline.png \
+	$(FIGURES_DIR)/longevity_scatter.png
 
 # Docker image for LaTeX compilation
 # Can be overridden via environment variable
@@ -43,10 +63,15 @@ else
     RUN_BIBTEX = $(DOCKER_RUN) $(BIBTEX)
 endif
 
-.PHONY: all clean cleanall view docker-pull docker-pull-full help local
+.PHONY: all clean cleanall view docker-pull docker-pull-full help local figures figures-force
 
 # Default target
+# In GitHub Actions, figures are generated in a separate job, so skip here
+ifdef GITHUB_ACTIONS
 all: $(BUILD_DIR) $(MAIN).pdf clean
+else
+all: $(BUILD_DIR) figures $(MAIN).pdf clean
+endif
 
 # Ensure build directory exists
 $(BUILD_DIR):
@@ -64,6 +89,56 @@ docker-pull-full:
 	docker pull texlive/texlive:latest
 	@echo "Full TeXLive image ready! Use: DOCKER_IMAGE=texlive/texlive:latest make"
 
+# ============================================================================
+# Figure Generation
+# ============================================================================
+
+# Ensure figures directory exists
+$(FIGURES_DIR):
+	@mkdir -p $(FIGURES_DIR)
+
+# Generate all figures (only if source files changed)
+figures: $(FIGURES_DIR) $(GENERATED_FIGURES)
+	@echo "✓ All figures up to date"
+
+# Force regenerate all figures
+figures-force:
+	@echo "Force regenerating all figures..."
+	cd $(MODELS_DIR) && $(MAKE) build
+	cd $(MODELS_DIR) && docker-compose run --rm abm python -m python.abm.corruption_dynamics --steps 200 --enforcers 100 --seed 42 --output /app/figures
+	cd $(MODELS_DIR) && docker-compose run --rm bifurcation python -m python.abm.cooperation_threshold --bifurcation --steps 100 --agents 500 --output /app/figures
+	cd $(MODELS_DIR) && docker-compose run --rm scenario-compare python -m python.analysis.compare_scenarios --data-dir /app/data --output /app/figures
+	cd $(MODELS_DIR) && docker-compose run --rm abm python -m python.analysis.generate_diagrams --all --output /app/figures
+	@echo "✓ All figures regenerated"
+
+# ABM simulation figures - depend on Python ABM sources
+$(FIGURES_DIR)/corruption_dynamics.png: $(PYTHON_ABM_SOURCES) | $(FIGURES_DIR)
+	@echo "Generating corruption dynamics figure..."
+	cd $(MODELS_DIR) && $(MAKE) build
+	cd $(MODELS_DIR) && docker-compose run --rm abm python -m python.abm.corruption_dynamics --steps 200 --enforcers 100 --seed 42 --output /app/figures
+
+$(FIGURES_DIR)/bifurcation_analysis.png: $(PYTHON_ABM_SOURCES) | $(FIGURES_DIR)
+	@echo "Generating bifurcation analysis figure..."
+	cd $(MODELS_DIR) && $(MAKE) build
+	cd $(MODELS_DIR) && docker-compose run --rm bifurcation python -m python.abm.cooperation_threshold --bifurcation --steps 100 --agents 500 --output /app/figures
+
+# Scenario comparison - depends on Monte Carlo data existing
+$(FIGURES_DIR)/scenario_comparison.png: $(PYTHON_ANALYSIS_SOURCES) | $(FIGURES_DIR)
+	@echo "Generating scenario comparison figure..."
+	cd $(MODELS_DIR) && $(MAKE) build
+	cd $(MODELS_DIR) && docker-compose run --rm scenario-compare python -m python.analysis.compare_scenarios --data-dir /app/data --output /app/figures || \
+		cd $(MODELS_DIR) && docker-compose run --rm abm python -m python.analysis.generate_diagrams --all --output /app/figures
+
+# Conceptual diagrams - depend on generate_diagrams.py
+$(FIGURES_DIR)/coordination_trilemma.png $(FIGURES_DIR)/default_trajectory_state_machine.png $(FIGURES_DIR)/scale_degradation_curves.png $(FIGURES_DIR)/enforcement_regress.png $(FIGURES_DIR)/detection_timeline.png $(FIGURES_DIR)/longevity_scatter.png: $(MODELS_DIR)/python/analysis/generate_diagrams.py | $(FIGURES_DIR)
+	@echo "Generating conceptual diagrams..."
+	cd $(MODELS_DIR) && $(MAKE) build
+	cd $(MODELS_DIR) && docker-compose run --rm abm python -m python.analysis.generate_diagrams --all --output /app/figures
+
+# ============================================================================
+# Build Information
+# ============================================================================
+
 # Generate build information from git metadata
 $(BUILD_DIR)/build-info.tex: | $(BUILD_DIR)
 	@echo "Generating build information..."
@@ -71,7 +146,12 @@ $(BUILD_DIR)/build-info.tex: | $(BUILD_DIR)
 	@mv build-info.tex $(BUILD_DIR)/ 2>/dev/null || true
 
 # Full build with bibliography
+# In GitHub Actions, figures are pre-generated, so don't list as dependency
+ifdef GITHUB_ACTIONS
 $(MAIN).pdf: $(BUILD_DIR)/build-info.tex $(SRC_DIR)/$(MAIN).tex $(SRC_DIR)/main-article.tex $(SRC_DIR)/appendices/*.tex $(SRC_DIR)/$(BIB).bib $(SRC_DIR)/glossary.tex
+else
+$(MAIN).pdf: $(BUILD_DIR)/build-info.tex $(SRC_DIR)/$(MAIN).tex $(SRC_DIR)/main-article.tex $(SRC_DIR)/appendices/*.tex $(SRC_DIR)/$(BIB).bib $(SRC_DIR)/glossary.tex $(GENERATED_FIGURES)
+endif
 	@echo "Compiling with $(COMPILE_METHOD) method..."
 	@cp $(BUILD_DIR)/build-info.tex $(SRC_DIR)/ || true
 	$(RUN_LATEX) $(MAIN)
@@ -115,7 +195,9 @@ help:
 	@echo "Coordination Trilemma LaTeX Build System"
 	@echo ""
 	@echo "Available targets:"
-	@echo "  make                 - Build PDF using Alpine Docker image (default)"
+	@echo "  make                 - Build PDF with figures using Docker (default)"
+	@echo "  make figures         - Generate figures only (with dependency tracking)"
+	@echo "  make figures-force   - Force regenerate all figures"
 	@echo "  make docker-pull     - Download custom Alpine image (~500MB-1GB)"
 	@echo "  make docker-pull-full - Download full TeXLive image (~4-5GB)"
 	@echo "  make local           - Build using local LaTeX installation"
@@ -129,6 +211,10 @@ help:
 	@echo "  1. Install Docker: https://docs.docker.com/get-docker/"
 	@echo "  2. Run: make docker-pull"
 	@echo "  3. Run: make"
+	@echo ""
+	@echo "Figure generation:"
+	@echo "  Figures are automatically generated when model source files change."
+	@echo "  Use 'make figures-force' to regenerate all figures from scratch."
 	@echo ""
 	@echo "To use full TeXLive image instead of Alpine:"
 	@echo "  DOCKER_IMAGE=texlive/texlive:latest make"
