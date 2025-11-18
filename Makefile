@@ -19,17 +19,20 @@ PYTHON_ANALYSIS_SOURCES = $(wildcard $(MODELS_DIR)/python/analysis/*.py)
 GO_SOURCES = $(wildcard $(MODELS_DIR)/go/*/*.go)
 MODEL_SOURCES = $(PYTHON_ABM_SOURCES) $(PYTHON_ANALYSIS_SOURCES) $(GO_SOURCES)
 
-# Generated figures
+# Generated figures (core set that can be built without Monte Carlo data)
 GENERATED_FIGURES = \
 	$(FIGURES_DIR)/corruption_dynamics.png \
 	$(FIGURES_DIR)/bifurcation_analysis.png \
-	$(FIGURES_DIR)/scenario_comparison.png \
 	$(FIGURES_DIR)/coordination_trilemma.png \
 	$(FIGURES_DIR)/default_trajectory_state_machine.png \
 	$(FIGURES_DIR)/scale_degradation_curves.png \
 	$(FIGURES_DIR)/enforcement_regress.png \
 	$(FIGURES_DIR)/detection_timeline.png \
 	$(FIGURES_DIR)/longevity_scatter.png
+
+# Optional figures that require Monte Carlo simulation data
+OPTIONAL_FIGURES = \
+	$(FIGURES_DIR)/scenario_comparison.png
 
 # Docker image for LaTeX compilation
 # Can be overridden via environment variable
@@ -98,42 +101,36 @@ docker-pull-full:
 $(FIGURES_DIR):
 	@mkdir -p $(FIGURES_DIR)
 
+# Marker file to track when containers were last built
+$(BUILD_DIR)/.models-built: $(MODEL_SOURCES) | $(BUILD_DIR)
+	@echo "Building model containers..."
+	cd $(MODELS_DIR) && $(MAKE) build
+	@touch $@
+
 # Generate all figures (only if source files changed)
 figures: $(FIGURES_DIR) $(GENERATED_FIGURES)
 	@echo "✓ All figures up to date"
 
 # Force regenerate all figures
-figures-force:
+figures-force: $(BUILD_DIR)/.models-built
 	@echo "Force regenerating all figures..."
-	cd $(MODELS_DIR) && $(MAKE) build
 	cd $(MODELS_DIR) && docker-compose run --rm abm python -m python.abm.corruption_dynamics --steps 200 --enforcers 100 --seed 42 --output /app/figures
 	cd $(MODELS_DIR) && docker-compose run --rm bifurcation python -m python.abm.cooperation_threshold --bifurcation --steps 100 --agents 500 --output /app/figures
-	cd $(MODELS_DIR) && docker-compose run --rm scenario-compare python -m python.analysis.compare_scenarios --data-dir /app/data --output /app/figures
 	cd $(MODELS_DIR) && docker-compose run --rm abm python -m python.analysis.generate_diagrams --all --output /app/figures
 	@echo "✓ All figures regenerated"
 
-# ABM simulation figures - depend on Python ABM sources
-$(FIGURES_DIR)/corruption_dynamics.png: $(PYTHON_ABM_SOURCES) | $(FIGURES_DIR)
+# ABM simulation figures - depend on Python ABM sources and built containers
+$(FIGURES_DIR)/corruption_dynamics.png: $(PYTHON_ABM_SOURCES) $(BUILD_DIR)/.models-built | $(FIGURES_DIR)
 	@echo "Generating corruption dynamics figure..."
-	cd $(MODELS_DIR) && $(MAKE) build
 	cd $(MODELS_DIR) && docker-compose run --rm abm python -m python.abm.corruption_dynamics --steps 200 --enforcers 100 --seed 42 --output /app/figures
 
-$(FIGURES_DIR)/bifurcation_analysis.png: $(PYTHON_ABM_SOURCES) | $(FIGURES_DIR)
+$(FIGURES_DIR)/bifurcation_analysis.png: $(PYTHON_ABM_SOURCES) $(BUILD_DIR)/.models-built | $(FIGURES_DIR)
 	@echo "Generating bifurcation analysis figure..."
-	cd $(MODELS_DIR) && $(MAKE) build
 	cd $(MODELS_DIR) && docker-compose run --rm bifurcation python -m python.abm.cooperation_threshold --bifurcation --steps 100 --agents 500 --output /app/figures
 
-# Scenario comparison - depends on Monte Carlo data existing
-$(FIGURES_DIR)/scenario_comparison.png: $(PYTHON_ANALYSIS_SOURCES) | $(FIGURES_DIR)
-	@echo "Generating scenario comparison figure..."
-	cd $(MODELS_DIR) && $(MAKE) build
-	cd $(MODELS_DIR) && docker-compose run --rm scenario-compare python -m python.analysis.compare_scenarios --data-dir /app/data --output /app/figures || \
-		cd $(MODELS_DIR) && docker-compose run --rm abm python -m python.analysis.generate_diagrams --all --output /app/figures
-
-# Conceptual diagrams - depend on generate_diagrams.py
-$(FIGURES_DIR)/coordination_trilemma.png $(FIGURES_DIR)/default_trajectory_state_machine.png $(FIGURES_DIR)/scale_degradation_curves.png $(FIGURES_DIR)/enforcement_regress.png $(FIGURES_DIR)/detection_timeline.png $(FIGURES_DIR)/longevity_scatter.png: $(MODELS_DIR)/python/analysis/generate_diagrams.py | $(FIGURES_DIR)
+# Conceptual diagrams - depend on generate_diagrams.py and built containers
+$(FIGURES_DIR)/coordination_trilemma.png $(FIGURES_DIR)/default_trajectory_state_machine.png $(FIGURES_DIR)/scale_degradation_curves.png $(FIGURES_DIR)/enforcement_regress.png $(FIGURES_DIR)/detection_timeline.png $(FIGURES_DIR)/longevity_scatter.png: $(MODELS_DIR)/python/analysis/generate_diagrams.py $(BUILD_DIR)/.models-built | $(FIGURES_DIR)
 	@echo "Generating conceptual diagrams..."
-	cd $(MODELS_DIR) && $(MAKE) build
 	cd $(MODELS_DIR) && docker-compose run --rm abm python -m python.analysis.generate_diagrams --all --output /app/figures
 
 # ============================================================================
@@ -202,9 +199,9 @@ shell:
 # Computational Models (Python ABM + Go Monte Carlo)
 # ============================================================================
 
-# Build model containers and run all simulations
-models:
-	cd $(MODELS_DIR) && $(MAKE) build
+# Build model containers
+models: $(BUILD_DIR)/.models-built
+	@echo "✓ Model containers up to date"
 
 # Run model tests
 models-test:

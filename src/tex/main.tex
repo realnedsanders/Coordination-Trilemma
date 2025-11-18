@@ -8,6 +8,7 @@
 \usepackage{hyperref}
 \usepackage{url}
 \usepackage{graphicx}
+\graphicspath{{../../}}  % Look for figures relative to repo root
 \usepackage{enumitem}
 \usepackage{booktabs}
 \usepackage{array}
@@ -28,6 +29,7 @@
 
 % Custom heading command: lightweight bold heading without ToC impact
 \newcommand{\heading}[1]{\bigskip\noindent\textbf{#1}\par\noindent}
+\newcommand{\subheading}[1]{\smallskip\noindent\textbf{#1}\par\noindent}
 
 % Theorem environments
 \theoremstyle{plain}
@@ -112,6 +114,12 @@ We discuss the requirements for voluntary coordination at scale, the metaphysica
 
 \clearpage
 \input{appendices/appendix-d.tex}
+
+\clearpage
+\input{appendices/appendix-e.tex}
+
+\clearpage
+\input{appendices/appendix-f.tex}
 
 % Bibliography
 \bibliographystyle{amsplain}

@@ -13,6 +13,11 @@ Transition dynamics:
 - S_TCS_AI → S_E (AI pursues own goals)
 
 Key result: P(reach S_E) → 1 as number of cycles → ∞
+
+Enhanced dynamics (v2):
+- Scale-dependent corruption: larger institutions harder to reform
+- Capability-dependent alignment: harder to align more capable AI systems
+- Calibrated from historical coordination cycles and AI capability forecasts
 */
 
 package main
@@ -73,6 +78,27 @@ type SimParams struct {
 
 	// Probability that AI alignment succeeds (AI-TCS doesn't lead to extinction)
 	PAlignment float64 `json:"p_alignment"`
+
+	// Scale-dependent dynamics (v2 enhancements)
+
+	// Enable scale effects on institutional dynamics
+	ScaleEffects bool `json:"scale_effects"`
+
+	// Initial institutional scale (relative to optimal)
+	InitialScale float64 `json:"initial_scale"`
+
+	// Rate at which institutional scale grows per cycle
+	ScaleGrowthRate float64 `json:"scale_growth_rate"`
+
+	// How much scale affects probability of successful reform
+	// Higher values = larger institutions harder to reform
+	ScaleReformDecay float64 `json:"scale_reform_decay"`
+
+	// Capability-dependent alignment difficulty
+
+	// How much AI capability affects alignment difficulty
+	// effectiveAlignment = p_alignment * (1 - alignmentCapabilityFactor * p_ai)
+	AlignmentCapabilityFactor float64 `json:"alignment_capability_factor"`
 }
 
 // SimResult holds the result of a single simulation
@@ -84,12 +110,27 @@ type SimResult struct {
 	FinalPAI          float64 `json:"final_p_ai"`
 }
 
+// scaleEffectMultiplier calculates reform difficulty based on institutional scale
+// Returns 1.0 at scale=1.0, decreasing exponentially as scale increases
+func scaleEffectMultiplier(scale, decayRate float64) float64 {
+	if scale <= 1.0 {
+		return 1.0
+	}
+	// Exponential decay beyond optimal scale
+	excess := scale - 1.0
+	return math.Exp(-decayRate * excess)
+}
+
 // Simulate runs a single trajectory
 func Simulate(params SimParams, rng *rand.Rand) SimResult {
 	state := StateCorruption
 	currentTime := 0.0
 	cycles := 0
 	pAI := params.PAI
+	scale := params.InitialScale
+	if scale <= 0 {
+		scale = 1.0
+	}
 
 	for state != StateExtinction && currentTime < params.MaxTime && cycles < params.MaxCycles {
 		cycles++
@@ -101,10 +142,17 @@ func Simulate(params SimParams, rng *rand.Rand) SimResult {
 			cycleDur = math.Max(1.0, rng.NormFloat64()*params.CycleDurationStd+params.CycleDuration)
 		}
 
+		// Calculate effective probabilities with scale effects
+		effectivePTCS := params.PTCSTransition
+		if params.ScaleEffects && params.ScaleReformDecay > 0 {
+			// Larger institutions are harder to reform
+			effectivePTCS *= scaleEffectMultiplier(scale, params.ScaleReformDecay)
+		}
+
 		switch state {
 		case StateCorruption:
 			// Corruption phase eventually leads to TCS or collapse
-			if rng.Float64() < params.PTCSTransition {
+			if rng.Float64() < effectivePTCS {
 				// Transition to TCS - human or AI controlled?
 				if rng.Float64() < pAI {
 					state = StateTCSAI
@@ -123,7 +171,16 @@ func Simulate(params SimParams, rng *rand.Rand) SimResult {
 
 		case StateTCSAI:
 			// AI-controlled TCS - check if alignment succeeds
-			if rng.Float64() < params.PAlignment {
+			// Alignment becomes harder with more capable AI systems
+			effectiveAlignment := params.PAlignment
+			if params.AlignmentCapabilityFactor > 0 {
+				// Higher capability = harder to align
+				// effectiveAlignment = p_align * (1 - factor * p_ai)
+				effectiveAlignment *= (1.0 - params.AlignmentCapabilityFactor*pAI)
+				effectiveAlignment = math.Max(0.0, effectiveAlignment)
+			}
+
+			if rng.Float64() < effectiveAlignment {
 				// Alignment succeeds - return to corruption phase
 				// (AI system is controlled, but controllers eventually corrupt)
 				state = StateCorruption
@@ -137,6 +194,11 @@ func Simulate(params SimParams, rng *rand.Rand) SimResult {
 
 		// p_ai increases over time (technological progress)
 		pAI = math.Min(params.PAIMax, pAI*(1+params.PAIGrowthRate))
+
+		// Institutional scale grows over time (natural bureaucratic expansion)
+		if params.ScaleEffects && params.ScaleGrowthRate > 0 {
+			scale *= (1 + params.ScaleGrowthRate)
+		}
 	}
 
 	return SimResult{
@@ -295,18 +357,30 @@ func WriteCSV(results []SimResult, filename string) error {
 
 func main() {
 	// Command line flags
+	// Core parameters - defaults calibrated from historical coordination cycles
+	// (League of Nations 26yr, Bretton Woods 27yr, Concert of Europe 99yr, mean ~45yr)
+	// and AI capability forecasts (Metaculus, Epoch AI)
 	nSims := flag.Int("n", 100000, "Number of simulations")
-	pAI := flag.Float64("p-ai", 0.05, "Initial probability of AI-controlled TCS")
-	cycleDur := flag.Float64("cycle", 50.0, "Average cycle duration in years")
-	cycleStd := flag.Float64("cycle-std", 20.0, "Std dev of cycle duration")
+	pAI := flag.Float64("p-ai", 0.08, "Initial probability of AI-controlled TCS (calibrated: 8%)")
+	cycleDur := flag.Float64("cycle", 45.0, "Average cycle duration in years (calibrated: 45yr)")
+	cycleStd := flag.Float64("cycle-std", 26.0, "Std dev of cycle duration (calibrated: 26yr)")
 	pTCS := flag.Float64("p-tcs", 0.8, "Probability corruption leads to TCS")
-	growth := flag.Float64("growth", 0.1, "p_ai growth rate per cycle")
+	growth := flag.Float64("growth", 0.15, "p_ai growth rate per cycle (calibrated: 15%)")
 	maxTime := flag.Float64("max-time", 1000.0, "Maximum simulation time in years")
 	maxCycles := flag.Int("max-cycles", 100, "Maximum number of cycles")
 	pAlignment := flag.Float64("p-align", 0.0, "Probability AI alignment succeeds")
 	output := flag.String("output", "", "Output CSV file path")
 	jsonOutput := flag.String("json", "", "Output JSON stats file path")
 	workers := flag.Int("workers", 0, "Number of workers (0 = NumCPU)")
+
+	// Scale-dependent dynamics (v2)
+	scaleEffects := flag.Bool("scale-effects", false, "Enable scale-dependent institutional dynamics")
+	initialScale := flag.Float64("initial-scale", 1.0, "Initial institutional scale (1.0 = optimal)")
+	scaleGrowth := flag.Float64("scale-growth", 0.05, "Institutional scale growth rate per cycle")
+	scaleDecay := flag.Float64("scale-decay", 0.3, "Reform difficulty decay rate with scale")
+
+	// Capability-dependent alignment (v2)
+	alignCapFactor := flag.Float64("align-cap-factor", 0.5, "How much AI capability affects alignment difficulty")
 
 	flag.Parse()
 
@@ -315,20 +389,33 @@ func main() {
 	}
 
 	params := SimParams{
-		PAI:              *pAI,
-		CycleDuration:    *cycleDur,
-		CycleDurationStd: *cycleStd,
-		PTCSTransition:   *pTCS,
-		PAIGrowthRate:    *growth,
-		PAIMax:           0.99,
-		MaxTime:          *maxTime,
-		MaxCycles:        *maxCycles,
-		PAlignment:       *pAlignment,
+		PAI:                       *pAI,
+		CycleDuration:             *cycleDur,
+		CycleDurationStd:          *cycleStd,
+		PTCSTransition:            *pTCS,
+		PAIGrowthRate:             *growth,
+		PAIMax:                    0.99,
+		MaxTime:                   *maxTime,
+		MaxCycles:                 *maxCycles,
+		PAlignment:                *pAlignment,
+		ScaleEffects:              *scaleEffects,
+		InitialScale:              *initialScale,
+		ScaleGrowthRate:           *scaleGrowth,
+		ScaleReformDecay:          *scaleDecay,
+		AlignmentCapabilityFactor: *alignCapFactor,
 	}
 
 	fmt.Printf("Running %d simulations with %d workers...\n", *nSims, *workers)
 	fmt.Printf("Parameters: p_ai=%.3f, cycle=%.1f±%.1f years, p_tcs=%.2f, growth=%.2f\n",
 		params.PAI, params.CycleDuration, params.CycleDurationStd, params.PTCSTransition, params.PAIGrowthRate)
+	if params.ScaleEffects {
+		fmt.Printf("Scale effects: initial=%.1f, growth=%.2f, decay=%.2f\n",
+			params.InitialScale, params.ScaleGrowthRate, params.ScaleReformDecay)
+	}
+	if params.PAlignment > 0 && params.AlignmentCapabilityFactor > 0 {
+		fmt.Printf("Alignment: p_align=%.2f, capability_factor=%.2f\n",
+			params.PAlignment, params.AlignmentCapabilityFactor)
+	}
 
 	start := time.Now()
 	results := RunSimulations(params, *nSims, *workers)

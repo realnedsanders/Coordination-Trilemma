@@ -10,7 +10,8 @@
 .PHONY: all-figures all-simulations
 .PHONY: python-abm python-corruption python-cooperation python-polycentric python-diagrams
 .PHONY: go-montecarlo go-motivation go-ostrom
-.PHONY: motivation-scale motivation-threshold motivation-transition montecarlo-alignment ostrom-scale
+.PHONY: motivation-scale motivation-threshold motivation-transition montecarlo-alignment montecarlo-scale ostrom-scale
+.PHONY: montecarlo-scenarios scenario-comparison
 
 # ============================================================================
 # Help & Common Targets
@@ -41,12 +42,15 @@ help:
 	@echo "  make go-montecarlo      - Monte Carlo AI alignment simulation"
 	@echo "  make go-motivation      - Motivation foundations model"
 	@echo "  make go-ostrom          - Ostrom polycentric governance"
+	@echo "  make montecarlo-scenarios - Generate all scenario data (pessimistic/baseline/optimistic)"
+	@echo "  make scenario-comparison  - Generate scenario comparison figure"
 	@echo ""
 	@echo "Appendix F - Motivation Foundations:"
 	@echo "  make motivation-scale      - Institutional vs soteriological at scale"
 	@echo "  make motivation-threshold  - Find soteriological threshold"
 	@echo "  make motivation-transition - Bifurcation at Dunbar scale"
-	@echo "  make montecarlo-alignment  - Long-horizon alignment testing"
+	@echo "  make montecarlo-alignment  - Alignment with capability-dependent difficulty"
+	@echo "  make montecarlo-scale      - Scale effects on reform probability"
 	@echo "  make ostrom-scale          - Polycentric governance at scale"
 	@echo ""
 
@@ -149,11 +153,46 @@ python-custom: build
 # Container: go (Dockerfile in go/ directory)
 # ============================================================================
 
-# Monte Carlo AI alignment simulation
+# Monte Carlo AI alignment simulation (baseline)
 go-montecarlo: build
 	@mkdir -p ../data/simulations
 	@echo "Running Monte Carlo alignment simulation..."
 	docker-compose run --rm montecarlo
+
+# Generate Monte Carlo scenario data for comparison figure
+# Uses calibrated defaults: p_ai=0.08, growth=0.15, cycle=45yr (σ=26yr)
+# Calibration source: historical coordination cycles (League of Nations 26yr,
+# Bretton Woods 27yr, Concert of Europe 99yr) and AI capability forecasts
+montecarlo-scenarios: build
+	@mkdir -p ../data/simulations
+	@echo "Generating Monte Carlo scenario data..."
+	@echo ""
+	@echo "--- Pessimistic scenario (high AI growth, short cycles) ---"
+	docker-compose run --rm montecarlo \
+		-n 100000 -p-ai 0.15 -cycle 35 -cycle-std 20 -growth 0.25 -max-time 1000 \
+		-output /app/output/montecarlo_pessimistic.csv \
+		-json /app/output/montecarlo_pessimistic.json
+	@echo ""
+	@echo "--- Baseline scenario (calibrated defaults) ---"
+	docker-compose run --rm montecarlo \
+		-n 100000 -max-time 1000 \
+		-output /app/output/montecarlo_results.csv \
+		-json /app/output/montecarlo_stats.json
+	@echo ""
+	@echo "--- Optimistic scenario (low AI growth, long cycles) ---"
+	docker-compose run --rm montecarlo \
+		-n 100000 -p-ai 0.03 -cycle 60 -cycle-std 30 -growth 0.08 -max-time 1000 \
+		-output /app/output/montecarlo_optimistic.csv \
+		-json /app/output/montecarlo_optimistic.json
+	@echo ""
+	@echo "✓ Monte Carlo scenario data generated"
+
+# Generate scenario comparison figure (requires montecarlo-scenarios first)
+scenario-comparison: montecarlo-scenarios
+	@echo "Generating scenario comparison figure..."
+	docker-compose run --rm scenario-compare python -m python.analysis.compare_scenarios \
+		--data-dir /app/data --output /app/figures
+	@echo "✓ Scenario comparison figure generated"
 
 # Motivation foundations model
 go-motivation: build
@@ -219,14 +258,37 @@ motivation-transition: build
 	done
 
 # Long-horizon alignment testing (Monte Carlo)
+# Tests alignment robustness with capability-dependent difficulty
 montecarlo-alignment: build
 	@echo "=== Monte Carlo Alignment Testing ==="
-	@echo "Testing alignment robustness over extended time horizons"
-	@for align in 0.95 0.99 0.999; do \
+	@echo "Testing alignment robustness with capability-dependent difficulty"
+	@echo ""
+	@echo "--- Static alignment (no capability scaling) ---"
+	@for align in 0.80 0.90 0.95; do \
 		echo ""; \
-		echo "Alignment probability: $$align (10,000 year horizon)"; \
+		echo "Alignment probability: $$align"; \
 		docker-compose run --rm montecarlo \
-			-n 100000 -p-ai $$align -max-time 10000 -cycle 50 -cycle-std 20 -growth 0.1; \
+			-n 100000 -p-align $$align -max-time 1000; \
+	done
+	@echo ""
+	@echo "--- Capability-dependent alignment (factor=0.5) ---"
+	@for align in 0.80 0.90 0.95; do \
+		echo ""; \
+		echo "Base alignment: $$align (effective decreases with AI capability)"; \
+		docker-compose run --rm montecarlo \
+			-n 100000 -p-align $$align -align-cap-factor 0.5 -max-time 1000; \
+	done
+
+# Scale effects testing (Monte Carlo)
+montecarlo-scale: build
+	@echo "=== Monte Carlo Scale Effects Testing ==="
+	@echo "Testing institutional scale effects on reform probability"
+	@for scale in 1.0 1.5 2.0 3.0; do \
+		echo ""; \
+		echo "Initial scale: $$scale (5% growth/cycle, decay=0.3)"; \
+		docker-compose run --rm montecarlo \
+			-n 100000 -scale-effects=true -initial-scale $$scale \
+			-scale-growth 0.05 -scale-decay 0.3 -max-time 1000; \
 	done
 
 # Ostrom polycentric governance at scale

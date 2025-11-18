@@ -1,6 +1,11 @@
 """
 Polycentric Governance Model (Ostrom's Design Principles)
 
+DEPRECATION NOTICE: This Python implementation has been superseded by the Go
+implementation in models/go/ostrom/ which properly implements scale-dependent
+degradation effects. Use `make go-ostrom` or `make ostrom-scale` for production
+simulations. This file is retained for reference and basic testing only.
+
 This model tests whether Ostrom's design principles for successful commons
 governance can break the corruption inevitability demonstrated in the
 hierarchical enforcement model.

@@ -188,12 +188,16 @@ The baseline model assumes AI-controlled TCS always leads to extinction ($P_{\te
 
 This identifies the ``AI control is catastrophic'' assumption as load-bearing. However, the results suggest that partial alignment success only delays rather than prevents eventual extinction unless alignment can be maintained at very high success rates ($>$90\%) indefinitely.
 
+\IfFileExists{figures/static/scenario_comparison.png}{%
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/static/scenario_comparison.png}
     \caption{Scenario comparison showing timeline distributions for pessimistic, baseline, and optimistic parameter sets. All scenarios converge to extinction; optimistic assumptions delay but do not prevent the default trajectory.}
     \label{fig:scenario-comparison}
 \end{figure}
+}{%
+\emph{[Scenario comparison figure requires Monte Carlo simulation data. Run Monte Carlo simulations to generate this figure.]}
+}
 
 \heading{Parameter uncertainty propagation}
 
