@@ -188,16 +188,34 @@ The baseline model assumes AI-controlled TCS always leads to extinction ($P_{\te
 
 This identifies the ``AI control is catastrophic'' assumption as load-bearing. However, the results suggest that partial alignment success only delays rather than prevents eventual extinction unless alignment can be maintained at very high success rates ($>$90\%) indefinitely.
 
-\IfFileExists{figures/static/scenario_comparison.png}{%
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/static/scenario_comparison.png}
     \caption{Scenario comparison showing timeline distributions for pessimistic, baseline, and optimistic parameter sets. All scenarios converge to extinction; optimistic assumptions delay but do not prevent the default trajectory.}
     \label{fig:scenario-comparison}
 \end{figure}
-}{%
-\emph{[Scenario comparison figure requires Monte Carlo simulation data. Run Monte Carlo simulations to generate this figure.]}
-}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/static/timeline_ranges.png}
+    \caption{Timeline ranges across scenarios showing 5th--95th percentile credible intervals. Even the optimistic scenario shows substantial extinction probability within 1000 years.}
+    \label{fig:timeline-ranges}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.45\textwidth]{figures/static/montecarlo_time_dist.png}
+    \includegraphics[width=0.45\textwidth]{figures/static/montecarlo_cycles_dist.png}
+    \caption{Baseline Monte Carlo distributions. Left: time to extinction (years) showing right-skewed distribution with median 432 years. Right: number of corruption-TCS cycles before extinction.}
+    \label{fig:montecarlo-distributions}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.95\textwidth]{figures/static/montecarlo_dashboard.png}
+    \caption{Monte Carlo simulation dashboard showing key statistics, parameter sensitivity, and state transition frequencies from 100,000 simulations.}
+    \label{fig:montecarlo-dashboard}
+\end{figure}
 
 \heading{Parameter uncertainty propagation}
 
@@ -323,6 +341,13 @@ Institutional mechanisms degrade beyond Dunbar scale through four explicit, meas
 \end{enumerate}
 
 Combined multiplier $= (\text{monitoring} \times \text{reputation} \times \text{pressure} \times \text{detection})^{0.25}$
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.95\textwidth]{figures/static/scale_degradation_curves.png}
+    \caption{Scale-dependent institutional degradation: the four mechanisms that cause cooperation to fail beyond Dunbar scale ($\sim$150). Each mechanism degrades as population increases, with combined effectiveness dropping to $\sim$22\% at $N=1000$ and $\sim$4\% at $N=10000$.}
+    \label{fig:scale-degradation}
+\end{figure}
 
 \heading{Results: Institutional vs soteriological at scale}
 

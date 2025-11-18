@@ -44,6 +44,13 @@ Evidence for scale effects comes from observing that small voluntary communities
 
 Evidence for time horizon requirements includes the observation that most revolutionary governments revert to corruption within 50-100 years, empires typically last 200-300 years before collapse (Tainter, 1988; Turchin \& Nefedov, 2009), and claims of permanent solutions have historically proven false.
 
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figures/static/longevity_scatter.png}
+    \caption{Historical coordination systems: scale versus longevity. Larger systems tend toward shorter durations, consistent with scale-dependent institutional degradation. Median longevity $\sim$250 years across major empires.}
+    \label{fig:longevity}
+\end{figure}
+
 \heading{Minimal form of assumptions}
 
 Our results only require weak forms of these assumptions. The bounded rationality assumption minimally requires only that corruption probability exceeds zero over infinite time, not that all agents maximize utility always. The scale threshold assumption minimally requires only that monitoring costs grow faster than monitoring benefits as scale increases. The time horizon assumption minimally requires only that we care about persistence beyond a single generation. Even if you doubt the strong forms of our assumptions, these weak forms are nearly undeniable and remain sufficient for our conclusions.
@@ -119,6 +126,12 @@ Therefore: Without enforcement, Stability (property 2) requires voluntary coordi
 
 \textbf{What this tells us:} The trilemma represents a mathematical necessity rather than a political opinion or engineering challenge. You must choose which property to sacrifice. This forces the binary choice: sacrifice agency (tech control $\to$ catastrophe), accept corruption (default path $\to$ catastrophe), or transform values (voluntary coordination, the only viable alternative).
 
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/static/coordination_trilemma.png}
+    \caption{The Coordination Trilemma: At civilization scale, no system can simultaneously achieve all three vertices. The center is impossible without soteriological motivation ($M_i$). Each edge represents a trade-off that sacrifices one property.}
+    \label{fig:trilemma}
+\end{figure}
 
 \subsection{Technological Control Impossibility}
 
@@ -202,6 +215,12 @@ $\square$
 
 \textbf{What this tells us:} Technological control transforms the coordination problem into a different problem with no solution preserving human agency rather than solving it. The appeal to technology is an illusion of escape.
 
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figures/static/enforcement_regress.png}
+    \caption{The enforcement regress problem: hierarchical enforcement terminates at some level with no oversight. Top-level corruption cascades down. Only intrinsic motivation ($M_i$) breaks the regress by eliminating the need for external enforcement.}
+    \label{fig:enforcement-regress}
+\end{figure}
 
 \subsection{Default Trajectory Terminus}
 
@@ -277,6 +296,12 @@ As of 2025, the current trajectory shows AI capabilities rapidly improving, infr
 
 \textbf{What this tells us:} We're facing an inevitability we must escape rather than a risk we might manage. The only escape is exiting the cycle entirely through voluntary coordination.
 
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/static/default_trajectory_state_machine.png}
+    \caption{Default Trajectory state machine (Theorem 3.2). $S_C$ = corruption phase, $S_{TCS}^H$ = TCS with human controllers, $S_{TCS}^{AI}$ = TCS with AI control, $S_E$ = extinction/enslavement (absorbing). As cycles $\to \infty$, $P(\text{reach } S_E) \to 1$.}
+    \label{fig:state-machine}
+\end{figure}
 
 \subsection{Game Theory of Cooperation}
 
@@ -742,6 +767,20 @@ Prediction 3 (VCS Necessity) states that no coordination mechanism exists outsid
 Prediction 4 (Game-Theoretic Cooperation Failure) states that without transformation, cooperation fails at civilization scale. To falsify this, one would need to show that self-interest alone sustains cooperation at scale greater than $10^7$, no enforcement is required, no intrinsic motivation exists ($m_i = 0$ for all agents), and the system is stable over more than 100 years.
 
 As of 2025, Predictions 1-4 have no historical counterexamples that survive scrutiny.
+
+\heading{Apparent counterexamples: long-lived hierarchies}
+
+Some might cite long-lived hierarchical institutions as counterexamples to the corruption inevitability thesis. Two cases deserve explicit analysis.
+
+\textbf{The Roman Catholic Church (2000 years).} The RCC's persistence actually confirms rather than contradicts our framework. The institution survives by parasitizing telic $M_i$ from genuine believers---adherents provide intrinsic motivation grounded in soteriological framework, which the institutional hierarchy then extracts from while claiming to represent. This creates a distinctive dynamic: the institution corrupts (as the model predicts), but the underlying soteriological framework continues generating $M_i$ that the institution can harvest. The RCC has exhibited systematic corruption throughout its history (sale of indulgences, Inquisition, colonialism, contemporary scandals), yet persists because the framework it claims to represent continues attracting genuine adherents whose $M_i$ sustains coordination.
+
+Critically, this arrangement is unstable over sufficient time horizons. As institutional actions increasingly contradict the soteriological framework adherents actually hold, cognitive dissonance grows. We observe this instability manifesting currently: declining adherence rates, visible tension between institutional positions and source texts, and institutional attempts to modify foundational claims in ways that undermine the very framework generating $M_i$. The 2000-year duration reflects how long an institution can parasitize a genuine soteriological framework before the contradiction becomes unsustainable---not hierarchical stability, but the durability of the underlying $M_i$ source despite institutional corruption.
+
+\textbf{Chinese Imperial Bureaucracy (2000+ years).} This apparent counterexample dissolves upon examination. ``Chinese imperial bureaucracy'' is a semantic label for approximately twenty distinct dynasties (Qin, Han, Jin, Sui, Tang, Song, Yuan, Ming, Qing, etc.), each of which followed precisely the corruption-collapse-reconstitution cycle our model predicts. The Han Dynasty collapsed into the Three Kingdoms period; the Tang Dynasty fragmented into the Five Dynasties and Ten Kingdoms; the Ming Dynasty fell to the Qing. Each dynasty exhibited the extraction dynamics of Theorem~\ref{thm:extraction}: initial consolidation, growing corruption, extraction exceeding productive capacity, collapse or conquest.
+
+The appearance of continuity comes from cultural and institutional memory persisting across dynastic collapse---the examination system, Confucian administrative principles, and bureaucratic structures were reconstituted by successor dynasties. But this represents cultural transmission across institutional failures, not hierarchical stability within a single system. The ``Chinese imperial system'' is thus not one coordination system persisting for 2000 years but rather a series of systems, each lasting 100-300 years before collapsing as predicted, with cultural elements carrying across the transitions.
+
+These cases illustrate an important distinction: cultural continuity versus institutional stability. Cultures and soteriological frameworks can persist across institutional collapse; this doesn't demonstrate that hierarchical institutions can avoid corruption dynamics. If anything, these cases confirm that the only elements persisting over millennial timescales are the $M_i$-generating frameworks themselves, not the hierarchical institutions that attempt to monopolize them.
 
 \textbf{Why previous ``inevitability'' claims failed (e.g., Malthus):}
 

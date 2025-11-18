@@ -55,7 +55,9 @@ help:
 	@echo ""
 
 # Build all Docker images
+# Create output directories FIRST to prevent Docker from creating them as root
 build:
+	@mkdir -p ../data/simulations ../figures/static
 	docker-compose build
 
 # Run quick test
@@ -157,30 +159,30 @@ python-custom: build
 go-montecarlo: build
 	@mkdir -p ../data/simulations
 	@echo "Running Monte Carlo alignment simulation..."
-	docker-compose run --rm montecarlo
+	docker-compose run --user $$(id -u):$$(id -g) --rm montecarlo
 
 # Generate Monte Carlo scenario data for comparison figure
 # Uses calibrated defaults: p_ai=0.08, growth=0.15, cycle=45yr (σ=26yr)
 # Calibration source: historical coordination cycles (League of Nations 26yr,
 # Bretton Woods 27yr, Concert of Europe 99yr) and AI capability forecasts
-montecarlo-scenarios: build
-	@mkdir -p ../data/simulations
+# Note: No 'build' dependency - caller must ensure containers are built
+montecarlo-scenarios:
 	@echo "Generating Monte Carlo scenario data..."
 	@echo ""
 	@echo "--- Pessimistic scenario (high AI growth, short cycles) ---"
-	docker-compose run --rm montecarlo \
+	docker-compose run --user $$(id -u):$$(id -g) --rm montecarlo \
 		-n 100000 -p-ai 0.15 -cycle 35 -cycle-std 20 -growth 0.25 -max-time 1000 \
 		-output /app/output/montecarlo_pessimistic.csv \
 		-json /app/output/montecarlo_pessimistic.json
 	@echo ""
 	@echo "--- Baseline scenario (calibrated defaults) ---"
-	docker-compose run --rm montecarlo \
+	docker-compose run --user $$(id -u):$$(id -g) --rm montecarlo \
 		-n 100000 -max-time 1000 \
 		-output /app/output/montecarlo_results.csv \
 		-json /app/output/montecarlo_stats.json
 	@echo ""
 	@echo "--- Optimistic scenario (low AI growth, long cycles) ---"
-	docker-compose run --rm montecarlo \
+	docker-compose run --user $$(id -u):$$(id -g) --rm montecarlo \
 		-n 100000 -p-ai 0.03 -cycle 60 -cycle-std 30 -growth 0.08 -max-time 1000 \
 		-output /app/output/montecarlo_optimistic.csv \
 		-json /app/output/montecarlo_optimistic.json
@@ -188,7 +190,7 @@ montecarlo-scenarios: build
 	@echo "✓ Monte Carlo scenario data generated"
 
 # Generate scenario comparison figure (requires montecarlo-scenarios first)
-scenario-comparison: montecarlo-scenarios
+scenario-comparison: build montecarlo-scenarios
 	@echo "Generating scenario comparison figure..."
 	docker-compose run --rm scenario-compare python -m python.analysis.compare_scenarios \
 		--data-dir /app/data --output /app/figures
@@ -198,13 +200,13 @@ scenario-comparison: montecarlo-scenarios
 go-motivation: build
 	@mkdir -p ../data/simulations
 	@echo "Running motivation foundations model..."
-	docker-compose run --rm motivation
+	docker-compose run --user $$(id -u):$$(id -g) --rm motivation
 
 # Ostrom polycentric governance (Go implementation)
 go-ostrom: build
 	@mkdir -p ../data/simulations
 	@echo "Running Ostrom model..."
-	docker-compose run --rm ostrom-go
+	docker-compose run --user $$(id -u):$$(id -g) --rm ostrom-go
 
 # ============================================================================
 # Appendix F - Motivation Foundations Experiments
