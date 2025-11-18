@@ -1,0 +1,72 @@
+\section{Methodology}
+\label{app:e}
+
+This appendix details the empirical and computational methods used to validate the theoretical claims in this paper. We describe our historical case selection criteria, data sources, coding schemes, and statistical approaches, as well as the computational models and their parameterization.
+
+\subsection{Historical Case Study Methodology}
+
+\heading{Case selection criteria}
+
+We systematically selected historical coordination systems for analysis based on the following criteria: population scale exceeding $10^6$ agents, documented governance and enforcement structures, sufficient historical record to assess corruption and stability over time (minimum 50 years of data), and geographic and temporal diversity to avoid selection bias.
+
+% TODO: Add specific cases selected and exclusion criteria
+
+\heading{Data sources}
+
+Primary sources include Tainter's collapse database, Turchin and Nefedov's secular cycles data, Acemoglu and Robinson's institutional datasets, and original archival research for specific cases.
+
+% TODO: Full bibliography of data sources
+
+\heading{Coding scheme}
+
+We coded each case on the following variables:
+
+% TODO: Add variable definitions, coding rules, inter-rater reliability
+
+\heading{Limitations}
+
+Historical data has inherent limitations including survivorship bias (we only observe systems that left records), measurement error in corruption indicators, and difficulty establishing counterfactuals.
+
+
+\subsection{Computational Model Specifications}
+
+\heading{Agent-based corruption dynamics model}
+
+The corruption dynamics model simulates enforcer behavior over time in hierarchical systems. Agents are characterized by integrity motivation $M_{\text{integrity}}$, extraction opportunity $U_e$, and detection probability $P_{\text{detection}}$.
+
+% TODO: Full model specification, parameters, validation
+
+\heading{Cooperation threshold model}
+
+This model explores the critical mass dynamics of voluntary coordination, testing the relationship between transformation proportion $\theta$, intrinsic motivation distribution, and cooperation stability.
+
+% TODO: Full model specification
+
+\heading{Monte Carlo cycle simulations}
+
+We simulate the corruption-to-TCS cycle dynamics using Monte Carlo methods to generate probability distributions over outcomes and timelines.
+
+% TODO: Full specification, convergence diagnostics
+
+
+\subsection{Statistical Methods}
+
+\heading{Survival analysis}
+
+We use Kaplan-Meier estimation and Cox proportional hazards models to analyze coordination system longevity as a function of scale and institutional features.
+
+% TODO: Model specifications, diagnostics
+
+\heading{Bayesian uncertainty quantification}
+
+Timeline predictions incorporate Bayesian methods to properly quantify uncertainty and update as evidence accumulates.
+
+% TODO: Prior specifications, posterior diagnostics
+
+
+\subsection{Reproducibility}
+
+All computational analyses are fully reproducible. Code, data, and instructions are available in the supplementary materials repository. Random seeds are fixed for all stochastic simulations.
+
+% TODO: Repository link, software versions, computational environment
+

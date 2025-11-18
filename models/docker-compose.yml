@@ -1,0 +1,183 @@
+services:
+  # Run ABM experiments
+  abm:
+    build:
+      context: .
+      target: base
+    volumes:
+      - ./python:/app/python:ro
+      - ../data/simulations:/app/output
+      - ../figures/static:/app/figures
+    working_dir: /app
+    command: >
+      python -m python.abm.corruption_dynamics
+      --steps 200
+      --enforcers 100
+      --seed 42
+      --output /app/figures
+
+  # Parameter sweep (computationally intensive)
+  sweep:
+    build:
+      context: .
+      target: base
+    volumes:
+      - ./python:/app/python:ro
+      - ../data/simulations:/app/output
+      - ../figures/static:/app/figures
+    working_dir: /app
+    command: >
+      python -m python.analysis.parameter_sweep
+      --output /app/figures
+      --workers 4
+      --reps 10
+
+  # Development environment with Jupyter
+  dev:
+    build:
+      context: .
+      target: dev
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./python:/app/python
+      - ../data:/app/data
+      - ../figures:/app/figures
+    working_dir: /app
+
+  # Cooperation threshold model
+  cooperation:
+    build:
+      context: .
+      target: base
+    volumes:
+      - ./python:/app/python:ro
+      - ../data/simulations:/app/output
+      - ../figures/static:/app/figures
+    working_dir: /app
+    command: >
+      python -m python.abm.cooperation_threshold
+      --steps 100
+      --agents 1000
+      --seed 42
+      --output /app/figures
+
+  # Go Ostrom polycentric governance (fast)
+  ostrom-go:
+    build:
+      context: ./go
+      dockerfile: Dockerfile
+    volumes:
+      - ../data/simulations:/app/output
+    entrypoint: ["/app/ostrom"]
+    command: >
+      -n 1000
+      -groups 50
+      -steps 200
+      -reps 20
+
+  # Motivation foundations model (soteriological vs institutional)
+  motivation:
+    build:
+      context: ./go
+      dockerfile: Dockerfile
+    volumes:
+      - ../data/simulations:/app/output
+    entrypoint: ["/app/motivation"]
+    command: >
+      -n 1000
+      -steps 500
+      -reps 50
+      -soterio-frac 0.0
+
+  # Polycentric governance (Ostrom) comparison
+  ostrom:
+    build:
+      context: .
+      target: base
+    volumes:
+      - ./python:/app/python:ro
+      - ../data/simulations:/app/output
+      - ../figures/static:/app/figures
+    working_dir: /app
+    command: >
+      python -m python.abm.polycentric_governance
+      --compare
+      --steps 200
+      --participants 100
+      --output /app/figures
+
+  # Bifurcation analysis
+  bifurcation:
+    build:
+      context: .
+      target: base
+    volumes:
+      - ./python:/app/python:ro
+      - ../data/simulations:/app/output
+      - ../figures/static:/app/figures
+    working_dir: /app
+    command: >
+      python -m python.abm.cooperation_threshold
+      --steps 100
+      --agents 500
+      --bifurcation
+      --output /app/figures
+
+  # Go Monte Carlo simulations
+  montecarlo:
+    build:
+      context: ./go
+      dockerfile: Dockerfile
+    volumes:
+      - ../data/simulations:/app/output
+    command: >
+      -n 100000
+      -p-ai 0.05
+      -cycle 50
+      -cycle-std 20
+      -growth 0.1
+      -max-time 1000
+      -output /app/output/montecarlo_results.csv
+      -json /app/output/montecarlo_stats.json
+
+  # Visualize Monte Carlo results
+  montecarlo-viz:
+    build:
+      context: .
+      target: base
+    volumes:
+      - ./python:/app/python:ro
+      - ../data/simulations:/app/data
+      - ../figures/static:/app/figures
+    working_dir: /app
+    command: >
+      python -m python.analysis.visualize_montecarlo
+      --csv /app/data/montecarlo_results.csv
+      --json /app/data/montecarlo_stats.json
+      --output /app/figures
+
+  # Compare Monte Carlo scenarios
+  scenario-compare:
+    build:
+      context: .
+      target: base
+    volumes:
+      - ./python:/app/python:ro
+      - ../data/simulations:/app/data
+      - ../figures/static:/app/figures
+    working_dir: /app
+    command: >
+      python -m python.analysis.compare_scenarios
+      --data-dir /app/data
+      --output /app/figures
+
+  # Quick test run
+  test:
+    build:
+      context: .
+      target: base
+    volumes:
+      - ./python:/app/python:ro
+    working_dir: /app
+    command: ["python", "-c", "from python.abm.corruption_dynamics import run_experiment; results = run_experiment(n_enforcers=50, n_steps=100, seed=42); print(f'Corruption rate: {results[\"final_corruption_rate\"]:.2%}'); print(f'Mean integrity: {results[\"final_mean_integrity\"]:.2f}'); print('Test passed!')"]

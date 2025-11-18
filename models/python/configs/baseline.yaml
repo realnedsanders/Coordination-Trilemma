@@ -1,0 +1,36 @@
+# Baseline configuration for corruption dynamics model
+# These parameters represent default assumptions from Appendix B
+
+# Population
+n_enforcers: 100
+n_steps: 200
+
+# Integrity distribution
+# Represents M_integrity in the paper
+integrity_mean: 5.0      # Average integrity motivation
+integrity_std: 2.0       # Variation in integrity
+
+# Extraction opportunities
+# Represents U_e in the paper
+extraction_mean: 3.0     # Average extraction opportunity per step
+extraction_std: 1.5      # Variation in opportunities
+
+# Detection parameters
+# Represents P_detection and detection cost
+base_detection_prob: 0.3 # Baseline probability of detection
+detection_cost: 10.0     # Cost if caught (reputation, punishment)
+
+# Oversight structure
+# 'hierarchical' implements the infinite regress problem (top enforcers have less oversight)
+# 'flat' gives everyone equal oversight
+# 'none' removes all oversight
+oversight_structure: "hierarchical"
+
+# Dynamic effects
+integrity_decay: true           # Corruption reduces future integrity
+integrity_decay_rate: 0.05      # Rate of decay per extraction event
+corruption_contagion: true      # Seeing corruption reduces others' integrity
+contagion_rate: 0.02            # Rate of contagion effect
+
+# Reproducibility
+seed: 42

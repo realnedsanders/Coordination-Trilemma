@@ -1,0 +1,25 @@
+{
+  "params": {
+    "p_ai": 0.15,
+    "cycle_duration": 30,
+    "cycle_duration_std": 10,
+    "p_tcs_transition": 0.8,
+    "p_ai_growth_rate": 0.25,
+    "p_ai_max": 0.99,
+    "max_time": 1000,
+    "max_cycles": 100
+  },
+  "stats": {
+    "n": 100000,
+    "extinction_rate": 1,
+    "mean_time": 167.29733499126345,
+    "std_time": 87.68460590830982,
+    "median_time": 168.08178764564104,
+    "p5_time": 27.813144425043387,
+    "p25_time": 97.6612807591213,
+    "p75_time": 233.54234536496105,
+    "p95_time": 309.66517879022916,
+    "mean_cycles": 6.57527,
+    "median_cycles": 7
+  }
+}
