@@ -99,8 +99,8 @@ jobs:
         run: |
           mkdir -p data/simulations
           cd models/go
-          go build -o bifurcation ./bifurcation/main.go
-          ./bifurcation -n 1000 -steps 100 -reps 5 -rates 17 \
+          go build -o bifurcation-bin ./bifurcation/main.go
+          ./bifurcation-bin -n 1000 -steps 100 -reps 5 -rates 17 \
             -output ../../data/simulations/bifurcation_results.json
 
       - name: Upload computation results
