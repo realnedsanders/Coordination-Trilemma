@@ -120,7 +120,7 @@ jobs:
       # TODO: Fix markdownlint issues in documentation files
       # Currently non-blocking to avoid CI failures while issues are addressed
       - name: Run markdownlint
-        uses: DavidAnson/markdownlint-cli2-action@v18
+        uses: DavidAnson/markdownlint-cli2-action@v21
         continue-on-error: true
         with:
           config: '.markdownlint.yaml'
